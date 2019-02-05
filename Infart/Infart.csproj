@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Infart</RootNamespace>
+    <AssemblyName>Infart</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Assets\AssetsLoader.cs" />
+    <Compile Include="Assets\GameStringsLoader.cs" />
+    <Compile Include="Auxiliary\Button.cs" />
+    <Compile Include="Auxiliary\CollisionSolver.cs" />
+    <Compile Include="Auxiliary\fbonizziHelper.cs" />
+    <Compile Include="Auxiliary\FPScounter.cs" />
+    <Compile Include="Auxiliary\Loader.cs" />
+    <Compile Include="Auxiliary\StringBuilderExtension.cs" />
+    <Compile Include="Base\AbstractGameObject.cs" />
+    <Compile Include="Base\AnimatedGameObject.cs" />
+    <Compile Include="Base\Camera.cs" />
+    <Compile Include="Base\GameObject.cs" />
+    <Compile Include="Base\Gemma.cs" />
+    <Compile Include="Base\GrattacieliAutogeneranti.cs" />
+    <Compile Include="Base\Nuvola.cs" />
+    <Compile Include="Base\SingleTextureGameObject.cs" />
+    <Compile Include="Base\StatusBarSprite.cs" />
+    <Compile Include="ExplosionSystem\InfartExplosion.cs" />
+    <Compile Include="ExplosionSystem\ParticleExplosion.cs" />
+    <Compile Include="ExplosionSystem\RecordExplosion.cs" />
+    <Compile Include="GameOrchestrator.cs" />
+    <Compile Include="InfartBootstrap.cs" />
+    <Compile Include="Managers\BackgroundManager.cs" />
+    <Compile Include="Managers\GameManager.cs" />
+    <Compile Include="Managers\GemmaManager.cs" />
+    <Compile Include="Managers\GroundManager.cs" />
+    <Compile Include="Managers\SoundManager.cs" />
+    <Compile Include="ParticleSystem\Particle.cs" />
+    <Compile Include="ParticleSystem\ParticleSystem.cs" />
+    <Compile Include="ParticleSystem\ScoreggiaParticleSystem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Specializzazioni\episodio-1\BackgroundManager_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\BroccoloParticleSystem.cs" />
+    <Compile Include="InfartGame.cs" />
+    <Compile Include="Specializzazioni\episodio-1\GemmaManager_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\Grattacieli\GrattacieliAutogeneranti_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\Grattacieli\Grattacielo.cs" />
+    <Compile Include="Specializzazioni\episodio-1\GroundManager_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\InfartExplosion_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\JalapenoParticleSystem.cs" />
+    <Compile Include="Specializzazioni\episodio-1\Loader_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\Nuvolificio.cs" />
+    <Compile Include="Specializzazioni\episodio-1\PauseButton_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\Player_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\RecordExplosion_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\SoundManger_episodio1.cs" />
+    <Compile Include="Specializzazioni\episodio-1\StarFieldParticleSystem.cs" />
+    <Compile Include="Specializzazioni\episodio-1\StatusBar.cs" />
+    <Compile Include="Specializzazioni\episodio-1\StatusBar_episodio1.cs" />
+    <Compile Include="Specializzazioni\Menu\Loader_menu.cs" />
+    <Compile Include="Specializzazioni\Menu\MerdeVolantiParticleSystem.cs" />
+    <Compile Include="Specializzazioni\Menu\SoundManager_menu.cs" />
+    <Compile Include="Specializzazioni\Player\Actor.cs" />
+    <Compile Include="Specializzazioni\Player\AnimationManager.cs" />
+    <Compile Include="Specializzazioni\Player\Player.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FbonizziMonoGame, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FbonizziMonoGame.1.0.8-alpha\lib\portable-net45+win8+wpa81\FbonizziMonoGame.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\ContentBuilder\TextFont.spritefont" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\_TextureProject\gratta_back.png" />
+    <None Include="Assets\_TextureProject\gratta_ground.png" />
+    <None Include="Assets\_TextureProject\gratta_mid.png" />
+    <None Include="Assets\_TextureProject\textures.png" />
+    <None Include="Assets\ContentBuilder\Music\Effects\culata.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\cuore.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\esplosione.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\fall.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\jalapeno.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\merdone.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\morso.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\night.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\turu.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart1.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart2.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart3.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart4.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart5.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart6.wav" />
+    <None Include="Assets\ContentBuilder\Music\Scoregge\fart7.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\_Other\ApplicationIcon.png" />
+    <None Include="Assets\_Other\infart.png" />
+    <None Include="Assets\_Other\scritta_small.png" />
+    <None Include="Assets\_Other\Background.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>

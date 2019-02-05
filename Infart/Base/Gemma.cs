@@ -1,0 +1,140 @@
+﻿#region Using
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+using System.ComponentModel;
+using System.Runtime.Serialization;
+
+#endregion
+
+namespace fge
+{
+    public class Gemma : GameObject
+    {
+        // TODO
+        // Si può rimuovere active?
+        #region Dichiarazioni
+
+        private float move_y_amount_ = 10f;
+        private float elapsed_ = 0.0f;
+
+        private Texture2D texture_reference_;
+        private Rectangle texture_rectangle_;
+
+        private Rectangle collision_rectangle_;
+
+        private bool active_;
+
+        #endregion
+
+        #region Costruttore / Distruttore
+
+        public Gemma(
+            Texture2D TextureReference,
+            Rectangle TextureRectangle)
+        {
+            texture_reference_ = TextureReference;
+            texture_rectangle_ = TextureRectangle;
+            
+            collision_rectangle_ = new Rectangle(
+                   0, 0,
+                   TextureRectangle.Width - 40,
+                   TextureRectangle.Height - 40);
+
+            active_ = false;
+        }
+
+        public Gemma(
+           Texture2D TextureReference,
+            Rectangle TextureRectangle,
+            Vector2 starting_position)
+            : this(TextureReference, TextureRectangle)
+        {
+            Position = starting_position;
+        }
+
+        #endregion
+
+        #region Proprietà
+
+        public bool Active
+        {
+            get { return active_; }
+            set { active_ = value; }
+        }
+
+        public override Vector2 Position
+        {
+            get { return position_; }
+            set
+            {
+                // Per stringere il bounding box
+                collision_rectangle_.X = (int)value.X + 20;
+                collision_rectangle_.Y = (int)value.Y + 20;
+                position_ = value;
+            }
+        }
+
+        public override Rectangle CollisionRectangle
+        {
+            get { return collision_rectangle_; }
+        }
+
+        public int Width
+        {
+            get { return texture_rectangle_.Width; }
+        }
+
+        public int Height
+        {
+            get { return texture_rectangle_.Height; }
+        }
+
+
+        #endregion
+
+        #region Update / Draw
+
+        public override void Update(double gameTime)
+        {
+            if (active_)
+            {
+                float elapsed = (float)gameTime / 1000.0f;
+
+                if (elapsed_ >= 0.4f)
+                {
+                    move_y_amount_ *= -1;
+                    elapsed_ = 0.0f;
+                }
+
+                position_ += new Vector2(0, move_y_amount_ * elapsed);
+
+                elapsed_ += elapsed;
+            }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (active_)
+            {
+                spriteBatch.Draw(
+                    texture_reference_,
+                    position_,
+                    texture_rectangle_,
+                    overlay_color_,
+                    rotation_,
+                    origin_,
+                    scale_,
+                    flip_,
+                    depth_);
+            }
+        }
+
+        #endregion
+    }
+}

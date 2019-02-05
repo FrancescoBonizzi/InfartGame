@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infart", "Infart\Infart.csproj", "{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9ADBCA44-EB6B-4B7E-9022-40BA5FF06EA5}"
+	ProjectSection(SolutionItems) = preProject
+		license.txt = license.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infart.WindowsDesktop", "Infart.WindowsDesktop\Infart.WindowsDesktop.csproj", "{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D757D795-BF2D-45AA-B676-0EA0AB5E2A5C}.Release|x86.Build.0 = Release|Any CPU
+		{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}.Debug|x86.ActiveCfg = Debug|x86
+		{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}.Debug|x86.Build.0 = Debug|x86
+		{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}.Release|Any CPU.ActiveCfg = Release|x86
+		{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}.Release|x86.ActiveCfg = Release|x86
+		{A2CF4533-9CE5-4FE6-9824-E3243BB4F073}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1F99D24-9950-4F0A-B51C-99B20C99A7C1}
+	EndGlobalSection
+EndGlobal
