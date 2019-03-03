@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace fge 
+namespace fge
 {
     public class StatusBar_episodio1 //: StatusBar
     {

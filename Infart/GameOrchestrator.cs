@@ -176,7 +176,8 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    _menu.Update(elapsed);
+                    throw new NotImplementedException();
+                    //_menu.Update(elapsed);
                     break;
 
                 case GameStates.Playing:
@@ -189,14 +190,14 @@ namespace Infart
         {
             _game?.Resume();
             IsPaused = false;
-            _soundManager.ResumeAll();
+         //   _soundManager.ResumeAll();
         }
 
         public void Pause()
         {
             _game?.Pause();
             IsPaused = true;
-            _soundManager.PauseAll();
+      //      _soundManager.PauseAll();
         }
 
         public void TogglePause()
@@ -211,8 +212,9 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    ShouldEndApplication = true;
-                    _soundManager.StopSounds();
+                    //ShouldEndApplication = true;
+                    //_soundManager.StopSounds();
+                    throw new NotImplementedException();
                     break;
 
                 case GameStates.Playing:
@@ -233,7 +235,8 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    _menu.Draw(spriteBatch);
+                    throw new NotImplementedException();
+                    //_menu.Draw(spriteBatch);
                     break;
 
                 case GameStates.Playing:

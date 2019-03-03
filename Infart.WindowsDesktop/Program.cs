@@ -1,21 +1,27 @@
-﻿using System;
+﻿using FbonizziMonoGameWindowsDesktop;
+using System;
+using System.Globalization;
 
 namespace Infart.WindowsDesktop
 {
 #if WINDOWS || LINUX
-    /// <summary>
-    /// The main class.
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new InfartBootstrap(
+                textFileAssetsLoader: new WindowsTextFileImporter(),
+                settingsRepository: new FileWindowsSettingsRepository("infart-settings.txt"),
+                webPageOpener: new WindowsWebSiteOpener(),
+                gameCulture: CultureInfo.CreateSpecificCulture("it-IT"),
+                isPc: true,
+                isFullScreen: false,
+                rateMeUri: new Uri("https://www.fbonizzi.it"),
+                deviceWidth: 800, deviceHeight: 480))
+            {
                 game.Run();
+            }
         }
     }
 #endif

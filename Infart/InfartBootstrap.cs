@@ -115,7 +115,26 @@ namespace Infart
                Content,
                _textFileAssetsLoader);
             _mousePointer = _assetsLoader.Sprites["manina"];
-            _soundManager = new fge.SoundManger_episodio1();
+            //     _soundManager = new fge.SoundManger_episodio1();
+
+            var loaderEpisodio1 = new Loader_episodio1(Content, GraphicsDevice);
+            var soundManager = new SoundManager_episodio1(true, new Loader_menu(Content), loaderEpisodio1);
+            var gameFactory = new Func<InfartGame>(
+                () => new InfartGame(
+                    loaderEpisodio1,
+                    new Loader_menu(Content),
+                    soundManager,
+                    100, "Metri", "Pausa"));
+
+            _orchestrator = new GameOrchestrator(
+                gameFactory,
+               // mainMenuFactory,
+                GraphicsDevice,
+                _matrixScaleProvider,
+                _soundManager,
+                _webPageOpener);
+
+            // TODO Menu with rate me
 
             _inputListeners = new List<IInputListener>();
 

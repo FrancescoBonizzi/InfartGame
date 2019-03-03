@@ -2,16 +2,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.IO.IsolatedStorage;
 using Microsoft.Xna.Framework.Input.Touch;
-using System.Diagnostics;
 
 #endregion
 
@@ -157,6 +151,11 @@ namespace fge
             get { return score_metri_; }
         }
 
+        internal void HandleInput(Vector2 value)
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetHamburger
         {
             get { return status_bar_.HamburgerMangiatiInTotale; }
@@ -204,6 +203,10 @@ namespace fge
             (sound_manager_ as SoundManager_episodio1).PlayMorso();
         }
 
+        internal void Update(TimeSpan elapsed)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void CheckPlayerGemmaCollision()
         {
@@ -223,6 +226,11 @@ namespace fge
                 (sound_manager_ as SoundManager_episodio1).PlayShit();
                 merda_mode_active_ = true;
             }
+        }
+
+        internal void Resume()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
