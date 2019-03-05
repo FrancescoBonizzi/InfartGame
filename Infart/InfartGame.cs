@@ -1,11 +1,11 @@
 #region Using
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 #endregion
 
@@ -13,8 +13,6 @@ namespace fge
 {
     public class InfartGame : GameManager
     {
-        #region Dichiarazioni
-
         public double BucoProbability;
         public double PowerUpProbability;
         public double PeperoncinoDuration;
@@ -52,9 +50,6 @@ namespace fge
 
         //  private Loader_episodio1 Loader;
 
-        #endregion
-
-        #region Costruttore
 
         public InfartGame(
             Loader_episodio1 Loader,
@@ -134,12 +129,8 @@ namespace fge
             ground_.Reset(player_camera_);
             gemme_.Reset(player_camera_);
             status_bar_.Reset();
-        
+
         }
-
-        #endregion
-
-        #region Proprietà
 
         public int GetScoregge
         {
@@ -153,7 +144,16 @@ namespace fge
 
         internal void HandleInput(Vector2 value)
         {
-            throw new NotImplementedException();
+            if (fall_sound_active_ && !dead_explosion_.Started)
+            {
+                force_to_finish_ = true;
+
+                if ((sound_manager_ as SoundManager_episodio1).HasFallFinished())
+                {
+                    dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager_episodio1));
+                    status_bar_.SetInfart();
+                }
+            }
         }
 
         public int GetHamburger
@@ -161,15 +161,10 @@ namespace fge
             get { return status_bar_.HamburgerMangiatiInTotale; }
         }
 
-
         public override List<GameObject> GroundObjects()
         {
             return ground_.WalkableObjects();
         }
-
-        #endregion
-
-        #region Metodi
 
         protected override void SetRecordRectangle()
         {
@@ -183,8 +178,6 @@ namespace fge
             high_score_x_ = value * 100;
         }
 
-        #region Gemme
-
         public int HamburgerMangiati()
         {
             return status_bar_.HamburgerMangiatiInTotale;
@@ -196,15 +189,17 @@ namespace fge
                 (gemme_ as GemmaManager_episodio1).AddPowerUp(position);
         }
 
-
         public override void PlayerCollidedWithNormalGemma()
         {
             status_bar_.HamburgerEaten();
             (sound_manager_ as SoundManager_episodio1).PlayMorso();
         }
 
-        internal void Update(TimeSpan elapsed)
+        public void Update(TimeSpan elapsed)
         {
+#warning Metterlo async?
+            base.Update(elapsed.TotalMilliseconds, TouchPanel.GetState());
+
             // Ogni 50m aumento i parametri
             if (score_metri_ % 50 == 0)
             {
@@ -221,25 +216,6 @@ namespace fge
                 }
             }
             old_score_metri_ = score_metri_;
-
-#warning TODO
-            //if (fall_sound_active_ && !dead_explosion_.Started)
-            //{
-            //    if (touch.Count != 0)
-            //        force_to_finish_ = true;
-
-            //    if ((sound_manager_ as SoundManager_episodio1).HasFallFinished())
-            //    // TODO Si possono evitare i cast?
-            //    // Forse riesco a farlo solo una volta all'inizio in un'altra variabile apposta per l'uso
-            //    // tipo l'altra la metto private e questa diventa sound_manager_ep1...
-            //    // Il soundmanager potrei non chiedere quello del menu, ma creare il secondo a partire da quello
-            //    // del menu? MMM... attenzione al dispose
-            //    {
-            //        dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager_episodio1));
-            //        status_bar_.SetInfart();
-            //    }
-            //}
-
         }
 
         public override void CheckPlayerGemmaCollision()
@@ -262,14 +238,10 @@ namespace fge
             }
         }
 
-        internal void Resume()
+        public void Resume()
         {
             throw new NotImplementedException();
         }
-
-        #endregion
-
-        #region Dead
 
         protected override void MakePlayerDead()
         {
@@ -323,10 +295,6 @@ namespace fge
             }
         }
 
-        #endregion
-
-        #region Camera / Input
-
         protected override void RepositionCamera()
         {
             float player_camera_y;
@@ -344,12 +312,6 @@ namespace fge
             LerpCameraPosition(player_camera_x, player_camera_y);
         }
 
-        #endregion
-
-        #endregion
-
-        #region Update/Draw
-
         public void UpdateForMenu(double gametime, TouchCollection touch)
         {
             background_.Update(gametime);
@@ -359,8 +321,6 @@ namespace fge
             player_.Update(gametime, touch);
         }
 
-
-        // Ads 320x50
         protected override void DrawUI(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
@@ -405,8 +365,6 @@ namespace fge
             background_.DrawSpecial(spritebatch);
             spritebatch.End();
         }
-
-        #endregion
     }
 }
 
