@@ -91,13 +91,103 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\gratta_back.xnb">
+      <Link>Content\gratta_back.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\gratta_ground.xnb">
+      <Link>Content\gratta_ground.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\gratta_mid.xnb">
+      <Link>Content\gratta_mid.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\manina.xnb">
+      <Link>Content\manina.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\culata.xnb">
+      <Link>Content\Music\Effects\culata.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\cuore.xnb">
+      <Link>Content\Music\Effects\cuore.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\esplosione.xnb">
+      <Link>Content\Music\Effects\esplosione.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\fall.xnb">
+      <Link>Content\Music\Effects\fall.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\jalapeno.xnb">
+      <Link>Content\Music\Effects\jalapeno.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\merdone.xnb">
+      <Link>Content\Music\Effects\merdone.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\morso.xnb">
+      <Link>Content\Music\Effects\morso.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\night.xnb">
+      <Link>Content\Music\Effects\night.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\turu.xnb">
+      <Link>Content\Music\Effects\turu.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart1.xnb">
+      <Link>Content\Music\Scoregge\fart1.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart2.xnb">
+      <Link>Content\Music\Scoregge\fart2.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart3.xnb">
+      <Link>Content\Music\Scoregge\fart3.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart4.xnb">
+      <Link>Content\Music\Scoregge\fart4.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart5.xnb">
+      <Link>Content\Music\Scoregge\fart5.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart6.xnb">
+      <Link>Content\Music\Scoregge\fart6.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart7.xnb">
+      <Link>Content\Music\Scoregge\fart7.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Splashscreen.xnb">
+      <Link>Content\Splashscreen.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\TextFont.xnb">
+      <Link>Content\TextFont.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\textures.xnb">
+      <Link>Content\textures.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Infart\Infart.csproj">
       <Project>{d757d795-bf2d-45aa-b676-0ea0ab5e2a5c}</Project>

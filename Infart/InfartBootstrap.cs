@@ -111,10 +111,10 @@ namespace Infart
         {
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
 
-            _assetsLoader = new AssetsLoader(
-               Content,
-               _textFileAssetsLoader);
-            _mousePointer = _assetsLoader.Sprites["manina"];
+            //_assetsLoader = new AssetsLoader(
+            //   Content,
+            //   _textFileAssetsLoader);
+            //_mousePointer = _assetsLoader.Sprites["manina"];
             //     _soundManager = new fge.SoundManger_episodio1();
 
             var loaderEpisodio1 = new Loader_episodio1(Content, GraphicsDevice);
@@ -276,14 +276,14 @@ namespace Infart
             {
                 if (!_orchestrator.IsPaused)
                 {
-                    var mouseState = Mouse.GetState();
-                    var mousePosition = new Vector2(mouseState.X - 32, mouseState.Y);
-                    if (mouseState.X != 0 && mouseState.Y != 0)
-                    {
-                        _spriteBatch.Begin();
-                        _spriteBatch.Draw(_mousePointer.Sheet, mousePosition, _mousePointer.SourceRectangle, Color.White);
-                        _spriteBatch.End();
-                    }
+                    //var mouseState = Mouse.GetState();
+                    //var mousePosition = new Vector2(mouseState.X - 32, mouseState.Y);
+                    //if (mouseState.X != 0 && mouseState.Y != 0)
+                    //{
+                    //    _spriteBatch.Begin();
+                    //    _spriteBatch.Draw(_mousePointer.Sheet, mousePosition, _mousePointer.SourceRectangle, Color.White);
+                    //    _spriteBatch.End();
+                    //}
                 }
             }
 

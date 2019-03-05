@@ -98,14 +98,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\ContentBuilder\bin\gratta_back.xnb" />
+    <None Include="Assets\ContentBuilder\bin\gratta_ground.xnb" />
+    <None Include="Assets\ContentBuilder\bin\gratta_mid.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\culata.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\cuore.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\esplosione.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\fall.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\jalapeno.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\merdone.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\morso.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\night.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\turu.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart1.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart2.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart3.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart4.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart5.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart6.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart7.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Splashscreen.xnb" />
+    <None Include="Assets\ContentBuilder\bin\TextFont.xnb" />
+    <None Include="Assets\ContentBuilder\bin\textures.xnb" />
+    <None Include="Assets\ContentBuilder\InfartContent.mgcb" />
     <None Include="Assets\ContentBuilder\TextFont.spritefont" />
+    <None Include="Assets\_TextureProject\Splashscreen.psd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\_TextureProject\gratta_back.png" />
-    <None Include="Assets\_TextureProject\gratta_ground.png" />
-    <None Include="Assets\_TextureProject\gratta_mid.png" />
-    <None Include="Assets\_TextureProject\textures.png" />
     <None Include="Assets\ContentBuilder\Music\Effects\culata.wav" />
     <None Include="Assets\ContentBuilder\Music\Effects\cuore.wav" />
     <None Include="Assets\ContentBuilder\Music\Effects\esplosione.wav" />
@@ -128,6 +148,14 @@
     <None Include="Assets\_Other\infart.png" />
     <None Include="Assets\_Other\scritta_small.png" />
     <None Include="Assets\_Other\Background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\ContentBuilder\gratta_back.png" />
+    <Content Include="Assets\ContentBuilder\gratta_ground.png" />
+    <Content Include="Assets\ContentBuilder\gratta_mid.png" />
+    <Content Include="Assets\ContentBuilder\Splashscreen.png" />
+    <Content Include="Assets\ContentBuilder\textures.png" />
+    <Content Include="Assets\_TextureProject\Export\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

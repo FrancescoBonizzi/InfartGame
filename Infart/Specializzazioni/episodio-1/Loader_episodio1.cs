@@ -43,11 +43,11 @@ namespace fge
         public override void LoadTexture()
         {
             textures_rectangles_ = new Dictionary<string, Rectangle>();
-            textures_ = content_.Load<Texture2D>(@"episodio1/textures");
+            textures_ = content_.Load<Texture2D>(@"textures");
 
-            textures_gratta_back_ = content_.Load<Texture2D>(@"episodio1/gratta_back");
-            textures_gratta_mid_ = content_.Load<Texture2D>(@"episodio1/gratta_mid");
-            textures_gratta_ground_ = content_.Load<Texture2D>(@"episodio1/gratta_ground");
+            textures_gratta_back_ = content_.Load<Texture2D>(@"gratta_back");
+            textures_gratta_mid_ = content_.Load<Texture2D>(@"gratta_mid");
+            textures_gratta_ground_ = content_.Load<Texture2D>(@"gratta_ground");
 
             // ****** TEXTURES ****** //
             textures_rectangles_.Add("Bang", new Rectangle(824, 68, 251, 171));

@@ -205,7 +205,41 @@ namespace fge
 
         internal void Update(TimeSpan elapsed)
         {
-            throw new NotImplementedException();
+            // Ogni 50m aumento i parametri
+            if (score_metri_ % 50 == 0)
+            {
+                // Se è appena cambiato (Perché rimane sullo stesso metro per un po')
+                if (old_score_metri_ != score_metri_)
+                {
+                    (player_ as Player_episodio1).IncreaseMoveSpeed();
+                    background_.IncreaseParallaxSpeed();
+                    if (LarghezzaBuchi.Y < 600)
+                    {
+                        LarghezzaBuchi.X += 80.0f;
+                        LarghezzaBuchi.Y += 80.0f;
+                    }
+                }
+            }
+            old_score_metri_ = score_metri_;
+
+#warning TODO
+            //if (fall_sound_active_ && !dead_explosion_.Started)
+            //{
+            //    if (touch.Count != 0)
+            //        force_to_finish_ = true;
+
+            //    if ((sound_manager_ as SoundManager_episodio1).HasFallFinished())
+            //    // TODO Si possono evitare i cast?
+            //    // Forse riesco a farlo solo una volta all'inizio in un'altra variabile apposta per l'uso
+            //    // tipo l'altra la metto private e questa diventa sound_manager_ep1...
+            //    // Il soundmanager potrei non chiedere quello del menu, ma creare il secondo a partire da quello
+            //    // del menu? MMM... attenzione al dispose
+            //    {
+            //        dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager_episodio1));
+            //        status_bar_.SetInfart();
+            //    }
+            //}
+
         }
 
         public override void CheckPlayerGemmaCollision()
@@ -315,46 +349,6 @@ namespace fge
         #endregion
 
         #region Update/Draw
-
-        protected override void GameUpdate(double gametime, TouchCollection touch)
-        {
-            base.GameUpdate(gametime, touch);
-
-            // Ogni 50m aumento i parametri
-            if (score_metri_ % 50 == 0)
-            {
-                // Se è appena cambiato (Perché rimane sullo stesso metro per un po')
-                if (old_score_metri_ != score_metri_)
-                {
-                    (player_ as Player_episodio1).IncreaseMoveSpeed();
-                    background_.IncreaseParallaxSpeed();
-                    if (LarghezzaBuchi.Y < 600)
-                    {
-                        LarghezzaBuchi.X += 80.0f;
-                        LarghezzaBuchi.Y += 80.0f;
-                    }
-                }
-            }
-            old_score_metri_ = score_metri_;
-
-            if (fall_sound_active_ && !dead_explosion_.Started)
-            {
-                if (touch.Count != 0)
-                    force_to_finish_ = true;
-
-                if ((sound_manager_ as SoundManager_episodio1).HasFallFinished())
-                // TODO Si possono evitare i cast?
-                // Forse riesco a farlo solo una volta all'inizio in un'altra variabile apposta per l'uso
-                // tipo l'altra la metto private e questa diventa sound_manager_ep1...
-                // Il soundmanager potrei non chiedere quello del menu, ma creare il secondo a partire da quello
-                // del menu? MMM... attenzione al dispose
-                {
-                    dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager_episodio1));
-                    status_bar_.SetInfart();
-                }
-            }
-
-        }
 
         public void UpdateForMenu(double gametime, TouchCollection touch)
         {
