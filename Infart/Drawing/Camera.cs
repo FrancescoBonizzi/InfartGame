@@ -108,7 +108,6 @@ namespace Infart.Drawing
         {
             if (moving_)
             {
-
                 if (position_to_go_to_ != Position)
                 {
                     float elapsed = (float)gametime / 1000.0f;

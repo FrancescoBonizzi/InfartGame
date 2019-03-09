@@ -9,11 +9,9 @@ namespace Infart.Assets
         {
             if (cultureInfo.TwoLetterISOLanguageName == "it")
             {
-
             }
             else
             {
-
             }
         }
     }

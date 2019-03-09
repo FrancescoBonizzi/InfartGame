@@ -39,16 +39,6 @@ namespace Infart.ParticleSystem
         {
             base.InitializeParticle(p, where);
 
-
-
-
-
-
-
-
-
-
-
             p.Acceleration = -p.Velocity / p.LifeTime;
         }
     }

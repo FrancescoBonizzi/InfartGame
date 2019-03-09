@@ -39,7 +39,6 @@ namespace Infart.Background
                 CurrentCamera,
                 GameManagerReference);
 
-
             game_manager_reference_ = GameManagerReference;
         }
 

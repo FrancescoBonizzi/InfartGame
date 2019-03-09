@@ -52,7 +52,6 @@ namespace Infart.Drawing
             get { return position_; }
             set
             {
-
                 collision_rectangle_.X = (int)value.X + 20;
                 collision_rectangle_.Y = (int)value.Y + 20;
                 position_ = value;

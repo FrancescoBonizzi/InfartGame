@@ -119,7 +119,6 @@ namespace Infart.Astronaut
             {
                 ++CurrentFrame;
 
-
                 if (current_frame_ >= FrameCount)
                 {
                     if (loop_animation_)

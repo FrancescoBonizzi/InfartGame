@@ -72,10 +72,8 @@ namespace Infart.Astronaut
 
         private Vector2 CollisionTest(Vector2 move_amount)
         {
-
             Rectangle afterMoveRect = collision_rectangle_;
             Vector2 corner1, corner2;
-
 
             if (move_amount.X != 0)
             {
@@ -99,9 +97,6 @@ namespace Infart.Astronaut
                 }
             }
 
-
-
-
             if (move_amount.Y == 0)
                 return move_amount;
             else
@@ -111,14 +106,12 @@ namespace Infart.Astronaut
 
                 if (velocity_.Y > 0)
                 {
-
                     corner1 = new Vector2(
                         afterMoveRect.X + 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
                     corner2 = new Vector2(
                         afterMoveRect.X + afterMoveRect.Width - 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
-
 
                     int coll_index = CollisionSolver.CheckCollisionsReturnCollidedObject(
                        new Rectangle(
@@ -135,7 +128,6 @@ namespace Infart.Astronaut
                         move_amount.Y = 0;
                         velocity_.Y = 0;
 
-
                         position_ = new Vector2(
                             position_.X,
                             MathHelper.Lerp(
@@ -143,11 +135,8 @@ namespace Infart.Astronaut
                                 colliding_objs_reference_[coll_index].CollisionRectangle.Y - Height + 2,
                                 0.1f));
                     }
-
                 }
             }
-
-
 
             return move_amount;
         }

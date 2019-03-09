@@ -25,7 +25,8 @@ namespace Infart
 
         protected Camera current_camera_;
 
-        enum PowerUps { Jalapeno, Merda };
+        private enum PowerUps
+        { Jalapeno, Merda };
 
         private PowerUps next_power_up_ = PowerUps.Jalapeno;
 

@@ -76,14 +76,12 @@ namespace Infart.Background
             parallax_speed_fondo_ = default_parallax_speed_fondo_;
             parallax_speed_mid_ = default_parallax_speed_mid_;
 
-
             List<Rectangle> tmp = new List<Rectangle>
             {
                 Loader.textures_rectangles_["nuvola1"],
                 Loader.textures_rectangles_["nuvola2"],
                 Loader.textures_rectangles_["nuvola3"]
             };
-
 
             nuvolificio_vicino_ = new Nuvolificio(
                 Color.White, 0.6f, new Vector2(45, 60f),
@@ -132,7 +130,6 @@ namespace Infart.Background
 
         public void Update(double gametime)
         {
-
             if (old_camera_x_pos_ - current_camera_.Position.X < 0)
             {
                 parallax_dir_ = +1;

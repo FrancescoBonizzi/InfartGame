@@ -109,7 +109,6 @@ namespace Infart.ParticleSystem
         {
             Vector2 direction = PickRandomDirection();
 
-
             float velocity =
                 fbonizziHelper.RandomBetween(min_initial_speed_, max_initial_speed_);
             float acceleration =
@@ -171,25 +170,9 @@ namespace Infart.ParticleSystem
                 if (!p.Active)
                     continue;
 
-
-
-
-
-
                 float normalizedLifetime = p.TimeSinceStart / p.LifeTime;
 
-
-
-
-
-
-
-
-
-
                 float alpha = 4 * normalizedLifetime * (1 - normalizedLifetime);
-
-
 
                 float scale = p.Scale * (.75f + .25f * normalizedLifetime);
 

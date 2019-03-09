@@ -5,10 +5,11 @@ using System.Globalization;
 namespace Infart.WindowsDesktop
 {
 #if WINDOWS || LINUX
+
     public static class Program
     {
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             using (var game = new InfartBootstrap(
                 textFileAssetsLoader: new WindowsTextFileImporter(),
@@ -24,5 +25,6 @@ namespace Infart.WindowsDesktop
             }
         }
     }
+
 #endif
 }

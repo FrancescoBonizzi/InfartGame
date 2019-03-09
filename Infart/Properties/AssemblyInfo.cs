@@ -1,10 +1,6 @@
 ﻿using System.Reflection;
 using System.Resources;
 
-
-
-
-
 [assembly: AssemblyTitle("Infart")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -14,16 +10,6 @@ using System.Resources;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
-
-
-
-
-
-
-
-
-
-
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

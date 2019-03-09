@@ -390,7 +390,6 @@ namespace Infart.ParticleSystem
 
             if (score_metri_ % 50 == 0)
             {
-
                 if (old_score_metri_ != score_metri_)
                 {
                     (player_ as Player).IncreaseMoveSpeed();
@@ -505,7 +504,6 @@ namespace Infart.ParticleSystem
             player_camera_x = player_.Position.X - 150;
             player_camera_y = player_.Position.Y - 200;
 
-
             if (player_camera_y < game_cameraH_limit_)
                 player_camera_y = game_cameraH_limit_;
             else if (player_camera_y > 0)
@@ -526,7 +524,6 @@ namespace Infart.ParticleSystem
         protected void DrawUI(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-
 
             spriteBatch.Draw(
                 px_texture_,

@@ -72,9 +72,6 @@ namespace Infart.Background
         {
             List<Rectangle> nuvole_rects_ = NuvolaRectangles;
 
-
-
-
             nuvole_ = new List<Nuvola>();
             for (int i = 0; i < nuvole_number_; ++i)
                 nuvole_.Add(new Nuvola(
@@ -87,7 +84,6 @@ namespace Infart.Background
             get { return nuvole_spawn_y_range_; }
             set
             {
-
                 if (value.X > value.Y)
                 {
                     float tmp = value.X;
@@ -178,7 +174,6 @@ namespace Infart.Background
 
                 for (int i = 0; i < nuvole_.Count; ++i)
                 {
-
                     if (ToBeRemoved(nuvole_[i]))
                         SetNuvola(i);
                     else

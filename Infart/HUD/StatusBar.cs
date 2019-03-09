@@ -61,7 +61,6 @@ namespace Infart.HUD
                     empty_color,
                     ham_scale);
                 tmp_pos.X += ham_width;
-
             }
         }
 
@@ -112,9 +111,6 @@ namespace Infart.HUD
             if (hamburgers_ >= soglia_hamburger_per_star_male_)
             {
                 status_burgers_[hamburgers_ - 1].FillColor = Color.LightCoral;
-
-
-
 
                 sound_manager_reference_.PlayHeartBeat();
             }

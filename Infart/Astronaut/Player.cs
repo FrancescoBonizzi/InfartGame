@@ -197,13 +197,8 @@ namespace Infart.Astronaut
             {
                 string new_animation_ = "run";
 
-
                 if (allow_input_)
                 {
-
-
-
-
                     FlipEffect = SpriteEffects.None;
                     velocity_.X = +HorizontalMoveSpeed;
 
@@ -227,16 +222,12 @@ namespace Infart.Astronaut
                                     Jump(650);
                             }
                         }
-
                     }
                 }
                 else
                 {
                     new_animation_ = "idle";
                 }
-
-
-
 
                 if (!OnGround)
                 {
@@ -260,9 +251,6 @@ namespace Infart.Astronaut
                         collision_rectangle_.Width -= 120;
                 }
 
-
-
-
                 scoreggia_system_.Update(dt);
                 jalapeno_system_.Update(dt);
                 broccolo_system_.Update(dt);
@@ -274,15 +262,10 @@ namespace Infart.Astronaut
                 else
                     ScoreggiaGeneration(dt);
 
-
-
-
                 if (!Dead)
                 {
                     game_manager_reference_.score_metri_ = ((int)(position_.X / 100));
                 }
-
-
             }
 
             base.Update(dt);

@@ -141,7 +141,6 @@ namespace Infart.ParticleSystem
                         active_ = false;
                     }
                 }
-
             }
         }
 

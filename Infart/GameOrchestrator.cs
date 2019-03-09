@@ -75,11 +75,6 @@ namespace Infart
 
         public void Start()
         {
-
-
-
-
-
             _currentState = GameStates.Playing;
             _game = _gameFactory();
             _stateTransition.FadeIn();
@@ -99,7 +94,6 @@ namespace Infart
                     _stateTransition.FadeIn();
                     _currentState = GameStates.Playing;
                     _game = _gameFactory();
-
                 });
         }
 
@@ -127,9 +121,6 @@ namespace Infart
 
             if (_stateTransition.IsFading)
                 return;
-
-
-
 
             Replay();
         }
@@ -196,7 +187,6 @@ namespace Infart
             {
                 case GameStates.Menu:
 
-
                     throw new NotImplementedException();
                     break;
 
@@ -210,7 +200,6 @@ namespace Infart
         {
             if (IsPaused)
                 return;
-
 
             graphics.SetRenderTarget(_renderTarget);
             graphics.Clear(Color.Black);
@@ -226,7 +215,6 @@ namespace Infart
                     _game.Draw(spriteBatch);
                     break;
             }
-
 
             graphics.SetRenderTarget(null);
             graphics.Clear(Color.Black);

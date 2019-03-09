@@ -69,29 +69,12 @@ namespace Infart.ParticleSystem
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
             if (!scritta_.Active)
                 return;
 
-
-
-
-
-
             float normalizedLifetime = scritta_.TimeSinceStart / scritta_.LifeTime;
 
-
-
-
-
-
-
-
-
-
             float alpha = 4 * normalizedLifetime * (1 - normalizedLifetime);
-
-
 
             float scale = scritta_.Scale * (.75f + .25f * normalizedLifetime);
 

@@ -187,8 +187,6 @@ namespace Infart.Background
             {
                 Grattacielo g = grattacieli_to_draw_[i];
 
-
-
                 g.Update(gametime);
 
                 if (ToBeRemoved(camera_position_x_, (int)g.Position.X, (int)g.Width))
@@ -208,7 +206,6 @@ namespace Infart.Background
 
         private void AddGrattacieloForDrawing()
         {
-
             float camera_x_first = camera_position_x_;
             float camera_x_last = camera_x_first + camera_w_;
 
@@ -222,7 +219,6 @@ namespace Infart.Background
                 next_avaible_position_.X +=
                      grattacieli_in_coda_[0].Width +
                      random_.Next(1, max_grattacielo_position_offset_);
-
 
                 if (innest_gemma_)
                 {
@@ -243,7 +239,6 @@ namespace Infart.Background
                                     grattacieli_in_coda_[0].PositionAtTopLeftCorner().Y - 180));
                         }
                     }
-
                 }
 
                 grattacieli_to_draw_.Add(grattacieli_in_coda_[0]);

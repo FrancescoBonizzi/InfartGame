@@ -6,7 +6,6 @@ using FbonizziMonoGame.Input.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
 using FbonizziMonoGame.StringsLocalization;
 using FbonizziMonoGame.StringsLocalization.Abstractions;
-
 using Infart.Assets;
 using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
@@ -115,7 +114,7 @@ namespace Infart
         private void LoadGameAssets()
         {
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
-            
+
             var loaderEpisodio1 = new Loader(Content, GraphicsDevice);
             var soundManager = new SoundManager(true, loaderEpisodio1);
             var gameFactory = new Func<InfartGame>(
@@ -132,8 +131,6 @@ namespace Infart
                 _matrixScaleProvider,
                 _soundManager,
                 _webPageOpener);
-
-
 
             _inputListeners = new List<IInputListener>();
 
@@ -154,7 +151,6 @@ namespace Infart
                 _inputListeners.Add(touchListener);
                 _inputListeners.Add(gamepadListener);
             }
-
 
             var keyboardListener = new KeyboardListener();
             keyboardListener.KeyPressed += KeyboardListener_KeyPressed;
@@ -275,14 +271,6 @@ namespace Infart
             {
                 if (!_orchestrator.IsPaused)
                 {
-
-
-
-
-
-
-
-
                 }
             }
 

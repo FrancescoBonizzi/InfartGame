@@ -14,8 +14,6 @@ namespace Infart.ParticleSystem
 
         protected override void InitializeConstants()
         {
-
-
             min_initial_speed_ = 10f;
             max_initial_speed_ = 15f;
 

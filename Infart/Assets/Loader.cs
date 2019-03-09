@@ -77,7 +77,6 @@ namespace Infart.Assets
             textures_gratta_mid_ = content_.Load<Texture2D>(@"gratta_mid");
             textures_gratta_ground_ = content_.Load<Texture2D>(@"gratta_ground");
 
-
             textures_rectangles_.Add("Bang", new Rectangle(824, 68, 251, 171));
             textures_rectangles_.Add("BroccoloParticle", new Rectangle(1719, 542, 64, 64));
             textures_rectangles_.Add("Burger", new Rectangle(1992, 2, 51, 43));
@@ -396,7 +395,6 @@ namespace Infart.Assets
             textures_rectangles_.Add("mid7", new Rectangle(1314, 1760, 40, 200));
             textures_rectangles_.Add("mid8", new Rectangle(330, 1806, 104, 225));
             textures_rectangles_.Add("mid9", new Rectangle(1272, 1760, 40, 250));
-
 
             player_run_rects_ = new List<Rectangle>();
             player_run_rects_.Add(textures_rectangles_["run/run__000"]);
