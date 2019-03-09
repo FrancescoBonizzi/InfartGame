@@ -74,13 +74,11 @@
     <Compile Include="RecordExplosion_episodio1.cs" />
     <Compile Include="SoundManger_episodio1.cs" />
     <Compile Include="StarFieldParticleSystem.cs" />
-    <Compile Include="StatusBar.cs" />
     <Compile Include="StatusBar_episodio1.cs" />
     <Compile Include="Menu\Loader_menu.cs" />
     <Compile Include="Menu\MerdeVolantiParticleSystem.cs" />
     <Compile Include="Player\Actor.cs" />
     <Compile Include="Player\AnimationManager.cs" />
-    <Compile Include="Player\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FbonizziMonoGame, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

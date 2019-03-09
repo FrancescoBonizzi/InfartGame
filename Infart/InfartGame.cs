@@ -16,14 +16,14 @@ namespace fge
         private int resolution_h_;
         protected int game_h_;
         protected Camera player_camera_;
-        protected Player player_;
+        protected Player_episodio1 player_;
 
         protected BackgroundManager_episodio1 background_;
         protected GroundManager_episodio1 ground_;
         protected GemmaManager_episodio1 gemme_;
         protected SoundManager_episodio1 sound_manager_;
 
-        protected StatusBar status_bar_;
+        protected StatusBar_episodio1 status_bar_;
 
         protected Loader Loader;
 
@@ -104,7 +104,7 @@ namespace fge
 
             sound_manager_ = SoundManager;
 
-            status_bar_ = new StatusBar(new Vector2(460, 435), Loader, SoundManager);
+            status_bar_ = new StatusBar_episodio1(new Vector2(460, 435), Loader, SoundManager);
 
             high_score_ = HighScore;
             SetRecordRectangle();
@@ -475,7 +475,7 @@ namespace fge
         }
 
 
-        public Player PlayerReference
+        public Player_episodio1 PlayerReference
         {
             get { return player_; }
         }

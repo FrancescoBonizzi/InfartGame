@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
@@ -8,7 +9,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace fge
 {
-    public class Player_episodio1 : Player
+    public class Player_episodio1 : Actor
     {
         
         ScoreggiaParticleSystem scoreggia_system_;
@@ -37,15 +38,12 @@ namespace fge
         private double elapsed_broccolo_ = 0.0;
 
         private Color fill_color_;
-
-        
-
         
         public Player_episodio1(
-           Vector2 starting_pos,
+            Vector2 starting_pos,
             Loader_episodio1 Loader,
             InfartGame GameManagerReference)
-            : base(starting_pos, GameManagerReference)
+            : base(1.0f, starting_pos, GameManagerReference.GroundObjects())
         {
             fill_color_ = overlay_color_;
             Position = starting_pos;
@@ -78,7 +76,27 @@ namespace fge
             PlayAnimation("fall");
         }
 
-        public override void Reset(Vector2 position)
+
+        protected void LoadAnimation(
+            string name,
+            List<Rectangle> frames,
+            bool loop_animation,
+            float frame_lenght,
+            Texture2D TextureReference)
+        {
+            animations_.Add(
+               name,
+               new AnimationManager(
+                    frames,
+                    name,
+                    TextureReference
+               ));
+            animations_[name].LoopAnimation = loop_animation;
+            animations_[name].FrameLength = frame_lenght;
+        }
+
+
+        public void Reset(Vector2 position)
         {
             position_ = position;
             Dead = false;
@@ -111,9 +129,9 @@ namespace fge
 
 
         
-        public override void Jump(float amount)
+        public void Jump(float amount)
         {
-            base.Jump(amount);
+            velocity_.Y = -amount;
 
             game_manager_reference_.PlayerJumped();
             game_manager_reference_.AddScoreggia();
@@ -173,11 +191,8 @@ namespace fge
             game_manager_reference_.DecreaseParallaxSpeed();
             game_manager_reference_.DecreaseParallaxSpeed();
         }
-
         
-
-        
-        public override void Update(double dt, TouchCollection touch)
+        public void Update(double dt, TouchCollection touch)
         {
             if (!dead_)
             {
@@ -352,7 +367,7 @@ namespace fge
             }
         }
 
-        public override void DrawParticles(SpriteBatch spriteBatch)
+        public void DrawParticles(SpriteBatch spriteBatch)
         {
             if (!dead_)
             {
