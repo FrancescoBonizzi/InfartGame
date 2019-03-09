@@ -1,18 +1,16 @@
-#region Using
 
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 
-#endregion
+
 
 namespace fge
 {
     public class Player_episodio1 : Player
     {
-        #region Dichiarazioni
-
+        
         ScoreggiaParticleSystem scoreggia_system_;
         JalapenoParticleSystem jalapeno_system_;
         BroccoloParticleSystem broccolo_system_;
@@ -40,10 +38,9 @@ namespace fge
 
         private Color fill_color_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public Player_episodio1(
            Vector2 starting_pos,
             Loader_episodio1 Loader,
@@ -97,10 +94,9 @@ namespace fge
             PlayAnimation("fall");
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public bool JalapenosJump
         {
             get { return jalapenos_; }
@@ -111,11 +107,10 @@ namespace fge
             get { return current_animation_ == "culata"; }
         }
 
-        #endregion
+        
 
 
-        #region Metodi
-
+        
         public override void Jump(float amount)
         {
             base.Jump(amount);
@@ -179,18 +174,16 @@ namespace fge
             game_manager_reference_.DecreaseParallaxSpeed();
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public override void Update(double dt, TouchCollection touch)
         {
             if (!dead_)
             {
                 string new_animation_ = "run";
 
-                #region Input
-
+                
                 if (allow_input_)
                 {
                     //  current_keyboard_state_ = Keyboard.GetState();
@@ -228,10 +221,9 @@ namespace fge
                     new_animation_ = "idle";
                 }
 
-                #endregion
+                
 
-                #region Animazioni / Particle
-
+                
                 if (!OnGround)
                 {
                     if (velocity_.Y < 0)
@@ -254,10 +246,9 @@ namespace fge
                         collision_rectangle_.Width -= 120;
                 }
 
-                #endregion
+                
 
-                #region Particle systems
-
+                
                 scoreggia_system_.Update(dt);
                 jalapeno_system_.Update(dt);
                 broccolo_system_.Update(dt);
@@ -269,16 +260,15 @@ namespace fge
                 else
                     ScoreggiaGeneration(dt);
 
-                #endregion
+                
 
-                #region Metraggio
-
+                
                 if (!Dead)
                 {
                     game_manager_reference_.score_metri_ = ((int)(position_.X / 100));
                 }
 
-                #endregion
+                
             }
 
             base.Update(dt);
@@ -372,6 +362,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

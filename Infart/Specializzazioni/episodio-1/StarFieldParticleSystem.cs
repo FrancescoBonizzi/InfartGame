@@ -1,8 +1,7 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 
-#endregion
+
 
 namespace fge
 {

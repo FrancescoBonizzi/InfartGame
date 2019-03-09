@@ -1,18 +1,16 @@
-﻿#region
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Microsoft.Xna.Framework.Input.Touch;
 
-#endregion
+
 
 namespace fge
 {
     public class Button
     {
-        #region Dichiarazioni
-
+        
         private string name_;
         private string text_;
 
@@ -47,10 +45,9 @@ namespace fge
         private CustomButtonState current_button_state_ = CustomButtonState.UP;
         private double timer_ = 0.0;
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public Button(
             string text,
             Vector2 position,
@@ -97,10 +94,9 @@ namespace fge
             current_drawn_texture_ = state1_texture_;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public Vector2 Position
         {
             set
@@ -134,10 +130,9 @@ namespace fge
             get { return name_; }
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public void SwitchTexture()
         {
             if (current_drawn_texture_ == state1_texture_)
@@ -145,10 +140,9 @@ namespace fge
             else current_drawn_texture_ = state1_texture_;
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public void Update(double gameTime, TouchCollection touch)
         {
             if (touch.Count != 0)
@@ -237,6 +231,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

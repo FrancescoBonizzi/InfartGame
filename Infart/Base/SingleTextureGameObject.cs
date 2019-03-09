@@ -1,16 +1,14 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public class SingleTextureGameObject : GameObject
     {
-        #region Dichiarazioni
-
+        
         private Texture2D texture_;
 
         private int width_;
@@ -19,10 +17,9 @@ namespace fge
         private Rectangle texture_bounds_;
         protected Rectangle collision_rectangle_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public SingleTextureGameObject(Texture2D texture)
         {
             texture_ = texture;
@@ -69,10 +66,9 @@ namespace fge
         {
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public override Vector2 Position
         {
             get { return position_; }
@@ -124,10 +120,9 @@ namespace fge
             }
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public override void Update(double gameTime)
         {
         }
@@ -146,6 +141,6 @@ namespace fge
                 depth_);
         }
 
-        #endregion
+        
     }
 }

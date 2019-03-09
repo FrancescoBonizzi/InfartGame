@@ -1,16 +1,14 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public class Nuvola : GameObject
     {
-        #region Dichiarazioni
-
+        
         private float velocity_;
         private Vector2 current_move_amount = Vector2.Zero;
 
@@ -22,10 +20,9 @@ namespace fge
 
         private bool active_ = false;
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public Nuvola(Texture2D TextureReference, Rectangle TextureRectangle)
         {
             texture_rectangle_ = TextureRectangle;
@@ -34,10 +31,9 @@ namespace fge
             scale_ = Vector2.One;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public void Set(
             Vector2 pos,
             float speed,
@@ -52,10 +48,9 @@ namespace fge
             active_ = true;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public bool Active
         {
             get { return active_; }
@@ -66,10 +61,9 @@ namespace fge
             get { return new Rectangle((int)position_.X, (int)position_.Y, texture_rectangle_.Width, texture_rectangle_.Height); }
         }
 
-        #endregion
+        
 
-        #region Update
-
+        
         public override void Update(double gameTime)
         {
             if (active_)
@@ -105,6 +99,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

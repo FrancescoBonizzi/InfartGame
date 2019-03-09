@@ -1,18 +1,16 @@
-﻿#region Using
-
+﻿
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public abstract class ParticleSystem
     {
-        #region Dichiarazioni
-
+        
         private Texture2D texture_;
         private Rectangle texture_rectangle_;
         private Vector2 origin_;
@@ -47,10 +45,9 @@ namespace fge
 
         private static Random random_;
 
-        #endregion
+        
 
-        #region Costruttore / Inizializzazione
-
+        
         public ParticleSystem(
             int Density,
             Texture2D Texture,
@@ -93,10 +90,9 @@ namespace fge
 
         protected abstract void InitializeConstants();
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public virtual void AddParticles(Vector2 where)
         {
             int numParticles = random_.Next(min_num_particles_, max_num_particles_);
@@ -145,10 +141,9 @@ namespace fge
             return direction;
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public virtual void Update(double gameTime)
         {
             float dt = (float)gameTime / 1000.0f;
@@ -205,6 +200,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

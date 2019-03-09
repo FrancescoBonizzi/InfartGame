@@ -1,19 +1,17 @@
-﻿#region Using
-
+﻿
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-#endregion
+
 
 namespace fge
 {
     public abstract class GemmaManager
     {
-        #region Dichiarazioni
-
+        
         // Quando vorrò modificarlo, lo metterò non const e forzerò l'inizializzazione
         protected const int max_gemme_attive_ = 10;
         protected List<Gemma> gemme_attive_;
@@ -22,10 +20,9 @@ namespace fge
         protected Random random_;
         protected Camera current_camera_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public GemmaManager(
             Camera CameraReference,
             Texture2D Texture,
@@ -55,10 +52,9 @@ namespace fge
             current_camera_ = CameraReference;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         // Sicuro public? Va usato dall'esterno? >.<
         public void AddGemma(Vector2 StartingPosition)
         {
@@ -99,10 +95,9 @@ namespace fge
             return false;
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public virtual void Update(double gametime)
         {
             for (int i = 0; i < gemme_attive_.Count; ++i)
@@ -125,7 +120,7 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }
 

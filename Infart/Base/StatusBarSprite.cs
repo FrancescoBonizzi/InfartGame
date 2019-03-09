@@ -1,9 +1,8 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 // TODO
 // Texture reference e texture rectangle DEVONO finire nel gameobject
@@ -12,8 +11,7 @@ namespace fge
 {
     public class StatusBarSprite : GameObject
     {
-        #region Dichiarazioni
-
+        
         private double elapsed_ = 0.0;
         private bool animate_in_ = false;
         private bool animate_out_ = false;
@@ -26,10 +24,9 @@ namespace fge
         private Vector2 scaleTo_;
         private Vector2 scale_change_amount = new Vector2(0.005f);
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public StatusBarSprite(
             Texture2D TextureReference,
             Rectangle TextureRectangle,
@@ -62,10 +59,9 @@ namespace fge
             animate_out_ = false;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public override Vector2 Position
         {
             get { return position_; }
@@ -101,10 +97,9 @@ namespace fge
             animate_out_ = true;
         }
 
-        #endregion
+        
 
-        #region Update / Draw
-
+        
         public override void Update(double gameTime)
         {
             if (animate_in_ || animate_out_)
@@ -147,6 +142,6 @@ namespace fge
                 depth_);
         }
 
-        #endregion
+        
     }
 }

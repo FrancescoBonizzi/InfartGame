@@ -1,19 +1,17 @@
-﻿#region Using
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public abstract class GrattacieliAutogeneranti
     {
-        #region Dichiarazioni
-
+        
         protected List<Grattacielo> grattacieli_to_draw_;
         protected List<Grattacielo> grattacieli_in_coda_;
 
@@ -42,10 +40,9 @@ namespace fge
 
         protected int resolution_h_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public GrattacieliAutogeneranti(
             Texture2D Texture,
             Dictionary<string, Rectangle> GrattaRects,
@@ -73,10 +70,9 @@ namespace fge
             else innest_gemma_ = false;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public int LastGrattacieloHeight
         {
             get { return last_grattacielo_height_; }
@@ -105,10 +101,9 @@ namespace fge
                 grattacieli_to_draw_[i].PositionX += Xamount;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public void Reset(Camera camera)
         {
             if (firstOne_pointer_ != null)
@@ -180,10 +175,9 @@ namespace fge
             return camera_position_x > obj_position_x + Width;
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public void Update(double gametime, Camera current_camera)
         {
             camera_position_x_ = (int)current_camera_.Position.X;
@@ -215,6 +209,6 @@ namespace fge
                 grattacieli_to_draw_[i].Draw(spriteBatch);
         }
 
-        #endregion
+        
     }
 }

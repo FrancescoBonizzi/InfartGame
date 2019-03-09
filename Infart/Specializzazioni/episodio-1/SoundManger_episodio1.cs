@@ -1,16 +1,14 @@
-#region Using
 
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 
-#endregion
+
 
 namespace fge
 {
     public class SoundManager_episodio1 : SoundManager
     {
-        #region Dichiarazioni
-
+        
         private SoundEffectInstance background_music_;
         private SoundEffectInstance explosion_sound_;
         private SoundEffectInstance fall_sound_;
@@ -19,10 +17,9 @@ namespace fge
         private SoundEffectInstance merdone_sound_;
         private SoundEffectInstance morso_ = null;
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public SoundManager_episodio1(
             bool SoundFlag,
             Loader_menu Loader_menu,
@@ -31,10 +28,9 @@ namespace fge
         {
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         protected override void AddAllSounds(Loader MyLoader)
         {
             background_music_ = ((MyLoader) as Loader_episodio1).sound_effects_["night"].CreateInstance();
@@ -138,6 +134,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

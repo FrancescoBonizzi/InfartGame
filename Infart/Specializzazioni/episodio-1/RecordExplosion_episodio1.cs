@@ -1,7 +1,6 @@
-#region Using
 
 
-#endregion
+
 namespace fge
 {
     public class RecordExplosion_episodio1 : RecordExplosion

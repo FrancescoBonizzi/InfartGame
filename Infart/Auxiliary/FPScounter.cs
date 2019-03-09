@@ -1,10 +1,9 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Text;
 
-#endregion
+
 
 
 namespace fge

@@ -1,17 +1,15 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-#endregion
+
 
 namespace fge
 {
     public /*abstract*/ class StatusBar
     {
-        #region Dichiarazioni
-
+        
         private Vector2 position_;
 
         private StatusBarSprite[] status_burgers_;
@@ -36,10 +34,9 @@ namespace fge
 
         private bool infart_ = false;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public StatusBar(
             Vector2 position,
             Loader_episodio1 Loader,
@@ -84,10 +81,9 @@ namespace fge
             jump_count_ = 0;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public int CurrentHamburgers
         {
             get { return hamburgers_; }
@@ -110,10 +106,9 @@ namespace fge
             return false;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public void HamburgerEaten()
         {
             Hamburgers += 1;
@@ -194,10 +189,9 @@ namespace fge
             sound_manager_reference_.StopHeartBeat();
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public void Update(double gametime)
         {
             elapsed_ += gametime;
@@ -235,6 +229,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

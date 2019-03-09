@@ -1,9 +1,8 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
@@ -12,8 +11,7 @@ namespace fge
     // sull'asse y
     public abstract class BackgroundManager
     {
-        #region Dichiarazioni
-
+        
         protected Camera current_camera_;
         protected float old_camera_x_pos_;
         protected float parallax_dir_ = +1;
@@ -23,10 +21,9 @@ namespace fge
         protected Vector2 sfondo_origin_;
         protected Vector2 sfondo_scale_;
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public BackgroundManager(
             Camera CameraInstance,
             Rectangle SfondoRectangle,
@@ -41,19 +38,17 @@ namespace fge
             sfondo_scale_ = Vector2.One;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public abstract void IncreaseParallaxSpeed();
         public abstract void DecreaseParallaxSpeed();
 
         public abstract void Reset(Camera camera);
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public virtual void Update(double gametime)
         {
             // Se la telecamera si è mossa
@@ -93,6 +88,6 @@ namespace fge
                 1.0f);
         }
 
-        #endregion
+        
     }
 }

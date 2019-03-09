@@ -1,18 +1,16 @@
-﻿#region Using
-
+﻿
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     // Da rifare tutto come infart explosion
     public class RecordExplosion
     {
-        #region Dichiarazioni
-
+        
         private Particle scritta_ = null;
         private Rectangle texture_rectangle_;
         private Vector2 origin_;
@@ -20,10 +18,9 @@ namespace fge
 
         private static Random random_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public RecordExplosion(
             Texture2D TextureReference,
             Rectangle TextureRectangle)
@@ -66,10 +63,9 @@ namespace fge
             //  SoundManager.PlayRecord();
         }
 
-        #endregion
+        
 
-        #region Update / Draw
-
+        
         public void Update(double gameTime)
         {
             if (scritta_.Active)
@@ -112,6 +108,6 @@ namespace fge
                 scritta_.Rotation, origin_, scale, SpriteEffects.None, 0.0f);
         }
 
-        #endregion
+        
     }
 }

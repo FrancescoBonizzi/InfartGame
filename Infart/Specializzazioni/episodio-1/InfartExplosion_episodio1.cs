@@ -1,7 +1,6 @@
-#region Using
 
 
-#endregion
+
 namespace fge
 {
     public class InfartExplosion_episodio1 : InfartExplosion

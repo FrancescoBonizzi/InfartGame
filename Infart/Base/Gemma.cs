@@ -1,9 +1,8 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
@@ -11,8 +10,7 @@ namespace fge
     {
         // TODO
         // Si può rimuovere active?
-        #region Dichiarazioni
-
+        
         private float move_y_amount_ = 10f;
         private float elapsed_ = 0.0f;
 
@@ -23,10 +21,9 @@ namespace fge
 
         private bool active_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public Gemma(
             Texture2D TextureReference,
             Rectangle TextureRectangle)
@@ -51,10 +48,9 @@ namespace fge
             Position = starting_position;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public bool Active
         {
             get { return active_; }
@@ -89,10 +85,9 @@ namespace fge
         }
 
 
-        #endregion
+        
 
-        #region Update / Draw
-
+        
         public override void Update(double gameTime)
         {
             if (active_)
@@ -128,6 +123,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

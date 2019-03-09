@@ -1,5 +1,4 @@
-﻿#region Descrizione
-//-----------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
 // GameObject.cs
 //
 // - Oggetto astratto: ciò che viene disegnato, possiede coordinate 
@@ -9,21 +8,19 @@
 // fbonizzi_Game_Engine
 // Copyright (C) Francesco Bonizzi. All rights reserved.
 //-----------------------------------------------------------------------------
-#endregion
 
-#region Using
+
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public abstract class GameObject
     {
-        #region Dichiarazioni
-
+        
         protected Vector2 position_ = Vector2.Zero;
         protected float rotation_ = 0.0f;
         protected Vector2 scale_ = Vector2.One;
@@ -32,10 +29,9 @@ namespace fge
         protected Color overlay_color_ = Color.White;
         protected SpriteEffects flip_ = SpriteEffects.None;
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public virtual Vector2 Position
         {
             get { return position_; }
@@ -111,20 +107,18 @@ namespace fge
             get { return overlay_color_; }
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public virtual void Dispose()
         { }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public abstract void Update(double gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
 
-        #endregion
+        
     }
 }

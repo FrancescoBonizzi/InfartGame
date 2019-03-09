@@ -1,25 +1,22 @@
-﻿#region Descrizione
-//-----------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
 // CollisionSolver.cs
 //
 // fbonizzi_Game_Engine
 // Copyright (C) Francesco Bonizzi. All rights reserved.
 //-----------------------------------------------------------------------------
-#endregion
 
-#region Using
+
 
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-#endregion
+
 
 namespace fge
 {
     public static class CollisionSolver
     {
-        #region Dichiarazioni
-
+        
         public enum actions
         {
             blockAll,
@@ -28,7 +25,7 @@ namespace fge
             endLevel
         };
 
-        #endregion
+        
 
         public static bool CheckCollisions(
              Rectangle obj_rect,

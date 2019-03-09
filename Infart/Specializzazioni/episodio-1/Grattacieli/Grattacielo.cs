@@ -1,9 +1,8 @@
-﻿#region Using
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 // PS:
 // L'origine è sul vertice in basso a sinistra
@@ -12,8 +11,7 @@ namespace fge
 {
     public class Grattacielo : GameObject
     {
-        #region Dichiarazioni
-
+        
         private int h_; // In numero di blocchi
         private int one_block_height_ = 25;
 
@@ -24,10 +22,9 @@ namespace fge
 
         private Texture2D texture_reference_;
 
-        #endregion
+        
 
-        #region Costruttori / Distruttore
-
+        
         // Non utilizzabile perché non ha h_ settata
         public Grattacielo(Rectangle TextureRectangle, Texture2D TextureReference)
         {
@@ -43,19 +40,17 @@ namespace fge
             texture_rectangle_ = TextureRectangle;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public void Move(Vector2 amount)
         {
             position_ += amount;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public override Rectangle CollisionRectangle
         {
             get
@@ -100,10 +95,9 @@ namespace fge
                 Position.Y - Origin.Y);
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public override void Update(double gameTime)
         {
         }
@@ -122,6 +116,6 @@ namespace fge
                 depth_);
         }
 
-        #endregion
+        
     }
 }

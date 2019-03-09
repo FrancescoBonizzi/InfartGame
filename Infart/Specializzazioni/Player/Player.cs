@@ -1,19 +1,17 @@
-﻿#region Using
-
+﻿
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 
-#endregion
+
 
 namespace fge
 {
     public abstract class Player : Actor
     {
-        #region Dichiarazioni
-
+        
         ScoreggiaParticleSystem scoreggia_system_;
         JalapenoParticleSystem jalapeno_system_;
         BroccoloParticleSystem broccolo_system_;
@@ -39,10 +37,9 @@ namespace fge
 
         private Color fill_color_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public Player(
            Vector2 starting_pos,
             GameManager GameManagerReference)
@@ -56,7 +53,7 @@ namespace fge
 
         public abstract void Reset(Vector2 position);
 
-        #endregion
+        
 
         protected void LoadAnimation(
             string name,
@@ -81,8 +78,7 @@ namespace fge
             velocity_.Y = -amount;
         }
 
-        #region Update/Draw
-
+        
         public virtual void Update(double dt, TouchCollection touch)
         {
             base.Update(dt);
@@ -107,6 +103,6 @@ namespace fge
 
         public abstract void DrawParticles(SpriteBatch spriteBatch);
 
-        #endregion
+        
     }
 }

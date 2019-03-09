@@ -1,4 +1,3 @@
-#region Using
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-#endregion
+
 
 namespace fge
 {
@@ -197,7 +196,6 @@ namespace fge
 
         public void Update(TimeSpan elapsed)
         {
-#warning Metterlo async?
             base.Update(elapsed.TotalMilliseconds, TouchPanel.GetState());
 
             // Ogni 50m aumento i parametri

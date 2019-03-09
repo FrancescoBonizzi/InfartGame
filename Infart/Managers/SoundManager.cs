@@ -1,17 +1,15 @@
-﻿#region Using
-
+﻿
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 
 
-#endregion
+
 
 namespace fge
 {
     public abstract class SoundManager
     {
-        #region Dichiarazioni
-
+        
         // Riferimenti ai suoni per le funzioni built-in di questa classe astratta
         protected List<SoundEffectInstance> newgame_sounds_;
         protected List<SoundEffectInstance> all_sounds_;
@@ -20,10 +18,9 @@ namespace fge
 
         protected bool sound_on_ = true;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public SoundManager(bool SoundFlag, Loader_menu LoaderScoregge, Loader MyLoader)
         {
             sound_on_ = SoundFlag;
@@ -33,10 +30,9 @@ namespace fge
             AddNewGameSounds();
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         // Suoni da aggiungere alla lista di quelli da far partire col new game
         // Non serve il loader perché è già tutto caricato, è solo un riferimento
         protected abstract void AddNewGameSounds();
@@ -138,6 +134,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

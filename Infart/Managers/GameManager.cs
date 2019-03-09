@@ -1,19 +1,13 @@
-﻿#region Using
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 
-#endregion
-
 namespace fge
 {
     public abstract class GameManager
     {
-        #region Dichiarazioni
-
         private int resolution_w_;
         private int resolution_h_;
         protected int game_h_;
@@ -50,10 +44,6 @@ namespace fge
         protected SpriteFont font_;
 
         protected Texture2D px_texture_;
-
-        #endregion
-
-        #region Costruttore
 
         public GameManager(
             int ResolutionWidth,
@@ -120,10 +110,6 @@ namespace fge
 
         protected abstract void SetRecordRectangle();
 
-        #endregion
-
-        #region Proprietà
-
         public int GetScore
         {
             get { return high_score_; }
@@ -167,10 +153,6 @@ namespace fge
         {
             get { return game_h_; }
         }
-
-        #endregion
-
-        #region Metodi
 
         public void StopScoreggia()
         {
@@ -225,8 +207,6 @@ namespace fge
 
         //sound play quando aggiungi scoreggia
 
-        #endregion
-
         protected virtual void MakePlayerDead()
         {
             player_.Dead = true;
@@ -249,8 +229,6 @@ namespace fge
         }
 
         protected abstract void RepositionCamera();
-
-        #region Update/Draw
 
         protected virtual void GameUpdate(double gametime, TouchCollection touch)
         {
@@ -283,7 +261,6 @@ namespace fge
             {
                 GameUpdate(gametime, touch);
             }
-
         }
 
         protected abstract void DrawUI(SpriteBatch spriteBatch);
@@ -292,8 +269,6 @@ namespace fge
         {
             Matrix Camera_transformation = player_camera_.GetTransformation();
 
-            #region Scene
-
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Camera_transformation);
 
             background_.Draw(spritebatch);
@@ -301,10 +276,6 @@ namespace fge
             gemme_.Draw(spritebatch);
 
             spritebatch.End();
-
-            #endregion
-
-            #region Player + Particles + Explosions
 
             if (!dead_explosion_.Started)
             {
@@ -319,14 +290,10 @@ namespace fge
                 dead_explosion_.Draw(spritebatch);
             else
             {
-                player_.Draw(spritebatch); // Perchè la scoreggia stia dietro di lui
+                player_.Draw(spritebatch); 
             }
 
             background_.DrawSpecial(spritebatch);
-
-            #endregion
-
-            #region Record
 
             if (high_score_ != 0
                && player_.Position.X >= high_score_position_.X - resolution_w_
@@ -334,7 +301,6 @@ namespace fge
             {
                 if (player_.Position.X < high_score_position_.X)
                 {
-                    // E' la sbarra verticale
                     spritebatch.Draw(
                         px_texture_,
                         high_score_position_,
@@ -347,24 +313,13 @@ namespace fge
                 }
             }
 
-            record_explosion_.Draw(spritebatch); // MMMMMMM
+            record_explosion_.Draw(spritebatch); 
 
             spritebatch.End();
 
-            #endregion
-
-            #region UI
-
             DrawUI(spritebatch);
-
-            // Leva il pulsante della pausa, metti in alto la barra...
-            // In alto a sx la pubblicità, in alto a destra i metri
-
-
-            #endregion
         }
-
-        #endregion
+        
     }
 }
 

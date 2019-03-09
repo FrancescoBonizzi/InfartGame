@@ -1,10 +1,9 @@
-#region Using
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-#endregion
+
 
 namespace fge
 {
@@ -95,8 +94,7 @@ namespace fge
         }
 
         
-        #region Update/Draw
-
+        
         public override void Update(double gametime)
         {
             base.Update(gametime);
@@ -126,7 +124,7 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }
 

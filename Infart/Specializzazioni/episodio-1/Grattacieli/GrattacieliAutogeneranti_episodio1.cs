@@ -1,24 +1,16 @@
-#region Using
 
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
-
 namespace fge
 {
     public class GrattacieliAutogeneranti_episodio1 : GrattacieliAutogeneranti
     {
-        #region Dichiarazioni
 
         private InfartGame game_manager_reference_;
 
-       
-        #endregion
-
-        #region Costruttore / Distruttore
-
+ 
         public GrattacieliAutogeneranti_episodio1(
             Texture2D Texture,
             Dictionary<string, Rectangle> GrattaRects,
@@ -35,8 +27,6 @@ namespace fge
         {
             game_manager_reference_ = GameManagerReference;
         }
-
-        #endregion
 
     
         protected override void AddGrattacieloForDrawing()
@@ -56,8 +46,7 @@ namespace fge
                      grattacieli_in_coda_[0].Width +
                      random_.Next(1, max_grattacielo_position_offset_);
 
-                #region Innesto gemme / Powerups
-
+       
                 if (innest_gemma_)
                 {
                     if (random_.NextDouble() < game_manager_reference_.GemmaProbability)
@@ -79,8 +68,7 @@ namespace fge
                         }
 
                 }
-                #endregion
-
+        
                 grattacieli_to_draw_.Add(grattacieli_in_coda_[0]);
                 grattacieli_in_coda_.RemoveAt(0);
             }

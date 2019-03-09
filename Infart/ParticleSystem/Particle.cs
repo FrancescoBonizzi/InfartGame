@@ -5,8 +5,7 @@ namespace fge
 {
     public class Particle
     {
-        #region Dichiarazioni
-
+        
         public Vector2 Position;
         public Color Color;
         public float Scale;
@@ -20,7 +19,7 @@ namespace fge
         public float TimeSinceStart;
         public float LifeTime;
 
-        #endregion
+        
 
         public Particle() { /* Nothing to do */ }
 

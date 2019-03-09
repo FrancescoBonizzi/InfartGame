@@ -1,5 +1,4 @@
-﻿#region Descrizione
-//-----------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
 // BasicGameObject.cs
 //
 // Un oggetto di gioco generico che proietta ombre, può intervenire in collisioni,
@@ -8,22 +7,20 @@
 // fbonizzi_Game_Engine
 // Copyright (C) Francesco Bonizzi. All rights reserved.
 //-----------------------------------------------------------------------------
-#endregion
 
-#region Using
+
 
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public abstract class AnimatedGameObject : GameObject
     {
-        #region Dichiarazioni
-
+        
         protected Dictionary<string, AnimationManager> animations_ = new Dictionary<string, AnimationManager>();
 
         protected string current_animation_;
@@ -32,10 +29,9 @@ namespace fge
         protected int current_frame_width_;
         protected int current_frame_height_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public AnimatedGameObject()
         {
             collision_rectangle_ = Rectangle.Empty;
@@ -47,10 +43,9 @@ namespace fge
                 animations_[i.Key].Dispose();
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public override Rectangle CollisionRectangle
         {
             get { return collision_rectangle_; }
@@ -80,10 +75,9 @@ namespace fge
             }
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         private void UpdateAnimation(double gameTime)
         {
             if (animations_.ContainsKey(current_animation_))
@@ -112,10 +106,9 @@ namespace fge
             }
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public override void Update(double gameTime)
         {
             UpdateAnimation(gameTime);
@@ -138,6 +131,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

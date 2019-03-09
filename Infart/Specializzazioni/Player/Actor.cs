@@ -1,5 +1,4 @@
-﻿#region Descrizione
-//-----------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
 // Actor.cs
 //
 // Classe astratta che implementa comuni azioni come morire, saltare, e altre
@@ -8,22 +7,20 @@
 // fbonizzi_Game_Engine
 // Copyright (C) Francesco Bonizzi. All rights reserved.
 //-----------------------------------------------------------------------------
-#endregion
 
-#region Using
+
 
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-#endregion
+
 
 namespace fge
 {
     public abstract class Actor : AnimatedGameObject
     {
-        #region Dichiarazioni
-
+        
         protected Vector2 velocity_ = Vector2.Zero;
         protected float x_move_speed_ = 180.0f;
         private float y_fall_speed_ = 20.0f;
@@ -32,10 +29,9 @@ namespace fge
 
         protected List<GameObject> colliding_objs_reference_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         protected Actor(
             float depth,
             Vector2 starting_pos,
@@ -57,10 +53,9 @@ namespace fge
             base.Dispose();
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public float HorizontalMoveSpeed
         {
             get { return x_move_speed_; }
@@ -90,18 +85,16 @@ namespace fge
             get { return on_ground_; }
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         private Vector2 collisionTest(Vector2 move_amount)
         {
             // Attenzione! Si basa sul fatto che si muoverà solo a destra!
             Rectangle afterMoveRect = collision_rectangle_;
             Vector2 corner1, corner2;
 
-            #region Horizontal
-
+            
             if (move_amount.X != 0)
             {
                 afterMoveRect.Offset((int)move_amount.X, 0);
@@ -124,10 +117,9 @@ namespace fge
                 }
             }
 
-            #endregion
+            
 
-            #region Vertical
-
+            
             if (move_amount.Y == 0)
                 return move_amount;
             else
@@ -173,16 +165,15 @@ namespace fge
                 }
             }
 
-            #endregion
+            
 
             return move_amount;
         }
 
 
-        #endregion
+        
 
-        #region Update
-
+        
         public override void Update(double gameTime)
         {
             velocity_.Y += y_fall_speed_;
@@ -205,6 +196,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

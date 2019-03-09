@@ -1,19 +1,17 @@
-﻿#region Using
-
+﻿
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-#endregion
+
 
 namespace fge
 {
     public class Nuvolificio
     {
-        #region Dichiarazioni
-
+        
         private List<Nuvola> nuvole_;
 
         private int nuvole_number_ = 5;
@@ -25,8 +23,7 @@ namespace fge
 
         private bool active_ = true;
 
-        #region Tools
-
+        
         private static Random random_;
         private float elapsed_ = 0.0f;
         private Camera current_camera_;
@@ -36,12 +33,11 @@ namespace fge
         private float camera_w_;
         private float camera_h_;
 
-        #endregion
+        
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public Nuvolificio(
             Color OverlayColor,
             float Scale,
@@ -87,10 +83,9 @@ namespace fge
                     nuvole_rects_[random_.Next(nuvole_rects_.Count)]));
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public Vector2 NuvoleYSpawnRange
         {
             get { return nuvole_spawn_y_range_; }
@@ -107,10 +102,9 @@ namespace fge
             }
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public void Reset(Camera camera)
         {
             current_camera_ = camera;
@@ -168,10 +162,9 @@ namespace fge
             return false;
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public void Update(double gametime)
         {
             camera_pos_y_ = current_camera_.Position.Y;
@@ -214,6 +207,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

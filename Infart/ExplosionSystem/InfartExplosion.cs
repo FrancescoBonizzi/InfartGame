@@ -1,18 +1,16 @@
-﻿#region Using
-
+﻿
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public class InfartExplosion
     {
-        #region Dichiarazioni
-
+        
         private double elapsed_ = 0.0;
         private const double time_to_finish_ = 5000.0;
         private const float scritta_scale_increase_amount_ = 0.004f;
@@ -35,10 +33,9 @@ namespace fge
         private bool active_ = false;
         private bool with_text_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public InfartExplosion(
             Texture2D TextureScrittaEParticelle,
             Rectangle ScrittaRectangle,
@@ -52,10 +49,9 @@ namespace fge
             AddRandomParticles(TextureScrittaEParticelle, ParticleRectangle, ParticleRectangle2);
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public bool Finished
         {
             get { return finished_; }
@@ -66,10 +62,9 @@ namespace fge
             get { return started_; }
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         // Attenzione!
 
         public void Explode(Vector2 CenterPosition, bool WithText, SoundManager_episodio1 SoundManager)
@@ -180,10 +175,9 @@ namespace fge
         }
 
 
-        #endregion
+        
 
-        #region Update / Draw
-
+        
         public void Update(double gameTime)
         {
             if (active_)
@@ -216,6 +210,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

@@ -1,17 +1,15 @@
-#region Using
 
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public class BackgroundManager_episodio1 : BackgroundManager
     {
-        #region Dichiarazioni
-
+        
         private GrattacieliAutogeneranti grattacieli_fondo_ = null;
         private GrattacieliAutogeneranti grattacieli_mid_ = null;
 
@@ -30,10 +28,9 @@ namespace fge
         const double timeBetweenNewStar_ = 20.0f;
         double timeTillNewStar_ = 0.0f;
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public BackgroundManager_episodio1(
             Camera CameraInstance,
             Loader_episodio1 Loader,
@@ -77,10 +74,9 @@ namespace fge
             old_camera_x_pos_ = current_camera_.Position.X;
         }
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public override void IncreaseParallaxSpeed()
         {
             parallax_speed_fondo_ -= 4.0f;
@@ -108,10 +104,9 @@ namespace fge
             parallax_speed_mid_ = default_parallax_speed_mid_;
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public override void Update(double gametime)
         {
             base.Update(gametime);
@@ -169,6 +164,6 @@ namespace fge
             nuvolificio_vicino_.Draw(spritebatch);
         }
 
-        #endregion
+        
     }
 }

@@ -1,16 +1,14 @@
-﻿#region Using
-
+﻿
 using System;
 using Microsoft.Xna.Framework;
 
-#endregion
+
 
 namespace fge
 {
     public class Camera
     {
-        #region Dichiarazioni
-
+        
         public Vector2 Position = Vector2.Zero;
 
         // Calcolata nello zoom!
@@ -27,10 +25,9 @@ namespace fge
         private float intorno_uguaglianza_ = 10.0f;
         private bool moving_ = false;
 
-        #endregion
+        
 
-        #region Costruttore
-
+        
         public Camera(Vector2 starting_position, Vector2 ViewPortSize, float zoom)
         {
             Position = starting_position;
@@ -47,10 +44,9 @@ namespace fge
             moving_ = false;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public float Zoom
         {
             get { return zoom_; }
@@ -67,10 +63,9 @@ namespace fge
             set { rotation_ = value; }
         }
 
-        #endregion
+        
 
-        #region Metodi pubblici
-
+        
         public void MoveTo(Vector2 where)
         {
             position_to_go_to_ = where;
@@ -116,10 +111,9 @@ namespace fge
             return transform_;
         }
 
-        #endregion
+        
 
-        #region Update
-
+        
         public void Update(double gametime)
         {
             if (moving_)
@@ -147,6 +141,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

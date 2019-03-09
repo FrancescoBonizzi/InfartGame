@@ -1,5 +1,4 @@
-﻿#region Descrizione
-//-----------------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------------
 // AnimationManager.cs
 //
 // Gestore delle animazioni relative ad uno spritesheet ORIZZONTALE
@@ -7,21 +6,19 @@
 // fbonizzi_Game_Engine
 // Copyright (C) Francesco Bonizzi. All rights reserved.
 //-----------------------------------------------------------------------------
-#endregion
 
-#region Using
+
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-#endregion
+
 
 namespace fge
 {
     public class AnimationManager : IDisposable
     {
-        #region Dichiarazioni
-
+        
         private Texture2D atlas_reference_;
 
         private List<Rectangle> frames_;
@@ -36,10 +33,9 @@ namespace fge
         private string name_;
         private string next_animation_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public AnimationManager(
             List<Rectangle> frames,
             string name,
@@ -57,10 +53,9 @@ namespace fge
         {
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public Texture2D Texture
         {
             get { return atlas_reference_; }
@@ -121,20 +116,18 @@ namespace fge
             get { return frames_[current_frame_]; }
         }
 
-        #endregion
+        
 
-        #region Metodi ausiliari
-
+        
         public void Play()
         {
             CurrentFrame = 0;
             finished_playing_ = false;
         }
 
-        #endregion
+        
 
-        #region Update
-
+        
         public void Update(double gameTime)
         {
             float elapsed = (float)gameTime/1000.0f;
@@ -162,6 +155,6 @@ namespace fge
             }
         }
 
-        #endregion
+        
     }
 }

@@ -1,27 +1,24 @@
-#region Using
 
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#endregion
+
 
 namespace fge
 {
     public class GroundManager_episodio1 : GroundManager
     {
-        #region Dichiarazioni
-
+        
         private GrattacieliAutogeneranti grattacieli_camminabili_ = null;
         private float min_time_to_next_buco_ = 2000.0f;
         private float elapsed_ = 0.0f;
 
         private InfartGame game_manager_reference_;
 
-        #endregion
+        
 
-        #region Costruttore / Distruttore
-
+        
         public GroundManager_episodio1(
             Camera CurrentCamera,
             Loader_episodio1 Loader,
@@ -40,10 +37,9 @@ namespace fge
             game_manager_reference_ = GameManagerReference;
         }
 
-        #endregion
+        
 
-        #region Proprietà
-
+        
         public override List<GameObject> WalkableObjects()
         {
             return grattacieli_camminabili_.DrawnObjectsList;
@@ -56,10 +52,9 @@ namespace fge
         }
          */
 
-        #endregion
+        
 
-        #region Metodi
-
+        
         public override void Reset(Camera camera)
         {
             current_camera_ = camera;
@@ -77,10 +72,9 @@ namespace fge
                 (int)grattacieli_camminabili_.NextGrattacieloPosition.Y);
         }
 
-        #endregion
+        
 
-        #region Update/Draw
-
+        
         public override void Update(double gametime)
         {
             elapsed_ += (float)gametime;
@@ -103,6 +97,6 @@ namespace fge
 
 
 
-        #endregion
+        
     }
 }
