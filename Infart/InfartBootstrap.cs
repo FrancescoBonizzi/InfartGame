@@ -4,6 +4,7 @@ using FbonizziMonoGame.Drawing.Abstractions;
 using FbonizziMonoGame.Input;
 using FbonizziMonoGame.Input.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
+using FbonizziMonoGame.Sprites;
 using FbonizziMonoGame.StringsLocalization;
 using FbonizziMonoGame.StringsLocalization.Abstractions;
 using Infart.Assets;
@@ -28,36 +29,35 @@ namespace Infart
         }
 
         private readonly Uri _rateMeUri;
-
         private RunningStates _currentState;
 
         public GraphicsDeviceManager GraphicsDeviceManager { get; private set; }
-
         private SpriteBatch _spriteBatch;
 
         private SplashScreenLoader _splashScreenAssetsLoader;
 
+        private readonly ITextFileLoader _textFileAssetsLoader;
         private readonly ISettingsRepository _settingsRepository;
-
         private readonly IWebPageOpener _webPageOpener;
-
         private List<IInputListener> _inputListeners;
 
         private readonly CultureInfo _gameCulture;
 
         public event EventHandler ExitGameRequested;
 
+        private Loader _loader;
         private IScreenTransformationMatrixProvider _matrixScaleProvider;
 
-        private readonly ITextFileLoader _textFileAssetsLoader;
+        private Sprite _mousePointer;
 
         private GameOrchestrator _orchestrator;
-
         private readonly SoundManager _soundManager;
-
         private readonly bool _isPc;
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
+
+        // Just for MonoGame.Framework.WindowsUniversal bootstrapping requirement
+        public InfartBootstrap() { }
 
         public InfartBootstrap(
            ITextFileLoader textFileAssetsLoader,
@@ -84,7 +84,7 @@ namespace Infart
 
             GraphicsDeviceManager = new GraphicsDeviceManager(this)
             {
-                SupportedOrientations = DisplayOrientation.Portrait | DisplayOrientation.PortraitDown,
+                SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeLeft,
                 IsFullScreen = isFullScreen
             };
 
@@ -110,12 +110,12 @@ namespace Infart
         private void LoadGameAssets()
         {
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
-
-            var loaderEpisodio1 = new Loader(Content, GraphicsDevice);
-            var soundManager = new SoundManager(true, loaderEpisodio1);
+            
+            _loader = new Loader(Content, GraphicsDevice);
+            var soundManager = new SoundManager(true, _loader);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
-                    loaderEpisodio1,
+                    _loader,
                     //        new Loader_menu(Content),
                     soundManager,
                     100, "Metri", "Pausa"));
