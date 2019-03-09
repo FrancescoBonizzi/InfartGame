@@ -37,7 +37,7 @@ namespace Infart
         public bool IsPaused { get; set; }
 
         private readonly TimeSpan _fadeDuration = TimeSpan.FromMilliseconds(800);
-        private readonly Uri _aboutUri = new Uri("https:
+        private readonly Uri _aboutUri = new Uri("https://www.fbonizzi.it");
 
         public GameOrchestrator(
              Func<InfartGame> gameFactory,
