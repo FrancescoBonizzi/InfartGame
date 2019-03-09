@@ -26,7 +26,7 @@ namespace fge
 
         public GemmaManager(
             Camera CameraReference,
-            Loader_episodio1 Loader)
+            Loader Loader)
         {
             random_ = fbonizziHelper.random;
             current_camera_ = CameraReference;
@@ -91,7 +91,7 @@ namespace fge
         }
 
         
-        public bool CheckJalapenoCollisionWithPlayer(Player_episodio1 p)
+        public bool CheckJalapenoCollisionWithPlayer(Player p)
         {
             if (jalapenos_.Active)
             {
@@ -105,7 +105,7 @@ namespace fge
         }
 
         
-        public bool CheckMerdaCollisionWithPlayer(Player_episodio1 p)
+        public bool CheckMerdaCollisionWithPlayer(Player p)
         {
             if (broccolo_.Active)
             {
@@ -149,7 +149,7 @@ namespace fge
         }
 
 
-        public bool CheckCollisionWithPlayer(Player_episodio1 p)
+        public bool CheckCollisionWithPlayer(Player p)
         {
             for (int i = 0; i < gemme_attive_.Count; ++i)
             {

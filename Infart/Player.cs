@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace fge
 {
-    public class Player_episodio1 : Actor
+    public class Player : Actor
     {
         
         ScoreggiaParticleSystem scoreggia_system_;
@@ -39,9 +39,9 @@ namespace fge
 
         private Color fill_color_;
         
-        public Player_episodio1(
+        public Player(
             Vector2 starting_pos,
-            Loader_episodio1 Loader,
+            Loader Loader,
             InfartGame GameManagerReference)
             : base(1.0f, starting_pos, GameManagerReference.GroundObjects())
         {

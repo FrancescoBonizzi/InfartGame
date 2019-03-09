@@ -49,7 +49,7 @@ namespace fge
 
 
 
-        public InfartExplosion(Loader_episodio1 Loader)
+        public InfartExplosion(Loader Loader)
         {
             random_ = fbonizziHelper.random;
             particelle_ = new List<ParticleExplosion>();
@@ -59,7 +59,7 @@ namespace fge
         }
 
 
-        public void Explode(Vector2 CenterPosition, bool WithText, SoundManager_episodio1 SoundManager)
+        public void Explode(Vector2 CenterPosition, bool WithText, SoundManager SoundManager)
         {
             started_ = true;
             with_text_ = WithText;

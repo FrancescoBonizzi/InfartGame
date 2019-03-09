@@ -9,7 +9,7 @@ namespace fge
     {
         public StarFieldParticleSystem(
             int Density,
-            Loader_episodio1 Loader)
+            Loader Loader)
             : base(Density, Loader.textures_, Loader.textures_rectangles_["Stella"])
         {
         }

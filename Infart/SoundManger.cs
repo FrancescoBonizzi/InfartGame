@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace fge
 {
-    public class SoundManager_episodio1
+    public class SoundManager
     {
 
         protected List<SoundEffectInstance> newgame_sounds_;
@@ -27,10 +27,10 @@ namespace fge
         private SoundEffectInstance morso_ = null;
 
         
-        public SoundManager_episodio1(
+        public SoundManager(
             bool SoundFlag,
            // Loader_menu Loader_menu,
-            Loader_episodio1 Loader_episodio1)
+            Loader Loader_episodio1)
         {
             sound_on_ = SoundFlag;
 
@@ -135,28 +135,28 @@ namespace fge
             sound_on_ = true;
         }
 
-        protected void AddAllSounds(Loader_episodio1 MyLoader)
+        protected void AddAllSounds(Loader MyLoader)
         {
-            background_music_ = ((MyLoader) as Loader_episodio1).sound_effects_["night"].CreateInstance();
+            background_music_ = ((MyLoader) as Loader).sound_effects_["night"].CreateInstance();
             background_music_.IsLooped = true;
             all_sounds_.Add(background_music_);
 
-            explosion_sound_ = ((MyLoader) as Loader_episodio1).sound_effects_["esplosione"].CreateInstance();
+            explosion_sound_ = ((MyLoader) as Loader).sound_effects_["esplosione"].CreateInstance();
             all_sounds_.Add(explosion_sound_);
             
-            fall_sound_ = ((MyLoader) as Loader_episodio1).sound_effects_["fall"].CreateInstance();
+            fall_sound_ = ((MyLoader) as Loader).sound_effects_["fall"].CreateInstance();
             all_sounds_.Add(fall_sound_);
             
-            heart_beat_ = ((MyLoader) as Loader_episodio1).sound_effects_["cuore"].CreateInstance();
+            heart_beat_ = ((MyLoader) as Loader).sound_effects_["cuore"].CreateInstance();
             all_sounds_.Add(heart_beat_);
 
-            morso_ = ((MyLoader) as Loader_episodio1).sound_effects_["morso"].CreateInstance();
+            morso_ = ((MyLoader) as Loader).sound_effects_["morso"].CreateInstance();
             all_sounds_.Add(morso_);
             
-            jalapeno_sound_ = ((MyLoader) as Loader_episodio1).sound_effects_["jalapeno"].CreateInstance();
+            jalapeno_sound_ = ((MyLoader) as Loader).sound_effects_["jalapeno"].CreateInstance();
             all_sounds_.Add(jalapeno_sound_);
 
-            merdone_sound_ = ((MyLoader) as Loader_episodio1).sound_effects_["merdone"].CreateInstance();
+            merdone_sound_ = ((MyLoader) as Loader).sound_effects_["merdone"].CreateInstance();
             all_sounds_.Add(merdone_sound_);
         }
 

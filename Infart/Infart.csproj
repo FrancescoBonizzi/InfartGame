@@ -65,14 +65,12 @@
     <Compile Include="GroundManager.cs" />
     <Compile Include="InfartExplosion.cs" />
     <Compile Include="JalapenoParticleSystem.cs" />
-    <Compile Include="Loader_episodio1.cs" />
+    <Compile Include="Loader.cs" />
     <Compile Include="Nuvolificio.cs" />
-    <Compile Include="PauseButton_episodio1.cs" />
-    <Compile Include="Player_episodio1.cs" />
-    <Compile Include="RecordExplosion_episodio1.cs" />
-    <Compile Include="SoundManger_episodio1.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="SoundManger.cs" />
     <Compile Include="StarFieldParticleSystem.cs" />
-    <Compile Include="StatusBar_episodio1.cs" />
+    <Compile Include="StatusBar.cs" />
     <Compile Include="Player\Actor.cs" />
     <Compile Include="Player\AnimationManager.cs" />
   </ItemGroup>

@@ -21,7 +21,7 @@ namespace fge
         
         public GroundManager(
             Camera CurrentCamera,
-            Loader_episodio1 Loader,
+            Loader Loader,
             InfartGame GameManagerReference)
         {
             current_camera_ = CurrentCamera;

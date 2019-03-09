@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    public class StatusBar_episodio1
+    public class StatusBar
     {
         
         private Vector2 position_;
@@ -15,7 +15,7 @@ namespace fge
         private StatusBarSprite[] status_burgers_;
         private Texture2D texture_reference_;
 
-        private SoundManager_episodio1 sound_manager_reference_;
+        private SoundManager sound_manager_reference_;
 
         private Color empty_color = Color.Gray * 0.5f;
         private Color full_color = Color.White;
@@ -35,10 +35,10 @@ namespace fge
         private bool infart_ = false;
 
         
-        public StatusBar_episodio1(
+        public StatusBar(
             Vector2 position,
-            Loader_episodio1 Loader,
-            SoundManager_episodio1 SoundManagerReference)
+            Loader Loader,
+            SoundManager SoundManagerReference)
         {
             position_ = position;
             texture_reference_ = Loader.textures_;

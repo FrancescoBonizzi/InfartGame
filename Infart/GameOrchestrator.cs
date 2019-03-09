@@ -44,7 +44,7 @@ namespace Infart
              
              GraphicsDevice graphicsDevice,
              IScreenTransformationMatrixProvider matrixScaleProvider,
-             SoundManager_episodio1 soundManager,
+             SoundManager soundManager,
              IWebPageOpener webPageOpener)
         {
             _gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));

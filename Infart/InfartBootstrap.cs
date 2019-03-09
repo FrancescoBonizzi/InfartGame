@@ -51,7 +51,7 @@ namespace Infart
         private Sprite _mousePointer;
 
         private GameOrchestrator _orchestrator;
-        private SoundManager_episodio1 _soundManager;
+        private SoundManager _soundManager;
         private readonly bool _isPc;
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
@@ -117,8 +117,8 @@ namespace Infart
             
             
 
-            var loaderEpisodio1 = new Loader_episodio1(Content, GraphicsDevice);
-            var soundManager = new SoundManager_episodio1(true, loaderEpisodio1);
+            var loaderEpisodio1 = new Loader(Content, GraphicsDevice);
+            var soundManager = new SoundManager(true, loaderEpisodio1);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
                     loaderEpisodio1,

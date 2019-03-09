@@ -41,7 +41,7 @@ namespace fge
 
         public BackgroundManager(
             Camera CameraInstance,
-            Loader_episodio1 Loader,
+            Loader Loader,
             InfartGame GameManagerReference)
         {
             current_camera_ = CameraInstance;

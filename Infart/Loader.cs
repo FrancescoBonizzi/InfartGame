@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace fge
 {
-    public class Loader_episodio1
+    public class Loader
     {
         protected ContentManager content_;
 
@@ -34,7 +34,7 @@ namespace fge
         public Dictionary<string, SoundEffect> sound_effects_;
         public SpriteFont font_;
 
-        public Loader_episodio1(
+        public Loader(
             ContentManager Content,
             GraphicsDevice Graphics)
         {

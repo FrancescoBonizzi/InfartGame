@@ -16,16 +16,16 @@ namespace fge
         private int resolution_h_;
         protected int game_h_;
         protected Camera player_camera_;
-        protected Player_episodio1 player_;
+        protected Player player_;
 
         protected BackgroundManager background_;
         protected GroundManager ground_;
         protected GemmaManager gemme_;
-        protected SoundManager_episodio1 sound_manager_;
+        protected SoundManager sound_manager_;
 
-        protected StatusBar_episodio1 status_bar_;
+        protected StatusBar status_bar_;
 
-        protected Loader_episodio1 Loader;
+        protected Loader Loader;
 
         protected bool paused_;
 
@@ -89,9 +89,9 @@ namespace fge
 
 
         public InfartGame(
-            Loader_episodio1 Loader,
+            Loader Loader,
     //        Loader_menu LoaderMenu,
-            SoundManager_episodio1 SoundManager,
+            SoundManager SoundManager,
             int HighScore,
             string MetriString,
             string PauseString)
@@ -104,7 +104,7 @@ namespace fge
 
             sound_manager_ = SoundManager;
 
-            status_bar_ = new StatusBar_episodio1(new Vector2(460, 435), Loader, SoundManager);
+            status_bar_ = new StatusBar(new Vector2(460, 435), Loader, SoundManager);
 
             high_score_ = HighScore;
             SetRecordRectangle();
@@ -116,7 +116,8 @@ namespace fge
             player_camera_ = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
             dead_explosion_ = new InfartExplosion(Loader);
-            record_explosion_ = new RecordExplosion_episodio1(Loader);
+            //     record_explosion_ = new RecordExplosion_episodio1(Loader);
+#warning TODO: mettere un popup per il record
 
             paused_ = false;
             force_to_finish_ = false;
@@ -137,22 +138,22 @@ namespace fge
 
         protected void InitializeBackgroundManager()
         {
-            background_ = new BackgroundManager(player_camera_, (Loader as Loader_episodio1), this);
+            background_ = new BackgroundManager(player_camera_, (Loader as Loader), this);
         }
 
         protected void InitializeGroundManager()
         {
-            ground_ = new GroundManager(player_camera_, (Loader as Loader_episodio1), this);
+            ground_ = new GroundManager(player_camera_, (Loader as Loader), this);
         }
 
         protected void InitializeGemmaManager()
         {
-            gemme_ = new GemmaManager(player_camera_, (Loader as Loader_episodio1));
+            gemme_ = new GemmaManager(player_camera_, (Loader as Loader));
         }
 
         protected void InitializePlayer()
         {
-            player_ = new Player_episodio1(new Vector2(240, 300), (Loader as Loader_episodio1), this);
+            player_ = new Player(new Vector2(240, 300), (Loader as Loader), this);
         }
 
         public void NewGame()
@@ -207,9 +208,9 @@ namespace fge
             {
                 force_to_finish_ = true;
 
-                if ((sound_manager_ as SoundManager_episodio1).HasFallFinished())
+                if ((sound_manager_ as SoundManager).HasFallFinished())
                 {
-                    dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager_episodio1));
+                    dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager));
                     status_bar_.SetInfart();
                 }
             }
@@ -337,7 +338,7 @@ namespace fge
         public void PlayerCollidedWithNormalGemma()
         {
             status_bar_.HamburgerEaten();
-            (sound_manager_ as SoundManager_episodio1).PlayMorso();
+            (sound_manager_ as SoundManager).PlayMorso();
         }
 
         public void Update(TimeSpan elapsed)
@@ -375,7 +376,7 @@ namespace fge
                 
                 if (old_score_metri_ != score_metri_)
                 {
-                    (player_ as Player_episodio1).IncreaseMoveSpeed();
+                    (player_ as Player).IncreaseMoveSpeed();
                     background_.IncreaseParallaxSpeed();
                     if (LarghezzaBuchi.Y < 600)
                     {
@@ -397,15 +398,15 @@ namespace fge
             if ((gemme_ as GemmaManager).CheckJalapenoCollisionWithPlayer(player_))
             {
                 status_bar_.ComputeJalapenos();
-                (player_ as Player_episodio1).ActivateJalapenos();
-                (sound_manager_ as SoundManager_episodio1).PlayJalapeno();
+                (player_ as Player).ActivateJalapenos();
+                (sound_manager_ as SoundManager).PlayJalapeno();
                 jalapenos_mode_active_ = true;
             }
             else if ((gemme_ as GemmaManager).CheckMerdaCollisionWithPlayer(player_))
             {
                 status_bar_.ComputeMerda();
-                (player_ as Player_episodio1).ActivateBroccolo();
-                (sound_manager_ as SoundManager_episodio1).PlayShit();
+                (player_ as Player).ActivateBroccolo();
+                (sound_manager_ as SoundManager).PlayShit();
                 merda_mode_active_ = true;
             }
         }
@@ -433,14 +434,14 @@ namespace fge
                 if (player_.Position.Y > player_camera_.ViewPortHeight) 
                 {
                     MakePlayerDead();
-                    (sound_manager_ as SoundManager_episodio1).PlayFall();
+                    (sound_manager_ as SoundManager).PlayFall();
                     fall_sound_active_ = true;
                 }
             }
 
             if (status_bar_.IsInfarting() && !player_.Dead)
             {
-                dead_explosion_.Explode(player_.Position, true, (sound_manager_ as SoundManager_episodio1));
+                dead_explosion_.Explode(player_.Position, true, (sound_manager_ as SoundManager));
                 MakePlayerDead();
             }
         }
@@ -475,7 +476,7 @@ namespace fge
         }
 
 
-        public Player_episodio1 PlayerReference
+        public Player PlayerReference
         {
             get { return player_; }
         }
