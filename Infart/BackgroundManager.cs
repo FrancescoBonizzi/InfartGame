@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    public class BackgroundManager_episodio1 
+    public class BackgroundManager 
     {
         
         private GrattacieliAutogeneranti_episodio1 grattacieli_fondo_ = null;
@@ -39,7 +39,7 @@ namespace fge
         protected Vector2 sfondo_scale_;
 
 
-        public BackgroundManager_episodio1(
+        public BackgroundManager(
             Camera CameraInstance,
             Loader_episodio1 Loader,
             InfartGame GameManagerReference)

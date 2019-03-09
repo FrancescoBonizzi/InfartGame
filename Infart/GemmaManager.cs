@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace fge
 {
-    public class GemmaManager_episodio1
+    public class GemmaManager
     {
         private Gemma jalapenos_ = null;
         private Gemma broccolo_ = null;
@@ -24,7 +24,7 @@ namespace fge
         enum PowerUps { Jalapeno, Merda };
         PowerUps next_power_up_ = PowerUps.Jalapeno;
 
-        public GemmaManager_episodio1(
+        public GemmaManager(
             Camera CameraReference,
             Loader_episodio1 Loader)
         {

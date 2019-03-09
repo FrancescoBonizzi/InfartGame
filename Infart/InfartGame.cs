@@ -18,9 +18,9 @@ namespace fge
         protected Camera player_camera_;
         protected Player_episodio1 player_;
 
-        protected BackgroundManager_episodio1 background_;
-        protected GroundManager_episodio1 ground_;
-        protected GemmaManager_episodio1 gemme_;
+        protected BackgroundManager background_;
+        protected GroundManager ground_;
+        protected GemmaManager gemme_;
         protected SoundManager_episodio1 sound_manager_;
 
         protected StatusBar_episodio1 status_bar_;
@@ -31,7 +31,7 @@ namespace fge
 
 
 
-        protected InfartExplosion dead_explosion_;
+        protected InfartExplosion_episodio1 dead_explosion_;
         protected RecordExplosion record_explosion_;
 
         protected Random random_;
@@ -137,17 +137,17 @@ namespace fge
 
         protected void InitializeBackgroundManager()
         {
-            background_ = new BackgroundManager_episodio1(player_camera_, (Loader as Loader_episodio1), this);
+            background_ = new BackgroundManager(player_camera_, (Loader as Loader_episodio1), this);
         }
 
         protected void InitializeGroundManager()
         {
-            ground_ = new GroundManager_episodio1(player_camera_, (Loader as Loader_episodio1), this);
+            ground_ = new GroundManager(player_camera_, (Loader as Loader_episodio1), this);
         }
 
         protected void InitializeGemmaManager()
         {
-            gemme_ = new GemmaManager_episodio1(player_camera_, (Loader as Loader_episodio1));
+            gemme_ = new GemmaManager(player_camera_, (Loader as Loader_episodio1));
         }
 
         protected void InitializePlayer()
@@ -331,7 +331,7 @@ namespace fge
         public void AddPowerUp(Vector2 position)
         {
             if (position.X > player_.Position.X)
-                (gemme_ as GemmaManager_episodio1).AddPowerUp(position);
+                (gemme_ as GemmaManager).AddPowerUp(position);
         }
 
         public void PlayerCollidedWithNormalGemma()
@@ -394,14 +394,14 @@ namespace fge
                 PlayerCollidedWithNormalGemma();
             }
             
-            if ((gemme_ as GemmaManager_episodio1).CheckJalapenoCollisionWithPlayer(player_))
+            if ((gemme_ as GemmaManager).CheckJalapenoCollisionWithPlayer(player_))
             {
                 status_bar_.ComputeJalapenos();
                 (player_ as Player_episodio1).ActivateJalapenos();
                 (sound_manager_ as SoundManager_episodio1).PlayJalapeno();
                 jalapenos_mode_active_ = true;
             }
-            else if ((gemme_ as GemmaManager_episodio1).CheckMerdaCollisionWithPlayer(player_))
+            else if ((gemme_ as GemmaManager).CheckMerdaCollisionWithPlayer(player_))
             {
                 status_bar_.ComputeMerda();
                 (player_ as Player_episodio1).ActivateBroccolo();

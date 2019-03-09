@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    public class GroundManager_episodio1
+    public class GroundManager
     {
         protected Random random_;
         protected Camera current_camera_;
@@ -19,7 +19,7 @@ namespace fge
 
         private InfartGame game_manager_reference_;
         
-        public GroundManager_episodio1(
+        public GroundManager(
             Camera CurrentCamera,
             Loader_episodio1 Loader,
             InfartGame GameManagerReference)
