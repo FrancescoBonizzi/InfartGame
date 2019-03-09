@@ -1,9 +1,13 @@
+using Infart.Assets;
+using Infart.Drawing;
+using Infart.Extensions;
+using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.Background
 {
     public class GroundManager
     {

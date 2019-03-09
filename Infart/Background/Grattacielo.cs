@@ -1,21 +1,22 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Drawing;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace fge
+namespace Infart.Background
 {
     public class Grattacielo : GameObject
     {
-        private int h_;
+        private readonly int h_;
 
-        private int one_block_height_ = 25;
+        private readonly int one_block_height_ = 25;
 
-        private int w_grattacielo_;
+        private readonly int w_grattacielo_;
 
         private Rectangle collision_rectangle_;
 
         private Rectangle texture_rectangle_;
 
-        private Texture2D texture_reference_;
+        private readonly Texture2D texture_reference_;
 
         public Grattacielo(Rectangle TextureRectangle, Texture2D TextureReference)
         {

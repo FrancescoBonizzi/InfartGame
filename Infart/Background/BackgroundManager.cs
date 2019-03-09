@@ -1,8 +1,12 @@
+using Infart.Assets;
+using Infart.Drawing;
+using Infart.Extensions;
+using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.Background
 {
     public class BackgroundManager
     {
@@ -73,10 +77,12 @@ namespace fge
             parallax_speed_mid_ = default_parallax_speed_mid_;
 
 
-            List<Rectangle> tmp = new List<Rectangle>();
-            tmp.Add(Loader.textures_rectangles_["nuvola1"]);
-            tmp.Add(Loader.textures_rectangles_["nuvola2"]);
-            tmp.Add(Loader.textures_rectangles_["nuvola3"]);
+            List<Rectangle> tmp = new List<Rectangle>
+            {
+                Loader.textures_rectangles_["nuvola1"],
+                Loader.textures_rectangles_["nuvola2"],
+                Loader.textures_rectangles_["nuvola3"]
+            };
 
 
             nuvolificio_vicino_ = new Nuvolificio(

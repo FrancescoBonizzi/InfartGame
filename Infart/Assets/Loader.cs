@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
 
-namespace fge
+namespace Infart.Assets
 {
     public class Loader
     {

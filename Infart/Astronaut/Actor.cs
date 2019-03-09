@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Drawing;
+using Infart.Extensions;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.Astronaut
 {
     public abstract class Actor : AnimatedGameObject
     {
@@ -68,7 +70,7 @@ namespace fge
             get { return on_ground_; }
         }
 
-        private Vector2 collisionTest(Vector2 move_amount)
+        private Vector2 CollisionTest(Vector2 move_amount)
         {
 
             Rectangle afterMoveRect = collision_rectangle_;
@@ -159,7 +161,7 @@ namespace fge
                 float elapsed = (float)gameTime / 1000.0f;
 
                 Vector2 moveAmount = velocity_ * elapsed;
-                moveAmount = collisionTest(moveAmount);
+                moveAmount = CollisionTest(moveAmount);
 
                 if (velocity_.Y < 0)
                 {

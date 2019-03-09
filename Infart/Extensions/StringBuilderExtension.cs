@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Text;
 
-namespace fge
+namespace Infart.Extensions
 {
     public static class StringBuilderExtensions
     {

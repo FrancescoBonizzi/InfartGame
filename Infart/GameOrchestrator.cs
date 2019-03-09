@@ -2,7 +2,7 @@
 using FbonizziMonoGame.Drawing.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
 using FbonizziMonoGame.TransformationObjects;
-using fge;
+using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

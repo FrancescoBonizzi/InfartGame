@@ -1,9 +1,11 @@
+using Infart.Assets;
+using Infart.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.ParticleSystem
 {
     public class InfartExplosion
     {

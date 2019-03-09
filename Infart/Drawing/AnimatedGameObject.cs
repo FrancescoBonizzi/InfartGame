@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Astronaut;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.Drawing
 {
     public abstract class AnimatedGameObject : GameObject
     {

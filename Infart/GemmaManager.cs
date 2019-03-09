@@ -1,9 +1,13 @@
+using Infart.Assets;
+using Infart.Astronaut;
+using Infart.Drawing;
+using Infart.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart
 {
     public class GemmaManager
     {

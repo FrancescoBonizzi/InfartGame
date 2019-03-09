@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Extensions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace fge
+namespace Infart.ParticleSystem
 {
     public class RecordExplosion
     {
@@ -12,7 +13,7 @@ namespace fge
 
         private Vector2 origin_;
 
-        private Texture2D texture_;
+        private readonly Texture2D texture_;
 
         private static Random random_;
 

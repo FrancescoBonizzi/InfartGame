@@ -65,12 +65,12 @@
     <Compile Include="ParticleSystem\JalapenoParticleSystem.cs" />
     <Compile Include="Assets\Loader.cs" />
     <Compile Include="Background\Nuvolificio.cs" />
-    <Compile Include="Player\Player.cs" />
+    <Compile Include="Astronaut\Player.cs" />
     <Compile Include="SoundManger.cs" />
     <Compile Include="ParticleSystem\StarFieldParticleSystem.cs" />
     <Compile Include="HUD\StatusBar.cs" />
-    <Compile Include="Player\Actor.cs" />
-    <Compile Include="Player\AnimationManager.cs" />
+    <Compile Include="Astronaut\Actor.cs" />
+    <Compile Include="Astronaut\AnimationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FbonizziMonoGame, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

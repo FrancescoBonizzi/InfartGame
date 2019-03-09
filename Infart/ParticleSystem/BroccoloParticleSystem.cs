@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Assets;
+using Microsoft.Xna.Framework;
 
-namespace fge
+namespace Infart.ParticleSystem
 {
     public class BroccoloParticleSystem : ParticleSystem
     {

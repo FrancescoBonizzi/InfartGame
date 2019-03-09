@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 
-namespace fge
+namespace Infart.Drawing
 {
     public class Camera
     {

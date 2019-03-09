@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace fge
+namespace Infart.Drawing
 {
     public class AbstractGameObject : GameObject
     {

@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Drawing;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace fge
+namespace Infart.HUD
 {
     public class StatusBarSprite : GameObject
     {

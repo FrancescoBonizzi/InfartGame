@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Drawing;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.Extensions
 {
     public static class CollisionSolver
     {

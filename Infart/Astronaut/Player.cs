@@ -1,10 +1,13 @@
+using Infart.Assets;
+using Infart.Extensions;
+using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.Astronaut
 {
     public class Player : Actor
     {

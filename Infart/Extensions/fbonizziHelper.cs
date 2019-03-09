@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace fge
+namespace Infart.Extensions
 {
     public static class fbonizziHelper
     {

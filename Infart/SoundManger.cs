@@ -1,7 +1,9 @@
+using Infart.Assets;
+using Infart.Extensions;
 using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart
 {
     public class SoundManager
     {

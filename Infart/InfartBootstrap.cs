@@ -6,8 +6,9 @@ using FbonizziMonoGame.Input.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
 using FbonizziMonoGame.StringsLocalization;
 using FbonizziMonoGame.StringsLocalization.Abstractions;
-using fge;
+
 using Infart.Assets;
+using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -53,7 +54,7 @@ namespace Infart
 
         private GameOrchestrator _orchestrator;
 
-        private SoundManager _soundManager;
+        private readonly SoundManager _soundManager;
 
         private readonly bool _isPc;
 

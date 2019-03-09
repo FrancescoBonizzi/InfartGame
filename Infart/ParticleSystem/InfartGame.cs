@@ -1,3 +1,9 @@
+using FbonizziMonoGame.Extensions;
+using Infart.Assets;
+using Infart.Astronaut;
+using Infart.Background;
+using Infart.Drawing;
+using Infart.HUD;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
@@ -5,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fge
+namespace Infart.ParticleSystem
 {
     public class InfartGame
     {

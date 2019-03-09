@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+using Infart.Extensions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace fge
+namespace Infart.ParticleSystem
 {
     public abstract class ParticleSystem
     {
@@ -13,7 +14,7 @@ namespace fge
 
         private Vector2 origin_;
 
-        private int density_;
+        private readonly int density_;
 
         private Particle[] active_particles_;
 
