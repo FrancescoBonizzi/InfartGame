@@ -7,8 +7,8 @@ namespace Infart.ParticleSystem
     {
         public JalapenoParticleSystem(
             int Density,
-            Loader Loader)
-            : base(Density, Loader.textures_, Loader.textures_rectangles_["JalapenoParticle"])
+            AssetsLoader AssetsLoader)
+            : base(Density, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["JalapenoParticle"])
         {
         }
 

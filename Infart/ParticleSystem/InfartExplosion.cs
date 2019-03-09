@@ -49,13 +49,13 @@ namespace Infart.ParticleSystem
             get { return started_; }
         }
 
-        public InfartExplosion(Loader Loader)
+        public InfartExplosion(AssetsLoader AssetsLoader)
         {
             random_ = fbonizziHelper.random;
             particelle_ = new List<ParticleExplosion>();
 
-            AddNewScritta(Loader.textures_, Loader.textures_rectangles_["Bang"]);
-            AddRandomParticles(Loader.textures_, Loader.textures_rectangles_["Burger"], Loader.textures_rectangles_["Merda"]);
+            AddNewScritta(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Bang"]);
+            AddRandomParticles(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Burger"], AssetsLoader.TexturesRectangles["Merda"]);
         }
 
         public void Explode(Vector2 CenterPosition, bool WithText, SoundManager SoundManager)

@@ -63,7 +63,6 @@
     <Compile Include="Background\GroundManager.cs" />
     <Compile Include="ParticleSystem\InfartExplosion.cs" />
     <Compile Include="ParticleSystem\JalapenoParticleSystem.cs" />
-    <Compile Include="Assets\Loader.cs" />
     <Compile Include="Background\Nuvolificio.cs" />
     <Compile Include="Astronaut\Player.cs" />
     <Compile Include="SoundManger.cs" />

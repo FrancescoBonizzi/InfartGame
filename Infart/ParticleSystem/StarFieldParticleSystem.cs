@@ -7,8 +7,8 @@ namespace Infart.ParticleSystem
     {
         public StarFieldParticleSystem(
             int Density,
-            Loader Loader)
-            : base(Density, Loader.textures_, Loader.textures_rectangles_["Stella"])
+            AssetsLoader AssetsLoader)
+            : base(Density, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Stella"])
         {
         }
 

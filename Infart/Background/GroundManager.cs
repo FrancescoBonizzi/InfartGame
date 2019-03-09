@@ -25,15 +25,15 @@ namespace Infart.Background
 
         public GroundManager(
             Camera CurrentCamera,
-            Loader Loader,
+            AssetsLoader AssetsLoader,
             InfartGame GameManagerReference)
         {
             current_camera_ = CurrentCamera;
             random_ = fbonizziHelper.random;
 
             grattacieli_camminabili_ = new GrattacieliAutogeneranti(
-                Loader.textures_gratta_ground_,
-                Loader.textures_rectangles_,
+                AssetsLoader.TexturesGrattaGround,
+                AssetsLoader.TexturesRectangles,
                 "ground",
                 69,
                 CurrentCamera,

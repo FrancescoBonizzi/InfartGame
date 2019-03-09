@@ -6,8 +6,8 @@ namespace Infart.ParticleSystem
     public class BroccoloParticleSystem : ParticleSystem
     {
         public BroccoloParticleSystem(int Density,
-            Loader Loader)
-            : base(Density, Loader.textures_, Loader.textures_rectangles_["BroccoloParticle"])
+            AssetsLoader AssetsLoader)
+            : base(Density, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["BroccoloParticle"])
         {
         }
 

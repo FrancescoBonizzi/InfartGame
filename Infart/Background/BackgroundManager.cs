@@ -54,48 +54,48 @@ namespace Infart.Background
 
         public BackgroundManager(
             Camera CameraInstance,
-            Loader Loader,
+            AssetsLoader AssetsLoader,
             InfartGame GameManagerReference)
         {
             current_camera_ = CameraInstance;
             old_camera_x_pos_ = current_camera_.Position.X;
 
-            sfondo_rectangle_ = Loader.textures_rectangles_["background"];
-            texture_reference_ = Loader.textures_;
+            sfondo_rectangle_ = AssetsLoader.TexturesRectangles["background"];
+            texture_reference_ = AssetsLoader.Textures;
             sfondo_origin_ = new Vector2(0.0f, sfondo_rectangle_.Height);
             sfondo_scale_ = Vector2.One;
 
             grattacieli_fondo_ = new GrattacieliAutogeneranti(
-                Loader.textures_gratta_back_, Loader.textures_rectangles_, "back", 69, CameraInstance, GameManagerReference);
+                AssetsLoader.TexturesGrattaBack, AssetsLoader.TexturesRectangles, "back", 69, CameraInstance, GameManagerReference);
 
             sfondo_scale_ = new Vector2(1.8f);
 
             grattacieli_mid_ = new GrattacieliAutogeneranti(
-                Loader.textures_gratta_mid_, Loader.textures_rectangles_, "mid", 69, CameraInstance, GameManagerReference);
+                AssetsLoader.TexturesGrattaMid, AssetsLoader.TexturesRectangles, "mid", 69, CameraInstance, GameManagerReference);
 
             parallax_speed_fondo_ = default_parallax_speed_fondo_;
             parallax_speed_mid_ = default_parallax_speed_mid_;
 
             List<Rectangle> tmp = new List<Rectangle>
             {
-                Loader.textures_rectangles_["nuvola1"],
-                Loader.textures_rectangles_["nuvola2"],
-                Loader.textures_rectangles_["nuvola3"]
+                AssetsLoader.TexturesRectangles["nuvola1"],
+                AssetsLoader.TexturesRectangles["nuvola2"],
+                AssetsLoader.TexturesRectangles["nuvola3"]
             };
 
             nuvolificio_vicino_ = new Nuvolificio(
                 Color.White, 0.6f, new Vector2(45, 60f),
-                nuvole_default_spawn_y_range_, CameraInstance, tmp, Loader.textures_);
+                nuvole_default_spawn_y_range_, CameraInstance, tmp, AssetsLoader.Textures);
 
             nuvolificio_medio_ = new Nuvolificio(
                new Color(9, 50, 67), 0.4f, new Vector2(30f, 40f),
-                nuvole_default_spawn_y_range_, CameraInstance, tmp, Loader.textures_);
+                nuvole_default_spawn_y_range_, CameraInstance, tmp, AssetsLoader.Textures);
 
             nuvolificio_lontano_ = new Nuvolificio(
                  new Color(5, 23, 40), 0.2f, new Vector2(10f, 20f),
-                nuvole_default_spawn_y_range_, CameraInstance, tmp, Loader.textures_);
+                nuvole_default_spawn_y_range_, CameraInstance, tmp, AssetsLoader.Textures);
 
-            starfield_ = new StarFieldParticleSystem(8, Loader);
+            starfield_ = new StarFieldParticleSystem(8, AssetsLoader);
 
             current_camera_ = CameraInstance;
             old_camera_x_pos_ = current_camera_.Position.X;

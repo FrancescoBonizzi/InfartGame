@@ -32,7 +32,7 @@ namespace Infart
 
         public GemmaManager(
             Camera CameraReference,
-            Loader Loader)
+            AssetsLoader AssetsLoader)
         {
             random_ = fbonizziHelper.random;
             current_camera_ = CameraReference;
@@ -41,11 +41,11 @@ namespace Infart
 
             for (int i = 0; i < max_gemme_attive_; ++i)
                 gemme_inactive_.Add(new Gemma(
-                    Loader.textures_,
-                    Loader.textures_rectangles_["Burger"]));
+                    AssetsLoader.Textures,
+                    AssetsLoader.TexturesRectangles["Burger"]));
 
-            jalapenos_ = new Gemma(Loader.textures_, Loader.textures_rectangles_["Jalapenos"]);
-            broccolo_ = new Gemma(Loader.textures_, Loader.textures_rectangles_["Verdura"]);
+            jalapenos_ = new Gemma(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Jalapenos"]);
+            broccolo_ = new Gemma(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Verdura"]);
         }
 
         public void Reset(Camera CameraReference)

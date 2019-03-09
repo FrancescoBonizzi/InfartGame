@@ -35,7 +35,7 @@ namespace Infart.ParticleSystem
 
         protected StatusBar status_bar_;
 
-        protected Loader Loader;
+        protected AssetsLoader AssetsLoader;
 
         protected bool paused_;
 
@@ -112,7 +112,7 @@ namespace Infart.ParticleSystem
         private int game_cameraH_limit_;
 
         public InfartGame(
-            Loader Loader,
+            AssetsLoader AssetsLoader,
             //        Loader_menu LoaderMenu,
             SoundManager SoundManager,
             int HighScore,
@@ -123,23 +123,23 @@ namespace Infart.ParticleSystem
             resolution_h_ = 480;
             game_h_ = 1500;
 
-            this.Loader = Loader;
+            this.AssetsLoader = AssetsLoader;
 
             sound_manager_ = SoundManager;
 
-            status_bar_ = new StatusBar(new Vector2(460, 435), Loader, SoundManager);
+            status_bar_ = new StatusBar(new Vector2(460, 435), AssetsLoader, SoundManager);
 
             high_score_ = HighScore;
             SetRecordRectangle();
             SetHighScore(HighScore);
 
-            font_ = Loader.font_;
-            px_texture_ = Loader.px_texture_;
+            font_ = AssetsLoader.Font;
+         //   px_texture_ = AssetsLoader.px_texture_;
 
             player_camera_ = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
-            dead_explosion_ = new InfartExplosion(Loader);
-            //     record_explosion_ = new RecordExplosion_episodio1(Loader);
+            dead_explosion_ = new InfartExplosion(AssetsLoader);
+            //     record_explosion_ = new RecordExplosion_episodio1(AssetsLoader);
 #warning TODO: mettere un popup per il record
 
             paused_ = false;
@@ -153,7 +153,7 @@ namespace Infart.ParticleSystem
             score_string_ = new StringBuilder();
 
             high_score_color_ = new Color(22, 232, 86) * 0.5f;
-            px_texture_ = Loader.px_texture_;
+       //     px_texture_ = AssetsLoader.px_texture_;
             metri_string_ = MetriString;
 
             NewGame();
@@ -161,22 +161,22 @@ namespace Infart.ParticleSystem
 
         protected void InitializeBackgroundManager()
         {
-            background_ = new BackgroundManager(player_camera_, (Loader as Loader), this);
+            background_ = new BackgroundManager(player_camera_, (AssetsLoader as AssetsLoader), this);
         }
 
         protected void InitializeGroundManager()
         {
-            ground_ = new GroundManager(player_camera_, (Loader as Loader), this);
+            ground_ = new GroundManager(player_camera_, (AssetsLoader as AssetsLoader), this);
         }
 
         protected void InitializeGemmaManager()
         {
-            gemme_ = new GemmaManager(player_camera_, (Loader as Loader));
+            gemme_ = new GemmaManager(player_camera_, (AssetsLoader as AssetsLoader));
         }
 
         protected void InitializePlayer()
         {
-            player_ = new Player(new Vector2(240, 300), (Loader as Loader), this);
+            player_ = new Player(new Vector2(240, 300), (AssetsLoader as AssetsLoader), this);
         }
 
         public void NewGame()
@@ -525,10 +525,10 @@ namespace Infart.ParticleSystem
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(
-                px_texture_,
-                bar_rectangle_,
-                bar_color_);
+            //spriteBatch.Draw(
+            //    px_texture_,
+            //    bar_rectangle_,
+            //    bar_color_);
 
             score_string_.Clear();
             StringBuilderExtensions.AppendNumber(score_string_, score_metri_).Append(metri_string_);

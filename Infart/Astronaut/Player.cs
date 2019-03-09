@@ -49,7 +49,7 @@ namespace Infart.Astronaut
 
         public Player(
             Vector2 starting_pos,
-            Loader Loader,
+            AssetsLoader AssetsLoader,
             InfartGame GameManagerReference)
             : base(1.0f, starting_pos, GameManagerReference.GroundObjects())
         {
@@ -60,26 +60,26 @@ namespace Infart.Astronaut
 
             game_manager_reference_ = GameManagerReference;
 
-            scoreggia_system_ = new ScoreggiaParticleSystem(10, Loader.textures_, Loader.textures_rectangles_["ScoreggiaParticle"]);
-            jalapeno_system_ = new JalapenoParticleSystem(10, Loader);
-            broccolo_system_ = new BroccoloParticleSystem(8, Loader);
+            scoreggia_system_ = new ScoreggiaParticleSystem(10, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["ScoreggiaParticle"]);
+            jalapeno_system_ = new JalapenoParticleSystem(10, AssetsLoader);
+            broccolo_system_ = new BroccoloParticleSystem(8, AssetsLoader);
 
             rand_ = fbonizziHelper.random;
 
-            LoadAnimation("idle", Loader.player_idle_rects_,
-                true, 0.1f, Loader.textures_);
+            LoadAnimation("idle", AssetsLoader.PlayerIdleRects,
+                true, 0.1f, AssetsLoader.Textures);
 
-            LoadAnimation("run", Loader.player_run_rects_,
-                true, 0.05f, Loader.textures_);
+            LoadAnimation("run", AssetsLoader.PlayerRunRects,
+                true, 0.05f, AssetsLoader.Textures);
 
-            LoadAnimation("fall", Loader.player_fall_rects_,
-                true, 0.01f, Loader.textures_);
+            LoadAnimation("fall", AssetsLoader.PlayerFallRects,
+                true, 0.01f, AssetsLoader.Textures);
 
-            LoadAnimation("fart_sustain_up", Loader.player_fart_rects_,
-                true, 0.05f, Loader.textures_);
+            LoadAnimation("fart_sustain_up", AssetsLoader.PlayerFartRects,
+                true, 0.05f, AssetsLoader.Textures);
 
-            LoadAnimation("merdone", Loader.player_merda_rects_,
-                true, 0.01f, Loader.textures_);
+            LoadAnimation("merdone", AssetsLoader.PlayerMerdaRects,
+                true, 0.01f, AssetsLoader.Textures);
 
             PlayAnimation("fall");
         }

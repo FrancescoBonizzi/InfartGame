@@ -45,7 +45,7 @@ namespace Infart
 
         public event EventHandler ExitGameRequested;
 
-        private Loader _loader;
+        private AssetsLoader _assetsLoader;
         private IScreenTransformationMatrixProvider _matrixScaleProvider;
 
         private Sprite _mousePointer;
@@ -111,11 +111,11 @@ namespace Infart
         {
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
             
-            _loader = new Loader(Content, GraphicsDevice);
-            var soundManager = new SoundManager(true, _loader);
+            _assetsLoader = new AssetsLoader(Content);
+            var soundManager = new SoundManager(true, _assetsLoader);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
-                    _loader,
+                    _assetsLoader,
                     //        new Loader_menu(Content),
                     soundManager,
                     100, "Metri", "Pausa"));

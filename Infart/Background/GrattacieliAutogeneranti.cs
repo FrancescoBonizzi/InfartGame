@@ -51,7 +51,7 @@ namespace Infart.Background
 
         public GrattacieliAutogeneranti(
             Texture2D Texture,
-            Dictionary<string, Rectangle> GrattaRects,
+            IDictionary<string, Rectangle> GrattaRects,
             string EntryName,
             int GrattaNumber,
             Camera PlayerCamera,
@@ -141,7 +141,7 @@ namespace Infart.Background
             }
         }
 
-        private void LoadGrattacieli(string EntryName, Dictionary<string, Rectangle> GrattaRects, int GrattaNumber)
+        private void LoadGrattacieli(string EntryName, IDictionary<string, Rectangle> GrattaRects, int GrattaNumber)
         {
             for (int i = 1; i <= GrattaNumber; ++i)
             {

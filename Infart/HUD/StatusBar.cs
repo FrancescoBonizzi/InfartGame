@@ -38,25 +38,25 @@ namespace Infart.HUD
 
         public StatusBar(
             Vector2 position,
-            Loader Loader,
+            AssetsLoader AssetsLoader,
             SoundManager SoundManagerReference)
         {
             position_ = position;
-            texture_reference_ = Loader.textures_;
+            texture_reference_ = AssetsLoader.Textures;
 
             sound_manager_reference_ = SoundManagerReference;
 
             status_burgers_ = new StatusBarSprite[4];
             Vector2 tmp_pos = new Vector2(position.X, position.Y + 20);
-            int ham_width = Loader.textures_rectangles_["Burger"].Width;
+            int ham_width = AssetsLoader.TexturesRectangles["Burger"].Width;
             Vector2 ham_scale = new Vector2(0.9f);
-            sfondo_morte_rect_ = Loader.textures_rectangles_["death_screen"];
+            sfondo_morte_rect_ = AssetsLoader.TexturesRectangles["death_screen"];
 
             for (int i = 0; i < 4; ++i)
             {
                 status_burgers_[i] = new StatusBarSprite(
-                    Loader.textures_,
-                    Loader.textures_rectangles_["Burger"],
+                    AssetsLoader.Textures,
+                    AssetsLoader.TexturesRectangles["Burger"],
                     tmp_pos,
                     empty_color,
                     ham_scale);
