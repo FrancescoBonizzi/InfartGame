@@ -6,9 +6,18 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace fge
 {
-    public class SoundManager_episodio1 : SoundManager
+    public class SoundManager_episodio1
     {
-        
+
+        protected List<SoundEffectInstance> newgame_sounds_;
+        protected List<SoundEffectInstance> all_sounds_;
+
+        private List<SoundEffectInstance> scoreggia_sound_;
+
+        protected bool sound_on_ = true;
+
+
+
         private SoundEffectInstance background_music_;
         private SoundEffectInstance explosion_sound_;
         private SoundEffectInstance fall_sound_;
@@ -18,20 +27,115 @@ namespace fge
         private SoundEffectInstance morso_ = null;
 
         
-
-        
         public SoundManager_episodio1(
             bool SoundFlag,
             Loader_menu Loader_menu,
             Loader_episodio1 Loader_episodio1)
-            : base(SoundFlag, Loader_menu, Loader_episodio1)
         {
+            sound_on_ = SoundFlag;
+
+            LoadScoregge(Loader_menu);
+            AddAllSounds(Loader_episodio1);
+            AddNewGameSounds();
+        }
+        
+        private void LoadScoregge(Loader_menu scoregge_loader)
+        {
+            scoreggia_sound_ = new List<SoundEffectInstance>();
+            all_sounds_ = new List<SoundEffectInstance>();
+            foreach (SoundEffect s in scoregge_loader.sound_scoregge_)
+            {
+                SoundEffectInstance tmp = s.CreateInstance();
+                scoreggia_sound_.Add(tmp);
+                all_sounds_.Add(tmp);
+            }
         }
 
-        
+        public void NewGame()
+        {
+            if (sound_on_)
+            {
+                foreach (SoundEffectInstance s in newgame_sounds_)
+                    s.Play();
+            }
+        }
 
-        
-        protected override void AddAllSounds(Loader MyLoader)
+
+        public void StopSounds()
+        {
+            foreach (SoundEffectInstance s in all_sounds_)
+            {
+                s.Stop();
+            }
+        }
+
+        public void PauseAll()
+        {
+            foreach (SoundEffectInstance s in all_sounds_)
+            {
+                if (s.State == SoundState.Playing)
+                    s.Pause();
+            }
+        }
+
+        public void ResumeAll()
+        {
+            if (sound_on_)
+            {
+                foreach (SoundEffectInstance s in all_sounds_)
+                {
+                    if (s.State == SoundState.Paused)
+                        s.Play();
+                }
+                NewGame();
+            }
+        }
+
+        public void PlayScoreggia()
+        {
+            if (sound_on_)
+            {
+                bool one_playing = false;
+
+                foreach (SoundEffectInstance s in scoreggia_sound_)
+                {
+                    if (s.State == SoundState.Playing)
+                    {
+                        one_playing = true;
+                    }
+                }
+
+                if (!one_playing)
+                {
+                    scoreggia_sound_[fbonizziHelper.random.Next(scoreggia_sound_.Count)].Play();
+                }
+            }
+        }
+
+        public void StopScoreggia()
+        {
+            foreach (SoundEffectInstance s in scoreggia_sound_)
+            {
+                if (s.State == SoundState.Playing)
+                {
+                    s.Stop();
+                    break;
+                }
+            }
+        }
+
+        public void SoundOff()
+        {
+            StopSounds();
+            sound_on_ = false;
+        }
+
+        public void SoundOn()
+        {
+            sound_on_ = true;
+        }
+
+        protected void AddAllSounds(Loader MyLoader)
         {
             background_music_ = ((MyLoader) as Loader_episodio1).sound_effects_["night"].CreateInstance();
             background_music_.IsLooped = true;
@@ -56,7 +160,7 @@ namespace fge
             all_sounds_.Add(merdone_sound_);
         }
 
-        protected override void AddNewGameSounds()
+        protected void AddNewGameSounds()
         {
             newgame_sounds_ = new List<SoundEffectInstance>();
             newgame_sounds_.Add(background_music_);

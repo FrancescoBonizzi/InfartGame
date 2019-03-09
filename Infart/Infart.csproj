@@ -79,7 +79,6 @@
     <Compile Include="Specializzazioni\episodio-1\StatusBar_episodio1.cs" />
     <Compile Include="Specializzazioni\Menu\Loader_menu.cs" />
     <Compile Include="Specializzazioni\Menu\MerdeVolantiParticleSystem.cs" />
-    <Compile Include="Specializzazioni\Menu\SoundManager_menu.cs" />
     <Compile Include="Specializzazioni\Player\Actor.cs" />
     <Compile Include="Specializzazioni\Player\AnimationManager.cs" />
     <Compile Include="Specializzazioni\Player\Player.cs" />

@@ -19,9 +19,9 @@ namespace fge
         protected Player player_;
 
         protected BackgroundManager_episodio1 background_;
-        protected GroundManager ground_;
+        protected GroundManager_episodio1 ground_;
         protected GemmaManager_episodio1 gemme_;
-        protected SoundManager sound_manager_;
+        protected SoundManager_episodio1 sound_manager_;
 
         protected StatusBar status_bar_;
 
