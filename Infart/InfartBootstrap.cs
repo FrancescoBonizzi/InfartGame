@@ -44,11 +44,9 @@ namespace Infart
 
         public event EventHandler ExitGameRequested;
 
-        private AssetsLoader _assetsLoader;
         private IScreenTransformationMatrixProvider _matrixScaleProvider;
 
         private readonly ITextFileLoader _textFileAssetsLoader;
-        private Sprite _mousePointer;
 
         private GameOrchestrator _orchestrator;
         private SoundManager _soundManager;
