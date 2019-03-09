@@ -10,7 +10,7 @@ namespace fge
     public class GroundManager_episodio1 : GroundManager
     {
         
-        private GrattacieliAutogeneranti grattacieli_camminabili_ = null;
+        private GrattacieliAutogeneranti_episodio1 grattacieli_camminabili_ = null;
         private float min_time_to_next_buco_ = 2000.0f;
         private float elapsed_ = 0.0f;
 

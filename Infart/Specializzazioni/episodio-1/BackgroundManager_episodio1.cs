@@ -10,8 +10,8 @@ namespace fge
     public class BackgroundManager_episodio1 : BackgroundManager
     {
         
-        private GrattacieliAutogeneranti grattacieli_fondo_ = null;
-        private GrattacieliAutogeneranti grattacieli_mid_ = null;
+        private GrattacieliAutogeneranti_episodio1 grattacieli_fondo_ = null;
+        private GrattacieliAutogeneranti_episodio1 grattacieli_mid_ = null;
 
         private float parallax_speed_fondo_;
         private float parallax_speed_mid_;

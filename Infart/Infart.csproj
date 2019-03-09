@@ -46,7 +46,6 @@
     <Compile Include="Base\Camera.cs" />
     <Compile Include="Base\GameObject.cs" />
     <Compile Include="Base\Gemma.cs" />
-    <Compile Include="Base\GrattacieliAutogeneranti.cs" />
     <Compile Include="Base\Nuvola.cs" />
     <Compile Include="Base\SingleTextureGameObject.cs" />
     <Compile Include="Base\StatusBarSprite.cs" />
