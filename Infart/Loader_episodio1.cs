@@ -10,8 +10,14 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace fge
 {
-    public class Loader_episodio1 : Loader
+    public class Loader_episodio1
     {
+        protected ContentManager content_;
+
+        private bool music_loaded_ = false;
+        private bool texture_loaded_ = false;
+
+
         public Texture2D textures_;
         public Texture2D textures_gratta_back_;
         public Texture2D textures_gratta_mid_;
@@ -31,16 +37,32 @@ namespace fge
         public Loader_episodio1(
             ContentManager Content,
             GraphicsDevice Graphics)
-            : base(Content)
         {
+            content_ = Content;
+
             font_ = Content.Load<SpriteFont>(@"TextFont");
 
             px_texture_ = new Texture2D(Graphics, 1, 1);
             px_texture_.SetData(new Color[] { Color.White });
         }
 
-        public override void LoadTexture()
+        private void MusicLoader()
         {
+            if (!music_loaded_)
+            {
+                LoadMusic();
+                music_loaded_ = true;
+            }
+        }
+
+        public void LoadTexture()
+        {
+            if (!texture_loaded_)
+            {
+                LoadTexture();
+                texture_loaded_ = true;
+            }
+
             textures_rectangles_ = new Dictionary<string, Rectangle>();
             textures_ = content_.Load<Texture2D>(@"textures");
 
@@ -470,7 +492,7 @@ namespace fge
             player_merda_rects_.Add(textures_rectangles_["merdone/merdone__019"]);
         }
 
-        public override void LoadMusic()
+        public void LoadMusic()
         {
             string folder = Path.Combine("Music", "Effects");
             sound_effects_ = new Dictionary<string, SoundEffect>();

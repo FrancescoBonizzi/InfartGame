@@ -118,11 +118,11 @@ namespace Infart
             
 
             var loaderEpisodio1 = new Loader_episodio1(Content, GraphicsDevice);
-            var soundManager = new SoundManager_episodio1(true, new Loader_menu(Content), loaderEpisodio1);
+            var soundManager = new SoundManager_episodio1(true, loaderEpisodio1);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
                     loaderEpisodio1,
-                    new Loader_menu(Content),
+            //        new Loader_menu(Content),
                     soundManager,
                     100, "Metri", "Pausa"));
 

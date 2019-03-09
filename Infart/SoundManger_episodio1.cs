@@ -29,27 +29,27 @@ namespace fge
         
         public SoundManager_episodio1(
             bool SoundFlag,
-            Loader_menu Loader_menu,
+           // Loader_menu Loader_menu,
             Loader_episodio1 Loader_episodio1)
         {
             sound_on_ = SoundFlag;
 
-            LoadScoregge(Loader_menu);
+     //       LoadScoregge(Loader_menu);
             AddAllSounds(Loader_episodio1);
             AddNewGameSounds();
         }
         
-        private void LoadScoregge(Loader_menu scoregge_loader)
-        {
-            scoreggia_sound_ = new List<SoundEffectInstance>();
-            all_sounds_ = new List<SoundEffectInstance>();
-            foreach (SoundEffect s in scoregge_loader.sound_scoregge_)
-            {
-                SoundEffectInstance tmp = s.CreateInstance();
-                scoreggia_sound_.Add(tmp);
-                all_sounds_.Add(tmp);
-            }
-        }
+        //private void LoadScoregge(Loader_menu scoregge_loader)
+        //{
+        //    scoreggia_sound_ = new List<SoundEffectInstance>();
+        //    all_sounds_ = new List<SoundEffectInstance>();
+        //    foreach (SoundEffect s in scoregge_loader.sound_scoregge_)
+        //    {
+        //        SoundEffectInstance tmp = s.CreateInstance();
+        //        scoreggia_sound_.Add(tmp);
+        //        all_sounds_.Add(tmp);
+        //    }
+        //}
 
         public void NewGame()
         {
@@ -135,7 +135,7 @@ namespace fge
             sound_on_ = true;
         }
 
-        protected void AddAllSounds(Loader MyLoader)
+        protected void AddAllSounds(Loader_episodio1 MyLoader)
         {
             background_music_ = ((MyLoader) as Loader_episodio1).sound_effects_["night"].CreateInstance();
             background_music_.IsLooped = true;

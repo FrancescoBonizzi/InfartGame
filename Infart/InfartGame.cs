@@ -25,13 +25,13 @@ namespace fge
 
         protected StatusBar_episodio1 status_bar_;
 
-        protected Loader Loader;
+        protected Loader_episodio1 Loader;
 
         protected bool paused_;
 
 
 
-        protected InfartExplosion_episodio1 dead_explosion_;
+        protected InfartExplosion dead_explosion_;
         protected RecordExplosion record_explosion_;
 
         protected Random random_;
@@ -90,7 +90,7 @@ namespace fge
 
         public InfartGame(
             Loader_episodio1 Loader,
-            Loader_menu LoaderMenu,
+    //        Loader_menu LoaderMenu,
             SoundManager_episodio1 SoundManager,
             int HighScore,
             string MetriString,
@@ -115,7 +115,7 @@ namespace fge
 
             player_camera_ = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
-            dead_explosion_ = new InfartExplosion_episodio1(Loader);
+            dead_explosion_ = new InfartExplosion(Loader);
             record_explosion_ = new RecordExplosion_episodio1(Loader);
 
             paused_ = false;

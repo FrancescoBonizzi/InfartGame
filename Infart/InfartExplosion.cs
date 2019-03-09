@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace fge
 {
-    public class InfartExplosion_episodio1
+    public class InfartExplosion
     {
 
         private double elapsed_ = 0.0;
@@ -49,7 +49,7 @@ namespace fge
 
 
 
-        public InfartExplosion_episodio1(Loader_episodio1 Loader)
+        public InfartExplosion(Loader_episodio1 Loader)
         {
             random_ = fbonizziHelper.random;
             particelle_ = new List<ParticleExplosion>();
