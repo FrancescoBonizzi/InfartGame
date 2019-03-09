@@ -42,7 +42,7 @@ namespace fge
         
         public Player(
            Vector2 starting_pos,
-            GameManager GameManagerReference)
+            InfartGame GameManagerReference)
             : base(1.0f, starting_pos, GameManagerReference.GroundObjects())
         {
             fill_color_ = overlay_color_;

@@ -10,8 +10,46 @@ using System.Text;
 
 namespace fge
 {
-    public class InfartGame : GameManager
+    public class InfartGame
     {
+        private int resolution_w_;
+        private int resolution_h_;
+        protected int game_h_;
+        protected Camera player_camera_;
+        protected Player player_;
+
+        protected BackgroundManager_episodio1 background_;
+        protected GroundManager ground_;
+        protected GemmaManager gemme_;
+        protected SoundManager sound_manager_;
+
+        protected StatusBar status_bar_;
+
+        protected Loader Loader;
+
+        protected bool paused_;
+
+
+
+        protected InfartExplosion dead_explosion_;
+        protected RecordExplosion record_explosion_;
+
+        protected Random random_;
+
+
+        protected int high_score_;
+        protected int score_scoregge_;
+        protected bool new_high_score_ = false;
+
+        protected bool force_to_finish_;
+
+        protected Rectangle high_score_position_;
+        protected Color high_score_color_ = Color.Blue;
+        protected SpriteFont font_;
+
+        protected Texture2D px_texture_;
+
+
         public double BucoProbability;
         public double PowerUpProbability;
         public double PeperoncinoDuration;
@@ -57,20 +95,37 @@ namespace fge
             int HighScore,
             string MetriString,
             string PauseString)
-            : base(
-            800,
-            480,
-            1500,
-            SoundManager,
-            new StatusBar(new Vector2(460, 435), Loader, SoundManager),
-            HighScore,
-            new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f),
-            Loader.font_,
-            Loader.px_texture_,
-            Loader,
-            new InfartExplosion_episodio1(Loader),
-            new RecordExplosion_episodio1(Loader))
         {
+            resolution_w_ = 800;
+            resolution_h_ = 480;
+            game_h_ = 1500;
+
+            this.Loader = Loader;
+
+            sound_manager_ = SoundManager;
+
+            status_bar_ = new StatusBar(new Vector2(460, 435), Loader, SoundManager);
+
+            high_score_ = HighScore;
+            SetRecordRectangle();
+            SetHighScore(HighScore);
+
+            font_ = Loader.font_;
+            px_texture_ = Loader.px_texture_;
+
+            player_camera_ = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
+
+            dead_explosion_ = new InfartExplosion_episodio1(Loader);
+            record_explosion_ = new RecordExplosion_episodio1(Loader);
+
+            paused_ = false;
+            force_to_finish_ = false;
+
+            InitializeBackgroundManager();
+            InitializeGroundManager();
+            InitializeGemmaManager();
+            InitializePlayer();
+
             score_string_ = new StringBuilder();
 
             high_score_color_ = new Color(22, 232, 86) * 0.5f;
@@ -80,29 +135,34 @@ namespace fge
             NewGame();
         }
 
-        protected override void InitializeBackgroundManager()
+        protected void InitializeBackgroundManager()
         {
             background_ = new BackgroundManager_episodio1(player_camera_, (Loader as Loader_episodio1), this);
         }
 
-        protected override void InitializeGroundManager()
+        protected void InitializeGroundManager()
         {
             ground_ = new GroundManager_episodio1(player_camera_, (Loader as Loader_episodio1), this);
         }
 
-        protected override void InitializeGemmaManager()
+        protected void InitializeGemmaManager()
         {
             gemme_ = new GemmaManager_episodio1(player_camera_, (Loader as Loader_episodio1));
         }
 
-        protected override void InitializePlayer()
+        protected void InitializePlayer()
         {
             player_ = new Player_episodio1(new Vector2(240, 300), (Loader as Loader_episodio1), this);
         }
 
-        public override void NewGame()
+        public void NewGame()
         {
-            base.NewGame();
+            dead_explosion_.Reset();
+
+            paused_ = false;
+            force_to_finish_ = false;
+            new_high_score_ = false;
+            sound_manager_.NewGame();
 
             game_cameraH_limit_ = -game_h_ - player_camera_.ViewPortHeight;
 
@@ -160,22 +220,108 @@ namespace fge
             get { return status_bar_.HamburgerMangiatiInTotale; }
         }
 
-        public override List<GameObject> GroundObjects()
+        public List<GameObject> GroundObjects()
         {
             return ground_.WalkableObjects();
         }
 
-        protected override void SetRecordRectangle()
+        protected void SetRecordRectangle()
         {
             high_score_position_ = new Rectangle(0, -1020, 20, 1500);
         }
 
-        public override void SetHighScore(int value)
+
+        public int GetScore
+        {
+            get { return high_score_; }
+        }
+
+        public bool IsPaused
+        {
+            get { return paused_; }
+            set
+            {
+                if (value)
+                    Pause();
+                else ResumeFromPause();
+            }
+        }
+
+        public void Pause()
+        {
+            paused_ = true;
+            sound_manager_.PauseAll();
+            GC.Collect();
+        }
+
+        public void ResumeFromPause()
+        {
+            paused_ = false;
+            sound_manager_.ResumeAll();
+        }
+
+        public int ResolutionWidth
+        {
+            get { return resolution_w_; }
+        }
+
+        public int ResolutionHeight
+        {
+            get { return resolution_h_; }
+        }
+
+        public int PlayableGameWindowHeight
+        {
+            get { return game_h_; }
+        }
+
+        public void StopScoreggia()
+        {
+            sound_manager_.StopScoreggia();
+        }
+
+        public void DecreaseParallaxSpeed()
+        {
+            background_.DecreaseParallaxSpeed();
+
+        }
+
+        public void IncreaseParallaxSpeed()
+        {
+            background_.IncreaseParallaxSpeed();
+        }
+
+        public void PlayerJumped()
+        {
+            status_bar_.PlayerJumped();
+        }
+
+        public void AddScoreggia()
+        {
+            ++score_scoregge_;
+            sound_manager_.PlayScoreggia();
+        }
+
+        public void MoveCamera(Vector2 where)
+        {
+            player_camera_.MoveTo(where);
+        }
+
+
+        public void SetHighScore(int value)
         {
             high_score_ = value;
             high_score_position_.X = value * 100;
             high_score_x_ = value * 100;
         }
+
+
+        public void AddGemma(Vector2 position)
+        {
+            if (position.X > player_.Position.X + resolution_w_ / 2)
+                gemme_.AddGemma(position);
+        }
+
 
         public int HamburgerMangiati()
         {
@@ -188,7 +334,7 @@ namespace fge
                 (gemme_ as GemmaManager_episodio1).AddPowerUp(position);
         }
 
-        public override void PlayerCollidedWithNormalGemma()
+        public void PlayerCollidedWithNormalGemma()
         {
             status_bar_.HamburgerEaten();
             (sound_manager_ as SoundManager_episodio1).PlayMorso();
@@ -196,9 +342,34 @@ namespace fge
 
         public void Update(TimeSpan elapsed)
         {
-            base.Update(elapsed.TotalMilliseconds, TouchPanel.GetState());
+            var gametime = elapsed.TotalMilliseconds;
+            var touch = TouchPanel.GetState();
 
-            
+            if (!paused_)
+            {
+                RepositionCamera();
+                player_camera_.Update(gametime);
+
+                CheckDead();
+                background_.Update(gametime);
+                ground_.Update(gametime);
+                player_.Update(gametime, touch);
+                player_.CollidingObjectsReference = ground_.WalkableObjects();
+                gemme_.Update(gametime);
+                CheckPlayerGemmaCollision();
+                record_explosion_.Update(gametime);
+
+                if (status_bar_ != null)
+                    status_bar_.Update(gametime);
+
+                if (dead_explosion_.Started)
+                {
+                    dead_explosion_.Update(gametime);
+                    if (touch.Count > 0)
+                        force_to_finish_ = true;
+                }
+            }
+
             if (score_metri_ % 50 == 0)
             {
                 
@@ -216,10 +387,13 @@ namespace fge
             old_score_metri_ = score_metri_;
         }
 
-        public override void CheckPlayerGemmaCollision()
+        public void CheckPlayerGemmaCollision()
         {
-            base.CheckPlayerGemmaCollision();
-
+            if (gemme_.CheckCollisionWithPlayer(player_))
+            {
+                PlayerCollidedWithNormalGemma();
+            }
+            
             if ((gemme_ as GemmaManager_episodio1).CheckJalapenoCollisionWithPlayer(player_))
             {
                 status_bar_.ComputeJalapenos();
@@ -241,9 +415,9 @@ namespace fge
             throw new NotImplementedException();
         }
 
-        protected override void MakePlayerDead()
+        protected void MakePlayerDead()
         {
-            base.MakePlayerDead();
+            player_.Dead = true;
 
             if (high_score_ < score_metri_)
             {
@@ -252,7 +426,7 @@ namespace fge
             }
         }
 
-        protected override void CheckDead()
+        protected void CheckDead()
         {
             if (!fall_sound_active_)
             {
@@ -271,7 +445,7 @@ namespace fge
             }
         }
 
-        public override bool IsTimeToGameOver()
+        public bool IsTimeToGameOver()
         {
             if (force_to_finish_)
             {
@@ -293,7 +467,21 @@ namespace fge
             }
         }
 
-        protected override void RepositionCamera()
+        protected void LerpCameraPosition(float NewCameraX, float NewCameraY)
+        {
+            player_camera_.Position = new Vector2(
+              MathHelper.Lerp(player_camera_.Position.X, NewCameraX, 0.08f),
+              MathHelper.Lerp(player_camera_.Position.Y, NewCameraY, 0.08f));
+        }
+
+
+        public Player PlayerReference
+        {
+            get { return player_; }
+        }
+
+
+        protected void RepositionCamera()
         {
             float player_camera_y;
             float player_camera_x;
@@ -319,7 +507,7 @@ namespace fge
             player_.Update(gametime, touch);
         }
 
-        protected override void DrawUI(SpriteBatch spriteBatch)
+        protected void DrawUI(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
@@ -337,10 +525,59 @@ namespace fge
             spriteBatch.End();
         }
 
-        public override void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spritebatch)
         {
-            base.Draw(spritebatch);
-            
+            Matrix Camera_transformation = player_camera_.GetTransformation();
+
+            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Camera_transformation);
+
+            background_.Draw(spritebatch);
+            ground_.Draw(spritebatch);
+            gemme_.Draw(spritebatch);
+
+            spritebatch.End();
+
+            if (!dead_explosion_.Started)
+            {
+                spritebatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, Camera_transformation);
+                player_.DrawParticles(spritebatch);
+                spritebatch.End();
+            }
+
+            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Camera_transformation);
+
+            if (dead_explosion_.Started)
+                dead_explosion_.Draw(spritebatch);
+            else
+            {
+                player_.Draw(spritebatch);
+            }
+
+            background_.DrawSpecial(spritebatch);
+
+            if (high_score_ != 0
+               && player_.Position.X >= high_score_position_.X - resolution_w_
+               && !new_high_score_)
+            {
+                if (player_.Position.X < high_score_position_.X)
+                {
+                    spritebatch.Draw(
+                        px_texture_,
+                        high_score_position_,
+                        high_score_color_);
+                }
+                else
+                {
+                    record_explosion_.Explode(player_.Position, 0);
+                    new_high_score_ = true;
+                }
+            }
+
+            record_explosion_.Draw(spritebatch);
+
+            spritebatch.End();
+
+            DrawUI(spritebatch);
         }
 
         public void DrawForMenu(SpriteBatch spritebatch)
