@@ -20,7 +20,7 @@ namespace fge
 
         protected BackgroundManager_episodio1 background_;
         protected GroundManager ground_;
-        protected GemmaManager gemme_;
+        protected GemmaManager_episodio1 gemme_;
         protected SoundManager sound_manager_;
 
         protected StatusBar status_bar_;

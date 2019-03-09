@@ -54,7 +54,6 @@
     <Compile Include="ExplosionSystem\RecordExplosion.cs" />
     <Compile Include="GameOrchestrator.cs" />
     <Compile Include="InfartBootstrap.cs" />
-    <Compile Include="Managers\GemmaManager.cs" />
     <Compile Include="Managers\GroundManager.cs" />
     <Compile Include="Managers\SoundManager.cs" />
     <Compile Include="ParticleSystem\Particle.cs" />
