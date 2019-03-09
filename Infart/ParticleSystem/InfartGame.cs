@@ -375,7 +375,7 @@ namespace Infart.ParticleSystem
                 player_.CollidingObjectsReference = ground_.WalkableObjects();
                 gemme_.Update(gametime);
                 CheckPlayerGemmaCollision();
-                record_explosion_.Update(gametime);
+       //         record_explosion_.Update(gametime);
 
                 if (status_bar_ != null)
                     status_bar_.Update(gametime);
@@ -586,7 +586,7 @@ namespace Infart.ParticleSystem
                 }
             }
 
-            record_explosion_.Draw(spritebatch);
+        //    record_explosion_.Draw(spritebatch);
 
             spritebatch.End();
 

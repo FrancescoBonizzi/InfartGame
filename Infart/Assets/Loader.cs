@@ -51,6 +51,7 @@ namespace Infart.Assets
 
             px_texture_ = new Texture2D(Graphics, 1, 1);
             px_texture_.SetData(new Color[] { Color.White });
+            LoadTexture();
         }
 
         private void MusicLoader()
@@ -64,11 +65,10 @@ namespace Infart.Assets
 
         public void LoadTexture()
         {
-            if (!texture_loaded_)
-            {
-                LoadTexture();
-                texture_loaded_ = true;
-            }
+            if (texture_loaded_)
+                return;
+            
+            texture_loaded_ = true;
 
             textures_rectangles_ = new Dictionary<string, Rectangle>();
             textures_ = content_.Load<Texture2D>(@"textures");

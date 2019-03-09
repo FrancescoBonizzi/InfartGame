@@ -59,10 +59,6 @@ namespace Infart
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
 
-        public InfartBootstrap()
-        {
-        }
-
         public InfartBootstrap(
            ITextFileLoader textFileAssetsLoader,
            ISettingsRepository settingsRepository,
