@@ -1,8 +1,5 @@
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
 
 namespace fge
 {
@@ -26,9 +23,11 @@ namespace fge
         }
 
         public override void Update(double gameTime)
-        { }
+        {
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
-        { }
+        {
+        }
     }
 }

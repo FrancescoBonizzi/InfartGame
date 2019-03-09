@@ -1,37 +1,21 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
+using System.Collections.Generic;
 
 namespace fge
 {
     public abstract class AnimatedGameObject : GameObject
     {
-        
         protected Dictionary<string, AnimationManager> animations_ = new Dictionary<string, AnimationManager>();
 
         protected string current_animation_;
+
         protected Rectangle collision_rectangle_;
 
         protected int current_frame_width_;
+
         protected int current_frame_height_;
 
-        
-
-        
         public AnimatedGameObject()
         {
             collision_rectangle_ = Rectangle.Empty;
@@ -43,9 +27,6 @@ namespace fge
                 animations_[i.Key].Dispose();
         }
 
-        
-
-        
         public override Rectangle CollisionRectangle
         {
             get { return collision_rectangle_; }
@@ -75,9 +56,6 @@ namespace fge
             }
         }
 
-        
-
-        
         private void UpdateAnimation(double gameTime)
         {
             if (animations_.ContainsKey(current_animation_))
@@ -106,9 +84,6 @@ namespace fge
             }
         }
 
-        
-
-        
         public override void Update(double gameTime)
         {
             UpdateAnimation(gameTime);
@@ -130,7 +105,5 @@ namespace fge
                        depth_);
             }
         }
-
-        
     }
 }

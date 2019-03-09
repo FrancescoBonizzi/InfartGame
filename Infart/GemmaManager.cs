@@ -1,4 +1,3 @@
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,20 +8,22 @@ namespace fge
     public class GemmaManager
     {
         private Gemma jalapenos_ = null;
+
         private Gemma broccolo_ = null;
 
-
-
         protected const int max_gemme_attive_ = 10;
+
         protected List<Gemma> gemme_attive_;
+
         protected List<Gemma> gemme_inactive_;
 
         protected Random random_;
+
         protected Camera current_camera_;
 
-
         enum PowerUps { Jalapeno, Merda };
-        PowerUps next_power_up_ = PowerUps.Jalapeno;
+
+        private PowerUps next_power_up_ = PowerUps.Jalapeno;
 
         public GemmaManager(
             Camera CameraReference,
@@ -90,7 +91,6 @@ namespace fge
             }
         }
 
-        
         public bool CheckJalapenoCollisionWithPlayer(Player p)
         {
             if (jalapenos_.Active)
@@ -104,7 +104,6 @@ namespace fge
             return false;
         }
 
-        
         public bool CheckMerdaCollisionWithPlayer(Player p)
         {
             if (broccolo_.Active)
@@ -118,8 +117,6 @@ namespace fge
             return false;
         }
 
-
-
         public void AddGemma(Vector2 StartingPosition)
         {
             if (gemme_inactive_.Count > 0)
@@ -131,8 +128,6 @@ namespace fge
             }
         }
 
-
-
         private void RemoveGemma(int index)
         {
             gemme_attive_[index].Active = false;
@@ -140,14 +135,12 @@ namespace fge
             gemme_attive_.RemoveAt(index);
         }
 
-
         protected bool ToBeRemoved(Vector2 position, float width)
         {
             if (position.X + width < current_camera_.Position.X)
                 return true;
             return false;
         }
-
 
         public bool CheckCollisionWithPlayer(Player p)
         {
@@ -162,7 +155,7 @@ namespace fge
             }
             return false;
         }
-        
+
         public void Update(double gametime)
         {
             for (int i = 0; i < gemme_attive_.Count; ++i)
@@ -203,11 +196,5 @@ namespace fge
                     broccolo_.Draw(spritebatch);
             }
         }
-
-        
     }
 }
-
-
-
-

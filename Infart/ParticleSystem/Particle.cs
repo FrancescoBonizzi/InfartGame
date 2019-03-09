@@ -1,27 +1,30 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace fge
 {
     public class Particle
     {
-        
         public Vector2 Position;
+
         public Color Color;
+
         public float Scale;
 
         public Vector2 Velocity;
+
         public Vector2 Acceleration;
 
         public float Rotation;
+
         private float rotation_speed_;
 
         public float TimeSinceStart;
+
         public float LifeTime;
 
-        
-
-        public Particle() { /* Nothing to do */ }
+        public Particle()
+        {
+        }
 
         public void Initialize(
              Vector2 Position,

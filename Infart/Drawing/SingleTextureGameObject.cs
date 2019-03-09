@@ -1,25 +1,20 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
 
 namespace fge
 {
     public class SingleTextureGameObject : GameObject
     {
-        
         private Texture2D texture_;
 
         private int width_;
+
         private int height_;
 
         private Rectangle texture_bounds_;
+
         protected Rectangle collision_rectangle_;
 
-        
-
-        
         public SingleTextureGameObject(Texture2D texture)
         {
             texture_ = texture;
@@ -66,9 +61,6 @@ namespace fge
         {
         }
 
-        
-
-        
         public override Vector2 Position
         {
             get { return position_; }
@@ -120,9 +112,6 @@ namespace fge
             }
         }
 
-        
-
-        
         public override void Update(double gameTime)
         {
         }
@@ -140,7 +129,5 @@ namespace fge
                 flip_,
                 depth_);
         }
-
-        
     }
 }

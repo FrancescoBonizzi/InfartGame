@@ -1,6 +1,3 @@
-
-
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,13 +7,16 @@ namespace fge
 {
     public class InfartExplosion
     {
-
         private double elapsed_ = 0.0;
+
         private const double time_to_finish_ = 5000.0;
+
         private const float scritta_scale_increase_amount_ = 0.004f;
 
         private const int particelle_number_ = 100;
+
         private List<ParticleExplosion> particelle_;
+
         private ParticleExplosion scritta_ = null;
 
         private List<Color> fart_colors_ = new List<Color> {
@@ -28,13 +28,14 @@ namespace fge
         private Vector2 emitter_location_ = Vector2.Zero;
 
         private static Random random_;
+
         private bool finished_ = false;
+
         private bool started_ = false;
+
         private bool active_ = false;
+
         private bool with_text_;
-
-
-
 
         public bool Finished
         {
@@ -46,9 +47,6 @@ namespace fge
             get { return started_; }
         }
 
-
-
-
         public InfartExplosion(Loader Loader)
         {
             random_ = fbonizziHelper.random;
@@ -57,7 +55,6 @@ namespace fge
             AddNewScritta(Loader.textures_, Loader.textures_rectangles_["Bang"]);
             AddRandomParticles(Loader.textures_, Loader.textures_rectangles_["Burger"], Loader.textures_rectangles_["Merda"]);
         }
-
 
         public void Explode(Vector2 CenterPosition, bool WithText, SoundManager SoundManager)
         {
@@ -148,8 +145,6 @@ namespace fge
             }
         }
 
-
-
         public void AddNewScritta(
             Texture2D TextureScritta,
             Rectangle TextureRectangle)
@@ -165,10 +160,6 @@ namespace fge
                 1.0f,
                 500);
         }
-
-
-
-
 
         public void Update(double gameTime)
         {
@@ -201,8 +192,5 @@ namespace fge
                     scritta_.Draw(spriteBatch);
             }
         }
-
-
-
     }
 }

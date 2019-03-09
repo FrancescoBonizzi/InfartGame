@@ -1,16 +1,15 @@
-
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
     public class GrattacieliAutogeneranti
     {
-
         protected List<Grattacielo> grattacieli_to_draw_;
+
         protected List<Grattacielo> grattacieli_in_coda_;
 
         protected Grattacielo firstOne_pointer_ = null;
@@ -18,18 +17,25 @@ namespace fge
         protected Texture2D texture_reference_;
 
         protected bool has_finestre_;
+
         protected bool background_;
+
         protected bool innest_gemma_;
 
         protected Vector2 next_avaible_position_;
+
         protected const int max_grattacielo_position_offset_ = 20;
+
         protected int last_grattacielo_height_ = 4;
+
         protected const int num_grattacieli_to_draw_ = 16;
 
         protected static Random random_;
+
         protected Camera current_camera_;
 
         protected int camera_position_x_;
+
         protected int camera_w_;
 
         protected float scale_finestra_;
@@ -37,9 +43,9 @@ namespace fge
         protected int[] GrattasW_;
 
         protected int resolution_h_;
+
         private InfartGame game_manager_reference_;
 
- 
         public GrattacieliAutogeneranti(
             Texture2D Texture,
             Dictionary<string, Rectangle> GrattaRects,
@@ -58,7 +64,7 @@ namespace fge
 
             resolution_h_ = PlayerCamera.ViewPortHeight;
 
-            next_avaible_position_ = new Vector2(0.0f, resolution_h_); 
+            next_avaible_position_ = new Vector2(0.0f, resolution_h_);
 
             grattacieli_in_coda_ = new List<Grattacielo>();
             grattacieli_to_draw_ = new List<Grattacielo>();
@@ -69,7 +75,6 @@ namespace fge
                 innest_gemma_ = true;
             else innest_gemma_ = false;
         }
-
 
         public int LastGrattacieloHeight
         {
@@ -99,15 +104,12 @@ namespace fge
                 grattacieli_to_draw_[i].PositionX += Xamount;
         }
 
-
-
-
         public void Reset(Camera camera)
         {
             if (firstOne_pointer_ != null)
             {
                 current_camera_ = camera;
-                
+
                 for (int i = 0; i < grattacieli_to_draw_.Count; ++i)
                 {
                     grattacieli_in_coda_.Add(grattacieli_to_draw_[i]);
@@ -130,7 +132,7 @@ namespace fge
                     grattacieli_in_coda_.RemoveAt(0);
                 }
 
-                next_avaible_position_ = new Vector2(0.0f, resolution_h_); 
+                next_avaible_position_ = new Vector2(0.0f, resolution_h_);
 
                 AddGrattacieloForDrawingInit();
             }
@@ -138,7 +140,7 @@ namespace fge
 
         private void LoadGrattacieli(string EntryName, Dictionary<string, Rectangle> GrattaRects, int GrattaNumber)
         {
-            for (int i = 1; i <= GrattaNumber; ++i) 
+            for (int i = 1; i <= GrattaNumber; ++i)
             {
                 Grattacielo tmp_obj =
                     new Grattacielo(
@@ -171,9 +173,6 @@ namespace fge
             return camera_position_x > obj_position_x + Width;
         }
 
-
-
-
         public void Update(double gametime, Camera current_camera)
         {
             camera_position_x_ = (int)current_camera_.Position.X;
@@ -185,8 +184,8 @@ namespace fge
             {
                 Grattacielo g = grattacieli_to_draw_[i];
 
-                
-                
+
+
                 g.Update(gametime);
 
                 if (ToBeRemoved(camera_position_x_, (int)g.Position.X, (int)g.Width))
@@ -196,7 +195,6 @@ namespace fge
                     --i;
                 }
             }
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -207,13 +205,13 @@ namespace fge
 
         private void AddGrattacieloForDrawing()
         {
-            
+
             float camera_x_first = camera_position_x_;
             float camera_x_last = camera_x_first + camera_w_;
 
             while (grattacieli_to_draw_.Count < num_grattacieli_to_draw_
                 && grattacieli_in_coda_.Count > 0
-                
+
                 && next_avaible_position_.X <= camera_x_last)
             {
                 grattacieli_in_coda_[0].Position = next_avaible_position_;
@@ -222,7 +220,7 @@ namespace fge
                      grattacieli_in_coda_[0].Width +
                      random_.Next(1, max_grattacielo_position_offset_);
 
-       
+
                 if (innest_gemma_)
                 {
                     if (random_.NextDouble() < game_manager_reference_.GemmaProbability)
@@ -230,25 +228,24 @@ namespace fge
                         game_manager_reference_.AddGemma(
                             (new Vector2(
                                   grattacieli_in_coda_[0].Position.X + 15,
-                                  resolution_h_ - grattacieli_in_coda_[0].Height - 70))); 
+                                  resolution_h_ - grattacieli_in_coda_[0].Height - 70)));
                     }
                     else
                         if (random_.NextDouble() < game_manager_reference_.PowerUpProbability)
+                    {
+                        if (!game_manager_reference_.jalapenos_mode_active_ && !game_manager_reference_.merda_mode_active_)
                         {
-                            if (!game_manager_reference_.jalapenos_mode_active_ && !game_manager_reference_.merda_mode_active_)
-                            {
-                                game_manager_reference_.AddPowerUp(new Vector2(
-                                        grattacieli_in_coda_[0].PositionAtTopLeftCorner().X,
-                                        grattacieli_in_coda_[0].PositionAtTopLeftCorner().Y - 180));
-                            }
+                            game_manager_reference_.AddPowerUp(new Vector2(
+                                    grattacieli_in_coda_[0].PositionAtTopLeftCorner().X,
+                                    grattacieli_in_coda_[0].PositionAtTopLeftCorner().Y - 180));
                         }
+                    }
 
                 }
-        
+
                 grattacieli_to_draw_.Add(grattacieli_in_coda_[0]);
                 grattacieli_in_coda_.RemoveAt(0);
             }
         }
-
     }
 }

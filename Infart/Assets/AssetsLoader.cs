@@ -14,6 +14,7 @@ namespace Infart.Assets
         private readonly ContentManager _contentManager;
 
         public IDictionary<string, Sprite> Sprites { get; } = new Dictionary<string, Sprite>();
+
         public IDictionary<string, SoundEffect> Sounds { get; } = new Dictionary<string, SoundEffect>();
 
         public AssetsLoader(
@@ -26,19 +27,6 @@ namespace Infart.Assets
 
         private void LoadResources()
         {
-            
-            
-
-            
-            
-            
-
-            
-
-            
-            
-            
-            
         }
 
         private void AddSpritesFromDictionary(

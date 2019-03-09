@@ -1,41 +1,27 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-
-
 
 namespace fge
 {
     public abstract class Actor : AnimatedGameObject
     {
-        
         protected Vector2 velocity_ = Vector2.Zero;
+
         protected float x_move_speed_ = 180.0f;
+
         private float y_fall_speed_ = 20.0f;
+
         private bool on_ground_ = false;
+
         protected bool dead_ = false;
 
         protected List<GameObject> colliding_objs_reference_;
 
-        
-
-        
         protected Actor(
             float depth,
             Vector2 starting_pos,
-            List<GameObject> CollidingObjs) 
+            List<GameObject> CollidingObjs)
             : base()
         {
             velocity_.Y = y_fall_speed_;
@@ -53,9 +39,6 @@ namespace fge
             base.Dispose();
         }
 
-        
-
-        
         public float HorizontalMoveSpeed
         {
             get { return x_move_speed_; }
@@ -85,16 +68,13 @@ namespace fge
             get { return on_ground_; }
         }
 
-        
-
-        
         private Vector2 collisionTest(Vector2 move_amount)
         {
-            
+
             Rectangle afterMoveRect = collision_rectangle_;
             Vector2 corner1, corner2;
 
-            
+
             if (move_amount.X != 0)
             {
                 afterMoveRect.Offset((int)move_amount.X, 0);
@@ -117,9 +97,9 @@ namespace fge
                 }
             }
 
-            
 
-            
+
+
             if (move_amount.Y == 0)
                 return move_amount;
             else
@@ -129,7 +109,7 @@ namespace fge
 
                 if (velocity_.Y > 0)
                 {
-                    
+
                     corner1 = new Vector2(
                         afterMoveRect.X + 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
@@ -137,7 +117,7 @@ namespace fge
                         afterMoveRect.X + afterMoveRect.Width - 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
 
-                    
+
                     int coll_index = CollisionSolver.CheckCollisionsReturnCollidedObject(
                        new Rectangle(
                             (int)corner1.X,
@@ -153,7 +133,7 @@ namespace fge
                         move_amount.Y = 0;
                         velocity_.Y = 0;
 
-                        
+
                         position_ = new Vector2(
                             position_.X,
                             MathHelper.Lerp(
@@ -165,15 +145,11 @@ namespace fge
                 }
             }
 
-            
+
 
             return move_amount;
         }
 
-
-        
-
-        
         public override void Update(double gameTime)
         {
             velocity_.Y += y_fall_speed_;
@@ -195,7 +171,5 @@ namespace fge
                 base.Update(gameTime);
             }
         }
-
-        
     }
 }

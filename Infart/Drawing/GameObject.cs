@@ -1,37 +1,24 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
 
 namespace fge
 {
     public abstract class GameObject
     {
-        
         protected Vector2 position_ = Vector2.Zero;
+
         protected float rotation_ = 0.0f;
+
         protected Vector2 scale_ = Vector2.One;
+
         protected Vector2 origin_ = Vector2.Zero;
+
         protected float depth_ = 0.0f;
+
         protected Color overlay_color_ = Color.White;
+
         protected SpriteEffects flip_ = SpriteEffects.None;
 
-        
-
-        
         public virtual Vector2 Position
         {
             get { return position_; }
@@ -44,10 +31,7 @@ namespace fge
             set { position_.X = value; }
         }
 
-        public abstract Rectangle CollisionRectangle
-        {
-            get;
-        }
+        public abstract Rectangle CollisionRectangle { get; }
 
         public virtual Vector2 Scale
         {
@@ -57,7 +41,7 @@ namespace fge
 
         public virtual float ScaleUnique
         {
-            set 
+            set
             {
                 scale_.X = value;
                 scale_.Y = value;
@@ -107,18 +91,12 @@ namespace fge
             get { return overlay_color_; }
         }
 
-        
-
-        
         public virtual void Dispose()
-        { }
+        {
+        }
 
-        
-
-        
         public abstract void Update(double gameTime);
-        public abstract void Draw(SpriteBatch spriteBatch);
 
-        
+        public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

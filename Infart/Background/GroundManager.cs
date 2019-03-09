@@ -1,24 +1,24 @@
-
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
+using System;
+using System.Collections.Generic;
 
 namespace fge
 {
     public class GroundManager
     {
         protected Random random_;
+
         protected Camera current_camera_;
 
         private GrattacieliAutogeneranti grattacieli_camminabili_ = null;
+
         private float min_time_to_next_buco_ = 2000.0f;
+
         private float elapsed_ = 0.0f;
 
         private InfartGame game_manager_reference_;
-        
+
         public GroundManager(
             Camera CurrentCamera,
             Loader Loader,
@@ -35,10 +35,10 @@ namespace fge
                 CurrentCamera,
                 GameManagerReference);
 
-            
+
             game_manager_reference_ = GameManagerReference;
         }
-        
+
         public List<GameObject> WalkableObjects()
         {
             return grattacieli_camminabili_.DrawnObjectsList;
@@ -60,7 +60,7 @@ namespace fge
                 first_x + space,
                 (int)grattacieli_camminabili_.NextGrattacieloPosition.Y);
         }
-        
+
         public void Update(double gametime)
         {
             elapsed_ += (float)gametime;
@@ -80,6 +80,5 @@ namespace fge
         {
             grattacieli_camminabili_.Draw(spritebatch);
         }
-        
     }
 }

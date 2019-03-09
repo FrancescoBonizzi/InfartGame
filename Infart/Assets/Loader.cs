@@ -1,12 +1,9 @@
-
-using System.IO;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
-
-
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.IO;
 
 namespace fge
 {
@@ -15,23 +12,33 @@ namespace fge
         protected ContentManager content_;
 
         private bool music_loaded_ = false;
+
         private bool texture_loaded_ = false;
 
-
         public Texture2D textures_;
+
         public Texture2D textures_gratta_back_;
+
         public Texture2D textures_gratta_mid_;
+
         public Texture2D textures_gratta_ground_;
+
         public Texture2D px_texture_;
 
         public List<Rectangle> player_run_rects_;
+
         public List<Rectangle> player_idle_rects_;
+
         public List<Rectangle> player_fall_rects_;
+
         public List<Rectangle> player_fart_rects_;
+
         public List<Rectangle> player_merda_rects_;
+
         public Dictionary<string, Rectangle> textures_rectangles_;
 
         public Dictionary<string, SoundEffect> sound_effects_;
+
         public SpriteFont font_;
 
         public Loader(
@@ -70,7 +77,7 @@ namespace fge
             textures_gratta_mid_ = content_.Load<Texture2D>(@"gratta_mid");
             textures_gratta_ground_ = content_.Load<Texture2D>(@"gratta_ground");
 
-            
+
             textures_rectangles_.Add("Bang", new Rectangle(824, 68, 251, 171));
             textures_rectangles_.Add("BroccoloParticle", new Rectangle(1719, 542, 64, 64));
             textures_rectangles_.Add("Burger", new Rectangle(1992, 2, 51, 43));
@@ -390,7 +397,7 @@ namespace fge
             textures_rectangles_.Add("mid8", new Rectangle(330, 1806, 104, 225));
             textures_rectangles_.Add("mid9", new Rectangle(1272, 1760, 40, 250));
 
-            
+
             player_run_rects_ = new List<Rectangle>();
             player_run_rects_.Add(textures_rectangles_["run/run__000"]);
             player_run_rects_.Add(textures_rectangles_["run/run__001"]);

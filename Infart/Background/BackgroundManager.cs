@@ -1,43 +1,52 @@
-
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
+using System.Collections.Generic;
 
 namespace fge
 {
-    public class BackgroundManager 
+    public class BackgroundManager
     {
-        
         private GrattacieliAutogeneranti grattacieli_fondo_ = null;
+
         private GrattacieliAutogeneranti grattacieli_mid_ = null;
 
         private float parallax_speed_fondo_;
+
         private float parallax_speed_mid_;
+
         private const float default_parallax_speed_fondo_ = -10.0f;
+
         private const float default_parallax_speed_mid_ = -18.0f;
 
         private Nuvolificio nuvolificio_vicino_;
+
         private Nuvolificio nuvolificio_medio_;
+
         private Nuvolificio nuvolificio_lontano_;
+
         private Vector2 nuvole_default_spawn_y_range_ = new Vector2(300.0f, -300.0f);
 
         private StarFieldParticleSystem starfield_;
-        private Vector2 cielo_stellato_spawn_y_range_ = new Vector2(-960.0f, -300.0f);
-        const double timeBetweenNewStar_ = 20.0f;
-        double timeTillNewStar_ = 0.0f;
 
+        private Vector2 cielo_stellato_spawn_y_range_ = new Vector2(-960.0f, -300.0f);
+
+        private const double timeBetweenNewStar_ = 20.0f;
+
+        private double timeTillNewStar_ = 0.0f;
 
         protected Camera current_camera_;
+
         protected float old_camera_x_pos_;
+
         protected float parallax_dir_ = +1;
 
         protected Texture2D texture_reference_;
-        protected Rectangle sfondo_rectangle_;
-        protected Vector2 sfondo_origin_;
-        protected Vector2 sfondo_scale_;
 
+        protected Rectangle sfondo_rectangle_;
+
+        protected Vector2 sfondo_origin_;
+
+        protected Vector2 sfondo_scale_;
 
         public BackgroundManager(
             Camera CameraInstance,
@@ -87,8 +96,7 @@ namespace fge
             current_camera_ = CameraInstance;
             old_camera_x_pos_ = current_camera_.Position.X;
         }
-        
-        
+
         public void IncreaseParallaxSpeed()
         {
             parallax_speed_fondo_ -= 4.0f;
@@ -116,9 +124,6 @@ namespace fge
             parallax_speed_mid_ = default_parallax_speed_mid_;
         }
 
-        
-
-        
         public void Update(double gametime)
         {
 
@@ -138,7 +143,7 @@ namespace fge
             old_camera_x_pos_ = current_camera_.Position.X;
 
             float dt = (float)gametime / 1000.0f;
-            
+
             grattacieli_fondo_.MoveX(parallax_speed_fondo_ * dt * parallax_dir_);
             grattacieli_mid_.MoveX(parallax_speed_mid_ * dt * parallax_dir_);
             nuvolificio_lontano_.MoveX((float)((parallax_speed_fondo_) * dt * parallax_dir_));
@@ -198,7 +203,5 @@ namespace fge
         {
             nuvolificio_vicino_.Draw(spritebatch);
         }
-
-        
     }
 }

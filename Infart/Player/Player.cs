@@ -1,44 +1,49 @@
-
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
-
-
+using System;
+using System.Collections.Generic;
 
 namespace fge
 {
     public class Player : Actor
     {
-        
-        ScoreggiaParticleSystem scoreggia_system_;
-        JalapenoParticleSystem jalapeno_system_;
-        BroccoloParticleSystem broccolo_system_;
+        private ScoreggiaParticleSystem scoreggia_system_;
 
-        InfartGame game_manager_reference_;
+        private JalapenoParticleSystem jalapeno_system_;
 
-        
-        const double timeBetweenNewParticleScoregge_ = 30.0f;
-        double timeTillNewParticleScoregge_ = 0.0f;
+        private BroccoloParticleSystem broccolo_system_;
 
-        const double timeBetweenNewParticleJalapeno_ = 20.0f;
-        double timeTillNewParticleJalapeno_ = 0.0f;
+        private InfartGame game_manager_reference_;
 
-        const double timeBetweenNewParticleBroccolo_ = 80.0f;
-        double timeTillNewParticleBroccolo_ = 0.0f;
+        private const double timeBetweenNewParticleScoregge_ = 30.0f;
+
+        private double timeTillNewParticleScoregge_ = 0.0f;
+
+        private const double timeBetweenNewParticleJalapeno_ = 20.0f;
+
+        private double timeTillNewParticleJalapeno_ = 0.0f;
+
+        private const double timeBetweenNewParticleBroccolo_ = 80.0f;
+
+        private double timeTillNewParticleBroccolo_ = 0.0f;
 
         private static Random rand_;
 
-        bool allow_input_ = true;
-        bool jalapenos_ = false;
-        int jalapenos_jump_count_ = 0;
-        bool broccolo_ = false;
+        private bool allow_input_ = true;
+
+        private bool jalapenos_ = false;
+
+        private int jalapenos_jump_count_ = 0;
+
+        private bool broccolo_ = false;
+
         private double elapsed_jalapenos_ = 0.0;
+
         private double elapsed_broccolo_ = 0.0;
 
         private Color fill_color_;
-        
+
         public Player(
             Vector2 starting_pos,
             Loader Loader,
@@ -76,7 +81,6 @@ namespace fge
             PlayAnimation("fall");
         }
 
-
         protected void LoadAnimation(
             string name,
             List<Rectangle> frames,
@@ -95,7 +99,6 @@ namespace fge
             animations_[name].FrameLength = frame_lenght;
         }
 
-
         public void Reset(Vector2 position)
         {
             position_ = position;
@@ -112,9 +115,6 @@ namespace fge
             PlayAnimation("fall");
         }
 
-        
-
-        
         public bool JalapenosJump
         {
             get { return jalapenos_; }
@@ -125,10 +125,6 @@ namespace fge
             get { return current_animation_ == "culata"; }
         }
 
-        
-
-
-        
         public void Jump(float amount)
         {
             velocity_.Y = -amount;
@@ -176,7 +172,7 @@ namespace fge
             broccolo_ = true;
             Jump(200);
             HorizontalMoveSpeed += 400.0f;
-            
+
             game_manager_reference_.IncreaseParallaxSpeed();
             game_manager_reference_.IncreaseParallaxSpeed();
         }
@@ -191,20 +187,20 @@ namespace fge
             game_manager_reference_.DecreaseParallaxSpeed();
             game_manager_reference_.DecreaseParallaxSpeed();
         }
-        
+
         public void Update(double dt, TouchCollection touch)
         {
             if (!dead_)
             {
                 string new_animation_ = "run";
 
-                
+
                 if (allow_input_)
                 {
-                    
-                    
 
-                    
+
+
+
                     FlipEffect = SpriteEffects.None;
                     velocity_.X = +HorizontalMoveSpeed;
 
@@ -236,9 +232,9 @@ namespace fge
                     new_animation_ = "idle";
                 }
 
-                
 
-                
+
+
                 if (!OnGround)
                 {
                     if (velocity_.Y < 0)
@@ -261,9 +257,9 @@ namespace fge
                         collision_rectangle_.Width -= 120;
                 }
 
-                
 
-                
+
+
                 scoreggia_system_.Update(dt);
                 jalapeno_system_.Update(dt);
                 broccolo_system_.Update(dt);
@@ -275,15 +271,15 @@ namespace fge
                 else
                     ScoreggiaGeneration(dt);
 
-                
 
-                
+
+
                 if (!Dead)
                 {
                     game_manager_reference_.score_metri_ = ((int)(position_.X / 100));
                 }
 
-                
+
             }
 
             base.Update(dt);
@@ -376,7 +372,5 @@ namespace fge
                 broccolo_system_.Draw(spriteBatch);
             }
         }
-
-        
     }
 }

@@ -1,33 +1,32 @@
-﻿
+﻿using Microsoft.Xna.Framework;
 using System;
-using Microsoft.Xna.Framework;
-
-
 
 namespace fge
 {
     public class Camera
     {
-        
         public Vector2 Position = Vector2.Zero;
 
-        
         public int ViewPortWidth;
+
         public int ViewPortHeight;
 
         private float zoom_ = 1.0f;
+
         private Matrix transform_;
+
         private float rotation_ = 0.0f;
 
         private float moving_amount = 150.0f;
+
         private Vector2 velocity_ = Vector2.Zero;
+
         private Vector2 position_to_go_to_;
+
         private float intorno_uguaglianza_ = 10.0f;
+
         private bool moving_ = false;
 
-        
-
-        
         public Camera(Vector2 starting_position, Vector2 ViewPortSize, float zoom)
         {
             Position = starting_position;
@@ -35,7 +34,7 @@ namespace fge
             zoom_ = zoom;
 
             ViewPortWidth = 1000;
-            ViewPortHeight = 600; 
+            ViewPortHeight = 600;
         }
 
         public void Reset(Vector2 position)
@@ -44,13 +43,10 @@ namespace fge
             moving_ = false;
         }
 
-        
-
-        
         public float Zoom
         {
             get { return zoom_; }
-            set 
+            set
             {
                 zoom_ = value;
                 if (zoom_ < 0.1f) zoom_ = 0.1f;
@@ -63,9 +59,6 @@ namespace fge
             set { rotation_ = value; }
         }
 
-        
-
-        
         public void MoveTo(Vector2 where)
         {
             position_to_go_to_ = where;
@@ -111,14 +104,11 @@ namespace fge
             return transform_;
         }
 
-        
-
-        
         public void Update(double gametime)
         {
             if (moving_)
             {
-                
+
                 if (position_to_go_to_ != Position)
                 {
                     float elapsed = (float)gametime / 1000.0f;
@@ -140,7 +130,5 @@ namespace fge
                     moving_ = false;
             }
         }
-
-        
     }
 }

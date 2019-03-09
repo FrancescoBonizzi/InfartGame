@@ -1,43 +1,40 @@
-﻿
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-
-
 
 namespace fge
 {
     public class Nuvolificio
     {
-        
         private List<Nuvola> nuvole_;
 
         private int nuvole_number_ = 5;
+
         private Vector2 scale_;
+
         private Color overlay_color_;
+
         private Vector2 speed_range_;
 
         private Vector2 nuvole_spawn_y_range_;
 
         private bool active_ = true;
 
-        
         private static Random random_;
+
         private float elapsed_ = 0.0f;
+
         private Camera current_camera_;
 
         private float camera_pos_y_;
+
         private float camera_pos_x_;
+
         private float camera_w_;
+
         private float camera_h_;
 
-        
-
-        
-
-        
         public Nuvolificio(
             Color OverlayColor,
             float Scale,
@@ -72,9 +69,9 @@ namespace fge
         private void Initialize(Texture2D NuvolaTexture, List<Rectangle> NuvolaRectangles)
         {
             List<Rectangle> nuvole_rects_ = NuvolaRectangles;
-            
-            
-            
+
+
+
 
             nuvole_ = new List<Nuvola>();
             for (int i = 0; i < nuvole_number_; ++i)
@@ -83,9 +80,6 @@ namespace fge
                     nuvole_rects_[random_.Next(nuvole_rects_.Count)]));
         }
 
-        
-
-        
         public Vector2 NuvoleYSpawnRange
         {
             get { return nuvole_spawn_y_range_; }
@@ -102,9 +96,6 @@ namespace fge
             }
         }
 
-        
-
-        
         public void Reset(Camera camera)
         {
             current_camera_ = camera;
@@ -162,9 +153,6 @@ namespace fge
             return false;
         }
 
-        
-
-        
         public void Update(double gametime)
         {
             camera_pos_y_ = current_camera_.Position.Y;
@@ -195,7 +183,6 @@ namespace fge
                         nuvole_[i].Update(gametime);
                 }
             }
-
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -206,7 +193,5 @@ namespace fge
                     nuvole_[i].Draw(spritebatch);
             }
         }
-
-        
     }
 }

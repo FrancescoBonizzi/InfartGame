@@ -5,10 +5,8 @@ namespace fge
 {
     public static class StringBuilderExtensions
     {
-        
-        static char[] numberBuffer = new char[11];
+        private static char[] numberBuffer = new char[11];
 
-        
         public static StringBuilder AppendNumber(this StringBuilder sb, Int32 number)
         {
             bool negative = (number < 0);

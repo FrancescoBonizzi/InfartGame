@@ -1,4 +1,3 @@
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
@@ -6,21 +5,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
-
 namespace fge
 {
     public class InfartGame
     {
         private int resolution_w_;
+
         private int resolution_h_;
+
         protected int game_h_;
+
         protected Camera player_camera_;
+
         protected Player player_;
 
         protected BackgroundManager background_;
+
         protected GroundManager ground_;
+
         protected GemmaManager gemme_;
+
         protected SoundManager sound_manager_;
 
         protected StatusBar status_bar_;
@@ -29,68 +33,81 @@ namespace fge
 
         protected bool paused_;
 
-
-
         protected InfartExplosion dead_explosion_;
+
         protected RecordExplosion record_explosion_;
 
         protected Random random_;
 
-
         protected int high_score_;
+
         protected int score_scoregge_;
+
         protected bool new_high_score_ = false;
 
         protected bool force_to_finish_;
 
         protected Rectangle high_score_position_;
+
         protected Color high_score_color_ = Color.Blue;
+
         protected SpriteFont font_;
 
         protected Texture2D px_texture_;
 
-
         public double BucoProbability;
+
         public double PowerUpProbability;
+
         public double PeperoncinoDuration;
+
         public double GemmaProbability;
+
         public double BroccoloDuration;
+
         public Vector2 LarghezzaBuchi;
-        
+
         private const double default_BucoProbability = 0.005;
+
         private const double default_PoweupProbability = 0.03;
+
         private const double default_PeperoncinoDuration = 6000.0;
+
         private const double default_MerdoneDuration = 3500.0;
+
         private const double default_GemmaProbability = 0.4;
+
         private const float default_buco_min_w_ = 190.0f;
+
         private const float default_buco_max_w_ = 250.0f;
 
         private int old_score_metri_ = 0;
+
         public int score_metri_ = 0;
 
         private StringBuilder score_string_;
+
         private Vector2 score_string_position_ = new Vector2(680, 438);
 
         private Rectangle bar_rectangle_ = new Rectangle(400, 430, 800, 50);
-        private Color bar_color_ = Color.LightCyan * 0.5f;
-        private string metri_string_;
 
+        private Color bar_color_ = Color.LightCyan * 0.5f;
+
+        private string metri_string_;
 
         private int high_score_x_;
 
         public bool fall_sound_active_;
-        public bool merda_mode_active_;
-        public bool jalapenos_mode_active_;
 
+        public bool merda_mode_active_;
+
+        public bool jalapenos_mode_active_;
 
         private int game_cameraH_limit_;
 
-        
-
-
         public InfartGame(
             Loader Loader,
-    //        Loader_menu LoaderMenu,
+            //        Loader_menu LoaderMenu,
             SoundManager SoundManager,
             int HighScore,
             string MetriString,
@@ -189,7 +206,6 @@ namespace fge
             ground_.Reset(player_camera_);
             gemme_.Reset(player_camera_);
             status_bar_.Reset();
-
         }
 
         public int GetScoregge
@@ -230,7 +246,6 @@ namespace fge
         {
             high_score_position_ = new Rectangle(0, -1020, 20, 1500);
         }
-
 
         public int GetScore
         {
@@ -284,7 +299,6 @@ namespace fge
         public void DecreaseParallaxSpeed()
         {
             background_.DecreaseParallaxSpeed();
-
         }
 
         public void IncreaseParallaxSpeed()
@@ -308,7 +322,6 @@ namespace fge
             player_camera_.MoveTo(where);
         }
 
-
         public void SetHighScore(int value)
         {
             high_score_ = value;
@@ -316,13 +329,11 @@ namespace fge
             high_score_x_ = value * 100;
         }
 
-
         public void AddGemma(Vector2 position)
         {
             if (position.X > player_.Position.X + resolution_w_ / 2)
                 gemme_.AddGemma(position);
         }
-
 
         public int HamburgerMangiati()
         {
@@ -373,7 +384,7 @@ namespace fge
 
             if (score_metri_ % 50 == 0)
             {
-                
+
                 if (old_score_metri_ != score_metri_)
                 {
                     (player_ as Player).IncreaseMoveSpeed();
@@ -394,7 +405,7 @@ namespace fge
             {
                 PlayerCollidedWithNormalGemma();
             }
-            
+
             if ((gemme_ as GemmaManager).CheckJalapenoCollisionWithPlayer(player_))
             {
                 status_bar_.ComputeJalapenos();
@@ -431,7 +442,7 @@ namespace fge
         {
             if (!fall_sound_active_)
             {
-                if (player_.Position.Y > player_camera_.ViewPortHeight) 
+                if (player_.Position.Y > player_camera_.ViewPortHeight)
                 {
                     MakePlayerDead();
                     (sound_manager_ as SoundManager).PlayFall();
@@ -475,12 +486,10 @@ namespace fge
               MathHelper.Lerp(player_camera_.Position.Y, NewCameraY, 0.08f));
         }
 
-
         public Player PlayerReference
         {
             get { return player_; }
         }
-
 
         protected void RepositionCamera()
         {
@@ -490,7 +499,7 @@ namespace fge
             player_camera_x = player_.Position.X - 150;
             player_camera_y = player_.Position.Y - 200;
 
-            
+
             if (player_camera_y < game_cameraH_limit_)
                 player_camera_y = game_cameraH_limit_;
             else if (player_camera_y > 0)
@@ -512,7 +521,7 @@ namespace fge
         {
             spriteBatch.Begin();
 
-            
+
             spriteBatch.Draw(
                 px_texture_,
                 bar_rectangle_,
@@ -597,10 +606,9 @@ namespace fge
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Camera_transformation);
             if (!dead_explosion_.Started)
-                player_.Draw(spritebatch); 
+                player_.Draw(spritebatch);
             background_.DrawSpecial(spritebatch);
             spritebatch.End();
         }
     }
 }
-

@@ -5,13 +5,11 @@ namespace Infart.Assets
 {
     public class GameStringsLoader
     {
-        
-
         public GameStringsLoader(ILocalizedStringsRepository localizedStringsRepository, CultureInfo cultureInfo)
         {
             if (cultureInfo.TwoLetterISOLanguageName == "it")
             {
-                
+
             }
             else
             {

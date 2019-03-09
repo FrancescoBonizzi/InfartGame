@@ -1,31 +1,22 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
-
-
-
 
 namespace fge
 {
     public class Grattacielo : GameObject
     {
-        
-        private int h_; 
+        private int h_;
+
         private int one_block_height_ = 25;
 
-        int w_grattacielo_;
+        private int w_grattacielo_;
 
         private Rectangle collision_rectangle_;
+
         private Rectangle texture_rectangle_;
 
         private Texture2D texture_reference_;
 
-        
-
-        
-        
         public Grattacielo(Rectangle TextureRectangle, Texture2D TextureReference)
         {
             Position = Vector2.Zero;
@@ -40,17 +31,11 @@ namespace fge
             texture_rectangle_ = TextureRectangle;
         }
 
-        
-
-        
         public void Move(Vector2 amount)
         {
             position_ += amount;
         }
 
-        
-
-        
         public override Rectangle CollisionRectangle
         {
             get
@@ -95,9 +80,6 @@ namespace fge
                 Position.Y - Origin.Y);
         }
 
-        
-
-        
         public override void Update(double gameTime)
         {
         }
@@ -115,7 +97,5 @@ namespace fge
                 flip_,
                 depth_);
         }
-
-        
     }
 }

@@ -1,44 +1,44 @@
-
-using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
-
-
+using System.Collections.Generic;
 
 namespace fge
 {
     public class SoundManager
     {
-
         protected List<SoundEffectInstance> newgame_sounds_;
+
         protected List<SoundEffectInstance> all_sounds_;
 
         private List<SoundEffectInstance> scoreggia_sound_;
 
         protected bool sound_on_ = true;
 
-
-
         private SoundEffectInstance background_music_;
+
         private SoundEffectInstance explosion_sound_;
+
         private SoundEffectInstance fall_sound_;
+
         private SoundEffectInstance heart_beat_;
+
         private SoundEffectInstance jalapeno_sound_;
+
         private SoundEffectInstance merdone_sound_;
+
         private SoundEffectInstance morso_ = null;
 
-        
         public SoundManager(
             bool SoundFlag,
-           // Loader_menu Loader_menu,
+            // Loader_menu Loader_menu,
             Loader Loader_episodio1)
         {
             sound_on_ = SoundFlag;
 
-     //       LoadScoregge(Loader_menu);
+            //       LoadScoregge(Loader_menu);
             AddAllSounds(Loader_episodio1);
             AddNewGameSounds();
         }
-        
+
         //private void LoadScoregge(Loader_menu scoregge_loader)
         //{
         //    scoreggia_sound_ = new List<SoundEffectInstance>();
@@ -50,7 +50,6 @@ namespace fge
         //        all_sounds_.Add(tmp);
         //    }
         //}
-
         public void NewGame()
         {
             if (sound_on_)
@@ -59,7 +58,6 @@ namespace fge
                     s.Play();
             }
         }
-
 
         public void StopSounds()
         {
@@ -143,16 +141,16 @@ namespace fge
 
             explosion_sound_ = ((MyLoader) as Loader).sound_effects_["esplosione"].CreateInstance();
             all_sounds_.Add(explosion_sound_);
-            
+
             fall_sound_ = ((MyLoader) as Loader).sound_effects_["fall"].CreateInstance();
             all_sounds_.Add(fall_sound_);
-            
+
             heart_beat_ = ((MyLoader) as Loader).sound_effects_["cuore"].CreateInstance();
             all_sounds_.Add(heart_beat_);
 
             morso_ = ((MyLoader) as Loader).sound_effects_["morso"].CreateInstance();
             all_sounds_.Add(morso_);
-            
+
             jalapeno_sound_ = ((MyLoader) as Loader).sound_effects_["jalapeno"].CreateInstance();
             all_sounds_.Add(jalapeno_sound_);
 
@@ -237,7 +235,5 @@ namespace fge
                 jalapeno_sound_.Play();
             }
         }
-
-        
     }
 }

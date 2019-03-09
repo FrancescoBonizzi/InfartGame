@@ -1,7 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
-
-
+﻿using Microsoft.Xna.Framework;
 
 namespace fge
 {

@@ -1,35 +1,34 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
 
 namespace fge
 {
     public class ParticleExplosion
     {
-        
         private Texture2D texture_;
+
         private Rectangle texture_rectangle_;
 
         public Vector2 position_;
+
         private Vector2 velocity_;
 
         private float angle_;
+
         private float angular_velocity_;
 
         private Color color_;
+
         private float scale_;
+
         private int TTL_;
 
         private Vector2 origin_;
 
         private bool fading_ = false;
+
         private bool active_ = false;
 
-        
-
-        
         public ParticleExplosion(
             Texture2D texture,
             Rectangle texture_rectangle,
@@ -97,9 +96,6 @@ namespace fge
             active_ = true;
         }
 
-        
-
-        
         public Vector2 Position
         {
             get { return position_; }
@@ -117,17 +113,11 @@ namespace fge
             get { return !active_; }
         }
 
-        
-
-        
         public void Fade()
         {
             fading_ = true;
         }
 
-        
-
-        
         public void Update(double gameTime)
         {
             if (active_)
@@ -171,8 +161,5 @@ namespace fge
                     0f);
             }
         }
-
-
-        
     }
 }

@@ -20,37 +20,41 @@ namespace Infart
         private GameStates _currentState;
 
         private readonly Func<InfartGame> _gameFactory;
+
         private InfartGame _game;
 
-        
-        
-
         private readonly IWebPageOpener _webPageOpener;
+
         private readonly GraphicsDevice _graphicsDevice;
+
         private FadeObject _stateTransition;
+
         private Action _afterTransitionAction;
 
         private RenderTarget2D _renderTarget;
+
         private readonly IScreenTransformationMatrixProvider _matrixScaleProvider;
 
         public bool ShouldEndApplication { get; set; }
+
         public bool IsPaused { get; set; }
 
         private readonly TimeSpan _fadeDuration = TimeSpan.FromMilliseconds(800);
+
         private readonly Uri _aboutUri = new Uri("https://www.fbonizzi.it");
 
         public GameOrchestrator(
              Func<InfartGame> gameFactory,
-             
+
              GraphicsDevice graphicsDevice,
              IScreenTransformationMatrixProvider matrixScaleProvider,
              SoundManager soundManager,
              IWebPageOpener webPageOpener)
         {
             _gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));
-            
+
             _webPageOpener = webPageOpener ?? throw new ArgumentNullException(nameof(webPageOpener));
-            
+
             _graphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
 
             _matrixScaleProvider = matrixScaleProvider ?? throw new ArgumentNullException(nameof(matrixScaleProvider));
@@ -71,10 +75,10 @@ namespace Infart
 
         public void Start()
         {
-            
-            
-            
-            
+
+
+
+
 
             _currentState = GameStates.Playing;
             _game = _gameFactory();
@@ -83,25 +87,6 @@ namespace Infart
 
         public void SetMenuState()
         {
-            
-            
-
-            
-            
-
-            
-            
-
-            
-            
-            
-            
-            
-
-            
-            
-            
-            
         }
 
         public void Replay()
@@ -114,7 +99,7 @@ namespace Infart
                     _stateTransition.FadeIn();
                     _currentState = GameStates.Playing;
                     _game = _gameFactory();
-                    
+
                 });
         }
 
@@ -126,7 +111,7 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    
+
                     break;
 
                 case GameStates.Playing:
@@ -143,8 +128,8 @@ namespace Infart
             if (_stateTransition.IsFading)
                 return;
 
-            
-            
+
+
 
             Replay();
         }
@@ -177,7 +162,7 @@ namespace Infart
             {
                 case GameStates.Menu:
                     throw new NotImplementedException();
-                    
+
                     break;
 
                 case GameStates.Playing:
@@ -190,14 +175,12 @@ namespace Infart
         {
             _game?.Resume();
             IsPaused = false;
-         
         }
 
         public void Pause()
         {
             _game?.Pause();
             IsPaused = true;
-      
         }
 
         public void TogglePause()
@@ -212,8 +195,8 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    
-                    
+
+
                     throw new NotImplementedException();
                     break;
 
@@ -228,7 +211,7 @@ namespace Infart
             if (IsPaused)
                 return;
 
-            
+
             graphics.SetRenderTarget(_renderTarget);
             graphics.Clear(Color.Black);
 
@@ -236,7 +219,7 @@ namespace Infart
             {
                 case GameStates.Menu:
                     throw new NotImplementedException();
-                    
+
                     break;
 
                 case GameStates.Playing:
@@ -244,7 +227,7 @@ namespace Infart
                     break;
             }
 
-            
+
             graphics.SetRenderTarget(null);
             graphics.Clear(Color.Black);
             spriteBatch.Begin();

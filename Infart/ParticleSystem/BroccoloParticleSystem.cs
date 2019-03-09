@@ -1,7 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
-
-
+﻿using Microsoft.Xna.Framework;
 
 namespace fge
 {
@@ -41,16 +38,16 @@ namespace fge
         {
             base.InitializeParticle(p, where);
 
-            
-            
-            
-            
 
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
             p.Acceleration = -p.Velocity / p.LifeTime;
         }
     }

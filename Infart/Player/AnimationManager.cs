@@ -1,41 +1,32 @@
-﻿
-
-
-
-
-
-
-
-
-
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
 
 namespace fge
 {
     public class AnimationManager : IDisposable
     {
-        
         private Texture2D atlas_reference_;
 
         private List<Rectangle> frames_;
 
         private float frame_timer_ = 0f;
+
         private float frame_delay_ = 0.05f;
+
         private int current_frame_;
+
         private int last_frame_;
-        
+
         private bool loop_animation_ = true;
+
         private bool finished_playing_ = false;
+
         private string name_;
+
         private string next_animation_;
 
-        
-
-        
         public AnimationManager(
             List<Rectangle> frames,
             string name,
@@ -46,16 +37,13 @@ namespace fge
             frames_ = frames;
             atlas_reference_ = TextureReference;
 
-            last_frame_ = frames.Count-1;
+            last_frame_ = frames.Count - 1;
         }
 
         public void Dispose()
         {
         }
 
-        
-
-        
         public Texture2D Texture
         {
             get { return atlas_reference_; }
@@ -116,28 +104,22 @@ namespace fge
             get { return frames_[current_frame_]; }
         }
 
-        
-
-        
         public void Play()
         {
             CurrentFrame = 0;
             finished_playing_ = false;
         }
 
-        
-
-        
         public void Update(double gameTime)
         {
-            float elapsed = (float)gameTime/1000.0f;
+            float elapsed = (float)gameTime / 1000.0f;
             frame_timer_ += elapsed;
 
             if (frame_timer_ >= frame_delay_)
             {
                 ++CurrentFrame;
 
-                
+
                 if (current_frame_ >= FrameCount)
                 {
                     if (loop_animation_)
@@ -154,7 +136,5 @@ namespace fge
                 frame_timer_ = 0f;
             }
         }
-
-        
     }
 }

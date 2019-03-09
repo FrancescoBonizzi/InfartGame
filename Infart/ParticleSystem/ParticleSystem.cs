@@ -1,53 +1,56 @@
-﻿
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-
 
 namespace fge
 {
     public abstract class ParticleSystem
     {
-        
         private Texture2D texture_;
+
         private Rectangle texture_rectangle_;
+
         private Vector2 origin_;
 
         private int density_;
 
         private Particle[] active_particles_;
+
         protected Queue<Particle> free_particles_;
 
         protected int min_num_particles_;
+
         protected int max_num_particles_;
 
         protected float min_initial_speed_;
+
         protected float max_initial_speed_;
 
         protected float min_acceleration_;
+
         protected float max_acceleration_;
 
         protected float min_rotation_speed_;
+
         protected float max_rotation_speed_;
 
         protected float min_lifetime_;
+
         protected float max_lifetime_;
 
         protected float min_scale_;
+
         protected float max_scale_;
 
         protected float min_spawn_angle_;
+
         protected float max_spawn_angle_;
 
         private Vector2 emitter_location_ = Vector2.Zero;
 
         private static Random random_;
 
-        
-
-        
         public ParticleSystem(
             int Density,
             Texture2D Texture,
@@ -90,9 +93,6 @@ namespace fge
 
         protected abstract void InitializeConstants();
 
-        
-
-        
         public virtual void AddParticles(Vector2 where)
         {
             int numParticles = random_.Next(min_num_particles_, max_num_particles_);
@@ -108,7 +108,7 @@ namespace fge
         {
             Vector2 direction = PickRandomDirection();
 
-            
+
             float velocity =
                 fbonizziHelper.RandomBetween(min_initial_speed_, max_initial_speed_);
             float acceleration =
@@ -141,9 +141,6 @@ namespace fge
             return direction;
         }
 
-        
-
-        
         public virtual void Update(double gameTime)
         {
             float dt = (float)gameTime / 1000.0f;
@@ -173,33 +170,31 @@ namespace fge
                 if (!p.Active)
                     continue;
 
-                
-                
-                
-                
-                
+
+
+
+
+
                 float normalizedLifetime = p.TimeSinceStart / p.LifeTime;
 
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
+
                 float alpha = 4 * normalizedLifetime * (1 - normalizedLifetime);
 
-                
-                
+
+
                 float scale = p.Scale * (.75f + .25f * normalizedLifetime);
 
                 spriteBatch.Draw(texture_, p.Position, texture_rectangle_, p.Color * alpha,
                     p.Rotation, origin_, scale, SpriteEffects.None, 0.0f);
             }
         }
-
-        
     }
 }

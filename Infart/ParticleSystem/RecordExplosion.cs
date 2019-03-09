@@ -1,26 +1,21 @@
-﻿
-using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
+using System;
 
 namespace fge
 {
-    
     public class RecordExplosion
     {
-        
         private Particle scritta_ = null;
+
         private Rectangle texture_rectangle_;
+
         private Vector2 origin_;
+
         private Texture2D texture_;
 
         private static Random random_;
 
-        
-
-        
         public RecordExplosion(
             Texture2D TextureReference,
             Rectangle TextureRectangle)
@@ -59,13 +54,8 @@ namespace fge
                 Color.White,
                 scale,
                 lifetime);
-
-            
         }
 
-        
-
-        
         public void Update(double gameTime)
         {
             if (scritta_.Active)
@@ -82,32 +72,30 @@ namespace fge
             if (!scritta_.Active)
                 return;
 
-            
-            
-            
-            
-            
+
+
+
+
+
             float normalizedLifetime = scritta_.TimeSinceStart / scritta_.LifeTime;
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
             float alpha = 4 * normalizedLifetime * (1 - normalizedLifetime);
 
-            
-            
+
+
             float scale = scritta_.Scale * (.75f + .25f * normalizedLifetime);
 
             spriteBatch.Draw(texture_, scritta_.Position, texture_rectangle_, scritta_.Color * alpha,
                 scritta_.Rotation, origin_, scale, SpriteEffects.None, 0.0f);
         }
-
-        
     }
 }

@@ -1,22 +1,10 @@
-﻿
-
-
-
-
-
-
-
-
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-
-
 
 namespace fge
 {
     public static class CollisionSolver
     {
-        
         public enum actions
         {
             blockAll,
@@ -24,8 +12,6 @@ namespace fge
             blockPlayer,
             endLevel
         };
-
-        
 
         public static bool CheckCollisions(
              Rectangle obj_rect,
@@ -56,6 +42,5 @@ namespace fge
 
             return -1;
         }
-
     }
 }

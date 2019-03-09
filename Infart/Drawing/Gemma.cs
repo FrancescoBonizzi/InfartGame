@@ -1,36 +1,29 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
 
 namespace fge
 {
     public class Gemma : GameObject
     {
-        
-        
-        
         private float move_y_amount_ = 10f;
+
         private float elapsed_ = 0.0f;
 
         private Texture2D texture_reference_;
+
         private Rectangle texture_rectangle_;
 
         private Rectangle collision_rectangle_;
 
         private bool active_;
 
-        
-
-        
         public Gemma(
             Texture2D TextureReference,
             Rectangle TextureRectangle)
         {
             texture_reference_ = TextureReference;
             texture_rectangle_ = TextureRectangle;
-            
+
             collision_rectangle_ = new Rectangle(
                    0, 0,
                    TextureRectangle.Width - 40,
@@ -48,9 +41,6 @@ namespace fge
             Position = starting_position;
         }
 
-        
-
-        
         public bool Active
         {
             get { return active_; }
@@ -62,7 +52,7 @@ namespace fge
             get { return position_; }
             set
             {
-                
+
                 collision_rectangle_.X = (int)value.X + 20;
                 collision_rectangle_.Y = (int)value.Y + 20;
                 position_ = value;
@@ -84,10 +74,6 @@ namespace fge
             get { return texture_rectangle_.Height; }
         }
 
-
-        
-
-        
         public override void Update(double gameTime)
         {
             if (active_)
@@ -122,7 +108,5 @@ namespace fge
                     depth_);
             }
         }
-
-        
     }
 }

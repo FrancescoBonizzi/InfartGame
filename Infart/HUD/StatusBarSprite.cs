@@ -1,32 +1,28 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
-
-
-
 
 namespace fge
 {
     public class StatusBarSprite : GameObject
     {
-        
         private double elapsed_ = 0.0;
+
         private bool animate_in_ = false;
+
         private bool animate_out_ = false;
 
         private Texture2D texture_reference_;
+
         private Rectangle texture_rectangle_;
 
         private Vector2 deactivated_scale_;
+
         private Vector2 activated_scale_;
+
         private Vector2 scaleTo_;
+
         private Vector2 scale_change_amount = new Vector2(0.005f);
 
-        
-
-        
         public StatusBarSprite(
             Texture2D TextureReference,
             Rectangle TextureRectangle,
@@ -59,9 +55,6 @@ namespace fge
             animate_out_ = false;
         }
 
-        
-
-        
         public override Vector2 Position
         {
             get { return position_; }
@@ -97,9 +90,6 @@ namespace fge
             animate_out_ = true;
         }
 
-        
-
-        
         public override void Update(double gameTime)
         {
             if (animate_in_ || animate_out_)
@@ -141,7 +131,5 @@ namespace fge
                 flip_,
                 depth_);
         }
-
-        
     }
 }

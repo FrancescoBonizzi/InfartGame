@@ -4,7 +4,6 @@ using FbonizziMonoGame.Drawing.Abstractions;
 using FbonizziMonoGame.Input;
 using FbonizziMonoGame.Input.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
-using FbonizziMonoGame.Sprites;
 using FbonizziMonoGame.StringsLocalization;
 using FbonizziMonoGame.StringsLocalization.Abstractions;
 using fge;
@@ -29,15 +28,19 @@ namespace Infart
         }
 
         private readonly Uri _rateMeUri;
+
         private RunningStates _currentState;
 
         public GraphicsDeviceManager GraphicsDeviceManager { get; private set; }
+
         private SpriteBatch _spriteBatch;
 
         private SplashScreenLoader _splashScreenAssetsLoader;
 
         private readonly ISettingsRepository _settingsRepository;
+
         private readonly IWebPageOpener _webPageOpener;
+
         private List<IInputListener> _inputListeners;
 
         private readonly CultureInfo _gameCulture;
@@ -49,13 +52,16 @@ namespace Infart
         private readonly ITextFileLoader _textFileAssetsLoader;
 
         private GameOrchestrator _orchestrator;
+
         private SoundManager _soundManager;
+
         private readonly bool _isPc;
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
 
-        
-        public InfartBootstrap() { }
+        public InfartBootstrap()
+        {
+        }
 
         public InfartBootstrap(
            ITextFileLoader textFileAssetsLoader,
@@ -108,31 +114,25 @@ namespace Infart
         private void LoadGameAssets()
         {
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
-
             
-            
-            
-            
-            
-
             var loaderEpisodio1 = new Loader(Content, GraphicsDevice);
             var soundManager = new SoundManager(true, loaderEpisodio1);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
                     loaderEpisodio1,
-            //        new Loader_menu(Content),
+                    //        new Loader_menu(Content),
                     soundManager,
                     100, "Metri", "Pausa"));
 
             _orchestrator = new GameOrchestrator(
                 gameFactory,
-               
+
                 GraphicsDevice,
                 _matrixScaleProvider,
                 _soundManager,
                 _webPageOpener);
 
-            
+
 
             _inputListeners = new List<IInputListener>();
 
@@ -154,7 +154,7 @@ namespace Infart
                 _inputListeners.Add(gamepadListener);
             }
 
-            
+
             var keyboardListener = new KeyboardListener();
             keyboardListener.KeyPressed += KeyboardListener_KeyPressed;
             _inputListeners.Add(keyboardListener);
@@ -168,9 +168,9 @@ namespace Infart
                 if (_orchestrator.ShouldEndApplication)
                 {
                     if (ExitGameRequested != null)
-                        ExitGameRequested(this, EventArgs.Empty); 
+                        ExitGameRequested(this, EventArgs.Empty);
                     else
-                        Exit(); 
+                        Exit();
                 }
             }
         }
@@ -183,20 +183,20 @@ namespace Infart
                 if (_orchestrator.ShouldEndApplication)
                 {
                     if (ExitGameRequested != null)
-                        ExitGameRequested(this, EventArgs.Empty); 
+                        ExitGameRequested(this, EventArgs.Empty);
                     else
-                        Exit(); 
+                        Exit();
                 }
             }
-            else if (e.Key == Keys.Back) 
+            else if (e.Key == Keys.Back)
             {
                 _orchestrator.Back();
                 if (_orchestrator.ShouldEndApplication)
                 {
                     if (ExitGameRequested != null)
-                        ExitGameRequested(this, EventArgs.Empty); 
+                        ExitGameRequested(this, EventArgs.Empty);
                     else
-                        Exit(); 
+                        Exit();
                 }
             }
         }
@@ -274,19 +274,18 @@ namespace Infart
             {
                 if (!_orchestrator.IsPaused)
                 {
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
+
                 }
             }
 
             base.Draw(gameTime);
         }
-
     }
 }

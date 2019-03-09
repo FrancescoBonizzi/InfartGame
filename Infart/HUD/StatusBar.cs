@@ -1,40 +1,40 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-
-
 
 namespace fge
 {
     public class StatusBar
     {
-        
         private Vector2 position_;
 
         private StatusBarSprite[] status_burgers_;
+
         private Texture2D texture_reference_;
 
         private SoundManager sound_manager_reference_;
 
         private Color empty_color = Color.Gray * 0.5f;
+
         private Color full_color = Color.White;
 
         private double elapsed_ = 0.0;
 
         private int jump_count_ = 0;
+
         private const int jump_needed_to_remove_ham_ = 1;
 
         private int hamburgers_ = 0;
+
         private int hamburger_mangiati_totale_ = 0;
+
         private const int soglia_hamburger_per_star_male_ = 4;
+
         private float overlay_death_opacity_ = 0.01f;
 
         private Rectangle sfondo_morte_rect_;
 
         private bool infart_ = false;
 
-        
         public StatusBar(
             Vector2 position,
             Loader Loader,
@@ -60,7 +60,7 @@ namespace fge
                     empty_color,
                     ham_scale);
                 tmp_pos.X += ham_width;
-                
+
             }
         }
 
@@ -79,9 +79,6 @@ namespace fge
             jump_count_ = 0;
         }
 
-        
-
-        
         public int CurrentHamburgers
         {
             get { return hamburgers_; }
@@ -104,9 +101,6 @@ namespace fge
             return false;
         }
 
-        
-
-        
         public void HamburgerEaten()
         {
             Hamburgers += 1;
@@ -118,9 +112,9 @@ namespace fge
             {
                 status_burgers_[hamburgers_ - 1].FillColor = Color.LightCoral;
 
-                
-                
-                
+
+
+
                 sound_manager_reference_.PlayHeartBeat();
             }
 
@@ -187,9 +181,6 @@ namespace fge
             sound_manager_reference_.StopHeartBeat();
         }
 
-        
-
-        
         public void Update(double gametime)
         {
             elapsed_ += gametime;
@@ -226,7 +217,5 @@ namespace fge
                     Color.White * overlay_death_opacity_);
             }
         }
-
-        
     }
 }
