@@ -51,7 +51,7 @@ namespace Infart
         private Sprite _mousePointer;
 
         private GameOrchestrator _orchestrator;
-        private SoundManager _soundManager;
+        private SoundManager_episodio1 _soundManager;
         private readonly bool _isPc;
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
