@@ -10,8 +10,8 @@ namespace fge
     public class BackgroundManager 
     {
         
-        private GrattacieliAutogeneranti_episodio1 grattacieli_fondo_ = null;
-        private GrattacieliAutogeneranti_episodio1 grattacieli_mid_ = null;
+        private GrattacieliAutogeneranti grattacieli_fondo_ = null;
+        private GrattacieliAutogeneranti grattacieli_mid_ = null;
 
         private float parallax_speed_fondo_;
         private float parallax_speed_mid_;
@@ -52,12 +52,12 @@ namespace fge
             sfondo_origin_ = new Vector2(0.0f, sfondo_rectangle_.Height);
             sfondo_scale_ = Vector2.One;
 
-            grattacieli_fondo_ = new GrattacieliAutogeneranti_episodio1(
+            grattacieli_fondo_ = new GrattacieliAutogeneranti(
                 Loader.textures_gratta_back_, Loader.textures_rectangles_, "back", 69, CameraInstance, GameManagerReference);
 
             sfondo_scale_ = new Vector2(1.8f);
 
-            grattacieli_mid_ = new GrattacieliAutogeneranti_episodio1(
+            grattacieli_mid_ = new GrattacieliAutogeneranti(
                 Loader.textures_gratta_mid_, Loader.textures_rectangles_, "mid", 69, CameraInstance, GameManagerReference);
 
             parallax_speed_fondo_ = default_parallax_speed_fondo_;

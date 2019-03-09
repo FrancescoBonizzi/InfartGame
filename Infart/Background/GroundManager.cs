@@ -13,7 +13,7 @@ namespace fge
         protected Random random_;
         protected Camera current_camera_;
 
-        private GrattacieliAutogeneranti_episodio1 grattacieli_camminabili_ = null;
+        private GrattacieliAutogeneranti grattacieli_camminabili_ = null;
         private float min_time_to_next_buco_ = 2000.0f;
         private float elapsed_ = 0.0f;
 
@@ -27,7 +27,7 @@ namespace fge
             current_camera_ = CurrentCamera;
             random_ = fbonizziHelper.random;
 
-            grattacieli_camminabili_ = new GrattacieliAutogeneranti_episodio1(
+            grattacieli_camminabili_ = new GrattacieliAutogeneranti(
                 Loader.textures_gratta_ground_,
                 Loader.textures_rectangles_,
                 "ground",

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    public class GrattacieliAutogeneranti_episodio1
+    public class GrattacieliAutogeneranti
     {
 
         protected List<Grattacielo> grattacieli_to_draw_;
@@ -40,7 +40,7 @@ namespace fge
         private InfartGame game_manager_reference_;
 
  
-        public GrattacieliAutogeneranti_episodio1(
+        public GrattacieliAutogeneranti(
             Texture2D Texture,
             Dictionary<string, Rectangle> GrattaRects,
             string EntryName,
