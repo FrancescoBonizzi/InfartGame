@@ -14,7 +14,7 @@ namespace fge
         protected Camera player_camera_;
         protected Player player_;
 
-        protected BackgroundManager background_;
+        protected BackgroundManager_episodio1 background_;
         protected GroundManager ground_;
         protected GemmaManager gemme_;
         protected SoundManager sound_manager_;

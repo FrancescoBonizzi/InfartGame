@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    public class BackgroundManager_episodio1 : BackgroundManager
+    public class BackgroundManager_episodio1 
     {
         
         private GrattacieliAutogeneranti_episodio1 grattacieli_fondo_ = null;
@@ -28,16 +28,30 @@ namespace fge
         const double timeBetweenNewStar_ = 20.0f;
         double timeTillNewStar_ = 0.0f;
 
-        
 
-        
+        protected Camera current_camera_;
+        protected float old_camera_x_pos_;
+        protected float parallax_dir_ = +1;
+
+        protected Texture2D texture_reference_;
+        protected Rectangle sfondo_rectangle_;
+        protected Vector2 sfondo_origin_;
+        protected Vector2 sfondo_scale_;
+
+
         public BackgroundManager_episodio1(
             Camera CameraInstance,
             Loader_episodio1 Loader,
             InfartGame GameManagerReference)
-            : base(
-            CameraInstance, Loader.textures_rectangles_["background"], Loader.textures_)
         {
+            current_camera_ = CameraInstance;
+            old_camera_x_pos_ = current_camera_.Position.X;
+
+            sfondo_rectangle_ = Loader.textures_rectangles_["background"];
+            texture_reference_ = Loader.textures_;
+            sfondo_origin_ = new Vector2(0.0f, sfondo_rectangle_.Height);
+            sfondo_scale_ = Vector2.One;
+
             grattacieli_fondo_ = new GrattacieliAutogeneranti_episodio1(
                 Loader.textures_gratta_back_, Loader.textures_rectangles_, "back", 69, CameraInstance, GameManagerReference);
 
@@ -73,23 +87,21 @@ namespace fge
             current_camera_ = CameraInstance;
             old_camera_x_pos_ = current_camera_.Position.X;
         }
-
         
-
         
-        public override void IncreaseParallaxSpeed()
+        public void IncreaseParallaxSpeed()
         {
             parallax_speed_fondo_ -= 4.0f;
             parallax_speed_mid_ -= 4.0f;
         }
 
-        public override void DecreaseParallaxSpeed()
+        public void DecreaseParallaxSpeed()
         {
             parallax_speed_fondo_ += 4.0f;
             parallax_speed_mid_ += 4.0f;
         }
 
-        public override void Reset(Camera camera)
+        public void Reset(Camera camera)
         {
             current_camera_ = camera;
             old_camera_x_pos_ = current_camera_.Position.X;
@@ -107,12 +119,26 @@ namespace fge
         
 
         
-        public override void Update(double gametime)
+        public void Update(double gametime)
         {
-            base.Update(gametime);
+
+            if (old_camera_x_pos_ - current_camera_.Position.X < 0)
+            {
+                parallax_dir_ = +1;
+            }
+            else if (old_camera_x_pos_ - current_camera_.Position.X > 0)
+            {
+                parallax_dir_ = -1;
+            }
+            else
+            {
+                parallax_dir_ = 0;
+            }
+
+            old_camera_x_pos_ = current_camera_.Position.X;
 
             float dt = (float)gametime / 1000.0f;
-
+            
             grattacieli_fondo_.MoveX(parallax_speed_fondo_ * dt * parallax_dir_);
             grattacieli_mid_.MoveX(parallax_speed_mid_ * dt * parallax_dir_);
             nuvolificio_lontano_.MoveX((float)((parallax_speed_fondo_) * dt * parallax_dir_));
@@ -147,9 +173,18 @@ namespace fge
             }
         }
 
-        public override void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spritebatch)
         {
-            base.Draw(spritebatch);
+            spritebatch.Draw(
+                    texture_reference_,
+                    new Vector2(current_camera_.Position.X, current_camera_.ViewPortHeight),
+                    sfondo_rectangle_,
+                    Color.White,
+                    0.0f,
+                    sfondo_origin_,
+                    sfondo_scale_,
+                    SpriteEffects.None,
+                    1.0f);
 
             starfield_.Draw(spritebatch);
 
@@ -159,7 +194,7 @@ namespace fge
             grattacieli_mid_.Draw(spritebatch);
         }
 
-        public override void DrawSpecial(SpriteBatch spritebatch)
+        public void DrawSpecial(SpriteBatch spritebatch)
         {
             nuvolificio_vicino_.Draw(spritebatch);
         }
