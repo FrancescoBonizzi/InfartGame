@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,24 +8,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    public class GroundManager_episodio1 : GroundManager
+    public class GroundManager_episodio1
     {
-        
+        protected Random random_;
+        protected Camera current_camera_;
+
         private GrattacieliAutogeneranti_episodio1 grattacieli_camminabili_ = null;
         private float min_time_to_next_buco_ = 2000.0f;
         private float elapsed_ = 0.0f;
 
         private InfartGame game_manager_reference_;
-
-        
-
         
         public GroundManager_episodio1(
             Camera CurrentCamera,
             Loader_episodio1 Loader,
             InfartGame GameManagerReference)
-            : base(CurrentCamera)
         {
+            current_camera_ = CurrentCamera;
+            random_ = fbonizziHelper.random;
+
             grattacieli_camminabili_ = new GrattacieliAutogeneranti_episodio1(
                 Loader.textures_gratta_ground_,
                 Loader.textures_rectangles_,
@@ -36,26 +38,13 @@ namespace fge
             
             game_manager_reference_ = GameManagerReference;
         }
-
         
-
-        
-        public override List<GameObject> WalkableObjects()
+        public List<GameObject> WalkableObjects()
         {
             return grattacieli_camminabili_.DrawnObjectsList;
         }
 
-        /* TODO Serviva a qualcosa?
-        public List<Grattacielo> GeneratedObjects
-        {
-            get { return grattacieli_camminabili_.CachedObjectList; }
-        }
-         */
-
-        
-
-        
-        public override void Reset(Camera camera)
+        public void Reset(Camera camera)
         {
             current_camera_ = camera;
             grattacieli_camminabili_.Reset(camera);
@@ -71,11 +60,8 @@ namespace fge
                 first_x + space,
                 (int)grattacieli_camminabili_.NextGrattacieloPosition.Y);
         }
-
         
-
-        
-        public override void Update(double gametime)
+        public void Update(double gametime)
         {
             elapsed_ += (float)gametime;
             if (elapsed_ >= min_time_to_next_buco_)
@@ -90,13 +76,10 @@ namespace fge
             grattacieli_camminabili_.Update(gametime, current_camera_);
         }
 
-        public override void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spritebatch)
         {
             grattacieli_camminabili_.Draw(spritebatch);
         }
-
-
-
         
     }
 }
