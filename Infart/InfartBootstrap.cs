@@ -192,6 +192,10 @@ namespace Infart
                         Exit();
                 }
             }
+            else
+            {
+                _orchestrator.HandleTouchInput(null);
+            }
         }
 
         private void TouchListener_TouchEnded(object sender, TouchEventArgs e)

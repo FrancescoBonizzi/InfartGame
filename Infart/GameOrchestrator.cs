@@ -99,17 +99,16 @@ namespace Infart
 
         public void HandleTouchInput(Vector2? touchLocation = null)
         {
-            if (touchLocation == null)
-                return;
-
             switch (_currentState)
             {
                 case GameStates.Menu:
+                    if (touchLocation == null)
+                        return;
 
                     break;
 
                 case GameStates.Playing:
-                    _game.HandleInput(touchLocation.Value);
+                    _game.HandleInput();
                     break;
             }
         }

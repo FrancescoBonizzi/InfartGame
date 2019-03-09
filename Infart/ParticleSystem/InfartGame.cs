@@ -134,7 +134,7 @@ namespace Infart.ParticleSystem
             SetHighScore(HighScore);
 
             font_ = AssetsLoader.Font;
-         //   px_texture_ = AssetsLoader.px_texture_;
+            //   px_texture_ = AssetsLoader.px_texture_;
 
             player_camera_ = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
@@ -153,7 +153,7 @@ namespace Infart.ParticleSystem
             score_string_ = new StringBuilder();
 
             high_score_color_ = new Color(22, 232, 86) * 0.5f;
-       //     px_texture_ = AssetsLoader.px_texture_;
+            //     px_texture_ = AssetsLoader.px_texture_;
             metri_string_ = MetriString;
 
             NewGame();
@@ -224,8 +224,13 @@ namespace Infart.ParticleSystem
             get { return score_metri_; }
         }
 
-        internal void HandleInput(Vector2 value)
+        public void HandleInput()
         {
+            if (!player_.Dead)
+            {
+                player_.HandleInput();
+            }
+
             if (fall_sound_active_ && !dead_explosion_.Started)
             {
                 force_to_finish_ = true;
@@ -235,6 +240,11 @@ namespace Infart.ParticleSystem
                     dead_explosion_.Explode(player_.Position, false, (sound_manager_ as SoundManager));
                     status_bar_.SetInfart();
                 }
+            }
+
+            if (dead_explosion_.Started)
+            {
+                force_to_finish_ = true;
             }
         }
 
@@ -361,8 +371,6 @@ namespace Infart.ParticleSystem
         public void Update(TimeSpan elapsed)
         {
             var gametime = elapsed.TotalMilliseconds;
-            var touch = TouchPanel.GetState();
-
             if (!paused_)
             {
                 RepositionCamera();
@@ -371,11 +379,11 @@ namespace Infart.ParticleSystem
                 CheckDead();
                 background_.Update(gametime);
                 ground_.Update(gametime);
-                player_.Update(gametime, touch);
+                player_.Update(gametime);
                 player_.CollidingObjectsReference = ground_.WalkableObjects();
                 gemme_.Update(gametime);
                 CheckPlayerGemmaCollision();
-       //         record_explosion_.Update(gametime);
+                //         record_explosion_.Update(gametime);
 
                 if (status_bar_ != null)
                     status_bar_.Update(gametime);
@@ -383,8 +391,6 @@ namespace Infart.ParticleSystem
                 if (dead_explosion_.Started)
                 {
                     dead_explosion_.Update(gametime);
-                    if (touch.Count > 0)
-                        force_to_finish_ = true;
                 }
             }
 
@@ -518,7 +524,7 @@ namespace Infart.ParticleSystem
             ground_.Update(gametime);
             player_camera_.Update(gametime);
 
-            player_.Update(gametime, touch);
+            player_.Update(gametime);
         }
 
         protected void DrawUI(SpriteBatch spriteBatch)
@@ -574,10 +580,10 @@ namespace Infart.ParticleSystem
             {
                 if (player_.Position.X < high_score_position_.X)
                 {
-                    spritebatch.Draw(
-                        px_texture_,
-                        high_score_position_,
-                        high_score_color_);
+                    //spritebatch.Draw(
+                    //    px_texture_,
+                    //    high_score_position_,
+                    //    high_score_color_);
                 }
                 else
                 {
@@ -586,7 +592,7 @@ namespace Infart.ParticleSystem
                 }
             }
 
-        //    record_explosion_.Draw(spritebatch);
+            //    record_explosion_.Draw(spritebatch);
 
             spritebatch.End();
 

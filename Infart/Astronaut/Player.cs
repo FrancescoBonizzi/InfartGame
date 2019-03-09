@@ -3,7 +3,6 @@ using Infart.Extensions;
 using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
 
@@ -191,7 +190,26 @@ namespace Infart.Astronaut
             game_manager_reference_.DecreaseParallaxSpeed();
         }
 
-        public void Update(double dt, TouchCollection touch)
+        public void HandleInput()
+        {
+            if (jalapenos_)
+            {
+                if (jalapenos_jump_count_ < 1)
+                {
+                    ++jalapenos_jump_count_;
+                    Jump(800);
+                }
+            }
+            else if (broccolo_)
+                Jump(500);
+            else
+            {
+                if (OnGround)
+                    Jump(650);
+            }
+        }
+
+        public override void Update(double dt)
         {
             if (!dead_)
             {
@@ -201,28 +219,6 @@ namespace Infart.Astronaut
                 {
                     FlipEffect = SpriteEffects.None;
                     velocity_.X = +HorizontalMoveSpeed;
-
-                    if (touch.Count > 0)
-                    {
-                        if (touch[0].State == TouchLocationState.Pressed)
-                        {
-                            if (jalapenos_)
-                            {
-                                if (jalapenos_jump_count_ < 1)
-                                {
-                                    ++jalapenos_jump_count_;
-                                    Jump(800);
-                                }
-                            }
-                            else if (broccolo_)
-                                Jump(500);
-                            else
-                            {
-                                if (OnGround)
-                                    Jump(650);
-                            }
-                        }
-                    }
                 }
                 else
                 {
