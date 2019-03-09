@@ -62,7 +62,7 @@ namespace fge
                     empty_color,
                     ham_scale);
                 tmp_pos.X += ham_width;
-                // La distanza tra loro è già ottenuta dalla diminuzione della scala
+                
             }
         }
 
@@ -120,9 +120,9 @@ namespace fge
             {
                 status_burgers_[hamburgers_ - 1].FillColor = Color.LightCoral;
 
-                // TODO
-                // Il modo migliore per rendere soundmanager universale è inserire 
-                // ogni canzone in un dizionario... così che si possa fare sound_manager.Play("Scoreggia");
+                
+                
+                
                 sound_manager_reference_.PlayHeartBeat();
             }
 

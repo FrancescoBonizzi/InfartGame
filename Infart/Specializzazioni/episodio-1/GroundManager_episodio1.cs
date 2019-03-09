@@ -33,7 +33,7 @@ namespace fge
                 CurrentCamera,
                 GameManagerReference);
 
-            // TODO Verificare che sia davvero reference e non per valore
+            
             game_manager_reference_ = GameManagerReference;
         }
 

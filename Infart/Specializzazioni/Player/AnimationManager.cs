@@ -1,11 +1,11 @@
-﻿//-----------------------------------------------------------------------------
-// AnimationManager.cs
-//
-// Gestore delle animazioni relative ad uno spritesheet ORIZZONTALE
-//
-// fbonizzi_Game_Engine
-// Copyright (C) Francesco Bonizzi. All rights reserved.
-//-----------------------------------------------------------------------------
+﻿
+
+
+
+
+
+
+
 
 
 using System;
@@ -137,7 +137,7 @@ namespace fge
             {
                 ++CurrentFrame;
 
-                //Se sono arrivato all'ultimo frame
+                
                 if (current_frame_ >= FrameCount)
                 {
                     if (loop_animation_)

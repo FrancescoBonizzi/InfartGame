@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace fge
 {
-    // Serve, perché così poi posso instanziarla per ogni livello e non in generale
-    // Le animazioni dell'omino e il suono delle scoregge le posso caricare con il loading normale...
-    // dovrò poi trovare un modo di collegare insieme tutto
+    
+    
+    
     public abstract class Loader
     {
         protected ContentManager content_;

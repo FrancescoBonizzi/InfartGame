@@ -16,7 +16,7 @@ namespace fge
 
         protected override void InitializeConstants()
         {
-            // Prova a giocarci per vedere cosa succede
+            
 
             min_initial_speed_ = 10f;
             max_initial_speed_ = 15f;

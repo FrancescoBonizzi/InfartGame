@@ -26,19 +26,19 @@ namespace Infart.Assets
 
         private void LoadResources()
         {
-            // TitleFont = _contentManager.Load<SpriteFont>("font-title");
+            
             
 
-            //const string gameSpriteSheetName = "Spritesheet";
-            //var gameSpriteSheet = _contentManager.Load<Texture2D>($"{gameSpriteSheetName}");
-            //var gameSpritesDescriptions = _textureImporter.Import($"Content/{gameSpriteSheetName}.txt");
+            
+            
+            
 
-            //AddSpritesFromDictionary(gameSpritesDescriptions, gameSpriteSheet);
+            
 
-            //Sounds.Add("effect-win", _contentManager.Load<SoundEffect>("effect-ok"));
-            //Sounds.Add("effect-loose", _contentManager.Load<SoundEffect>("effect-wrong"));
-            //Sounds.Add("music-menu", _contentManager.Load<SoundEffect>("music-menu"));
-            //Sounds.Add("music-playing", _contentManager.Load<SoundEffect>("music-play"));
+            
+            
+            
+            
         }
 
         private void AddSpritesFromDictionary(

@@ -12,7 +12,7 @@ namespace fge
     public abstract class GemmaManager
     {
         
-        // Quando vorrò modificarlo, lo metterò non const e forzerò l'inizializzazione
+        
         protected const int max_gemme_attive_ = 10;
         protected List<Gemma> gemme_attive_;
         protected List<Gemma> gemme_inactive_;
@@ -39,7 +39,7 @@ namespace fge
                     GemmaRectangle));
         }
 
-        // Ricorda di richiamare il "base"
+        
         public virtual void Reset(Camera CameraReference)
         {
             for (int i = 0; i < gemme_attive_.Count; ++i)
@@ -55,7 +55,7 @@ namespace fge
         
 
         
-        // Sicuro public? Va usato dall'esterno? >.<
+        
         public void AddGemma(Vector2 StartingPosition)
         {
             if (gemme_inactive_.Count > 0)

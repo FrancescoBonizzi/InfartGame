@@ -72,9 +72,9 @@ namespace fge
         private void Initialize(Texture2D NuvolaTexture, List<Rectangle> NuvolaRectangles)
         {
             List<Rectangle> nuvole_rects_ = NuvolaRectangles;
-            //  nuvole_rects_.Add(Loader.textures_rectangles_["nuvola1"]);
-            // nuvole_rects_.Add(Loader.textures_rectangles_["nuvola2"]);
-            // nuvole_rects_.Add(Loader.textures_rectangles_["nuvola3"]);
+            
+            
+            
 
             nuvole_ = new List<Nuvola>();
             for (int i = 0; i < nuvole_number_; ++i)

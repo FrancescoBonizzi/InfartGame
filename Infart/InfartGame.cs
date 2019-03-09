@@ -18,7 +18,7 @@ namespace fge
         public double GemmaProbability;
         public double BroccoloDuration;
         public Vector2 LarghezzaBuchi;
-        //-----------------------------------------------
+        
         private const double default_BucoProbability = 0.005;
         private const double default_PoweupProbability = 0.03;
         private const double default_PeperoncinoDuration = 6000.0;
@@ -45,9 +45,9 @@ namespace fge
         public bool jalapenos_mode_active_;
 
 
-        private int game_cameraH_limit_;//la nuova altezza dopo lo zoom
+        private int game_cameraH_limit_;
 
-        //  private Loader_episodio1 Loader;
+        
 
 
         public InfartGame(
@@ -198,10 +198,10 @@ namespace fge
         {
             base.Update(elapsed.TotalMilliseconds, TouchPanel.GetState());
 
-            // Ogni 50m aumento i parametri
+            
             if (score_metri_ % 50 == 0)
             {
-                // Se è appena cambiato (Perché rimane sullo stesso metro per un po')
+                
                 if (old_score_metri_ != score_metri_)
                 {
                     (player_ as Player_episodio1).IncreaseMoveSpeed();
@@ -256,7 +256,7 @@ namespace fge
         {
             if (!fall_sound_active_)
             {
-                if (player_.Position.Y > player_camera_.ViewPortHeight) //480
+                if (player_.Position.Y > player_camera_.ViewPortHeight) 
                 {
                     MakePlayerDead();
                     (sound_manager_ as SoundManager_episodio1).PlayFall();
@@ -283,7 +283,7 @@ namespace fge
             {
                 return dead_explosion_.Finished;
             }
-            else if (fall_sound_active_)// Se il suono è partito
+            else if (fall_sound_active_)
             {
                 return false;
             }
@@ -301,11 +301,11 @@ namespace fge
             player_camera_x = player_.Position.X - 150;
             player_camera_y = player_.Position.Y - 200;
 
-            // Confino la telecamera nei limiti del gioco
+            
             if (player_camera_y < game_cameraH_limit_)
                 player_camera_y = game_cameraH_limit_;
-            else if (player_camera_y > 0)//0)
-                player_camera_y = 0;//0;
+            else if (player_camera_y > 0)
+                player_camera_y = 0;
 
             LerpCameraPosition(player_camera_x, player_camera_y);
         }
@@ -323,7 +323,7 @@ namespace fge
         {
             spriteBatch.Begin();
 
-            // Barra per contenere ads e score
+            
             spriteBatch.Draw(
                 px_texture_,
                 bar_rectangle_,
@@ -340,7 +340,7 @@ namespace fge
         public override void Draw(SpriteBatch spritebatch)
         {
             base.Draw(spritebatch);
-            // Niente da aggiungere
+            
         }
 
         public void DrawForMenu(SpriteBatch spritebatch)
@@ -359,7 +359,7 @@ namespace fge
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Camera_transformation);
             if (!dead_explosion_.Started)
-                player_.Draw(spritebatch); // Perchè la scoreggia stia dietro di lui
+                player_.Draw(spritebatch); 
             background_.DrawSpecial(spritebatch);
             spritebatch.End();
         }

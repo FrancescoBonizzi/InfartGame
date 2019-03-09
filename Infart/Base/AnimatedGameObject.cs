@@ -1,12 +1,12 @@
-﻿//-----------------------------------------------------------------------------
-// BasicGameObject.cs
-//
-// Un oggetto di gioco generico che proietta ombre, può intervenire in collisioni,
-// ha lightmap, e supporta animazioni.
-//
-// fbonizzi_Game_Engine
-// Copyright (C) Francesco Bonizzi. All rights reserved.
-//-----------------------------------------------------------------------------
+﻿
+
+
+
+
+
+
+
+
 
 
 

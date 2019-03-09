@@ -147,7 +147,7 @@ namespace fge
         {
             if (touch.Count != 0)
             {
-                // Handle per il touch
+                
                 TouchLocation t = touch[0];
 
                 finger_position_ = new Point((int)t.Position.X, (int)t.Position.Y);
@@ -167,7 +167,7 @@ namespace fge
                     {
                         if (current_button_state_ == CustomButtonState.DOWN)
                         {
-                            // Appena rilasciato
+                            
                             current_button_state_ = CustomButtonState.JUST_RELEASED;
                             if (toggle_button_)
                                 SwitchTexture();
@@ -180,7 +180,7 @@ namespace fge
 
                     if (timer_ > 0)
                     {
-                        timer_ -= 0.017; // 1/60, framerate
+                        timer_ -= 0.017; 
                     }
                     else
                     {
@@ -198,7 +198,7 @@ namespace fge
 
                 if (timer_ > 0)
                 {
-                    timer_ -= 0.017; // 1/60, framerate
+                    timer_ -= 0.017; 
                 }
                 else
                 {

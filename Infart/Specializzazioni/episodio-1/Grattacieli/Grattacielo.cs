@@ -4,15 +4,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 
-// PS:
-// L'origine è sul vertice in basso a sinistra
+
+
 
 namespace fge
 {
     public class Grattacielo : GameObject
     {
         
-        private int h_; // In numero di blocchi
+        private int h_; 
         private int one_block_height_ = 25;
 
         int w_grattacielo_;
@@ -25,7 +25,7 @@ namespace fge
         
 
         
-        // Non utilizzabile perché non ha h_ settata
+        
         public Grattacielo(Rectangle TextureRectangle, Texture2D TextureReference)
         {
             Position = Vector2.Zero;

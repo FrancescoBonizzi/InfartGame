@@ -8,8 +8,8 @@ namespace fge
 {
     public class Gemma : GameObject
     {
-        // TODO
-        // Si può rimuovere active?
+        
+        
         
         private float move_y_amount_ = 10f;
         private float elapsed_ = 0.0f;
@@ -62,7 +62,7 @@ namespace fge
             get { return position_; }
             set
             {
-                // Per stringere il bounding box
+                
                 collision_rectangle_.X = (int)value.X + 20;
                 collision_rectangle_.Y = (int)value.Y + 20;
                 position_ = value;

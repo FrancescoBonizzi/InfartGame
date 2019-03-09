@@ -11,7 +11,7 @@ namespace fge
         
         public Vector2 Position = Vector2.Zero;
 
-        // Calcolata nello zoom!
+        
         public int ViewPortWidth;
         public int ViewPortHeight;
 
@@ -34,8 +34,8 @@ namespace fge
 
             zoom_ = zoom;
 
-            ViewPortWidth = 1000;//(int)(ViewPortSize.X + ViewPortSize.X * (1-zoom_));
-            ViewPortHeight = 600; // (int)(ViewPortSize.Y + ViewPortSize.Y * (1 - zoom_));
+            ViewPortWidth = 1000;
+            ViewPortHeight = 600; 
         }
 
         public void Reset(Vector2 position)
@@ -118,7 +118,7 @@ namespace fge
         {
             if (moving_)
             {
-                // Probabilmente non saranno mai uguali, devo stabilire un intorno
+                
                 if (position_to_go_to_ != Position)
                 {
                     float elapsed = (float)gametime / 1000.0f;

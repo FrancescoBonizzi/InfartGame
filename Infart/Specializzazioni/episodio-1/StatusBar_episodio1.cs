@@ -1,7 +1,7 @@
 namespace fge
 {
-    public class StatusBar_episodio1 //: StatusBar
+    public class StatusBar_episodio1 
     {
-        // TODO in the future
+        
     }
 }

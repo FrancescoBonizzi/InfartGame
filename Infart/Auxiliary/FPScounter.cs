@@ -25,10 +25,10 @@ namespace fge
 
         public void Update(double gameTime)
         {
-            // Update
+            
             _elapsed_time += (float)gameTime;
 
-            // 1 Second has passed
+            
             if (_elapsed_time >= 1000.0f)
             {
                 _fps = _total_frames;
@@ -42,7 +42,7 @@ namespace fge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Only update total frames when drawing
+            
             _total_frames++;
 
             spriteBatch.DrawString(

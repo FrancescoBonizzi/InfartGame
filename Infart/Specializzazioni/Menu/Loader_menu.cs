@@ -22,7 +22,7 @@ namespace fge
 
         public override void LoadTexture()
         {
-          //  merda_ = content_.Load<Texture2D>(@"Menu\merda");
+          
         }
 
         public override void LoadMusic()

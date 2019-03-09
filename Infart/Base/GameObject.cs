@@ -1,13 +1,13 @@
-﻿//-----------------------------------------------------------------------------
-// GameObject.cs
-//
-// - Oggetto astratto: ciò che viene disegnato, possiede coordinate 
-// e può essere selezionato nell'editor.
-// - Può essere scalato, ruotato, spostato
-//
-// fbonizzi_Game_Engine
-// Copyright (C) Francesco Bonizzi. All rights reserved.
-//-----------------------------------------------------------------------------
+﻿
+
+
+
+
+
+
+
+
+
 
 
 

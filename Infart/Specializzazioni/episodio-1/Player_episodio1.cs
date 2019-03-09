@@ -17,7 +17,7 @@ namespace fge
 
         InfartGame game_manager_reference_;
 
-        // In ms
+        
         const double timeBetweenNewParticleScoregge_ = 30.0f;
         double timeTillNewParticleScoregge_ = 0.0f;
 
@@ -158,7 +158,7 @@ namespace fge
             broccolo_ = true;
             Jump(200);
             HorizontalMoveSpeed += 400.0f;
-            //   scoreggia_system_.ActivateBroccolo();
+            
             game_manager_reference_.IncreaseParallaxSpeed();
             game_manager_reference_.IncreaseParallaxSpeed();
         }
@@ -186,10 +186,10 @@ namespace fge
                 
                 if (allow_input_)
                 {
-                    //  current_keyboard_state_ = Keyboard.GetState();
-                    //current_mouse_state_ = Mouse.GetState();
+                    
+                    
 
-                    // Corsa automatica
+                    
                     FlipEffect = SpriteEffects.None;
                     velocity_.X = +HorizontalMoveSpeed;
 

@@ -56,7 +56,7 @@ namespace Infart
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
 
-        // Just for MonoGame.Framework.WindowsUniversal bootstrapping requirement
+        
         public InfartBootstrap() { }
 
         public InfartBootstrap(
@@ -111,11 +111,11 @@ namespace Infart
         {
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
 
-            //_assetsLoader = new AssetsLoader(
-            //   Content,
-            //   _textFileAssetsLoader);
-            //_mousePointer = _assetsLoader.Sprites["manina"];
-            //     _soundManager = new fge.SoundManger_episodio1();
+            
+            
+            
+            
+            
 
             var loaderEpisodio1 = new Loader_episodio1(Content, GraphicsDevice);
             var soundManager = new SoundManager_episodio1(true, new Loader_menu(Content), loaderEpisodio1);
@@ -128,13 +128,13 @@ namespace Infart
 
             _orchestrator = new GameOrchestrator(
                 gameFactory,
-               // mainMenuFactory,
+               
                 GraphicsDevice,
                 _matrixScaleProvider,
                 _soundManager,
                 _webPageOpener);
 
-            // TODO Menu with rate me
+            
 
             _inputListeners = new List<IInputListener>();
 
@@ -156,7 +156,7 @@ namespace Infart
                 _inputListeners.Add(gamepadListener);
             }
 
-            // Perchè il back di Android lo prende la tastiera
+            
             var keyboardListener = new KeyboardListener();
             keyboardListener.KeyPressed += KeyboardListener_KeyPressed;
             _inputListeners.Add(keyboardListener);
@@ -170,9 +170,9 @@ namespace Infart
                 if (_orchestrator.ShouldEndApplication)
                 {
                     if (ExitGameRequested != null)
-                        ExitGameRequested(this, EventArgs.Empty); // Se ho un handler specifico, uso quello
+                        ExitGameRequested(this, EventArgs.Empty); 
                     else
-                        Exit(); // Devono ancora fixare il problema dell'uscita da Android
+                        Exit(); 
                 }
             }
         }
@@ -185,20 +185,20 @@ namespace Infart
                 if (_orchestrator.ShouldEndApplication)
                 {
                     if (ExitGameRequested != null)
-                        ExitGameRequested(this, EventArgs.Empty); // Se ho un handler specifico, uso quello
+                        ExitGameRequested(this, EventArgs.Empty); 
                     else
-                        Exit(); // Devono ancora fixare il problema dell'uscita da Android
+                        Exit(); 
                 }
             }
-            else if (e.Key == Keys.Back) // L'indietro di Android viene triggerato qui!
+            else if (e.Key == Keys.Back) 
             {
                 _orchestrator.Back();
                 if (_orchestrator.ShouldEndApplication)
                 {
                     if (ExitGameRequested != null)
-                        ExitGameRequested(this, EventArgs.Empty); // Se ho un handler specifico, uso quello
+                        ExitGameRequested(this, EventArgs.Empty); 
                     else
-                        Exit(); // Devono ancora fixare il problema dell'uscita da Android
+                        Exit(); 
                 }
             }
         }
@@ -276,14 +276,14 @@ namespace Infart
             {
                 if (!_orchestrator.IsPaused)
                 {
-                    //var mouseState = Mouse.GetState();
-                    //var mousePosition = new Vector2(mouseState.X - 32, mouseState.Y);
-                    //if (mouseState.X != 0 && mouseState.Y != 0)
-                    //{
-                    //    _spriteBatch.Begin();
-                    //    _spriteBatch.Draw(_mousePointer.Sheet, mousePosition, _mousePointer.SourceRectangle, Color.White);
-                    //    _spriteBatch.End();
-                    //}
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
             }
 

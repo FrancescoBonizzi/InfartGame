@@ -17,7 +17,7 @@ namespace Infart.WindowsDesktop
                 gameCulture: CultureInfo.CreateSpecificCulture("it-IT"),
                 isPc: true,
                 isFullScreen: false,
-                rateMeUri: new Uri("https://www.fbonizzi.it"),
+                rateMeUri: new Uri("https:
                 deviceWidth: 800, deviceHeight: 480))
             {
                 game.Run();

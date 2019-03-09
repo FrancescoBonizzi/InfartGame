@@ -25,14 +25,14 @@ namespace fge
 
         protected bool paused_;
 
-        // Devo cercare di mantenere questi punti fissi perché ci sia 
-        // un'esperienza di gioco complessiva
+        
+        
         protected InfartExplosion dead_explosion_;
         protected RecordExplosion record_explosion_;
 
         protected Random random_;
 
-        // rimetti tutto highscore
+        
         protected int high_score_;
         protected int score_scoregge_;
         protected bool new_high_score_ = false;
@@ -76,7 +76,7 @@ namespace fge
             font_ = Font;
             px_texture_ = PxTexture;
 
-            player_camera_ = Camera; //new Camera(Vector2.Zero, new Vector2(resolution_w_, resolution_h_));
+            player_camera_ = Camera; 
 
             dead_explosion_ = InfartExplosion;
             record_explosion_ = RecordExplosion;
@@ -162,7 +162,7 @@ namespace fge
         public void DecreaseParallaxSpeed()
         {
             background_.DecreaseParallaxSpeed();
-            //background_.DecreaseParallaxSpeed();
+            
         }
 
         public void IncreaseParallaxSpeed()
@@ -202,10 +202,10 @@ namespace fge
             {
                 PlayerCollidedWithNormalGemma();
             }
-            // Da fare base all'inizio nella funzione specializzata
+            
         }
 
-        //sound play quando aggiungi scoreggia
+        
 
         protected virtual void MakePlayerDead()
         {

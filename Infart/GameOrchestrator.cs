@@ -22,8 +22,8 @@ namespace Infart
         private readonly Func<InfartGame> _gameFactory;
         private InfartGame _game;
 
-        //private readonly Func<MainMenuPage> _menuFactory;
-        //private MainMenuPage _menu;
+        
+        
 
         private readonly IWebPageOpener _webPageOpener;
         private readonly GraphicsDevice _graphicsDevice;
@@ -37,20 +37,20 @@ namespace Infart
         public bool IsPaused { get; set; }
 
         private readonly TimeSpan _fadeDuration = TimeSpan.FromMilliseconds(800);
-        private readonly Uri _aboutUri = new Uri("https://www.fbonizzi.it");
+        private readonly Uri _aboutUri = new Uri("https:
 
         public GameOrchestrator(
              Func<InfartGame> gameFactory,
-             //Func<MainMenuPage> menuFactory,
+             
              GraphicsDevice graphicsDevice,
              IScreenTransformationMatrixProvider matrixScaleProvider,
              SoundManager soundManager,
              IWebPageOpener webPageOpener)
         {
             _gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));
-            //_menuFactory = menuFactory ?? throw new ArgumentNullException(nameof(menuFactory));
+            
             _webPageOpener = webPageOpener ?? throw new ArgumentNullException(nameof(webPageOpener));
-            //_soundManager = soundManager ?? throw new ArgumentNullException(nameof(soundManager));
+            
             _graphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
 
             _matrixScaleProvider = matrixScaleProvider ?? throw new ArgumentNullException(nameof(matrixScaleProvider));
@@ -71,10 +71,10 @@ namespace Infart
 
         public void Start()
         {
-            //_currentState = GameStates.Menu;
-            //_menu = _menuFactory();
-            //_stateTransition.FadeIn();
-            //_soundManager.PlayMenu();
+            
+            
+            
+            
 
             _currentState = GameStates.Playing;
             _game = _gameFactory();
@@ -83,25 +83,25 @@ namespace Infart
 
         public void SetMenuState()
         {
-            //if (_currentState == GameStates.Menu)
-            //    return;
+            
+            
 
-            //if (_stateTransition.IsFading)
-            //    return;
+            
+            
 
-            //_soundManager.StopSounds();
-            //_soundManager.PlayMenu();
+            
+            
 
-            //_stateTransition.FadeOut();
-            //_afterTransitionAction = new Action(
-            //    () =>
-            //    {
-            //        _stateTransition.FadeIn();
+            
+            
+            
+            
+            
 
-            //        _currentState = GameStates.Menu;
-            //        _game = null;
-            //        _menu = _menuFactory();
-            //    });
+            
+            
+            
+            
         }
 
         public void Replay()
@@ -114,7 +114,7 @@ namespace Infart
                     _stateTransition.FadeIn();
                     _currentState = GameStates.Playing;
                     _game = _gameFactory();
-                    //_menu = null;
+                    
                 });
         }
 
@@ -126,7 +126,7 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    //_menu.HandleInput(touchLocation.Value);
+                    
                     break;
 
                 case GameStates.Playing:
@@ -143,8 +143,8 @@ namespace Infart
             if (_stateTransition.IsFading)
                 return;
 
-            //_soundManager.StopSounds();
-            //_soundManager.PlayPlaying();
+            
+            
 
             Replay();
         }
@@ -177,7 +177,7 @@ namespace Infart
             {
                 case GameStates.Menu:
                     throw new NotImplementedException();
-                    //_menu.Update(elapsed);
+                    
                     break;
 
                 case GameStates.Playing:
@@ -190,14 +190,14 @@ namespace Infart
         {
             _game?.Resume();
             IsPaused = false;
-         //   _soundManager.ResumeAll();
+         
         }
 
         public void Pause()
         {
             _game?.Pause();
             IsPaused = true;
-      //      _soundManager.PauseAll();
+      
         }
 
         public void TogglePause()
@@ -212,8 +212,8 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    //ShouldEndApplication = true;
-                    //_soundManager.StopSounds();
+                    
+                    
                     throw new NotImplementedException();
                     break;
 
@@ -228,7 +228,7 @@ namespace Infart
             if (IsPaused)
                 return;
 
-            // Disegno tutto su un render target...
+            
             graphics.SetRenderTarget(_renderTarget);
             graphics.Clear(Color.Black);
 
@@ -236,7 +236,7 @@ namespace Infart
             {
                 case GameStates.Menu:
                     throw new NotImplementedException();
-                    //_menu.Draw(spriteBatch);
+                    
                     break;
 
                 case GameStates.Playing:
@@ -244,7 +244,7 @@ namespace Infart
                     break;
             }
 
-            // ...per poter fare il fade dei vari componenti in modo indipendente
+            
             graphics.SetRenderTarget(null);
             graphics.Clear(Color.Black);
             spriteBatch.Begin();

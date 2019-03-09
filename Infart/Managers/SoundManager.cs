@@ -10,7 +10,7 @@ namespace fge
     public abstract class SoundManager
     {
         
-        // Riferimenti ai suoni per le funzioni built-in di questa classe astratta
+        
         protected List<SoundEffectInstance> newgame_sounds_;
         protected List<SoundEffectInstance> all_sounds_;
 
@@ -33,10 +33,10 @@ namespace fge
         
 
         
-        // Suoni da aggiungere alla lista di quelli da far partire col new game
-        // Non serve il loader perché è già tutto caricato, è solo un riferimento
+        
+        
         protected abstract void AddNewGameSounds();
-        // Aggiunge i riferimenti ai suoni per gestire pause ecc
+        
         protected abstract void AddAllSounds(Loader loader);
 
         private void LoadScoregge(Loader_menu scoregge_loader)

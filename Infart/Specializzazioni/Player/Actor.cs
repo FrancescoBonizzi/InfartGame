@@ -1,12 +1,12 @@
-﻿//-----------------------------------------------------------------------------
-// Actor.cs
-//
-// Classe astratta che implementa comuni azioni come morire, saltare, e altre
-// E' valida per qualunque personaggio 
-//
-// fbonizzi_Game_Engine
-// Copyright (C) Francesco Bonizzi. All rights reserved.
-//-----------------------------------------------------------------------------
+﻿
+
+
+
+
+
+
+
+
 
 
 
@@ -35,7 +35,7 @@ namespace fge
         protected Actor(
             float depth,
             Vector2 starting_pos,
-            List<GameObject> CollidingObjs) // deve diventare templatico o specializzato
+            List<GameObject> CollidingObjs) 
             : base()
         {
             velocity_.Y = y_fall_speed_;
@@ -90,7 +90,7 @@ namespace fge
         
         private Vector2 collisionTest(Vector2 move_amount)
         {
-            // Attenzione! Si basa sul fatto che si muoverà solo a destra!
+            
             Rectangle afterMoveRect = collision_rectangle_;
             Vector2 corner1, corner2;
 
@@ -129,7 +129,7 @@ namespace fge
 
                 if (velocity_.Y > 0)
                 {
-                    // 2 Sono i pixel di offset perché l'animazione non è precisa
+                    
                     corner1 = new Vector2(
                         afterMoveRect.X + 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
@@ -137,7 +137,7 @@ namespace fge
                         afterMoveRect.X + afterMoveRect.Width - 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
 
-                    // Qui mi serve l'oggetto con cui ho colliso per porre l'oggetto al di sopra di esso
+                    
                     int coll_index = CollisionSolver.CheckCollisionsReturnCollidedObject(
                        new Rectangle(
                             (int)corner1.X,
@@ -153,7 +153,7 @@ namespace fge
                         move_amount.Y = 0;
                         velocity_.Y = 0;
 
-                        // 2 Sono i pixel di offset perché l'animazione non è precisa
+                        
                         position_ = new Vector2(
                             position_.X,
                             MathHelper.Lerp(

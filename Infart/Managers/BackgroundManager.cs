@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace fge
 {
-    // L'origine della texture dello sfondo è il punto in basso a sinistra
-    // così la dimensione della texture autodetermina la sua posizione 
-    // sull'asse y
+    
+    
+    
     public abstract class BackgroundManager
     {
         
@@ -51,7 +51,7 @@ namespace fge
         
         public virtual void Update(double gametime)
         {
-            // Se la telecamera si è mossa
+            
             if (old_camera_x_pos_ - current_camera_.Position.X < 0)
             {
                 parallax_dir_ = +1;
@@ -73,7 +73,7 @@ namespace fge
 
         public abstract void DrawSpecial(SpriteBatch spritebatch);
 
-        // Base.Draw() andrà sempre per primo
+        
         public virtual void Draw(SpriteBatch spritebatch)
         {
             spritebatch.Draw(

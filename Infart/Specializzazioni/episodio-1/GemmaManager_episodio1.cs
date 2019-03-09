@@ -79,7 +79,7 @@ namespace fge
             return false;
         }
 
-        //// Bool perché qui deve partire il merda explosion
+        
         public bool CheckMerdaCollisionWithPlayer(Player p)
         {
             if (broccolo_.Active)

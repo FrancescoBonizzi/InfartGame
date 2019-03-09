@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 
-// TODO
-// Texture reference e texture rectangle DEVONO finire nel gameobject
+
+
 
 namespace fge
 {

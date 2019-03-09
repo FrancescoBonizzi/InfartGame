@@ -65,7 +65,7 @@ namespace fge
         
 
         
-        // Attenzione!
+        
 
         public void Explode(Vector2 CenterPosition, bool WithText, SoundManager_episodio1 SoundManager)
         {

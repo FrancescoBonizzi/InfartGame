@@ -16,7 +16,7 @@ namespace fge
         JalapenoParticleSystem jalapeno_system_;
         BroccoloParticleSystem broccolo_system_;
 
-        // In ms
+        
         const double timeBetweenNewParticleScoregge_ = 30.0f;
         double timeTillNewParticleScoregge_ = 0.0f;
 

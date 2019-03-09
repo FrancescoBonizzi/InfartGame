@@ -58,7 +58,7 @@ namespace fge
 
             resolution_h_ = PlayerCamera.ViewPortHeight;
 
-            next_avaible_position_ = new Vector2(0.0f, resolution_h_); //480
+            next_avaible_position_ = new Vector2(0.0f, resolution_h_); 
 
             grattacieli_in_coda_ = new List<Grattacielo>();
             grattacieli_to_draw_ = new List<Grattacielo>();
@@ -107,7 +107,7 @@ namespace fge
             if (firstOne_pointer_ != null)
             {
                 current_camera_ = camera;
-                // Faccio tornare tutto all'inizio
+                
                 for (int i = 0; i < grattacieli_to_draw_.Count; ++i)
                 {
                     grattacieli_in_coda_.Add(grattacieli_to_draw_[i]);
@@ -130,7 +130,7 @@ namespace fge
                     grattacieli_in_coda_.RemoveAt(0);
                 }
 
-                next_avaible_position_ = new Vector2(0.0f, resolution_h_); //480
+                next_avaible_position_ = new Vector2(0.0f, resolution_h_); 
 
                 AddGrattacieloForDrawingInit();
             }
@@ -138,7 +138,7 @@ namespace fge
 
         private void LoadGrattacieli(string EntryName, Dictionary<string, Rectangle> GrattaRects, int GrattaNumber)
         {
-            for (int i = 1; i <= GrattaNumber; ++i) //69
+            for (int i = 1; i <= GrattaNumber; ++i) 
             {
                 Grattacielo tmp_obj =
                     new Grattacielo(
@@ -185,8 +185,8 @@ namespace fge
             {
                 Grattacielo g = grattacieli_to_draw_[i];
 
-                // Rimuovo e sposto in fondo alla coda se non è più visibile
-                // Si basa sul fatto che mi muoverò solo a destra!
+                
+                
                 g.Update(gametime);
 
                 if (ToBeRemoved(camera_position_x_, (int)g.Position.X, (int)g.Width))
@@ -207,13 +207,13 @@ namespace fge
 
         private void AddGrattacieloForDrawing()
         {
-            // La posizione l'aggiorno qua per evitare il sovrapporsi dei grattacieli
+            
             float camera_x_first = camera_position_x_;
             float camera_x_last = camera_x_first + camera_w_;
 
             while (grattacieli_to_draw_.Count < num_grattacieli_to_draw_
                 && grattacieli_in_coda_.Count > 0
-                //   && next_avaible_position_.X >= camera_x_first
+                
                 && next_avaible_position_.X <= camera_x_last)
             {
                 grattacieli_in_coda_[0].Position = next_avaible_position_;
@@ -230,7 +230,7 @@ namespace fge
                         game_manager_reference_.AddGemma(
                             (new Vector2(
                                   grattacieli_in_coda_[0].Position.X + 15,
-                                  resolution_h_ - grattacieli_in_coda_[0].Height - 70))); // Perchè ho messo in basso l'origine
+                                  resolution_h_ - grattacieli_in_coda_[0].Height - 70))); 
                     }
                     else
                         if (random_.NextDouble() < game_manager_reference_.PowerUpProbability)
