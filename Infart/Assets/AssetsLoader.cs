@@ -11,7 +11,7 @@ namespace Infart.Assets
 {
     public class AssetsLoader
     {
-        private ContentManager _contentManager;
+        private readonly ContentManager _contentManager;
 
         public Texture2D Textures { get; private set; }
         public Texture2D TexturesGrattaBack { get; private set; }

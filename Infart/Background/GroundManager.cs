@@ -11,77 +11,77 @@ namespace Infart.Background
 {
     public class GroundManager
     {
-        protected Random random_;
+        protected Random Random;
 
-        protected Camera current_camera_;
+        protected Camera CurrentCamera;
 
-        private GrattacieliAutogeneranti grattacieli_camminabili_ = null;
+        private readonly GrattacieliAutogeneranti _grattacieliCamminabili = null;
 
-        private float min_time_to_next_buco_ = 2000.0f;
+        private readonly float _minTimeToNextBuco = 2000.0f;
 
-        private float elapsed_ = 0.0f;
+        private float _elapsed = 0.0f;
 
-        private InfartGame game_manager_reference_;
+        private readonly InfartGame _gameManagerReference;
 
         public GroundManager(
-            Camera CurrentCamera,
-            AssetsLoader AssetsLoader,
-            InfartGame GameManagerReference)
+            Camera currentCamera,
+            AssetsLoader assetsLoader,
+            InfartGame gameManagerReference)
         {
-            current_camera_ = CurrentCamera;
-            random_ = fbonizziHelper.random;
+            this.CurrentCamera = currentCamera;
+            Random = FbonizziHelper.Random;
 
-            grattacieli_camminabili_ = new GrattacieliAutogeneranti(
-                AssetsLoader.TexturesGrattaGround,
-                AssetsLoader.TexturesRectangles,
+            _grattacieliCamminabili = new GrattacieliAutogeneranti(
+                assetsLoader.TexturesGrattaGround,
+                assetsLoader.TexturesRectangles,
                 "ground",
                 69,
-                CurrentCamera,
-                GameManagerReference);
+                currentCamera,
+                gameManagerReference);
 
-            game_manager_reference_ = GameManagerReference;
+            _gameManagerReference = gameManagerReference;
         }
 
         public List<GameObject> WalkableObjects()
         {
-            return grattacieli_camminabili_.DrawnObjectsList;
+            return _grattacieliCamminabili.DrawnObjectsList;
         }
 
         public void Reset(Camera camera)
         {
-            current_camera_ = camera;
-            grattacieli_camminabili_.Reset(camera);
-            elapsed_ = 0.0f;
+            CurrentCamera = camera;
+            _grattacieliCamminabili.Reset(camera);
+            _elapsed = 0.0f;
         }
 
         private void GenerateBuco()
         {
-            int first_x = (int)grattacieli_camminabili_.NextGrattacieloPosition.X;
-            int space = random_.Next((int)game_manager_reference_.LarghezzaBuchi.X, (int)game_manager_reference_.LarghezzaBuchi.Y);
+            int firstX = (int)_grattacieliCamminabili.NextGrattacieloPosition.X;
+            int space = Random.Next((int)_gameManagerReference.LarghezzaBuchi.X, (int)_gameManagerReference.LarghezzaBuchi.Y);
 
-            grattacieli_camminabili_.NextGrattacieloPosition = new Vector2(
-                first_x + space,
-                (int)grattacieli_camminabili_.NextGrattacieloPosition.Y);
+            _grattacieliCamminabili.NextGrattacieloPosition = new Vector2(
+                firstX + space,
+                (int)_grattacieliCamminabili.NextGrattacieloPosition.Y);
         }
 
         public void Update(double gametime)
         {
-            elapsed_ += (float)gametime;
-            if (elapsed_ >= min_time_to_next_buco_)
+            _elapsed += (float)gametime;
+            if (_elapsed >= _minTimeToNextBuco)
             {
-                if (random_.NextDouble() < game_manager_reference_.BucoProbability)
+                if (Random.NextDouble() < _gameManagerReference.BucoProbability)
                 {
                     GenerateBuco();
-                    elapsed_ = 0.0f;
+                    _elapsed = 0.0f;
                 }
             }
 
-            grattacieli_camminabili_.Update(gametime, current_camera_);
+            _grattacieliCamminabili.Update(gametime, CurrentCamera);
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            grattacieli_camminabili_.Draw(spritebatch);
+            _grattacieliCamminabili.Draw(spritebatch);
         }
     }
 }

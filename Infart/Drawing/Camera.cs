@@ -11,27 +11,27 @@ namespace Infart.Drawing
 
         public int ViewPortHeight;
 
-        private float zoom_ = 1.0f;
+        private float _zoom = 1.0f;
 
-        private Matrix transform_;
+        private Matrix _transform;
 
-        private float rotation_ = 0.0f;
+        private float _rotation = 0.0f;
 
-        private float moving_amount = 150.0f;
+        private readonly float _movingAmount = 150.0f;
 
-        private Vector2 velocity_ = Vector2.Zero;
+        private Vector2 _velocity = Vector2.Zero;
 
-        private Vector2 position_to_go_to_;
+        private Vector2 _positionToGoTo;
 
-        private float intorno_uguaglianza_ = 10.0f;
+        private readonly float _intornoUguaglianza = 10.0f;
 
-        private bool moving_ = false;
+        private bool _moving = false;
 
-        public Camera(Vector2 starting_position, Vector2 ViewPortSize, float zoom)
+        public Camera(Vector2 startingPosition, Vector2 viewPortSize, float zoom)
         {
-            Position = starting_position;
+            Position = startingPosition;
 
-            zoom_ = zoom;
+            _zoom = zoom;
 
             ViewPortWidth = 1000;
             ViewPortHeight = 600;
@@ -40,93 +40,93 @@ namespace Infart.Drawing
         public void Reset(Vector2 position)
         {
             Position = position;
-            moving_ = false;
+            _moving = false;
         }
 
         public float Zoom
         {
-            get { return zoom_; }
+            get { return _zoom; }
             set
             {
-                zoom_ = value;
-                if (zoom_ < 0.1f) zoom_ = 0.1f;
+                _zoom = value;
+                if (_zoom < 0.1f) _zoom = 0.1f;
             }
         }
 
         public float Rotation
         {
-            get { return rotation_; }
-            set { rotation_ = value; }
+            get { return _rotation; }
+            set { _rotation = value; }
         }
 
         public void MoveTo(Vector2 where)
         {
-            position_to_go_to_ = where;
+            _positionToGoTo = where;
 
-            int x_dir;
+            int xDir;
             if (Position.X < where.X)
-                x_dir = +1;
+                xDir = +1;
             else if (Position.X > where.X)
-                x_dir = -1;
-            else x_dir = 0;
+                xDir = -1;
+            else xDir = 0;
 
-            int y_dir;
+            int yDir;
             if (Position.Y < where.Y)
-                y_dir = +1;
+                yDir = +1;
             else if (Position.Y > where.Y)
-                y_dir = -1;
-            else y_dir = 0;
+                yDir = -1;
+            else yDir = 0;
 
-            velocity_ = new Vector2(
-                moving_amount * x_dir,
-                moving_amount * y_dir);
+            _velocity = new Vector2(
+                _movingAmount * xDir,
+                _movingAmount * yDir);
 
-            moving_ = true;
+            _moving = true;
         }
 
         public Vector2 ScreenToWorld(Vector2 pos)
         {
-            return Vector2.Transform(pos, Matrix.Invert(transform_));
+            return Vector2.Transform(pos, Matrix.Invert(_transform));
         }
 
         public Vector2 WorldToScreen(Vector2 pos)
         {
-            return Vector2.Transform(pos, transform_);
+            return Vector2.Transform(pos, _transform);
         }
 
         public Matrix GetTransformation()
         {
-            transform_ =
+            _transform =
               Matrix.CreateTranslation(
                     new Vector3(-Position.X, -Position.Y, 0)) *
-                    Matrix.CreateRotationZ(rotation_) *
+                    Matrix.CreateRotationZ(_rotation) *
                     Matrix.CreateScale(new Vector3(Zoom, Zoom, 1));
-            return transform_;
+            return _transform;
         }
 
         public void Update(double gametime)
         {
-            if (moving_)
+            if (_moving)
             {
-                if (position_to_go_to_ != Position)
+                if (_positionToGoTo != Position)
                 {
                     float elapsed = (float)gametime / 1000.0f;
-                    Position += velocity_ * elapsed;
+                    Position += _velocity * elapsed;
 
-                    if (Math.Abs(Position.X - position_to_go_to_.X) < intorno_uguaglianza_)
+                    if (Math.Abs(Position.X - _positionToGoTo.X) < _intornoUguaglianza)
                     {
-                        Position.X = position_to_go_to_.X;
-                        velocity_.X = 0.0f;
+                        Position.X = _positionToGoTo.X;
+                        _velocity.X = 0.0f;
                     }
 
-                    if (Math.Abs(Position.Y - position_to_go_to_.Y) < intorno_uguaglianza_)
+                    if (Math.Abs(Position.Y - _positionToGoTo.Y) < _intornoUguaglianza)
                     {
-                        Position.Y = position_to_go_to_.Y;
-                        velocity_.Y = 0.0f;
+                        Position.Y = _positionToGoTo.Y;
+                        _velocity.Y = 0.0f;
                     }
                 }
                 else
-                    moving_ = false;
+                    _moving = false;
             }
         }
     }

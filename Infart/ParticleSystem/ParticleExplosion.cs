@@ -5,33 +5,33 @@ namespace Infart.ParticleSystem
 {
     public class ParticleExplosion
     {
-        private Texture2D texture_;
+        private readonly Texture2D _texture;
 
-        private Rectangle texture_rectangle_;
+        private readonly Rectangle _textureRectangle;
 
-        public Vector2 position_;
+        public Vector2 Position;
 
-        private Vector2 velocity_;
+        private Vector2 _velocity;
 
-        private float angle_;
+        private float _angle;
 
-        private float angular_velocity_;
+        private float _angularVelocity;
 
-        private Color color_;
+        private Color _color;
 
-        private float scale_;
+        private float _scale;
 
-        private int TTL_;
+        private int _ttl;
 
-        private Vector2 origin_;
+        private readonly Vector2 _origin;
 
-        private bool fading_ = false;
+        private bool _fading = false;
 
-        private bool active_ = false;
+        private bool _active = false;
 
         public ParticleExplosion(
             Texture2D texture,
-            Rectangle texture_rectangle,
+            Rectangle textureRectangle,
             Vector2 position,
             Vector2 velocity,
             float angle,
@@ -40,20 +40,20 @@ namespace Infart.ParticleSystem
             float size,
             int ttl)
         {
-            texture_ = texture;
-            texture_rectangle_ = texture_rectangle;
-            position_ = position;
-            velocity_ = velocity;
-            angle_ = angle;
-            angular_velocity_ = angularVelocity;
-            color_ = color;
-            scale_ = size;
-            TTL_ = ttl;
+            _texture = texture;
+            _textureRectangle = textureRectangle;
+            Position = position;
+            _velocity = velocity;
+            _angle = angle;
+            _angularVelocity = angularVelocity;
+            _color = color;
+            _scale = size;
+            _ttl = ttl;
 
-            fading_ = false;
-            active_ = true;
+            _fading = false;
+            _active = true;
 
-            origin_ = new Vector2(texture_rectangle_.Width / 2, texture_rectangle_.Height / 2);
+            _origin = new Vector2(_textureRectangle.Width / 2, _textureRectangle.Height / 2);
         }
 
         public void Initialize(
@@ -65,16 +65,16 @@ namespace Infart.ParticleSystem
              float size,
              int ttl)
         {
-            position_ = position;
-            velocity_ = velocity;
-            angle_ = angle;
-            angular_velocity_ = angularVelocity;
-            color_ = color;
-            scale_ = size;
-            TTL_ = ttl;
+            Position = position;
+            _velocity = velocity;
+            _angle = angle;
+            _angularVelocity = angularVelocity;
+            _color = color;
+            _scale = size;
+            _ttl = ttl;
 
-            active_ = true;
-            fading_ = false;
+            _active = true;
+            _fading = false;
         }
 
         public void Refactor(
@@ -85,60 +85,54 @@ namespace Infart.ParticleSystem
             float size,
             int ttl)
         {
-            velocity_ = velocity;
-            angle_ = angle;
-            angular_velocity_ = angularVelocity;
-            color_ = color;
-            scale_ = size;
-            TTL_ = ttl;
+            _velocity = velocity;
+            _angle = angle;
+            _angularVelocity = angularVelocity;
+            _color = color;
+            _scale = size;
+            _ttl = ttl;
 
-            fading_ = false;
-            active_ = true;
+            _fading = false;
+            _active = true;
         }
-
-        public Vector2 Position
-        {
-            get { return position_; }
-            set { position_ = value; }
-        }
-
+        
         public float Scale
         {
-            get { return scale_; }
-            set { scale_ = value; }
+            get { return _scale; }
+            set { _scale = value; }
         }
 
         public bool IsDead
         {
-            get { return !active_; }
+            get { return !_active; }
         }
 
         public void Fade()
         {
-            fading_ = true;
+            _fading = true;
         }
 
         public void Update(double gameTime)
         {
-            if (active_)
+            if (_active)
             {
                 float elapsed = (float)gameTime / 1000.0f;
 
-                --TTL_;
-                position_ += velocity_ * elapsed;
-                angle_ += angular_velocity_ * elapsed;
+                --_ttl;
+                Position += _velocity * elapsed;
+                _angle += _angularVelocity * elapsed;
 
-                if (!fading_ && TTL_ <= 0)
+                if (!_fading && _ttl <= 0)
                 {
-                    fading_ = true;
+                    _fading = true;
                 }
 
-                if (fading_)
+                if (_fading)
                 {
-                    color_ *= 0.95f;
-                    if (color_.A <= 50)
+                    _color *= 0.95f;
+                    if (_color.A <= 50)
                     {
-                        active_ = false;
+                        _active = false;
                     }
                 }
             }
@@ -146,16 +140,16 @@ namespace Infart.ParticleSystem
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (active_)
+            if (_active)
             {
                 spriteBatch.Draw(
-                    texture_,
-                    position_,
-                    texture_rectangle_,
-                    color_,
-                    angle_,
-                    origin_,
-                    scale_,
+                    _texture,
+                    Position,
+                    _textureRectangle,
+                    _color,
+                    _angle,
+                    _origin,
+                    _scale,
                     SpriteEffects.None,
                     0f);
             }

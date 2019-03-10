@@ -5,34 +5,34 @@ namespace Infart.ParticleSystem
 {
     public class BroccoloParticleSystem : ParticleSystem
     {
-        public BroccoloParticleSystem(int Density,
-            AssetsLoader AssetsLoader)
-            : base(Density, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["BroccoloParticle"])
+        public BroccoloParticleSystem(int density,
+            AssetsLoader assetsLoader)
+            : base(density, assetsLoader.Textures, assetsLoader.TexturesRectangles["BroccoloParticle"])
         {
         }
 
         protected override void InitializeConstants()
         {
-            min_initial_speed_ = 50.0f;
-            max_initial_speed_ = 80.0f;
+            MinInitialSpeed = 50.0f;
+            MaxInitialSpeed = 80.0f;
 
-            min_acceleration_ = 30.0f;
-            max_acceleration_ = 50.0f;
+            MinAcceleration = 30.0f;
+            MaxAcceleration = 50.0f;
 
-            min_lifetime_ = 0.5f;
-            max_lifetime_ = 0.7f;
+            MinLifetime = 0.5f;
+            MaxLifetime = 0.7f;
 
-            min_scale_ = .5f;
-            max_scale_ = 1.0f;
+            MinScale = .5f;
+            MaxScale = 1.0f;
 
-            min_spawn_angle_ = 195.0f;
-            max_spawn_angle_ = 280.0f;
+            MinSpawnAngle = 195.0f;
+            MaxSpawnAngle = 280.0f;
 
-            min_num_particles_ = 4;
-            max_num_particles_ = 8;
+            MinNumParticles = 4;
+            MaxNumParticles = 8;
 
-            min_rotation_speed_ = -MathHelper.PiOver4 / 2.0f;
-            max_rotation_speed_ = MathHelper.PiOver4 / 2.0f;
+            MinRotationSpeed = -MathHelper.PiOver4 / 2.0f;
+            MaxRotationSpeed = MathHelper.PiOver4 / 2.0f;
         }
 
         protected override void InitializeParticle(Particle p, Vector2 where)

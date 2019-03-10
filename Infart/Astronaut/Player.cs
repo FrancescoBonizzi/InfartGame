@@ -5,80 +5,81 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using Infart.Drawing;
 
 namespace Infart.Astronaut
 {
     public class Player : Actor
     {
-        private ScoreggiaParticleSystem scoreggia_system_;
+        private readonly ScoreggiaParticleSystem _scoreggiaSystem;
 
-        private JalapenoParticleSystem jalapeno_system_;
+        private readonly JalapenoParticleSystem _jalapenoSystem;
 
-        private BroccoloParticleSystem broccolo_system_;
+        private readonly BroccoloParticleSystem _broccoloSystem;
 
-        private InfartGame game_manager_reference_;
+        private readonly InfartGame _gameManagerReference;
 
-        private const double timeBetweenNewParticleScoregge_ = 30.0f;
+        private const double TimeBetweenNewParticleScoregge = 30.0f;
 
-        private double timeTillNewParticleScoregge_ = 0.0f;
+        private double _timeTillNewParticleScoregge = 0.0f;
 
-        private const double timeBetweenNewParticleJalapeno_ = 20.0f;
+        private const double TimeBetweenNewParticleJalapeno = 20.0f;
 
-        private double timeTillNewParticleJalapeno_ = 0.0f;
+        private double _timeTillNewParticleJalapeno = 0.0f;
 
-        private const double timeBetweenNewParticleBroccolo_ = 80.0f;
+        private const double TimeBetweenNewParticleBroccolo = 80.0f;
 
-        private double timeTillNewParticleBroccolo_ = 0.0f;
+        private double _timeTillNewParticleBroccolo = 0.0f;
 
-        private static Random rand_;
+        private static Random _rand;
 
-        private bool allow_input_ = true;
+        private bool _allowInput = true;
 
-        private bool jalapenos_ = false;
+        private bool _jalapenos = false;
 
-        private int jalapenos_jump_count_ = 0;
+        private int _jalapenosJumpCount = 0;
 
-        private bool broccolo_ = false;
+        private bool _broccolo = false;
 
-        private double elapsed_jalapenos_ = 0.0;
+        private double _elapsedJalapenos = 0.0;
 
-        private double elapsed_broccolo_ = 0.0;
+        private double _elapsedBroccolo = 0.0;
 
-        private Color fill_color_;
+        private Color _fillColor;
 
         public Player(
-            Vector2 starting_pos,
-            AssetsLoader AssetsLoader,
-            InfartGame GameManagerReference)
-            : base(1.0f, starting_pos, GameManagerReference.GroundObjects())
+            Vector2 startingPos,
+            AssetsLoader assetsLoader,
+            InfartGame gameManagerReference)
+            : base(1.0f, startingPos, gameManagerReference.GroundObjects())
         {
-            fill_color_ = overlay_color_;
-            Position = starting_pos;
+            _fillColor = OverlayColor;
+            Position = startingPos;
             HorizontalMoveSpeed = 300f;
             Origin = Vector2.Zero;
 
-            game_manager_reference_ = GameManagerReference;
+            _gameManagerReference = gameManagerReference;
 
-            scoreggia_system_ = new ScoreggiaParticleSystem(10, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["ScoreggiaParticle"]);
-            jalapeno_system_ = new JalapenoParticleSystem(10, AssetsLoader);
-            broccolo_system_ = new BroccoloParticleSystem(8, AssetsLoader);
+            _scoreggiaSystem = new ScoreggiaParticleSystem(10, assetsLoader.Textures, assetsLoader.TexturesRectangles["ScoreggiaParticle"]);
+            _jalapenoSystem = new JalapenoParticleSystem(10, assetsLoader);
+            _broccoloSystem = new BroccoloParticleSystem(8, assetsLoader);
 
-            rand_ = fbonizziHelper.random;
+            _rand = FbonizziHelper.Random;
 
-            LoadAnimation("idle", AssetsLoader.PlayerIdleRects,
-                true, 0.1f, AssetsLoader.Textures);
+            LoadAnimation("idle", assetsLoader.PlayerIdleRects,
+                true, 0.1f, assetsLoader.Textures);
 
-            LoadAnimation("run", AssetsLoader.PlayerRunRects,
-                true, 0.05f, AssetsLoader.Textures);
+            LoadAnimation("run", assetsLoader.PlayerRunRects,
+                true, 0.05f, assetsLoader.Textures);
 
-            LoadAnimation("fall", AssetsLoader.PlayerFallRects,
-                true, 0.01f, AssetsLoader.Textures);
+            LoadAnimation("fall", assetsLoader.PlayerFallRects,
+                true, 0.01f, assetsLoader.Textures);
 
-            LoadAnimation("fart_sustain_up", AssetsLoader.PlayerFartRects,
-                true, 0.05f, AssetsLoader.Textures);
+            LoadAnimation("fart_sustain_up", assetsLoader.PlayerFartRects,
+                true, 0.05f, assetsLoader.Textures);
 
-            LoadAnimation("merdone", AssetsLoader.PlayerMerdaRects,
-                true, 0.01f, AssetsLoader.Textures);
+            LoadAnimation("merdone", assetsLoader.PlayerMerdaRects,
+                true, 0.01f, assetsLoader.Textures);
 
             PlayAnimation("fall");
         }
@@ -86,121 +87,121 @@ namespace Infart.Astronaut
         protected void LoadAnimation(
             string name,
             List<Rectangle> frames,
-            bool loop_animation,
-            float frame_lenght,
-            Texture2D TextureReference)
+            bool loopAnimation,
+            float frameLenght,
+            Texture2D textureReference)
         {
-            animations_.Add(
+            Animations.Add(
                name,
                new AnimationManager(
                     frames,
                     name,
-                    TextureReference
+                    textureReference
                ));
-            animations_[name].LoopAnimation = loop_animation;
-            animations_[name].FrameLength = frame_lenght;
+            Animations[name].LoopAnimation = loopAnimation;
+            Animations[name].FrameLength = frameLenght;
         }
 
         public void Reset(Vector2 position)
         {
-            position_ = position;
+            ((GameObject) this).Position = position;
             Dead = false;
-            jalapenos_ = false;
-            jalapenos_jump_count_ = 0;
-            broccolo_ = false;
-            elapsed_jalapenos_ = 0.0;
-            elapsed_broccolo_ = 0.0;
-            fill_color_ = Color.White;
+            _jalapenos = false;
+            _jalapenosJumpCount = 0;
+            _broccolo = false;
+            _elapsedJalapenos = 0.0;
+            _elapsedBroccolo = 0.0;
+            _fillColor = Color.White;
             HorizontalMoveSpeed = 300f;
-            animations_["run"].FrameLength = 0.05f;
-            velocity_ = Vector2.Zero;
+            Animations["run"].FrameLength = 0.05f;
+            Velocity = Vector2.Zero;
             PlayAnimation("fall");
         }
 
         public bool JalapenosJump
         {
-            get { return jalapenos_; }
+            get { return _jalapenos; }
         }
 
         public bool IsCulating
         {
-            get { return current_animation_ == "culata"; }
+            get { return CurrentAnimation == "culata"; }
         }
 
         public void Jump(float amount)
         {
-            velocity_.Y = -amount;
+            Velocity.Y = -amount;
 
-            game_manager_reference_.PlayerJumped();
-            game_manager_reference_.AddScoreggia();
+            _gameManagerReference.PlayerJumped();
+            _gameManagerReference.AddScoreggia();
         }
 
         public void IncreaseMoveSpeed()
         {
-            x_move_speed_ += 40.0f;
-            animations_["run"].FrameLength -= 0.005f;
+            XMoveSpeed += 40.0f;
+            Animations["run"].FrameLength -= 0.005f;
         }
 
         public bool AllowInput
         {
-            set { allow_input_ = value; }
+            set { _allowInput = value; }
         }
 
         public void ActivateJalapenos()
         {
             Jump(500);
-            jalapenos_ = true;
-            elapsed_jalapenos_ = 0.0;
+            _jalapenos = true;
+            _elapsedJalapenos = 0.0;
             HorizontalMoveSpeed += 200.0f;
-            fill_color_ = Color.DarkRed;
-            game_manager_reference_.IncreaseParallaxSpeed();
-            jalapenos_jump_count_ = 0;
+            _fillColor = Color.DarkRed;
+            _gameManagerReference.IncreaseParallaxSpeed();
+            _jalapenosJumpCount = 0;
         }
 
         public void DeactivateJalapenos()
         {
-            elapsed_jalapenos_ = 0.0;
-            jalapenos_ = false;
-            game_manager_reference_.jalapenos_mode_active_ = false;
+            _elapsedJalapenos = 0.0;
+            _jalapenos = false;
+            _gameManagerReference.JalapenosModeActive = false;
             HorizontalMoveSpeed -= 200.0f;
-            fill_color_ = overlay_color_;
-            game_manager_reference_.DecreaseParallaxSpeed();
+            _fillColor = OverlayColor;
+            _gameManagerReference.DecreaseParallaxSpeed();
         }
 
         public void ActivateBroccolo()
         {
-            elapsed_broccolo_ = 0.0;
-            fill_color_ = Color.Brown;
-            broccolo_ = true;
+            _elapsedBroccolo = 0.0;
+            _fillColor = Color.Brown;
+            _broccolo = true;
             Jump(200);
             HorizontalMoveSpeed += 400.0f;
 
-            game_manager_reference_.IncreaseParallaxSpeed();
-            game_manager_reference_.IncreaseParallaxSpeed();
+            _gameManagerReference.IncreaseParallaxSpeed();
+            _gameManagerReference.IncreaseParallaxSpeed();
         }
 
         public void DeactivateBroccolo()
         {
-            broccolo_ = false;
-            game_manager_reference_.merda_mode_active_ = false;
-            elapsed_broccolo_ = 0.0;
+            _broccolo = false;
+            _gameManagerReference.MerdaModeActive = false;
+            _elapsedBroccolo = 0.0;
             HorizontalMoveSpeed -= 400.0f;
-            fill_color_ = overlay_color_;
-            game_manager_reference_.DecreaseParallaxSpeed();
-            game_manager_reference_.DecreaseParallaxSpeed();
+            _fillColor = OverlayColor;
+            _gameManagerReference.DecreaseParallaxSpeed();
+            _gameManagerReference.DecreaseParallaxSpeed();
         }
 
         public void HandleInput()
         {
-            if (jalapenos_)
+            if (_jalapenos)
             {
-                if (jalapenos_jump_count_ < 1)
+                if (_jalapenosJumpCount < 1)
                 {
-                    ++jalapenos_jump_count_;
+                    ++_jalapenosJumpCount;
                     Jump(800);
                 }
             }
-            else if (broccolo_)
+            else if (_broccolo)
                 Jump(500);
             else
             {
@@ -211,56 +212,56 @@ namespace Infart.Astronaut
 
         public override void Update(double dt)
         {
-            if (!dead_)
+            if (!Dead)
             {
-                string new_animation_ = "run";
+                string newAnimation = "run";
 
-                if (allow_input_)
+                if (_allowInput)
                 {
                     FlipEffect = SpriteEffects.None;
-                    velocity_.X = +HorizontalMoveSpeed;
+                    Velocity.X = +HorizontalMoveSpeed;
                 }
                 else
                 {
-                    new_animation_ = "idle";
+                    newAnimation = "idle";
                 }
 
                 if (!OnGround)
                 {
-                    if (velocity_.Y < 0)
+                    if (Velocity.Y < 0)
                     {
-                        new_animation_ = "fart_sustain_up";
+                        newAnimation = "fart_sustain_up";
                     }
-                    else if (current_animation_ == "fart_sustain_up" || current_animation_ == "fall")
+                    else if (CurrentAnimation == "fart_sustain_up" || CurrentAnimation == "fall")
                     {
-                        new_animation_ = "fall";
+                        newAnimation = "fall";
                     }
                 }
 
-                if (broccolo_)
-                    new_animation_ = "merdone";
+                if (_broccolo)
+                    newAnimation = "merdone";
 
-                if (new_animation_ != current_animation_)
+                if (newAnimation != CurrentAnimation)
                 {
-                    PlayAnimation(new_animation_);
-                    if (new_animation_ == "merdone")
-                        collision_rectangle_.Width -= 120;
+                    PlayAnimation(newAnimation);
+                    if (newAnimation == "merdone")
+                        _collisionRectangle.Width -= 120;
                 }
 
-                scoreggia_system_.Update(dt);
-                jalapeno_system_.Update(dt);
-                broccolo_system_.Update(dt);
+                _scoreggiaSystem.Update(dt);
+                _jalapenoSystem.Update(dt);
+                _broccoloSystem.Update(dt);
 
-                if (jalapenos_ && !broccolo_)
+                if (_jalapenos && !_broccolo)
                     JalapenoGeneration(dt);
-                else if (!jalapenos_ && broccolo_)
+                else if (!_jalapenos && _broccolo)
                     BroccoloGeneration(dt);
                 else
                     ScoreggiaGeneration(dt);
 
                 if (!Dead)
                 {
-                    game_manager_reference_.score_metri_ = ((int)(position_.X / 100));
+                    _gameManagerReference.ScoreMetri = ((int)(((GameObject) this).Position.X / 100));
                 }
             }
 
@@ -270,88 +271,88 @@ namespace Infart.Astronaut
         private void JalapenoGeneration(double dt)
         {
             if (OnGround)
-                jalapenos_jump_count_ = 0;
+                _jalapenosJumpCount = 0;
 
-            elapsed_jalapenos_ += dt;
-            if (elapsed_jalapenos_ >= game_manager_reference_.PeperoncinoDuration)
+            _elapsedJalapenos += dt;
+            if (_elapsedJalapenos >= _gameManagerReference.PeperoncinoDuration)
                 DeactivateJalapenos();
 
-            timeTillNewParticleJalapeno_ -= dt;
-            if (timeTillNewParticleJalapeno_ < 0)
+            _timeTillNewParticleJalapeno -= dt;
+            if (_timeTillNewParticleJalapeno < 0)
             {
-                Vector2 where = position_ + new Vector2(
-                   animations_[current_animation_].FrameWidth / 3,
-                   (animations_[current_animation_].FrameHeight / 2) + 30);
+                Vector2 where = ((GameObject) this).Position + new Vector2(
+                   Animations[CurrentAnimation].FrameWidth / 3,
+                   (Animations[CurrentAnimation].FrameHeight / 2) + 30);
 
-                jalapeno_system_.AddParticles(where);
+                _jalapenoSystem.AddParticles(where);
 
-                timeTillNewParticleJalapeno_ = timeBetweenNewParticleJalapeno_;
+                _timeTillNewParticleJalapeno = TimeBetweenNewParticleJalapeno;
             }
         }
 
         private void BroccoloGeneration(double dt)
         {
-            elapsed_broccolo_ += dt;
-            if (elapsed_broccolo_ >= game_manager_reference_.BroccoloDuration)
+            _elapsedBroccolo += dt;
+            if (_elapsedBroccolo >= _gameManagerReference.BroccoloDuration)
                 DeactivateBroccolo();
 
-            timeTillNewParticleBroccolo_ -= dt;
-            if (timeTillNewParticleBroccolo_ < 0)
+            _timeTillNewParticleBroccolo -= dt;
+            if (_timeTillNewParticleBroccolo < 0)
             {
-                Vector2 where = position_ + new Vector2(
-                   animations_[current_animation_].FrameWidth / 3,
-                   (animations_[current_animation_].FrameHeight / 2) + 30);
+                Vector2 where = ((GameObject) this).Position + new Vector2(
+                   Animations[CurrentAnimation].FrameWidth / 3,
+                   (Animations[CurrentAnimation].FrameHeight / 2) + 30);
 
-                broccolo_system_.AddParticles(where);
+                _broccoloSystem.AddParticles(where);
 
-                timeTillNewParticleBroccolo_ = timeBetweenNewParticleBroccolo_;
+                _timeTillNewParticleBroccolo = TimeBetweenNewParticleBroccolo;
             }
         }
 
         private void ScoreggiaGeneration(double dt)
         {
-            if (velocity_.Y < 0)
+            if (Velocity.Y < 0)
             {
-                timeTillNewParticleScoregge_ -= dt;
-                if (timeTillNewParticleScoregge_ < 0)
+                _timeTillNewParticleScoregge -= dt;
+                if (_timeTillNewParticleScoregge < 0)
                 {
-                    Vector2 where = position_ + new Vector2(
-                       animations_[current_animation_].FrameWidth / 3,
-                       (animations_[current_animation_].FrameHeight / 2) + 30);
+                    Vector2 where = ((GameObject) this).Position + new Vector2(
+                       Animations[CurrentAnimation].FrameWidth / 3,
+                       (Animations[CurrentAnimation].FrameHeight / 2) + 30);
 
-                    scoreggia_system_.AddParticles(where);
+                    _scoreggiaSystem.AddParticles(where);
 
-                    timeTillNewParticleScoregge_ = timeBetweenNewParticleScoregge_;
+                    _timeTillNewParticleScoregge = TimeBetweenNewParticleScoregge;
                 }
             }
             else
-                game_manager_reference_.StopScoreggia();
+                _gameManagerReference.StopScoreggia();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (animations_.ContainsKey(current_animation_))
+            if (Animations.ContainsKey(CurrentAnimation))
             {
                 spriteBatch.Draw(
-                    animations_[current_animation_].Texture,
-                    position_,
-                    animations_[current_animation_].FrameRectangle,
-                    fill_color_,
-                    rotation_,
-                    origin_,
-                    scale_,
-                    flip_,
-                    depth_);
+                    Animations[CurrentAnimation].Texture,
+                    ((GameObject) this).Position,
+                    Animations[CurrentAnimation].FrameRectangle,
+                    _fillColor,
+                    Rotation,
+                    Origin,
+                    Scale,
+                    Flip,
+                    Depth);
             }
         }
 
         public void DrawParticles(SpriteBatch spriteBatch)
         {
-            if (!dead_)
+            if (!Dead)
             {
-                scoreggia_system_.Draw(spriteBatch);
-                jalapeno_system_.Draw(spriteBatch);
-                broccolo_system_.Draw(spriteBatch);
+                _scoreggiaSystem.Draw(spriteBatch);
+                _jalapenoSystem.Draw(spriteBatch);
+                _broccoloSystem.Draw(spriteBatch);
             }
         }
     }

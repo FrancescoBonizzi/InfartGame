@@ -5,56 +5,62 @@ namespace Infart.Drawing
 {
     public class SingleTextureGameObject : GameObject
     {
-        private Texture2D texture_;
+        private readonly Texture2D _texture;
 
-        private int width_;
+        private readonly int _width;
 
-        private int height_;
+        private readonly int _height;
 
-        private Rectangle texture_bounds_;
+        private readonly Rectangle _textureBounds;
 
-        protected Rectangle collision_rectangle_;
+        private Rectangle _collisionRectangle;
+
+
+        public override Rectangle CollisionRectangle
+        {
+            get => _collisionRectangle;
+        }
 
         public SingleTextureGameObject(Texture2D texture)
         {
-            texture_ = texture;
-            width_ = texture.Width;
-            height_ = texture.Height;
-            collision_rectangle_ = new Rectangle(0, 0, width_, height_);
-            texture_bounds_ = texture_.Bounds;
+            _texture = texture;
+            _width = texture.Width;
+            _height = texture.Height;
+            _collisionRectangle = new Rectangle(0, 0, _width, _height);
+            _textureBounds = _texture.Bounds;
         }
 
         public SingleTextureGameObject(
             Texture2D texture,
-            Vector2 starting_position)
+            Vector2 startingPosition)
             : this(texture)
         {
-            position_ = starting_position;
-            collision_rectangle_.X = (int)starting_position.X;
-            collision_rectangle_.Y = (int)starting_position.Y;
+            base.Position = startingPosition;
+            _collisionRectangle.X = (int)startingPosition.X;
+            _collisionRectangle.Y = (int)startingPosition.Y;
         }
 
         public SingleTextureGameObject(
             Texture2D texture,
-            Vector2 starting_position,
-            Color overlay_color)
-            : this(texture, starting_position)
+            Vector2 startingPosition,
+            Color overlayColor)
+            : this(texture, startingPosition)
         {
-            overlay_color_ = overlay_color;
+            OverlayColor = overlayColor;
         }
 
         public SingleTextureGameObject(
             Texture2D texture,
-            Vector2 starting_position,
-            Color fill_color,
+            Vector2 startingPosition,
+            Color fillColor,
             Vector2 origin,
             Vector2 scale
             )
-            : this(texture, starting_position)
+            : this(texture, startingPosition)
         {
-            overlay_color_ = fill_color;
-            origin_ = origin;
-            scale_ = scale;
+            OverlayColor = fillColor;
+            Origin = origin;
+            Scale = scale;
         }
 
         public override void Dispose()
@@ -63,50 +69,46 @@ namespace Infart.Drawing
 
         public override Vector2 Position
         {
-            get { return position_; }
+            get { return base.Position; }
             set
             {
-                collision_rectangle_.X = (int)value.X;
-                collision_rectangle_.Y = (int)value.Y;
-                position_ = value;
+                _collisionRectangle.X = (int)value.X;
+                _collisionRectangle.Y = (int)value.Y;
+                base.Position = value;
             }
         }
 
-        public override Rectangle CollisionRectangle
-        {
-            get { return collision_rectangle_; }
-        }
 
         public int Width
         {
-            get { return width_; }
+            get { return _width; }
         }
 
         public int Height
         {
-            get { return height_; }
+            get { return _height; }
         }
 
         public Texture2D Texture
         {
-            get { return texture_; }
+            get { return _texture; }
         }
 
         public Color[] PixelArray
         {
             get
             {
-                Color[] pixels = new Color[width_ * height_];
-                texture_.GetData(
+                Color[] pixels = new Color[_width * _height];
+                _texture.GetData(
                     0,
                     new Rectangle(
                     0,
                     0,
-                    width_,
-                    height_),
+                    _width,
+                    _height),
                 pixels,
                 0,
-                width_ * height_);
+                _width * _height);
 
                 return pixels;
             }
@@ -119,15 +121,15 @@ namespace Infart.Drawing
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                texture_,
-                position_,
-                texture_bounds_,
-                overlay_color_,
-                rotation_,
-                origin_,
-                scale_,
-                flip_,
-                depth_);
+                _texture,
+                base.Position,
+                _textureBounds,
+                OverlayColor,
+                Rotation,
+                Origin,
+                Scale,
+                Flip,
+                Depth);
         }
     }
 }

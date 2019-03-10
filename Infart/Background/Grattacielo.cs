@@ -6,42 +6,42 @@ namespace Infart.Background
 {
     public class Grattacielo : GameObject
     {
-        private readonly int h_;
+        private readonly int _h;
 
-        private readonly int one_block_height_ = 25;
+        private readonly int _oneBlockHeight = 25;
 
-        private readonly int w_grattacielo_;
+        private readonly int _wGrattacielo;
 
-        private Rectangle collision_rectangle_;
+        private Rectangle _collisionRectangle;
 
-        private Rectangle texture_rectangle_;
+        private readonly Rectangle _textureRectangle;
 
-        private readonly Texture2D texture_reference_;
+        private readonly Texture2D _textureReference;
 
-        public Grattacielo(Rectangle TextureRectangle, Texture2D TextureReference)
+        public Grattacielo(Rectangle textureRectangle, Texture2D textureReference)
         {
             Position = Vector2.Zero;
 
-            w_grattacielo_ = TextureRectangle.Width;
-            h_ = TextureRectangle.Height / one_block_height_;
-            origin_ = new Vector2(0, TextureRectangle.Height);
-            collision_rectangle_.Width = TextureRectangle.Width;
-            collision_rectangle_.Height = TextureRectangle.Height;
+            _wGrattacielo = textureRectangle.Width;
+            _h = textureRectangle.Height / _oneBlockHeight;
+            Origin = new Vector2(0, textureRectangle.Height);
+            _collisionRectangle.Width = textureRectangle.Width;
+            _collisionRectangle.Height = textureRectangle.Height;
 
-            texture_reference_ = TextureReference;
-            texture_rectangle_ = TextureRectangle;
+            _textureReference = textureReference;
+            _textureRectangle = textureRectangle;
         }
 
         public void Move(Vector2 amount)
         {
-            position_ += amount;
+            base.Position += amount;
         }
 
         public override Rectangle CollisionRectangle
         {
             get
             {
-                return collision_rectangle_;
+                return _collisionRectangle;
             }
         }
 
@@ -53,25 +53,25 @@ namespace Infart.Background
             }
             set
             {
-                collision_rectangle_.X = (int)value.X;
-                collision_rectangle_.Y = (int)(value.Y - Origin.Y);
+                _collisionRectangle.X = (int)value.X;
+                _collisionRectangle.Y = (int)(value.Y - Origin.Y);
                 base.Position = value;
             }
         }
 
         public int Width
         {
-            get { return texture_rectangle_.Width; }
+            get { return _textureRectangle.Width; }
         }
 
         public int Height
         {
-            get { return texture_rectangle_.Height; }
+            get { return _textureRectangle.Height; }
         }
 
         public int HeightInBlocksNumber
         {
-            get { return h_; }
+            get { return _h; }
         }
 
         public Vector2 PositionAtTopLeftCorner()
@@ -88,15 +88,15 @@ namespace Infart.Background
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                texture_reference_,
-                position_,
-                texture_rectangle_,
+                _textureReference,
+                base.Position,
+                _textureRectangle,
                 Color.White,
                 0.0f,
-                origin_,
-                scale_,
-                flip_,
-                depth_);
+                Origin,
+                Scale,
+                Flip,
+                Depth);
         }
     }
 }

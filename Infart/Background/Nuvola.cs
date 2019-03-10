@@ -6,82 +6,82 @@ namespace Infart.Background
 {
     public class Nuvola : GameObject
     {
-        private float velocity_;
+        private float _velocity;
 
-        private Vector2 current_move_amount = Vector2.Zero;
+        private Vector2 _currentMoveAmount = Vector2.Zero;
 
-        private Rectangle texture_rectangle_;
+        private readonly Rectangle _textureRectangle;
 
-        private Texture2D texture_reference_;
+        private readonly Texture2D _textureReference;
 
-        private float scale_float_amount_ = 0.05f;
+        private float _scaleFloatAmount = 0.05f;
 
-        private float scale_elapsed_ = 0.0f;
+        private float _scaleElapsed = 0.0f;
 
-        private bool active_ = false;
+        private bool _active = false;
 
-        public Nuvola(Texture2D TextureReference, Rectangle TextureRectangle)
+        public Nuvola(Texture2D textureReference, Rectangle textureRectangle)
         {
-            texture_rectangle_ = TextureRectangle;
-            texture_reference_ = TextureReference;
-            origin_ = new Vector2(TextureRectangle.Width / 2, TextureRectangle.Height / 2);
-            scale_ = Vector2.One;
+            _textureRectangle = textureRectangle;
+            _textureReference = textureReference;
+            Origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
+            Scale = Vector2.One;
         }
 
         public void Set(
             Vector2 pos,
             float speed,
-            Color overlay_color,
+            Color overlayColor,
             Vector2 scale)
         {
-            this.position_ = pos;
-            this.velocity_ = speed;
-            this.overlay_color_ = overlay_color;
-            this.scale_ = scale;
+            this.Position = pos;
+            this._velocity = speed;
+            this.OverlayColor = overlayColor;
+            this.Scale = scale;
 
-            active_ = true;
+            _active = true;
         }
 
         public bool Active
         {
-            get { return active_; }
+            get { return _active; }
         }
 
         public override Rectangle CollisionRectangle
         {
-            get { return new Rectangle((int)position_.X, (int)position_.Y, texture_rectangle_.Width, texture_rectangle_.Height); }
+            get { return new Rectangle((int)Position.X, (int)Position.Y, _textureRectangle.Width, _textureRectangle.Height); }
         }
 
         public override void Update(double gameTime)
         {
-            if (active_)
+            if (_active)
             {
                 float elapsed = (float)gameTime / 1000.0f;
 
-                position_ += new Vector2(velocity_ * elapsed, 0.0f);
+                Position += new Vector2(_velocity * elapsed, 0.0f);
 
-                if (scale_elapsed_ >= 0.4f)
+                if (_scaleElapsed >= 0.4f)
                 {
-                    scale_float_amount_ *= -1;
-                    scale_elapsed_ = 0.0f;
+                    _scaleFloatAmount *= -1;
+                    _scaleElapsed = 0.0f;
                 }
-                scale_ += new Vector2(scale_float_amount_ * elapsed, scale_float_amount_ * elapsed);
-                scale_elapsed_ += elapsed;
+                Scale += new Vector2(_scaleFloatAmount * elapsed, _scaleFloatAmount * elapsed);
+                _scaleElapsed += elapsed;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (active_)
+            if (_active)
             {
                 spriteBatch.Draw(
-                    texture_reference_,
-                    position_,
-                    texture_rectangle_,
-                    overlay_color_,
+                    _textureReference,
+                    Position,
+                    _textureRectangle,
+                    OverlayColor,
                     0.0f,
-                    origin_,
-                    scale_,
+                    Origin,
+                    Scale,
                     SpriteEffects.None,
                     1.0f);
             }

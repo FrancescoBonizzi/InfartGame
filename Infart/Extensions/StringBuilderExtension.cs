@@ -5,7 +5,7 @@ namespace Infart.Extensions
 {
     public static class StringBuilderExtensions
     {
-        private static char[] numberBuffer = new char[11];
+        private static readonly char[] _numberBuffer = new char[11];
 
         public static StringBuilder AppendNumber(this StringBuilder sb, Int32 number)
         {
@@ -13,18 +13,18 @@ namespace Infart.Extensions
             if (negative)
                 number = -number;
 
-            int i = numberBuffer.Length;
+            int i = _numberBuffer.Length;
             do
             {
-                numberBuffer[--i] = (char)('0' + (number % 10));
+                _numberBuffer[--i] = (char)('0' + (number % 10));
                 number /= 10;
             }
             while (number > 0);
 
             if (negative)
-                numberBuffer[--i] = '-';
+                _numberBuffer[--i] = '-';
 
-            sb.Append(numberBuffer, i, numberBuffer.Length - i);
+            sb.Append(_numberBuffer, i, _numberBuffer.Length - i);
 
             return sb;
         }

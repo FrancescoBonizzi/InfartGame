@@ -9,79 +9,79 @@ namespace Infart.Background
 {
     public class Nuvolificio
     {
-        private List<Nuvola> nuvole_;
+        private List<Nuvola> _nuvole;
 
-        private int nuvole_number_ = 5;
+        private readonly int _nuvoleNumber = 5;
 
-        private Vector2 scale_;
+        private readonly Vector2 _scale;
 
-        private Color overlay_color_;
+        private readonly Color _overlayColor;
 
-        private Vector2 speed_range_;
+        private readonly Vector2 _speedRange;
 
-        private Vector2 nuvole_spawn_y_range_;
+        private Vector2 _nuvoleSpawnYRange;
 
-        private bool active_ = true;
+        private bool _active = true;
 
-        private static Random random_;
+        private static Random _random;
 
-        private float elapsed_ = 0.0f;
+        private float _elapsed = 0.0f;
 
-        private Camera current_camera_;
+        private Camera _currentCamera;
 
-        private float camera_pos_y_;
+        private float _cameraPosY;
 
-        private float camera_pos_x_;
+        private float _cameraPosX;
 
-        private float camera_w_;
+        private readonly float _cameraW;
 
-        private float camera_h_;
+        private readonly float _cameraH;
 
         public Nuvolificio(
-            Color OverlayColor,
-            float Scale,
-            Vector2 SpeedRange,
-            Vector2 NuvoleSpawnYrange,
-            Camera CurrentCamera,
-            List<Rectangle> NuvolaRectangles,
-            Texture2D NuvolaTexture)
+            Color overlayColor,
+            float scale,
+            Vector2 speedRange,
+            Vector2 nuvoleSpawnYrange,
+            Camera currentCamera,
+            List<Rectangle> nuvolaRectangles,
+            Texture2D nuvolaTexture)
         {
-            random_ = fbonizziHelper.random;
+            _random = FbonizziHelper.Random;
 
-            current_camera_ = CurrentCamera;
-            overlay_color_ = OverlayColor;
-            scale_ = new Vector2(Scale, Scale);
+            _currentCamera = currentCamera;
+            _overlayColor = overlayColor;
+            _scale = new Vector2(scale, scale);
 
-            if (NuvoleSpawnYrange.X > NuvoleSpawnYrange.Y)
+            if (nuvoleSpawnYrange.X > nuvoleSpawnYrange.Y)
             {
-                float tmp = NuvoleSpawnYrange.X;
-                NuvoleSpawnYrange.X = NuvoleSpawnYrange.Y;
-                NuvoleSpawnYrange.Y = tmp;
+                float tmp = nuvoleSpawnYrange.X;
+                nuvoleSpawnYrange.X = nuvoleSpawnYrange.Y;
+                nuvoleSpawnYrange.Y = tmp;
             }
-            nuvole_spawn_y_range_ = NuvoleSpawnYrange;
+            _nuvoleSpawnYRange = nuvoleSpawnYrange;
 
-            speed_range_ = SpeedRange;
+            _speedRange = speedRange;
 
-            camera_w_ = current_camera_.ViewPortWidth;
-            camera_h_ = current_camera_.ViewPortHeight;
+            _cameraW = _currentCamera.ViewPortWidth;
+            _cameraH = _currentCamera.ViewPortHeight;
 
-            Initialize(NuvolaTexture, NuvolaRectangles);
+            Initialize(nuvolaTexture, nuvolaRectangles);
         }
 
-        private void Initialize(Texture2D NuvolaTexture, List<Rectangle> NuvolaRectangles)
+        private void Initialize(Texture2D nuvolaTexture, List<Rectangle> nuvolaRectangles)
         {
-            List<Rectangle> nuvole_rects_ = NuvolaRectangles;
+            List<Rectangle> nuvoleRects = nuvolaRectangles;
 
-            nuvole_ = new List<Nuvola>();
-            for (int i = 0; i < nuvole_number_; ++i)
-                nuvole_.Add(new Nuvola(
-                    NuvolaTexture,
-                    nuvole_rects_[random_.Next(nuvole_rects_.Count)]));
+            _nuvole = new List<Nuvola>();
+            for (int i = 0; i < _nuvoleNumber; ++i)
+                _nuvole.Add(new Nuvola(
+                    nuvolaTexture,
+                    nuvoleRects[_random.Next(nuvoleRects.Count)]));
         }
 
         public Vector2 NuvoleYSpawnRange
         {
-            get { return nuvole_spawn_y_range_; }
+            get { return _nuvoleSpawnYRange; }
             set
             {
                 if (value.X > value.Y)
@@ -90,52 +90,52 @@ namespace Infart.Background
                     value.X = value.Y;
                     value.Y = tmp;
                 }
-                nuvole_spawn_y_range_ = value;
+                _nuvoleSpawnYRange = value;
             }
         }
 
         public void Reset(Camera camera)
         {
-            current_camera_ = camera;
-            elapsed_ = 0.0f;
+            _currentCamera = camera;
+            _elapsed = 0.0f;
         }
 
         public void MoveX(float amount)
         {
-            for (int i = 0; i < nuvole_.Count; ++i)
+            for (int i = 0; i < _nuvole.Count; ++i)
             {
-                nuvole_[i].PositionX += amount;
+                _nuvole[i].PositionX += amount;
             }
         }
 
         private void SetNuvola(int index)
         {
-            float y_pos = random_.Next(
-                (int)nuvole_spawn_y_range_.X,
-                (int)nuvole_spawn_y_range_.Y);
+            float yPos = _random.Next(
+                (int)_nuvoleSpawnYRange.X,
+                (int)_nuvoleSpawnYRange.Y);
 
-            float x_pos;
+            float xPos;
             int direction;
-            if (random_.NextDouble() > 0.5)
+            if (_random.NextDouble() > 0.5)
             {
-                x_pos = (int)current_camera_.Position.X - 200 + random_.Next(1, 20);
+                xPos = (int)_currentCamera.Position.X - 200 + _random.Next(1, 20);
                 direction = +1;
             }
             else
             {
-                x_pos = (int)current_camera_.Position.X + (int)current_camera_.ViewPortWidth + 200 - random_.Next(1, 20);
+                xPos = (int)_currentCamera.Position.X + (int)_currentCamera.ViewPortWidth + 200 - _random.Next(1, 20);
                 direction = -1;
             }
 
-            Vector2 rand_pos = new Vector2(x_pos, y_pos);
+            Vector2 randPos = new Vector2(xPos, yPos);
 
-            float rand_speed = random_.Next((int)speed_range_.X, (int)speed_range_.Y);
+            float randSpeed = _random.Next((int)_speedRange.X, (int)_speedRange.Y);
 
-            nuvole_[index].Set(
-                    rand_pos,
-                    rand_speed * direction,
-                    overlay_color_,
-                    scale_);
+            _nuvole[index].Set(
+                    randPos,
+                    randSpeed * direction,
+                    _overlayColor,
+                    _scale);
         }
 
         private bool ToBeRemoved(Nuvola n)
@@ -144,8 +144,8 @@ namespace Infart.Background
                 return true;
 
             Vector2 position = n.Position;
-            if (position.X > camera_pos_x_ + camera_w_ + 250
-                || position.X < camera_pos_x_ - 250)
+            if (position.X > _cameraPosX + _cameraW + 250
+                || position.X < _cameraPosX - 250)
                 return true;
 
             return false;
@@ -153,41 +153,41 @@ namespace Infart.Background
 
         public void Update(double gametime)
         {
-            camera_pos_y_ = current_camera_.Position.Y;
+            _cameraPosY = _currentCamera.Position.Y;
 
-            if (camera_pos_y_ + camera_h_ >= nuvole_spawn_y_range_.X
-                && camera_pos_y_ <= nuvole_spawn_y_range_.Y)
+            if (_cameraPosY + _cameraH >= _nuvoleSpawnYRange.X
+                && _cameraPosY <= _nuvoleSpawnYRange.Y)
             {
-                active_ = true;
+                _active = true;
             }
             else
             {
-                active_ = false;
+                _active = false;
                 return;
             }
 
-            if (active_)
+            if (_active)
             {
-                elapsed_ += (float)gametime / 1000.0f;
+                _elapsed += (float)gametime / 1000.0f;
 
-                camera_pos_x_ = current_camera_.Position.X;
+                _cameraPosX = _currentCamera.Position.X;
 
-                for (int i = 0; i < nuvole_.Count; ++i)
+                for (int i = 0; i < _nuvole.Count; ++i)
                 {
-                    if (ToBeRemoved(nuvole_[i]))
+                    if (ToBeRemoved(_nuvole[i]))
                         SetNuvola(i);
                     else
-                        nuvole_[i].Update(gametime);
+                        _nuvole[i].Update(gametime);
                 }
             }
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            if (active_)
+            if (_active)
             {
-                for (int i = 0; i < nuvole_.Count; ++i)
-                    nuvole_[i].Draw(spritebatch);
+                for (int i = 0; i < _nuvole.Count; ++i)
+                    _nuvole[i].Draw(spritebatch);
             }
         }
     }

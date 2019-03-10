@@ -11,98 +11,98 @@ namespace Infart
 {
     public class GemmaManager
     {
-        private Gemma jalapenos_ = null;
+        private readonly Gemma _jalapenos = null;
 
-        private Gemma broccolo_ = null;
+        private readonly Gemma _broccolo = null;
 
-        protected const int max_gemme_attive_ = 10;
+        protected const int MaxGemmeAttive = 10;
 
-        protected List<Gemma> gemme_attive_;
+        protected List<Gemma> GemmeAttive;
 
-        protected List<Gemma> gemme_inactive_;
+        protected List<Gemma> GemmeInactive;
 
-        protected Random random_;
+        protected Random Random;
 
-        protected Camera current_camera_;
+        protected Camera CurrentCamera;
 
         private enum PowerUps
         { Jalapeno, Merda };
 
-        private PowerUps next_power_up_ = PowerUps.Jalapeno;
+        private PowerUps _nextPowerUp = PowerUps.Jalapeno;
 
         public GemmaManager(
-            Camera CameraReference,
-            AssetsLoader AssetsLoader)
+            Camera cameraReference,
+            AssetsLoader assetsLoader)
         {
-            random_ = fbonizziHelper.random;
-            current_camera_ = CameraReference;
-            gemme_attive_ = new List<Gemma>();
-            gemme_inactive_ = new List<Gemma>();
+            Random = FbonizziHelper.Random;
+            CurrentCamera = cameraReference;
+            GemmeAttive = new List<Gemma>();
+            GemmeInactive = new List<Gemma>();
 
-            for (int i = 0; i < max_gemme_attive_; ++i)
-                gemme_inactive_.Add(new Gemma(
-                    AssetsLoader.Textures,
-                    AssetsLoader.TexturesRectangles["Burger"]));
+            for (int i = 0; i < MaxGemmeAttive; ++i)
+                GemmeInactive.Add(new Gemma(
+                    assetsLoader.Textures,
+                    assetsLoader.TexturesRectangles["Burger"]));
 
-            jalapenos_ = new Gemma(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Jalapenos"]);
-            broccolo_ = new Gemma(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Verdura"]);
+            _jalapenos = new Gemma(assetsLoader.Textures, assetsLoader.TexturesRectangles["Jalapenos"]);
+            _broccolo = new Gemma(assetsLoader.Textures, assetsLoader.TexturesRectangles["Verdura"]);
         }
 
-        public void Reset(Camera CameraReference)
+        public void Reset(Camera cameraReference)
         {
-            for (int i = 0; i < gemme_attive_.Count; ++i)
+            for (int i = 0; i < GemmeAttive.Count; ++i)
             {
-                gemme_inactive_.Add(gemme_attive_[i]);
-                gemme_attive_.RemoveAt(i);
+                GemmeInactive.Add(GemmeAttive[i]);
+                GemmeAttive.RemoveAt(i);
                 --i;
             }
 
-            current_camera_ = CameraReference;
+            CurrentCamera = cameraReference;
         }
 
-        public void AddPowerUp(Vector2 Position)
+        public void AddPowerUp(Vector2 position)
         {
-            switch (next_power_up_)
+            switch (_nextPowerUp)
             {
                 case PowerUps.Jalapeno:
-                    AddJalapenos(Position);
+                    AddJalapenos(position);
 
                     break;
 
                 case PowerUps.Merda:
-                    AddMerda(Position);
+                    AddMerda(position);
 
                     break;
             }
         }
 
-        private void AddJalapenos(Vector2 Position)
+        private void AddJalapenos(Vector2 position)
         {
-            if (!jalapenos_.Active && !broccolo_.Active)
+            if (!_jalapenos.Active && !_broccolo.Active)
             {
-                jalapenos_.Position = Position;
-                jalapenos_.Active = true;
-                next_power_up_ = PowerUps.Merda;
+                _jalapenos.Position = position;
+                _jalapenos.Active = true;
+                _nextPowerUp = PowerUps.Merda;
             }
         }
 
-        private void AddMerda(Vector2 Position)
+        private void AddMerda(Vector2 position)
         {
-            if (!jalapenos_.Active && !broccolo_.Active)
+            if (!_jalapenos.Active && !_broccolo.Active)
             {
-                broccolo_.Position = Position;
-                broccolo_.Active = true;
-                next_power_up_ = PowerUps.Jalapeno;
+                _broccolo.Position = position;
+                _broccolo.Active = true;
+                _nextPowerUp = PowerUps.Jalapeno;
             }
         }
 
         public bool CheckJalapenoCollisionWithPlayer(Player p)
         {
-            if (jalapenos_.Active)
+            if (_jalapenos.Active)
             {
-                if (jalapenos_.CollisionRectangle.Intersects(p.CollisionRectangle))
+                if (_jalapenos.CollisionRectangle.Intersects(p.CollisionRectangle))
                 {
-                    jalapenos_.Active = false;
+                    _jalapenos.Active = false;
                     return true;
                 }
             }
@@ -111,47 +111,47 @@ namespace Infart
 
         public bool CheckMerdaCollisionWithPlayer(Player p)
         {
-            if (broccolo_.Active)
+            if (_broccolo.Active)
             {
-                if (broccolo_.CollisionRectangle.Intersects(p.CollisionRectangle))
+                if (_broccolo.CollisionRectangle.Intersects(p.CollisionRectangle))
                 {
-                    broccolo_.Active = false;
+                    _broccolo.Active = false;
                     return true;
                 }
             }
             return false;
         }
 
-        public void AddGemma(Vector2 StartingPosition)
+        public void AddGemma(Vector2 startingPosition)
         {
-            if (gemme_inactive_.Count > 0)
+            if (GemmeInactive.Count > 0)
             {
-                gemme_inactive_[0].Position = StartingPosition;
-                gemme_inactive_[0].Active = true;
-                gemme_attive_.Add(gemme_inactive_[0]);
-                gemme_inactive_.RemoveAt(0);
+                GemmeInactive[0].Position = startingPosition;
+                GemmeInactive[0].Active = true;
+                GemmeAttive.Add(GemmeInactive[0]);
+                GemmeInactive.RemoveAt(0);
             }
         }
 
         private void RemoveGemma(int index)
         {
-            gemme_attive_[index].Active = false;
-            gemme_inactive_.Add(gemme_attive_[index]);
-            gemme_attive_.RemoveAt(index);
+            GemmeAttive[index].Active = false;
+            GemmeInactive.Add(GemmeAttive[index]);
+            GemmeAttive.RemoveAt(index);
         }
 
         protected bool ToBeRemoved(Vector2 position, float width)
         {
-            if (position.X + width < current_camera_.Position.X)
+            if (position.X + width < CurrentCamera.Position.X)
                 return true;
             return false;
         }
 
         public bool CheckCollisionWithPlayer(Player p)
         {
-            for (int i = 0; i < gemme_attive_.Count; ++i)
+            for (int i = 0; i < GemmeAttive.Count; ++i)
             {
-                if (gemme_attive_[i].CollisionRectangle.Intersects(p.CollisionRectangle))
+                if (GemmeAttive[i].CollisionRectangle.Intersects(p.CollisionRectangle))
                 {
                     RemoveGemma(i);
                     --i;
@@ -163,18 +163,18 @@ namespace Infart
 
         public void Update(double gametime)
         {
-            for (int i = 0; i < gemme_attive_.Count; ++i)
-                gemme_attive_[i].Update(gametime);
+            for (int i = 0; i < GemmeAttive.Count; ++i)
+                GemmeAttive[i].Update(gametime);
 
-            jalapenos_.Update(gametime);
-            broccolo_.Update(gametime);
+            _jalapenos.Update(gametime);
+            _broccolo.Update(gametime);
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            for (int i = 0; i < gemme_attive_.Count; ++i)
+            for (int i = 0; i < GemmeAttive.Count; ++i)
             {
-                Gemma g = gemme_attive_[i];
+                Gemma g = GemmeAttive[i];
 
                 if (ToBeRemoved(g.Position, g.Width))
                 {
@@ -185,20 +185,20 @@ namespace Infart
                     g.Draw(spritebatch);
             }
 
-            if (jalapenos_.Active)
+            if (_jalapenos.Active)
             {
-                if (ToBeRemoved(jalapenos_.Position, jalapenos_.Width))
-                    jalapenos_.Active = false;
+                if (ToBeRemoved(_jalapenos.Position, _jalapenos.Width))
+                    _jalapenos.Active = false;
                 else
-                    jalapenos_.Draw(spritebatch);
+                    _jalapenos.Draw(spritebatch);
             }
 
-            if (broccolo_.Active)
+            if (_broccolo.Active)
             {
-                if (ToBeRemoved(broccolo_.Position, broccolo_.Width))
-                    broccolo_.Active = false;
+                if (ToBeRemoved(_broccolo.Position, _broccolo.Width))
+                    _broccolo.Active = false;
                 else
-                    broccolo_.Draw(spritebatch);
+                    _broccolo.Draw(spritebatch);
             }
         }
     }

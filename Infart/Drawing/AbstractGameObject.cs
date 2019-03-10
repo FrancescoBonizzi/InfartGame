@@ -5,21 +5,21 @@ namespace Infart.Drawing
 {
     public class AbstractGameObject : GameObject
     {
-        private Rectangle collision_rectangle_;
+        private Rectangle _collisionRectangle;
 
-        public AbstractGameObject(Rectangle CollisionRectangle)
+        public AbstractGameObject(Rectangle collisionRectangle)
         {
-            collision_rectangle_ = CollisionRectangle;
+            _collisionRectangle = collisionRectangle;
         }
 
         public override Rectangle CollisionRectangle
         {
-            get { return collision_rectangle_; }
+            get { return _collisionRectangle; }
         }
 
         public void SetCollisionRectangleX(int x)
         {
-            collision_rectangle_.X = x;
+            _collisionRectangle.X = x;
         }
 
         public override void Update(double gameTime)

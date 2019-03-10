@@ -6,34 +6,34 @@ namespace Infart.ParticleSystem
     public class StarFieldParticleSystem : ParticleSystem
     {
         public StarFieldParticleSystem(
-            int Density,
-            AssetsLoader AssetsLoader)
-            : base(Density, AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Stella"])
+            int density,
+            AssetsLoader assetsLoader)
+            : base(density, assetsLoader.Textures, assetsLoader.TexturesRectangles["Stella"])
         {
         }
 
         protected override void InitializeConstants()
         {
-            min_initial_speed_ = 10f;
-            max_initial_speed_ = 15f;
+            MinInitialSpeed = 10f;
+            MaxInitialSpeed = 15f;
 
-            min_acceleration_ = 30f;
-            max_acceleration_ = 40f;
+            MinAcceleration = 30f;
+            MaxAcceleration = 40f;
 
-            min_lifetime_ = 1.50f;
-            max_lifetime_ = 3.0f;
+            MinLifetime = 1.50f;
+            MaxLifetime = 3.0f;
 
-            min_scale_ = .2f;
-            max_scale_ = 1.0f;
+            MinScale = .2f;
+            MaxScale = 1.0f;
 
-            min_spawn_angle_ = 0.0f;
-            max_spawn_angle_ = 360.0f;
+            MinSpawnAngle = 0.0f;
+            MaxSpawnAngle = 360.0f;
 
-            min_num_particles_ = 4;
-            max_num_particles_ = 8;
+            MinNumParticles = 4;
+            MaxNumParticles = 8;
 
-            min_rotation_speed_ = -MathHelper.PiOver2;
-            max_rotation_speed_ = MathHelper.PiOver2;
+            MinRotationSpeed = -MathHelper.PiOver2;
+            MaxRotationSpeed = MathHelper.PiOver2;
         }
 
         protected override void InitializeParticle(Particle p, Vector2 where)

@@ -30,9 +30,9 @@ namespace Infart
         //private SoundEffectInstance morso_ = null;
 
         public SoundManager(
-            bool SoundFlag,
+            bool soundFlag,
             // Loader_menu Loader_menu,
-            AssetsLoader Loader_episodio1)
+            AssetsLoader loaderEpisodio1)
         {
             //sound_on_ = SoundFlag;
 
@@ -135,7 +135,7 @@ namespace Infart
             //sound_on_ = true;
         }
 
-        protected void AddAllSounds(AssetsLoader MyLoader)
+        protected void AddAllSounds(AssetsLoader myLoader)
         {
             //background_music_ = ((MyLoader) as AssetsLoader).sound_effects_["night"].CreateInstance();
             //background_music_.IsLooped = true;

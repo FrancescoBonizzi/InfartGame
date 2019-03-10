@@ -7,48 +7,48 @@ namespace Infart.ParticleSystem
 {
     public class RecordExplosion
     {
-        private Particle scritta_ = null;
+        private Particle _scritta = null;
 
-        private Rectangle texture_rectangle_;
+        private readonly Rectangle _textureRectangle;
 
-        private Vector2 origin_;
+        private readonly Vector2 _origin;
 
-        private readonly Texture2D texture_;
+        private readonly Texture2D _texture;
 
-        private static Random random_;
+        private static Random _random;
 
         public RecordExplosion(
-            Texture2D TextureReference,
-            Rectangle TextureRectangle)
+            Texture2D textureReference,
+            Rectangle textureRectangle)
         {
-            random_ = fbonizziHelper.random;
-            texture_rectangle_ = TextureRectangle;
-            origin_ = new Vector2(texture_rectangle_.Width / 2, texture_rectangle_.Height / 2);
-            texture_ = TextureReference;
-            scritta_ = new Particle();
+            _random = FbonizziHelper.Random;
+            _textureRectangle = textureRectangle;
+            _origin = new Vector2(_textureRectangle.Width / 2, _textureRectangle.Height / 2);
+            _texture = textureReference;
+            _scritta = new Particle();
         }
 
         public void Dispose()
         {
-            scritta_ = null;
+            _scritta = null;
         }
 
-        public void Explode(Vector2 Where, int direction_angle_degrees)
+        public void Explode(Vector2 @where, int directionAngleDegrees)
         {
-            float radians = MathHelper.ToRadians(direction_angle_degrees);
+            float radians = MathHelper.ToRadians(directionAngleDegrees);
             Vector2 direction = new Vector2(
                 direction.X = (float)Math.Cos(radians), direction.Y = -(float)Math.Sin(radians));
 
             float velocity =
-                fbonizziHelper.RandomBetween(120.0f, 180.0f);
+                FbonizziHelper.RandomBetween(120.0f, 180.0f);
             float acceleration =
-                fbonizziHelper.RandomBetween(100.0f, 130.0f);
+                FbonizziHelper.RandomBetween(100.0f, 130.0f);
             float lifetime = 4.0f;
             float scale = 2.0f;
-            float rotationSpeed = (float)random_.NextDouble() * 10;
+            float rotationSpeed = (float)_random.NextDouble() * 10;
 
-            scritta_.Initialize(
-                Where,
+            _scritta.Initialize(
+                @where,
                 velocity * direction,
                 acceleration * direction,
                 rotationSpeed,
@@ -59,27 +59,27 @@ namespace Infart.ParticleSystem
 
         public void Update(double gameTime)
         {
-            if (scritta_.Active)
+            if (_scritta.Active)
             {
                 float dt = (float)gameTime / 1000.0f;
 
-                scritta_.Update(dt);
+                _scritta.Update(dt);
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (!scritta_.Active)
+            if (!_scritta.Active)
                 return;
 
-            float normalizedLifetime = scritta_.TimeSinceStart / scritta_.LifeTime;
+            float normalizedLifetime = _scritta.TimeSinceStart / _scritta.LifeTime;
 
             float alpha = 4 * normalizedLifetime * (1 - normalizedLifetime);
 
-            float scale = scritta_.Scale * (.75f + .25f * normalizedLifetime);
+            float scale = _scritta.Scale * (.75f + .25f * normalizedLifetime);
 
-            spriteBatch.Draw(texture_, scritta_.Position, texture_rectangle_, scritta_.Color * alpha,
-                scritta_.Rotation, origin_, scale, SpriteEffects.None, 0.0f);
+            spriteBatch.Draw(_texture, _scritta.Position, _textureRectangle, _scritta.Color * alpha,
+                _scritta.Rotation, _origin, scale, SpriteEffects.None, 0.0f);
         }
     }
 }

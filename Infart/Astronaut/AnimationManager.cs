@@ -7,37 +7,37 @@ namespace Infart.Astronaut
 {
     public class AnimationManager : IDisposable
     {
-        private Texture2D atlas_reference_;
+        private readonly Texture2D _atlasReference;
 
-        private List<Rectangle> frames_;
+        private readonly List<Rectangle> _frames;
 
-        private float frame_timer_ = 0f;
+        private float _frameTimer = 0f;
 
-        private float frame_delay_ = 0.05f;
+        private float _frameDelay = 0.05f;
 
-        private int current_frame_;
+        private int _currentFrame;
 
-        private int last_frame_;
+        private readonly int _lastFrame;
 
-        private bool loop_animation_ = true;
+        private bool _loopAnimation = true;
 
-        private bool finished_playing_ = false;
+        private bool _finishedPlaying = false;
 
-        private string name_;
+        private string _name;
 
-        private string next_animation_;
+        private string _nextAnimation;
 
         public AnimationManager(
             List<Rectangle> frames,
             string name,
-            Texture2D TextureReference)
+            Texture2D textureReference)
         {
-            name_ = name;
+            _name = name;
 
-            frames_ = frames;
-            atlas_reference_ = TextureReference;
+            _frames = frames;
+            _atlasReference = textureReference;
 
-            last_frame_ = frames.Count - 1;
+            _lastFrame = frames.Count - 1;
         }
 
         public void Dispose()
@@ -46,93 +46,93 @@ namespace Infart.Astronaut
 
         public Texture2D Texture
         {
-            get { return atlas_reference_; }
+            get { return _atlasReference; }
         }
 
         public string Name
         {
-            get { return name_; }
-            set { name_ = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
         public string NextAnimation
         {
-            get { return next_animation_; }
-            set { next_animation_ = value; }
+            get { return _nextAnimation; }
+            set { _nextAnimation = value; }
         }
 
         public bool LoopAnimation
         {
-            get { return loop_animation_; }
-            set { loop_animation_ = value; }
+            get { return _loopAnimation; }
+            set { _loopAnimation = value; }
         }
 
         public bool FinishedPlaying
         {
-            get { return finished_playing_; }
+            get { return _finishedPlaying; }
         }
 
         public int CurrentFrame
         {
-            get { return current_frame_; }
-            set { current_frame_ = value % last_frame_; }
+            get { return _currentFrame; }
+            set { _currentFrame = value % _lastFrame; }
         }
 
         public int FrameWidth
         {
-            get { return frames_[current_frame_].Width; }
+            get { return _frames[_currentFrame].Width; }
         }
 
         public int FrameHeight
         {
-            get { return frames_[current_frame_].Height; }
+            get { return _frames[_currentFrame].Height; }
         }
 
         public int FrameCount
         {
-            get { return last_frame_; }
+            get { return _lastFrame; }
         }
 
         public float FrameLength
         {
-            get { return frame_delay_; }
-            set { frame_delay_ = value; }
+            get { return _frameDelay; }
+            set { _frameDelay = value; }
         }
 
         public Rectangle FrameRectangle
         {
-            get { return frames_[current_frame_]; }
+            get { return _frames[_currentFrame]; }
         }
 
         public void Play()
         {
             CurrentFrame = 0;
-            finished_playing_ = false;
+            _finishedPlaying = false;
         }
 
         public void Update(double gameTime)
         {
             float elapsed = (float)gameTime / 1000.0f;
-            frame_timer_ += elapsed;
+            _frameTimer += elapsed;
 
-            if (frame_timer_ >= frame_delay_)
+            if (_frameTimer >= _frameDelay)
             {
                 ++CurrentFrame;
 
-                if (current_frame_ >= FrameCount)
+                if (_currentFrame >= FrameCount)
                 {
-                    if (loop_animation_)
+                    if (_loopAnimation)
                     {
                         CurrentFrame = 0;
                     }
                     else
                     {
-                        CurrentFrame = last_frame_;
-                        finished_playing_ = true;
+                        CurrentFrame = _lastFrame;
+                        _finishedPlaying = true;
                     }
                 }
 
-                frame_timer_ = 0f;
+                _frameTimer = 0f;
             }
         }
     }

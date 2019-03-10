@@ -6,21 +6,21 @@ namespace Infart.Extensions
 {
     public static class CollisionSolver
     {
-        public enum actions
+        public enum Actions
         {
-            blockAll,
-            blockEnemies,
-            blockPlayer,
-            endLevel
+            BlockAll,
+            BlockEnemies,
+            BlockPlayer,
+            EndLevel
         };
 
         public static bool CheckCollisions(
-             Rectangle obj_rect,
-             List<GameObject> ListWith)
+             Rectangle objRect,
+             List<GameObject> listWith)
         {
-            for (int i = 0; i < ListWith.Count; ++i)
+            for (int i = 0; i < listWith.Count; ++i)
             {
-                if (obj_rect.Intersects(ListWith[i].CollisionRectangle))
+                if (objRect.Intersects(listWith[i].CollisionRectangle))
                 {
                     return true;
                 }
@@ -30,12 +30,12 @@ namespace Infart.Extensions
         }
 
         public static int CheckCollisionsReturnCollidedObject(
-            Rectangle obj_rect,
-             List<GameObject> ListWith)
+            Rectangle objRect,
+             List<GameObject> listWith)
         {
-            for (int i = 0; i < ListWith.Count; ++i)
+            for (int i = 0; i < listWith.Count; ++i)
             {
-                if (obj_rect.Intersects(ListWith[i].CollisionRectangle))
+                if (objRect.Intersects(listWith[i].CollisionRectangle))
                 {
                     return i;
                 }

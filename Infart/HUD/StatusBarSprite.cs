@@ -6,60 +6,60 @@ namespace Infart.HUD
 {
     public class StatusBarSprite : GameObject
     {
-        private double elapsed_ = 0.0;
+        private double _elapsed = 0.0;
 
-        private bool animate_in_ = false;
+        private bool _animateIn = false;
 
-        private bool animate_out_ = false;
+        private bool _animateOut = false;
 
-        private Texture2D texture_reference_;
+        private readonly Texture2D _textureReference;
 
-        private Rectangle texture_rectangle_;
+        private readonly Rectangle _textureRectangle;
 
-        private Vector2 deactivated_scale_;
+        private readonly Vector2 _deactivatedScale;
 
-        private Vector2 activated_scale_;
+        private readonly Vector2 _activatedScale;
 
-        private Vector2 scaleTo_;
+        private Vector2 _scaleTo;
 
-        private Vector2 scale_change_amount = new Vector2(0.005f);
+        private readonly Vector2 _scaleChangeAmount = new Vector2(0.005f);
 
         public StatusBarSprite(
-            Texture2D TextureReference,
-            Rectangle TextureRectangle,
-            Vector2 StartingPosition)
+            Texture2D textureReference,
+            Rectangle textureRectangle,
+            Vector2 startingPosition)
         {
-            texture_reference_ = TextureReference;
-            texture_rectangle_ = TextureRectangle;
-            position_ = StartingPosition;
+            _textureReference = textureReference;
+            _textureRectangle = textureRectangle;
+            base.Position = startingPosition;
         }
 
         public StatusBarSprite(
-            Texture2D TextureReference,
-            Rectangle TextureRectangle,
-            Vector2 StartingPosition,
-            Color overlay_color,
+            Texture2D textureReference,
+            Rectangle textureRectangle,
+            Vector2 startingPosition,
+            Color overlayColor,
             Vector2 scale)
-            : this(TextureReference, TextureRectangle, StartingPosition)
+            : this(textureReference, textureRectangle, startingPosition)
         {
-            overlay_color_ = overlay_color;
-            activated_scale_ = scale;
-            deactivated_scale_ = new Vector2(0.7f);
-            scale_ = deactivated_scale_;
-            origin_ = new Vector2(TextureRectangle.Width / 2, TextureRectangle.Height / 2);
+            OverlayColor = overlayColor;
+            _activatedScale = scale;
+            _deactivatedScale = new Vector2(0.7f);
+            Scale = _deactivatedScale;
+            Origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
         }
 
         public void Reset()
         {
-            scale_ = deactivated_scale_;
-            animate_in_ = false;
-            animate_out_ = false;
+            Scale = _deactivatedScale;
+            _animateIn = false;
+            _animateOut = false;
         }
 
         public override Vector2 Position
         {
-            get { return position_; }
-            set { position_ = value; }
+            get { return base.Position; }
+            set { base.Position = value; }
         }
 
         public override Rectangle CollisionRectangle
@@ -69,68 +69,68 @@ namespace Infart.HUD
 
         public int Width
         {
-            get { return texture_rectangle_.Width; }
+            get { return _textureRectangle.Width; }
         }
 
         public int Height
         {
-            get { return texture_rectangle_.Height; }
+            get { return _textureRectangle.Height; }
         }
 
         public void Taken()
         {
-            scaleTo_ = activated_scale_;
-            animate_in_ = true;
-            animate_out_ = false;
+            _scaleTo = _activatedScale;
+            _animateIn = true;
+            _animateOut = false;
         }
 
         public void Lost()
         {
-            scaleTo_ = deactivated_scale_;
-            animate_in_ = false;
-            animate_out_ = true;
+            _scaleTo = _deactivatedScale;
+            _animateIn = false;
+            _animateOut = true;
         }
 
         public override void Update(double gameTime)
         {
-            if (animate_in_ || animate_out_)
+            if (_animateIn || _animateOut)
             {
-                if (elapsed_ >= 0.0005)
+                if (_elapsed >= 0.0005)
                 {
-                    if (animate_in_)
+                    if (_animateIn)
                     {
-                        if (scale_.X <= scaleTo_.X)
-                            scale_ += scale_change_amount;
+                        if (Scale.X <= _scaleTo.X)
+                            Scale += _scaleChangeAmount;
                         else
-                            animate_in_ = false;
+                            _animateIn = false;
                     }
-                    else if (animate_out_)
+                    else if (_animateOut)
                     {
-                        if (scale_.X >= scaleTo_.X)
-                            scale_ -= scale_change_amount;
+                        if (Scale.X >= _scaleTo.X)
+                            Scale -= _scaleChangeAmount;
                         else
-                            animate_out_ = false;
+                            _animateOut = false;
                     }
 
-                    elapsed_ = 0.0;
+                    _elapsed = 0.0;
                 }
 
-                elapsed_ += gameTime / 1000.0;
+                _elapsed += gameTime / 1000.0;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                texture_reference_,
-                position_,
-                texture_rectangle_,
-                overlay_color_,
-                rotation_,
-                origin_,
-                scale_,
-                flip_,
-                depth_);
+                _textureReference,
+                base.Position,
+                _textureRectangle,
+                OverlayColor,
+                Rotation,
+                Origin,
+                Scale,
+                Flip,
+                Depth);
         }
     }
 }

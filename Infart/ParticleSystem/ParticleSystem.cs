@@ -8,71 +8,71 @@ namespace Infart.ParticleSystem
 {
     public abstract class ParticleSystem
     {
-        private Texture2D texture_;
+        private readonly Texture2D _texture;
 
-        private Rectangle texture_rectangle_;
+        private readonly Rectangle _textureRectangle;
 
-        private Vector2 origin_;
+        private readonly Vector2 _origin;
 
-        private readonly int density_;
+        private readonly int _density;
 
-        private Particle[] active_particles_;
+        private Particle[] _activeParticles;
 
-        protected Queue<Particle> free_particles_;
+        protected Queue<Particle> FreeParticles;
 
-        protected int min_num_particles_;
+        protected int MinNumParticles;
 
-        protected int max_num_particles_;
+        protected int MaxNumParticles;
 
-        protected float min_initial_speed_;
+        protected float MinInitialSpeed;
 
-        protected float max_initial_speed_;
+        protected float MaxInitialSpeed;
 
-        protected float min_acceleration_;
+        protected float MinAcceleration;
 
-        protected float max_acceleration_;
+        protected float MaxAcceleration;
 
-        protected float min_rotation_speed_;
+        protected float MinRotationSpeed;
 
-        protected float max_rotation_speed_;
+        protected float MaxRotationSpeed;
 
-        protected float min_lifetime_;
+        protected float MinLifetime;
 
-        protected float max_lifetime_;
+        protected float MaxLifetime;
 
-        protected float min_scale_;
+        protected float MinScale;
 
-        protected float max_scale_;
+        protected float MaxScale;
 
-        protected float min_spawn_angle_;
+        protected float MinSpawnAngle;
 
-        protected float max_spawn_angle_;
+        protected float MaxSpawnAngle;
 
-        private Vector2 emitter_location_ = Vector2.Zero;
+        private Vector2 _emitterLocation = Vector2.Zero;
 
-        private static Random random_;
+        private static Random _random;
 
         public ParticleSystem(
-            int Density,
-            Texture2D Texture,
-            Rectangle TextureRectangle)
+            int density,
+            Texture2D texture,
+            Rectangle textureRectangle)
         {
-            texture_ = Texture;
-            texture_rectangle_ = TextureRectangle;
-            origin_ = new Vector2(texture_rectangle_.Width / 2, texture_rectangle_.Height / 2);
+            _texture = texture;
+            _textureRectangle = textureRectangle;
+            _origin = new Vector2(_textureRectangle.Width / 2, _textureRectangle.Height / 2);
 
-            density_ = Density;
+            _density = density;
 
             Initialize();
         }
 
-        public ParticleSystem(int Density, Texture2D TextureName)
+        public ParticleSystem(int density, Texture2D textureName)
         {
-            texture_ = TextureName;
-            texture_rectangle_ = texture_.Bounds;
-            origin_ = new Vector2(texture_rectangle_.Width / 2, texture_rectangle_.Height / 2);
+            _texture = textureName;
+            _textureRectangle = _texture.Bounds;
+            _origin = new Vector2(_textureRectangle.Width / 2, _textureRectangle.Height / 2);
 
-            density_ = Density;
+            _density = density;
 
             Initialize();
         }
@@ -81,14 +81,14 @@ namespace Infart.ParticleSystem
         {
             InitializeConstants();
 
-            random_ = fbonizziHelper.random;
+            _random = FbonizziHelper.Random;
 
-            active_particles_ = new Particle[density_ * max_num_particles_];
-            free_particles_ = new Queue<Particle>(density_ * max_num_particles_);
-            for (int i = 0; i < active_particles_.Length; ++i)
+            _activeParticles = new Particle[_density * MaxNumParticles];
+            FreeParticles = new Queue<Particle>(_density * MaxNumParticles);
+            for (int i = 0; i < _activeParticles.Length; ++i)
             {
-                active_particles_[i] = new Particle();
-                free_particles_.Enqueue(active_particles_[i]);
+                _activeParticles[i] = new Particle();
+                FreeParticles.Enqueue(_activeParticles[i]);
             }
         }
 
@@ -96,11 +96,11 @@ namespace Infart.ParticleSystem
 
         public virtual void AddParticles(Vector2 where)
         {
-            int numParticles = random_.Next(min_num_particles_, max_num_particles_);
+            int numParticles = _random.Next(MinNumParticles, MaxNumParticles);
 
-            for (int i = 0; i < numParticles && free_particles_.Count > 0; ++i)
+            for (int i = 0; i < numParticles && FreeParticles.Count > 0; ++i)
             {
-                Particle p = free_particles_.Dequeue();
+                Particle p = FreeParticles.Dequeue();
                 InitializeParticle(p, where);
             }
         }
@@ -110,15 +110,15 @@ namespace Infart.ParticleSystem
             Vector2 direction = PickRandomDirection();
 
             float velocity =
-                fbonizziHelper.RandomBetween(min_initial_speed_, max_initial_speed_);
+                FbonizziHelper.RandomBetween(MinInitialSpeed, MaxInitialSpeed);
             float acceleration =
-                fbonizziHelper.RandomBetween(min_acceleration_, max_acceleration_);
+                FbonizziHelper.RandomBetween(MinAcceleration, MaxAcceleration);
             float lifetime =
-                fbonizziHelper.RandomBetween(min_lifetime_, max_lifetime_);
+                FbonizziHelper.RandomBetween(MinLifetime, MaxLifetime);
             float scale =
-                fbonizziHelper.RandomBetween(min_scale_, max_scale_);
+                FbonizziHelper.RandomBetween(MinScale, MaxScale);
             float rotationSpeed =
-                fbonizziHelper.RandomBetween(min_rotation_speed_, max_rotation_speed_);
+                FbonizziHelper.RandomBetween(MinRotationSpeed, MaxRotationSpeed);
 
             p.Initialize(
                 where,
@@ -132,8 +132,8 @@ namespace Infart.ParticleSystem
 
         private Vector2 PickRandomDirection()
         {
-            float radians = fbonizziHelper.RandomBetween(
-                MathHelper.ToRadians(min_spawn_angle_), MathHelper.ToRadians(max_spawn_angle_));
+            float radians = FbonizziHelper.RandomBetween(
+                MathHelper.ToRadians(MinSpawnAngle), MathHelper.ToRadians(MaxSpawnAngle));
 
             Vector2 direction = new Vector2(
                 direction.X = (float)Math.Cos(radians), direction.Y = -(float)Math.Sin(radians));
@@ -145,9 +145,9 @@ namespace Infart.ParticleSystem
         {
             float dt = (float)gameTime / 1000.0f;
 
-            for (int i = 0; i < active_particles_.Length; ++i)
+            for (int i = 0; i < _activeParticles.Length; ++i)
             {
-                Particle p = active_particles_[i];
+                Particle p = _activeParticles[i];
 
                 if (p.Active)
                 {
@@ -155,7 +155,7 @@ namespace Infart.ParticleSystem
 
                     if (!p.Active)
                     {
-                        free_particles_.Enqueue(p);
+                        FreeParticles.Enqueue(p);
                     }
                 }
             }
@@ -163,9 +163,9 @@ namespace Infart.ParticleSystem
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < active_particles_.Length; ++i)
+            for (int i = 0; i < _activeParticles.Length; ++i)
             {
-                Particle p = active_particles_[i];
+                Particle p = _activeParticles[i];
 
                 if (!p.Active)
                     continue;
@@ -176,8 +176,8 @@ namespace Infart.ParticleSystem
 
                 float scale = p.Scale * (.75f + .25f * normalizedLifetime);
 
-                spriteBatch.Draw(texture_, p.Position, texture_rectangle_, p.Color * alpha,
-                    p.Rotation, origin_, scale, SpriteEffects.None, 0.0f);
+                spriteBatch.Draw(_texture, p.Position, _textureRectangle, p.Color * alpha,
+                    p.Rotation, _origin, scale, SpriteEffects.None, 0.0f);
             }
         }
     }

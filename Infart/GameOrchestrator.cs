@@ -27,7 +27,7 @@ namespace Infart
 
         private readonly GraphicsDevice _graphicsDevice;
 
-        private FadeObject _stateTransition;
+        private readonly FadeObject _stateTransition;
 
         private Action _afterTransitionAction;
 

@@ -9,155 +9,155 @@ namespace Infart.ParticleSystem
 {
     public class InfartExplosion
     {
-        private double elapsed_ = 0.0;
+        private double _elapsed = 0.0;
 
-        private const double time_to_finish_ = 5000.0;
+        private const double TimeToFinish = 5000.0;
 
-        private const float scritta_scale_increase_amount_ = 0.004f;
+        private const float ScrittaScaleIncreaseAmount = 0.004f;
 
-        private const int particelle_number_ = 100;
+        private const int ParticelleNumber = 100;
 
-        private List<ParticleExplosion> particelle_;
+        private readonly List<ParticleExplosion> _particelle;
 
-        private ParticleExplosion scritta_ = null;
+        private ParticleExplosion _scritta = null;
 
-        private List<Color> fart_colors_ = new List<Color> {
+        private readonly List<Color> _fartColors = new List<Color> {
             new Color(111, 86, 41),
             new Color(65, 44, 32),
             Color.LawnGreen
         };
 
-        private Vector2 emitter_location_ = Vector2.Zero;
+        private readonly Vector2 _emitterLocation = Vector2.Zero;
 
-        private static Random random_;
+        private static Random _random;
 
-        private bool finished_ = false;
+        private bool _finished = false;
 
-        private bool started_ = false;
+        private bool _started = false;
 
-        private bool active_ = false;
+        private bool _active = false;
 
-        private bool with_text_;
+        private bool _withText;
 
         public bool Finished
         {
-            get { return finished_; }
+            get { return _finished; }
         }
 
         public bool Started
         {
-            get { return started_; }
+            get { return _started; }
         }
 
-        public InfartExplosion(AssetsLoader AssetsLoader)
+        public InfartExplosion(AssetsLoader assetsLoader)
         {
-            random_ = fbonizziHelper.random;
-            particelle_ = new List<ParticleExplosion>();
+            _random = FbonizziHelper.Random;
+            _particelle = new List<ParticleExplosion>();
 
-            AddNewScritta(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Bang"]);
-            AddRandomParticles(AssetsLoader.Textures, AssetsLoader.TexturesRectangles["Burger"], AssetsLoader.TexturesRectangles["Merda"]);
+            AddNewScritta(assetsLoader.Textures, assetsLoader.TexturesRectangles["Bang"]);
+            AddRandomParticles(assetsLoader.Textures, assetsLoader.TexturesRectangles["Burger"], assetsLoader.TexturesRectangles["Merda"]);
         }
 
-        public void Explode(Vector2 CenterPosition, bool WithText, SoundManager SoundManager)
+        public void Explode(Vector2 centerPosition, bool withText, SoundManager soundManager)
         {
-            started_ = true;
-            with_text_ = WithText;
+            _started = true;
+            _withText = withText;
 
-            active_ = true;
-            SoundManager.PlayExplosion();
-            SetEmitterLocation(CenterPosition);
+            _active = true;
+            soundManager.PlayExplosion();
+            SetEmitterLocation(centerPosition);
         }
 
         public void Reset()
         {
-            finished_ = false;
-            started_ = false;
-            elapsed_ = 0.0;
-            active_ = false;
+            _finished = false;
+            _started = false;
+            _elapsed = 0.0;
+            _active = false;
 
             ResetParticles();
             ResetScritta();
         }
 
-        private void SetEmitterLocation(Vector2 EmitterLocation)
+        private void SetEmitterLocation(Vector2 emitterLocation)
         {
-            scritta_.position_ = EmitterLocation;
+            _scritta.Position = emitterLocation;
 
-            for (int i = 0; i < particelle_number_; ++i)
-                particelle_[i].position_ = EmitterLocation;
+            for (int i = 0; i < ParticelleNumber; ++i)
+                _particelle[i].Position = emitterLocation;
         }
 
         private void ResetParticles()
         {
-            for (int i = 0; i < particelle_number_; ++i)
+            for (int i = 0; i < ParticelleNumber; ++i)
             {
-                float angle = random_.Next(0, 360);
+                float angle = _random.Next(0, 360);
                 angle = MathHelper.ToRadians(-angle);
                 Vector2 velocity = new Vector2(
                     (float)Math.Cos(angle),
                     (float)Math.Sin(angle))
-                    * random_.Next(80, 140);
+                    * _random.Next(80, 140);
 
-                particelle_[i].Refactor(
+                _particelle[i].Refactor(
                         velocity,
                         angle,
-                        (float)(random_.NextDouble() * 5),
-                        fart_colors_[random_.Next(fart_colors_.Count)],
-                        (float)random_.NextDouble() - 0.3f,
+                        (float)(_random.NextDouble() * 5),
+                        _fartColors[_random.Next(_fartColors.Count)],
+                        (float)_random.NextDouble() - 0.3f,
                         500);
             }
         }
 
         private void ResetScritta()
         {
-            scritta_.Refactor(
+            _scritta.Refactor(
                Vector2.Zero,
-               (float)random_.NextDouble(),
-               (float)random_.NextDouble() * 10,
+               (float)_random.NextDouble(),
+               (float)_random.NextDouble() * 10,
                Color.White,
                1.0f,
                500);
         }
 
         private void AddRandomParticles(
-            Texture2D Texture,
-            Rectangle ParticleRectangle1,
-            Rectangle ParticleRectangle2)
+            Texture2D texture,
+            Rectangle particleRectangle1,
+            Rectangle particleRectangle2)
         {
-            for (int i = 0; i < particelle_number_; ++i)
+            for (int i = 0; i < ParticelleNumber; ++i)
             {
-                float angle = random_.Next(0, 360);
+                float angle = _random.Next(0, 360);
                 angle = MathHelper.ToRadians(-angle);
                 Vector2 velocity = new Vector2(
                     (float)Math.Cos(angle),
                     (float)Math.Sin(angle))
-                    * random_.Next(80, 140);
+                    * _random.Next(80, 140);
 
-                particelle_.Add(
+                _particelle.Add(
                     new ParticleExplosion(
-                       Texture,
-                        random_.NextDouble() < 0.5 ? ParticleRectangle1 : ParticleRectangle2,
-                        emitter_location_,
+                       texture,
+                        _random.NextDouble() < 0.5 ? particleRectangle1 : particleRectangle2,
+                        _emitterLocation,
                         velocity,
                         angle,
-                        (float)(random_.NextDouble() * 5),
-                        fart_colors_[random_.Next(fart_colors_.Count)],
-                        (float)random_.NextDouble() - 0.3f,
+                        (float)(_random.NextDouble() * 5),
+                        _fartColors[_random.Next(_fartColors.Count)],
+                        (float)_random.NextDouble() - 0.3f,
                         500));
             }
         }
 
         public void AddNewScritta(
-            Texture2D TextureScritta,
-            Rectangle TextureRectangle)
+            Texture2D textureScritta,
+            Rectangle textureRectangle)
         {
-            scritta_ = new ParticleExplosion(
-                TextureScritta,
-                TextureRectangle,
-                emitter_location_,
+            _scritta = new ParticleExplosion(
+                textureScritta,
+                textureRectangle,
+                _emitterLocation,
                 Vector2.Zero,
-                (float)random_.NextDouble(),
-                (float)random_.NextDouble() * 10,
+                (float)_random.NextDouble(),
+                (float)_random.NextDouble() * 10,
                 Color.White,
                 1.0f,
                 500);
@@ -165,33 +165,33 @@ namespace Infart.ParticleSystem
 
         public void Update(double gameTime)
         {
-            if (active_)
+            if (_active)
             {
-                elapsed_ += gameTime;
+                _elapsed += gameTime;
 
-                if (elapsed_ >= time_to_finish_)
-                    finished_ = true;
+                if (_elapsed >= TimeToFinish)
+                    _finished = true;
 
-                for (int i = 0; i < particelle_.Count; ++i)
-                    particelle_[i].Update(gameTime);
+                for (int i = 0; i < _particelle.Count; ++i)
+                    _particelle[i].Update(gameTime);
 
-                if (with_text_)
+                if (_withText)
                 {
-                    scritta_.Scale += scritta_scale_increase_amount_ * ((float)elapsed_ / 1000.0f);
-                    scritta_.Update(gameTime);
+                    _scritta.Scale += ScrittaScaleIncreaseAmount * ((float)_elapsed / 1000.0f);
+                    _scritta.Update(gameTime);
                 }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (active_)
+            if (_active)
             {
-                for (int i = 0; i < particelle_.Count; ++i)
-                    particelle_[i].Draw(spriteBatch);
+                for (int i = 0; i < _particelle.Count; ++i)
+                    _particelle[i].Draw(spriteBatch);
 
-                if (with_text_)
-                    scritta_.Draw(spriteBatch);
+                if (_withText)
+                    _scritta.Draw(spriteBatch);
             }
         }
     }

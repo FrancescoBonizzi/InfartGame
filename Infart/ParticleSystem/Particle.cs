@@ -17,7 +17,7 @@ namespace Infart.ParticleSystem
 
         public float Rotation;
 
-        private float rotation_speed_;
+        private float _rotationSpeed;
 
         public float TimeSinceStart;
 
@@ -28,24 +28,24 @@ namespace Infart.ParticleSystem
         }
 
         public void Initialize(
-             Vector2 Position,
-             Vector2 Velocity,
-             Vector2 Acceleration,
-             float RotationSpeed,
-             Color Color,
-             float Scale,
-             float Lifetime)
+             Vector2 position,
+             Vector2 velocity,
+             Vector2 acceleration,
+             float rotationSpeed,
+             Color color,
+             float scale,
+             float lifetime)
         {
-            this.Position = Position;
-            this.Color = Color;
-            this.Scale = Scale;
+            this.Position = position;
+            this.Color = color;
+            this.Scale = scale;
 
-            this.Velocity = Velocity;
-            this.Acceleration = Acceleration;
-            this.rotation_speed_ = RotationSpeed;
-            this.LifeTime = Lifetime;
+            this.Velocity = velocity;
+            this.Acceleration = acceleration;
+            this._rotationSpeed = rotationSpeed;
+            this.LifeTime = lifetime;
             this.TimeSinceStart = 0.0f;
-            this.Rotation = fbonizziHelper.RandomBetween(0, MathHelper.TwoPi);
+            this.Rotation = FbonizziHelper.RandomBetween(0, MathHelper.TwoPi);
         }
 
         public bool Active
@@ -57,7 +57,7 @@ namespace Infart.ParticleSystem
         {
             Velocity += Acceleration * dt;
             Position += Velocity * dt;
-            Rotation += rotation_speed_ * dt;
+            Rotation += _rotationSpeed * dt;
 
             TimeSinceStart += dt;
         }

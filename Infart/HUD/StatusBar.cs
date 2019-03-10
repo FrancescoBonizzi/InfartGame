@@ -6,94 +6,94 @@ namespace Infart.HUD
 {
     public class StatusBar
     {
-        private Vector2 position_;
+        private Vector2 _position;
 
-        private StatusBarSprite[] status_burgers_;
+        private readonly StatusBarSprite[] _statusBurgers;
 
-        private Texture2D texture_reference_;
+        private readonly Texture2D _textureReference;
 
-        private SoundManager sound_manager_reference_;
+        private readonly SoundManager _soundManagerReference;
 
-        private Color empty_color = Color.Gray * 0.5f;
+        private readonly Color _emptyColor = Color.Gray * 0.5f;
 
-        private Color full_color = Color.White;
+        private readonly Color _fullColor = Color.White;
 
-        private double elapsed_ = 0.0;
+        private double _elapsed = 0.0;
 
-        private int jump_count_ = 0;
+        private int _jumpCount = 0;
 
-        private const int jump_needed_to_remove_ham_ = 1;
+        private const int JumpNeededToRemoveHam = 1;
 
-        private int hamburgers_ = 0;
+        private int _hamburgers = 0;
 
-        private int hamburger_mangiati_totale_ = 0;
+        private int _hamburgerMangiatiTotale = 0;
 
-        private const int soglia_hamburger_per_star_male_ = 4;
+        private const int SogliaHamburgerPerStarMale = 4;
 
-        private float overlay_death_opacity_ = 0.01f;
+        private float _overlayDeathOpacity = 0.01f;
 
-        private Rectangle sfondo_morte_rect_;
+        private readonly Rectangle _sfondoMorteRect;
 
-        private bool infart_ = false;
+        private bool _infart = false;
 
         public StatusBar(
             Vector2 position,
-            AssetsLoader AssetsLoader,
-            SoundManager SoundManagerReference)
+            AssetsLoader assetsLoader,
+            SoundManager soundManagerReference)
         {
-            position_ = position;
-            texture_reference_ = AssetsLoader.Textures;
+            _position = position;
+            _textureReference = assetsLoader.Textures;
 
-            sound_manager_reference_ = SoundManagerReference;
+            _soundManagerReference = soundManagerReference;
 
-            status_burgers_ = new StatusBarSprite[4];
-            Vector2 tmp_pos = new Vector2(position.X, position.Y + 20);
-            int ham_width = AssetsLoader.TexturesRectangles["Burger"].Width;
-            Vector2 ham_scale = new Vector2(0.9f);
-            sfondo_morte_rect_ = AssetsLoader.TexturesRectangles["death_screen"];
+            _statusBurgers = new StatusBarSprite[4];
+            Vector2 tmpPos = new Vector2(position.X, position.Y + 20);
+            int hamWidth = assetsLoader.TexturesRectangles["Burger"].Width;
+            Vector2 hamScale = new Vector2(0.9f);
+            _sfondoMorteRect = assetsLoader.TexturesRectangles["death_screen"];
 
             for (int i = 0; i < 4; ++i)
             {
-                status_burgers_[i] = new StatusBarSprite(
-                    AssetsLoader.Textures,
-                    AssetsLoader.TexturesRectangles["Burger"],
-                    tmp_pos,
-                    empty_color,
-                    ham_scale);
-                tmp_pos.X += ham_width;
+                _statusBurgers[i] = new StatusBarSprite(
+                    assetsLoader.Textures,
+                    assetsLoader.TexturesRectangles["Burger"],
+                    tmpPos,
+                    _emptyColor,
+                    hamScale);
+                tmpPos.X += hamWidth;
             }
         }
 
         public void Reset()
         {
-            infart_ = false;
+            _infart = false;
             Hamburgers = 0;
 
             for (int i = 0; i < 4; ++i)
             {
-                status_burgers_[i].Reset();
-                status_burgers_[i].FillColor = empty_color;
+                _statusBurgers[i].Reset();
+                _statusBurgers[i].FillColor = _emptyColor;
             }
-            overlay_death_opacity_ = 0.01f;
-            hamburger_mangiati_totale_ = 0;
-            jump_count_ = 0;
+            _overlayDeathOpacity = 0.01f;
+            _hamburgerMangiatiTotale = 0;
+            _jumpCount = 0;
         }
 
         public int CurrentHamburgers
         {
-            get { return hamburgers_; }
+            get { return _hamburgers; }
         }
 
         public int HamburgerMangiatiInTotale
         {
-            get { return hamburger_mangiati_totale_; }
+            get { return _hamburgerMangiatiTotale; }
         }
 
         public bool IsInfarting()
         {
-            if (hamburgers_ > soglia_hamburger_per_star_male_ || infart_)
+            if (_hamburgers > SogliaHamburgerPerStarMale || _infart)
             {
-                infart_ = true;
+                _infart = true;
 
                 return true;
             }
@@ -104,98 +104,98 @@ namespace Infart.HUD
         public void HamburgerEaten()
         {
             Hamburgers += 1;
-            status_burgers_[hamburgers_ - 1].Taken();
-            status_burgers_[hamburgers_ - 1].FillColor = full_color;
-            jump_count_ = 0;
+            _statusBurgers[_hamburgers - 1].Taken();
+            _statusBurgers[_hamburgers - 1].FillColor = _fullColor;
+            _jumpCount = 0;
 
-            if (hamburgers_ >= soglia_hamburger_per_star_male_)
+            if (_hamburgers >= SogliaHamburgerPerStarMale)
             {
-                status_burgers_[hamburgers_ - 1].FillColor = Color.LightCoral;
+                _statusBurgers[_hamburgers - 1].FillColor = Color.LightCoral;
 
-                sound_manager_reference_.PlayHeartBeat();
+                _soundManagerReference.PlayHeartBeat();
             }
 
-            ++hamburger_mangiati_totale_;
+            ++_hamburgerMangiatiTotale;
         }
 
         public void PlayerJumped()
         {
-            ++jump_count_;
+            ++_jumpCount;
 
-            if (jump_count_ == jump_needed_to_remove_ham_)
+            if (_jumpCount == JumpNeededToRemoveHam)
             {
                 --Hamburgers;
-                status_burgers_[hamburgers_].Lost();
-                status_burgers_[hamburgers_].FillColor = empty_color;
-                jump_count_ = 0;
+                _statusBurgers[_hamburgers].Lost();
+                _statusBurgers[_hamburgers].FillColor = _emptyColor;
+                _jumpCount = 0;
             }
 
-            if (hamburgers_ < soglia_hamburger_per_star_male_)
+            if (_hamburgers < SogliaHamburgerPerStarMale)
             {
-                sound_manager_reference_.StopHeartBeat();
+                _soundManagerReference.StopHeartBeat();
             }
         }
 
         public void SetInfart()
         {
-            infart_ = true;
+            _infart = true;
         }
 
         private int Hamburgers
         {
-            get { return hamburgers_; }
+            get { return _hamburgers; }
             set
             {
-                int amount = value - hamburgers_;
+                int amount = value - _hamburgers;
 
-                if (value < 0) hamburgers_ = 0;
-                else if (value > 4) infart_ = true;
-                else hamburgers_ = value;
+                if (value < 0) _hamburgers = 0;
+                else if (value > 4) _infart = true;
+                else _hamburgers = value;
             }
         }
 
         public void ComputeJalapenos()
         {
-            for (int i = 0; i < hamburgers_; ++i)
+            for (int i = 0; i < _hamburgers; ++i)
             {
-                status_burgers_[i].Lost();
-                status_burgers_[i].FillColor = empty_color;
+                _statusBurgers[i].Lost();
+                _statusBurgers[i].FillColor = _emptyColor;
             }
 
             Hamburgers = 0;
-            sound_manager_reference_.StopHeartBeat();
+            _soundManagerReference.StopHeartBeat();
         }
 
         public void ComputeMerda()
         {
-            for (int i = 0; i < hamburgers_; ++i)
+            for (int i = 0; i < _hamburgers; ++i)
             {
-                status_burgers_[i].Lost();
-                status_burgers_[i].FillColor = empty_color;
+                _statusBurgers[i].Lost();
+                _statusBurgers[i].FillColor = _emptyColor;
             }
 
             Hamburgers = 0;
-            sound_manager_reference_.StopHeartBeat();
+            _soundManagerReference.StopHeartBeat();
         }
 
         public void Update(double gametime)
         {
-            elapsed_ += gametime;
+            _elapsed += gametime;
 
-            if (!infart_)
+            if (!_infart)
             {
                 for (int i = 0; i < 4; ++i)
-                    status_burgers_[i].Update(gametime);
+                    _statusBurgers[i].Update(gametime);
 
-                if (hamburgers_ == soglia_hamburger_per_star_male_)
+                if (_hamburgers == SogliaHamburgerPerStarMale)
                 {
-                    if (overlay_death_opacity_ < 1.0f)
-                        overlay_death_opacity_ += 0.01f;
+                    if (_overlayDeathOpacity < 1.0f)
+                        _overlayDeathOpacity += 0.01f;
                 }
                 else
                 {
-                    if (overlay_death_opacity_ >= 0.01)
-                        overlay_death_opacity_ -= 0.01f;
+                    if (_overlayDeathOpacity >= 0.01)
+                        _overlayDeathOpacity -= 0.01f;
                 }
             }
         }
@@ -203,15 +203,15 @@ namespace Infart.HUD
         public void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < 4; ++i)
-                status_burgers_[i].Draw(spriteBatch);
+                _statusBurgers[i].Draw(spriteBatch);
 
-            if (overlay_death_opacity_ > 0.01f)
+            if (_overlayDeathOpacity > 0.01f)
             {
                 spriteBatch.Draw(
-                    texture_reference_,
+                    _textureReference,
                     Vector2.Zero,
-                    sfondo_morte_rect_,
-                    Color.White * overlay_death_opacity_);
+                    _sfondoMorteRect,
+                    Color.White * _overlayDeathOpacity);
             }
         }
     }

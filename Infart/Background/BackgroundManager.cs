@@ -10,201 +10,201 @@ namespace Infart.Background
 {
     public class BackgroundManager
     {
-        private GrattacieliAutogeneranti grattacieli_fondo_ = null;
+        private readonly GrattacieliAutogeneranti _grattacieliFondo = null;
 
-        private GrattacieliAutogeneranti grattacieli_mid_ = null;
+        private readonly GrattacieliAutogeneranti _grattacieliMid = null;
 
-        private float parallax_speed_fondo_;
+        private float _parallaxSpeedFondo;
 
-        private float parallax_speed_mid_;
+        private float _parallaxSpeedMid;
 
-        private const float default_parallax_speed_fondo_ = -10.0f;
+        private const float DefaultParallaxSpeedFondo = -10.0f;
 
-        private const float default_parallax_speed_mid_ = -18.0f;
+        private const float DefaultParallaxSpeedMid = -18.0f;
 
-        private Nuvolificio nuvolificio_vicino_;
+        private readonly Nuvolificio _nuvolificioVicino;
 
-        private Nuvolificio nuvolificio_medio_;
+        private readonly Nuvolificio _nuvolificioMedio;
 
-        private Nuvolificio nuvolificio_lontano_;
+        private readonly Nuvolificio _nuvolificioLontano;
 
-        private Vector2 nuvole_default_spawn_y_range_ = new Vector2(300.0f, -300.0f);
+        private readonly Vector2 _nuvoleDefaultSpawnYRange = new Vector2(300.0f, -300.0f);
 
-        private StarFieldParticleSystem starfield_;
+        private readonly StarFieldParticleSystem _starfield;
 
-        private Vector2 cielo_stellato_spawn_y_range_ = new Vector2(-960.0f, -300.0f);
+        private readonly Vector2 _cieloStellatoSpawnYRange = new Vector2(-960.0f, -300.0f);
 
-        private const double timeBetweenNewStar_ = 20.0f;
+        private const double TimeBetweenNewStar = 20.0f;
 
-        private double timeTillNewStar_ = 0.0f;
+        private double _timeTillNewStar = 0.0f;
 
-        protected Camera current_camera_;
+        protected Camera CurrentCamera;
 
-        protected float old_camera_x_pos_;
+        protected float OldCameraXPos;
 
-        protected float parallax_dir_ = +1;
+        protected float ParallaxDir = +1;
 
-        protected Texture2D texture_reference_;
+        protected Texture2D TextureReference;
 
-        protected Rectangle sfondo_rectangle_;
+        protected Rectangle SfondoRectangle;
 
-        protected Vector2 sfondo_origin_;
+        protected Vector2 SfondoOrigin;
 
-        protected Vector2 sfondo_scale_;
+        protected Vector2 SfondoScale;
 
         public BackgroundManager(
-            Camera CameraInstance,
-            AssetsLoader AssetsLoader,
-            InfartGame GameManagerReference)
+            Camera cameraInstance,
+            AssetsLoader assetsLoader,
+            InfartGame gameManagerReference)
         {
-            current_camera_ = CameraInstance;
-            old_camera_x_pos_ = current_camera_.Position.X;
+            CurrentCamera = cameraInstance;
+            OldCameraXPos = CurrentCamera.Position.X;
 
-            sfondo_rectangle_ = AssetsLoader.TexturesRectangles["background"];
-            texture_reference_ = AssetsLoader.Textures;
-            sfondo_origin_ = new Vector2(0.0f, sfondo_rectangle_.Height);
-            sfondo_scale_ = Vector2.One;
+            SfondoRectangle = assetsLoader.TexturesRectangles["background"];
+            TextureReference = assetsLoader.Textures;
+            SfondoOrigin = new Vector2(0.0f, SfondoRectangle.Height);
+            SfondoScale = Vector2.One;
 
-            grattacieli_fondo_ = new GrattacieliAutogeneranti(
-                AssetsLoader.TexturesGrattaBack, AssetsLoader.TexturesRectangles, "back", 69, CameraInstance, GameManagerReference);
+            _grattacieliFondo = new GrattacieliAutogeneranti(
+                assetsLoader.TexturesGrattaBack, assetsLoader.TexturesRectangles, "back", 69, cameraInstance, gameManagerReference);
 
-            sfondo_scale_ = new Vector2(1.8f);
+            SfondoScale = new Vector2(1.8f);
 
-            grattacieli_mid_ = new GrattacieliAutogeneranti(
-                AssetsLoader.TexturesGrattaMid, AssetsLoader.TexturesRectangles, "mid", 69, CameraInstance, GameManagerReference);
+            _grattacieliMid = new GrattacieliAutogeneranti(
+                assetsLoader.TexturesGrattaMid, assetsLoader.TexturesRectangles, "mid", 69, cameraInstance, gameManagerReference);
 
-            parallax_speed_fondo_ = default_parallax_speed_fondo_;
-            parallax_speed_mid_ = default_parallax_speed_mid_;
+            _parallaxSpeedFondo = DefaultParallaxSpeedFondo;
+            _parallaxSpeedMid = DefaultParallaxSpeedMid;
 
             List<Rectangle> tmp = new List<Rectangle>
             {
-                AssetsLoader.TexturesRectangles["nuvola1"],
-                AssetsLoader.TexturesRectangles["nuvola2"],
-                AssetsLoader.TexturesRectangles["nuvola3"]
+                assetsLoader.TexturesRectangles["nuvola1"],
+                assetsLoader.TexturesRectangles["nuvola2"],
+                assetsLoader.TexturesRectangles["nuvola3"]
             };
 
-            nuvolificio_vicino_ = new Nuvolificio(
+            _nuvolificioVicino = new Nuvolificio(
                 Color.White, 0.6f, new Vector2(45, 60f),
-                nuvole_default_spawn_y_range_, CameraInstance, tmp, AssetsLoader.Textures);
+                _nuvoleDefaultSpawnYRange, cameraInstance, tmp, assetsLoader.Textures);
 
-            nuvolificio_medio_ = new Nuvolificio(
+            _nuvolificioMedio = new Nuvolificio(
                new Color(9, 50, 67), 0.4f, new Vector2(30f, 40f),
-                nuvole_default_spawn_y_range_, CameraInstance, tmp, AssetsLoader.Textures);
+                _nuvoleDefaultSpawnYRange, cameraInstance, tmp, assetsLoader.Textures);
 
-            nuvolificio_lontano_ = new Nuvolificio(
+            _nuvolificioLontano = new Nuvolificio(
                  new Color(5, 23, 40), 0.2f, new Vector2(10f, 20f),
-                nuvole_default_spawn_y_range_, CameraInstance, tmp, AssetsLoader.Textures);
+                _nuvoleDefaultSpawnYRange, cameraInstance, tmp, assetsLoader.Textures);
 
-            starfield_ = new StarFieldParticleSystem(8, AssetsLoader);
+            _starfield = new StarFieldParticleSystem(8, assetsLoader);
 
-            current_camera_ = CameraInstance;
-            old_camera_x_pos_ = current_camera_.Position.X;
+            CurrentCamera = cameraInstance;
+            OldCameraXPos = CurrentCamera.Position.X;
         }
 
         public void IncreaseParallaxSpeed()
         {
-            parallax_speed_fondo_ -= 4.0f;
-            parallax_speed_mid_ -= 4.0f;
+            _parallaxSpeedFondo -= 4.0f;
+            _parallaxSpeedMid -= 4.0f;
         }
 
         public void DecreaseParallaxSpeed()
         {
-            parallax_speed_fondo_ += 4.0f;
-            parallax_speed_mid_ += 4.0f;
+            _parallaxSpeedFondo += 4.0f;
+            _parallaxSpeedMid += 4.0f;
         }
 
         public void Reset(Camera camera)
         {
-            current_camera_ = camera;
-            old_camera_x_pos_ = current_camera_.Position.X;
-            grattacieli_fondo_.Reset(camera);
-            grattacieli_mid_.Reset(camera);
+            CurrentCamera = camera;
+            OldCameraXPos = CurrentCamera.Position.X;
+            _grattacieliFondo.Reset(camera);
+            _grattacieliMid.Reset(camera);
 
-            nuvolificio_lontano_.Reset(camera);
-            nuvolificio_medio_.Reset(camera);
-            nuvolificio_vicino_.Reset(camera);
+            _nuvolificioLontano.Reset(camera);
+            _nuvolificioMedio.Reset(camera);
+            _nuvolificioVicino.Reset(camera);
 
-            parallax_speed_fondo_ = default_parallax_speed_fondo_;
-            parallax_speed_mid_ = default_parallax_speed_mid_;
+            _parallaxSpeedFondo = DefaultParallaxSpeedFondo;
+            _parallaxSpeedMid = DefaultParallaxSpeedMid;
         }
 
         public void Update(double gametime)
         {
-            if (old_camera_x_pos_ - current_camera_.Position.X < 0)
+            if (OldCameraXPos - CurrentCamera.Position.X < 0)
             {
-                parallax_dir_ = +1;
+                ParallaxDir = +1;
             }
-            else if (old_camera_x_pos_ - current_camera_.Position.X > 0)
+            else if (OldCameraXPos - CurrentCamera.Position.X > 0)
             {
-                parallax_dir_ = -1;
+                ParallaxDir = -1;
             }
             else
             {
-                parallax_dir_ = 0;
+                ParallaxDir = 0;
             }
 
-            old_camera_x_pos_ = current_camera_.Position.X;
+            OldCameraXPos = CurrentCamera.Position.X;
 
             float dt = (float)gametime / 1000.0f;
 
-            grattacieli_fondo_.MoveX(parallax_speed_fondo_ * dt * parallax_dir_);
-            grattacieli_mid_.MoveX(parallax_speed_mid_ * dt * parallax_dir_);
-            nuvolificio_lontano_.MoveX((float)((parallax_speed_fondo_) * dt * parallax_dir_));
-            nuvolificio_medio_.MoveX((float)((parallax_speed_mid_) * dt * parallax_dir_));
+            _grattacieliFondo.MoveX(_parallaxSpeedFondo * dt * ParallaxDir);
+            _grattacieliMid.MoveX(_parallaxSpeedMid * dt * ParallaxDir);
+            _nuvolificioLontano.MoveX((float)((_parallaxSpeedFondo) * dt * ParallaxDir));
+            _nuvolificioMedio.MoveX((float)((_parallaxSpeedMid) * dt * ParallaxDir));
 
-            grattacieli_fondo_.Update(gametime, current_camera_);
-            grattacieli_mid_.Update(gametime, current_camera_);
+            _grattacieliFondo.Update(gametime, CurrentCamera);
+            _grattacieliMid.Update(gametime, CurrentCamera);
 
-            starfield_.Update(gametime);
+            _starfield.Update(gametime);
 
-            if (current_camera_.Position.Y >= cielo_stellato_spawn_y_range_.X
-                && current_camera_.Position.Y <= cielo_stellato_spawn_y_range_.Y)
+            if (CurrentCamera.Position.Y >= _cieloStellatoSpawnYRange.X
+                && CurrentCamera.Position.Y <= _cieloStellatoSpawnYRange.Y)
                 GenerateStars(gametime);
 
-            nuvolificio_lontano_.Update(gametime);
-            nuvolificio_medio_.Update(gametime);
-            nuvolificio_vicino_.Update(gametime);
+            _nuvolificioLontano.Update(gametime);
+            _nuvolificioMedio.Update(gametime);
+            _nuvolificioVicino.Update(gametime);
         }
 
         private void GenerateStars(double dt)
         {
-            timeTillNewStar_ -= dt;
-            if (timeTillNewStar_ < 0)
+            _timeTillNewStar -= dt;
+            if (_timeTillNewStar < 0)
             {
                 Vector2 where = new Vector2(
-                    fbonizziHelper.random.Next((int)current_camera_.Position.X, (int)current_camera_.Position.X + current_camera_.ViewPortWidth),
-                    fbonizziHelper.random.Next((int)cielo_stellato_spawn_y_range_.X, (int)cielo_stellato_spawn_y_range_.Y));
+                    FbonizziHelper.Random.Next((int)CurrentCamera.Position.X, (int)CurrentCamera.Position.X + CurrentCamera.ViewPortWidth),
+                    FbonizziHelper.Random.Next((int)_cieloStellatoSpawnYRange.X, (int)_cieloStellatoSpawnYRange.Y));
 
-                starfield_.AddParticles(where);
+                _starfield.AddParticles(where);
 
-                timeTillNewStar_ = timeBetweenNewStar_;
+                _timeTillNewStar = TimeBetweenNewStar;
             }
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
             spritebatch.Draw(
-                    texture_reference_,
-                    new Vector2(current_camera_.Position.X, current_camera_.ViewPortHeight),
-                    sfondo_rectangle_,
+                    TextureReference,
+                    new Vector2(CurrentCamera.Position.X, CurrentCamera.ViewPortHeight),
+                    SfondoRectangle,
                     Color.White,
                     0.0f,
-                    sfondo_origin_,
-                    sfondo_scale_,
+                    SfondoOrigin,
+                    SfondoScale,
                     SpriteEffects.None,
                     1.0f);
 
-            starfield_.Draw(spritebatch);
+            _starfield.Draw(spritebatch);
 
-            nuvolificio_lontano_.Draw(spritebatch);
-            grattacieli_fondo_.Draw(spritebatch);
-            nuvolificio_medio_.Draw(spritebatch);
-            grattacieli_mid_.Draw(spritebatch);
+            _nuvolificioLontano.Draw(spritebatch);
+            _grattacieliFondo.Draw(spritebatch);
+            _nuvolificioMedio.Draw(spritebatch);
+            _grattacieliMid.Draw(spritebatch);
         }
 
         public void DrawSpecial(SpriteBatch spritebatch)
         {
-            nuvolificio_vicino_.Draw(spritebatch);
+            _nuvolificioVicino.Draw(spritebatch);
         }
     }
 }

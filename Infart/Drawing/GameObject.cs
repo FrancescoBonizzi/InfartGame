@@ -5,90 +5,72 @@ namespace Infart.Drawing
 {
     public abstract class GameObject
     {
-        protected Vector2 position_ = Vector2.Zero;
-
-        protected float rotation_ = 0.0f;
-
-        protected Vector2 scale_ = Vector2.One;
-
-        protected Vector2 origin_ = Vector2.Zero;
-
-        protected float depth_ = 0.0f;
-
-        protected Color overlay_color_ = Color.White;
-
-        protected SpriteEffects flip_ = SpriteEffects.None;
+        private Vector2 _position = Vector2.Zero;
 
         public virtual Vector2 Position
         {
-            get { return position_; }
-            set { position_ = value; }
+            get => _position;
+            set => _position = value;
         }
+
+        protected float Rotation = 0.0f;
+
+        protected Vector2 Scale = Vector2.One;
+
+        protected Vector2 Origin = Vector2.Zero;
+
+        protected float Depth = 0.0f;
+
+        protected Color OverlayColor = Color.White;
+
+        protected SpriteEffects Flip = SpriteEffects.None;
+        
 
         public float PositionX
         {
-            get { return position_.X; }
-            set { position_.X = value; }
+            get { return _position.X; }
+            set { _position.X = value; }
         }
 
-        public abstract Rectangle CollisionRectangle { get; }
-
-        public virtual Vector2 Scale
+        protected Rectangle _collisionRectangle;
+        public virtual Rectangle CollisionRectangle
         {
-            set { scale_ = value; }
-            get { return scale_; }
+            get => _collisionRectangle;
         }
-
+        
         public virtual float ScaleUnique
         {
             set
             {
-                scale_.X = value;
-                scale_.Y = value;
+                Scale.X = value;
+                Scale.Y = value;
             }
-            get { return scale_.X; }
+            get { return Scale.X; }
         }
-
-        public virtual float Depth
-        {
-            get { return depth_; }
-            set { depth_ = value; }
-        }
-
-        public virtual float Rotation
-        {
-            get { return rotation_; }
-            set { rotation_ = value; }
-        }
-
-        public Vector2 Origin
-        {
-            get { return origin_; }
-            set { origin_ = value; }
-        }
+        
 
         public Matrix Transformation
         {
             get
             {
                 return
-                         Matrix.CreateTranslation(new Vector3(-origin_, 0.0f)) *
-                         Matrix.CreateScale(scale_.X, scale_.Y, 1.0f) *
-                         Matrix.CreateRotationZ(rotation_) *
-                         Matrix.CreateTranslation(new Vector3(position_, 0.0f));
+                         Matrix.CreateTranslation(new Vector3(-Origin, 0.0f)) *
+                         Matrix.CreateScale(Scale.X, Scale.Y, 1.0f) *
+                         Matrix.CreateRotationZ(Rotation) *
+                         Matrix.CreateTranslation(new Vector3(Position, 0.0f));
             }
         }
 
         public SpriteEffects FlipEffect
         {
-            set { flip_ = value; }
-            get { return flip_; }
+            set { Flip = value; }
+            get { return Flip; }
         }
 
         public virtual Color FillColor
         {
-            set { overlay_color_ = value; }
-            get { return overlay_color_; }
+            set { OverlayColor = value; }
+            get { return OverlayColor; }
         }
 
         public virtual void Dispose()

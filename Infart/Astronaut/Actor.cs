@@ -8,32 +8,32 @@ namespace Infart.Astronaut
 {
     public abstract class Actor : AnimatedGameObject
     {
-        protected Vector2 velocity_ = Vector2.Zero;
+        protected Vector2 Velocity = Vector2.Zero;
 
-        protected float x_move_speed_ = 180.0f;
+        protected float XMoveSpeed = 180.0f;
 
-        private float y_fall_speed_ = 20.0f;
+        private float _yFallSpeed = 20.0f;
 
-        private bool on_ground_ = false;
+        private bool _onGround = false;
 
-        protected bool dead_ = false;
+        public bool Dead = false;
 
-        protected List<GameObject> colliding_objs_reference_;
+        protected List<GameObject> CollidingObjsReference;
 
         protected Actor(
             float depth,
-            Vector2 starting_pos,
-            List<GameObject> CollidingObjs)
+            Vector2 startingPos,
+            List<GameObject> collidingObjs)
             : base()
         {
-            velocity_.Y = y_fall_speed_;
+            Velocity.Y = _yFallSpeed;
 
-            colliding_objs_reference_ = CollidingObjs;
+            CollidingObjsReference = collidingObjs;
         }
 
         public List<GameObject> CollidingObjectsReference
         {
-            set { colliding_objs_reference_ = value; }
+            set { CollidingObjsReference = value; }
         }
 
         public override void Dispose()
@@ -43,41 +43,29 @@ namespace Infart.Astronaut
 
         public float HorizontalMoveSpeed
         {
-            get { return x_move_speed_; }
-            set { x_move_speed_ = value; }
-        }
-
-        public Vector2 Velocity
-        {
-            get { return velocity_; }
-            set { velocity_ = value; }
+            get { return XMoveSpeed; }
+            set { XMoveSpeed = value; }
         }
 
         public float FallSpeed
         {
-            get { return y_fall_speed_; }
-            set { y_fall_speed_ = value; }
+            get { return _yFallSpeed; }
+            set { _yFallSpeed = value; }
         }
-
-        public bool Dead
-        {
-            get { return dead_; }
-            set { dead_ = value; }
-        }
-
+        
         public bool OnGround
         {
-            get { return on_ground_; }
+            get { return _onGround; }
         }
 
-        private Vector2 CollisionTest(Vector2 move_amount)
+        private Vector2 CollisionTest(Vector2 moveAmount)
         {
-            Rectangle afterMoveRect = collision_rectangle_;
+            Rectangle afterMoveRect = _collisionRectangle;
             Vector2 corner1, corner2;
 
-            if (move_amount.X != 0)
+            if (moveAmount.X != 0)
             {
-                afterMoveRect.Offset((int)move_amount.X, 0);
+                afterMoveRect.Offset((int)moveAmount.X, 0);
 
                 corner1 = new Vector2(
                         afterMoveRect.X + afterMoveRect.Width,
@@ -90,21 +78,21 @@ namespace Infart.Astronaut
                     new Rectangle(
                         (int)corner1.X, (int)corner1.Y,
                         1, Math.Abs((int)(corner1.Y - corner2.Y))),
-                        colliding_objs_reference_))
+                        CollidingObjsReference))
                 {
-                    move_amount.X = 0;
-                    velocity_.X = 0;
+                    moveAmount.X = 0;
+                    Velocity.X = 0;
                 }
             }
 
-            if (move_amount.Y == 0)
-                return move_amount;
+            if (moveAmount.Y == 0)
+                return moveAmount;
             else
             {
-                afterMoveRect = collision_rectangle_;
-                afterMoveRect.Offset((int)move_amount.X, (int)move_amount.Y);
+                afterMoveRect = _collisionRectangle;
+                afterMoveRect.Offset((int)moveAmount.X, (int)moveAmount.Y);
 
-                if (velocity_.Y > 0)
+                if (Velocity.Y > 0)
                 {
                     corner1 = new Vector2(
                         afterMoveRect.X + 20.0f,
@@ -113,48 +101,48 @@ namespace Infart.Astronaut
                         afterMoveRect.X + afterMoveRect.Width - 20.0f,
                         afterMoveRect.Y + afterMoveRect.Height - 2.0f);
 
-                    int coll_index = CollisionSolver.CheckCollisionsReturnCollidedObject(
+                    int collIndex = CollisionSolver.CheckCollisionsReturnCollidedObject(
                        new Rectangle(
                             (int)corner1.X,
                             (int)corner1.Y + 10,
                             Math.Abs((int)(corner1.X - corner2.X)),
                             1),
-                            colliding_objs_reference_);
+                            CollidingObjsReference);
 
-                    if (coll_index != -1)
+                    if (collIndex != -1)
                     {
-                        on_ground_ = true;
+                        _onGround = true;
 
-                        move_amount.Y = 0;
-                        velocity_.Y = 0;
+                        moveAmount.Y = 0;
+                        Velocity.Y = 0;
 
-                        position_ = new Vector2(
-                            position_.X,
+                        ((GameObject) this).Position = new Vector2(
+                            ((GameObject) this).Position.X,
                             MathHelper.Lerp(
-                                position_.Y,
-                                colliding_objs_reference_[coll_index].CollisionRectangle.Y - Height + 2,
+                                ((GameObject) this).Position.Y,
+                                CollidingObjsReference[collIndex].CollisionRectangle.Y - Height + 2,
                                 0.1f));
                     }
                 }
             }
 
-            return move_amount;
+            return moveAmount;
         }
 
         public override void Update(double gameTime)
         {
-            velocity_.Y += y_fall_speed_;
+            Velocity.Y += _yFallSpeed;
 
-            if (!dead_)
+            if (!Dead)
             {
                 float elapsed = (float)gameTime / 1000.0f;
 
-                Vector2 moveAmount = velocity_ * elapsed;
+                Vector2 moveAmount = Velocity * elapsed;
                 moveAmount = CollisionTest(moveAmount);
 
-                if (velocity_.Y < 0)
+                if (Velocity.Y < 0)
                 {
-                    on_ground_ = false;
+                    _onGround = false;
                 }
 
                 Position += moveAmount;

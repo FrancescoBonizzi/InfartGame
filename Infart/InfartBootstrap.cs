@@ -20,7 +20,7 @@ namespace Infart
 {
     public class InfartBootstrap : Game, IFbonizziGame
     {
-        private const string _gameName = "INFART";
+        private const string GameName = "INFART";
 
         private enum RunningStates
         {
@@ -72,7 +72,7 @@ namespace Infart
         {
             _isPc = isPc;
 
-            Window.Title = _gameName;
+            Window.Title = GameName;
 
             _rateMeUri = rateMeUri;
             _currentState = RunningStates.Splashscreen;
