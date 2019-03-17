@@ -51,7 +51,7 @@ namespace Infart
         private Sprite _mousePointer;
 
         private GameOrchestrator _orchestrator;
-        private readonly SoundManager _soundManager;
+        private SoundManager _soundManager;
         private readonly bool _isPc;
 
         private readonly ILocalizedStringsRepository _localizedStringsRepository;
@@ -112,17 +112,15 @@ namespace Infart
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
             
             _assetsLoader = new AssetsLoader(Content);
-            var soundManager = new SoundManager(true, _assetsLoader);
+            _soundManager = new SoundManager(_assetsLoader);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
                     _assetsLoader,
-                    //        new Loader_menu(Content),
-                    soundManager,
+                    _soundManager,
                     100, "Metri", "Pausa"));
 
             _orchestrator = new GameOrchestrator(
                 gameFactory,
-
                 GraphicsDevice,
                 _matrixScaleProvider,
                 _soundManager,

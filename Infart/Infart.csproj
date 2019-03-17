@@ -92,13 +92,13 @@
     <None Include="Assets\ContentBuilder\bin\Music\Effects\morso.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\night.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\turu.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart1.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart2.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart3.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart4.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart5.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart6.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Scoregge\fart7.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart1.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart2.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart3.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart4.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart5.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart6.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Farts\fart7.xnb" />
     <None Include="Assets\ContentBuilder\bin\Splashscreen.xnb" />
     <None Include="Assets\ContentBuilder\bin\TextFont.xnb" />
     <None Include="Assets\ContentBuilder\bin\textures.xnb" />
@@ -117,13 +117,13 @@
     <None Include="Assets\ContentBuilder\Music\Effects\morso.wav" />
     <None Include="Assets\ContentBuilder\Music\Effects\night.wav" />
     <None Include="Assets\ContentBuilder\Music\Effects\turu.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart1.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart2.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart3.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart4.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart5.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart6.wav" />
-    <None Include="Assets\ContentBuilder\Music\Scoregge\fart7.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart1.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart2.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart3.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart4.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart5.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart6.wav" />
+    <None Include="Assets\ContentBuilder\Music\Farts\fart7.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Other\ApplicationIcon.png" />

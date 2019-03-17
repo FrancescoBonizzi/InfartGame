@@ -16,87 +16,52 @@ namespace Infart.ParticleSystem
     public class InfartGame
     {
         private readonly int _resolutionW;
-
         private readonly int _resolutionH;
 
-        protected int GameH;
-
-        protected Camera PlayerCamera;
-
-        protected Player Player;
-
-        protected BackgroundManager Background;
-
-        protected GroundManager Ground;
-
-        protected GemmaManager Gemme;
-
-        protected SoundManager SoundManager;
-
-        protected StatusBar StatusBar;
-
-        protected AssetsLoader AssetsLoader;
-
-        protected bool Paused;
-
-        protected InfartExplosion DeadExplosion;
-
-        protected RecordExplosion RecordExplosion;
-
-        protected Random Random;
-
-        protected int HighScore;
-
-        protected int ScoreScoregge;
-
-        protected bool NewHighScore = false;
-
-        protected bool ForceToFinish;
-
-        protected Rectangle HighScorePosition;
-
-        protected Color HighScoreColor = Color.Blue;
-
-        protected SpriteFont Font;
-
-        protected Texture2D PxTexture;
+        private int GameH;
+        private Camera PlayerCamera;
+        private Player Player;
+        private BackgroundManager Background;
+        private GroundManager Ground;
+        private GemmaManager Gemme;
+        private SoundManager SoundManager;
+        private StatusBar StatusBar;
+        private AssetsLoader AssetsLoader;
+        private bool Paused = false;
+        private InfartExplosion DeadExplosion;
+        private RecordExplosion RecordExplosion;
+        private Random Random;
+        private int HighScore;
+        private int ScoreScoregge;
+        private bool NewHighScore = false;
+        private bool ForceToFinish;
+        private Rectangle HighScorePosition;
+        private Color HighScoreColor = Color.Blue;
+        private SpriteFont Font;
+        private Texture2D PxTexture;
 
         public double BucoProbability;
-
         public double PowerUpProbability;
-
         public double PeperoncinoDuration;
-
         public double GemmaProbability;
-
         public double BroccoloDuration;
-
         public Vector2 LarghezzaBuchi;
 
         private const double DefaultBucoProbability = 0.005;
-
         private const double DefaultPoweupProbability = 0.03;
-
         private const double DefaultPeperoncinoDuration = 6000.0;
-
         private const double DefaultMerdoneDuration = 3500.0;
-
         private const double DefaultGemmaProbability = 0.4;
-
         private const float DefaultBucoMinW = 190.0f;
-
         private const float DefaultBucoMaxW = 250.0f;
-
         private int _oldScoreMetri = 0;
 
         public int ScoreMetri = 0;
 
         private readonly StringBuilder _scoreString;
-
         private readonly Vector2 _scoreStringPosition = new Vector2(680, 438);
 
         private Rectangle _barRectangle = new Rectangle(400, 430, 800, 50);
-
         private Color _barColor = Color.LightCyan * 0.5f;
 
         private readonly string _metriString;
@@ -104,16 +69,13 @@ namespace Infart.ParticleSystem
         private int _highScoreX;
 
         public bool FallSoundActive;
-
         public bool MerdaModeActive;
-
         public bool JalapenosModeActive;
 
         private int _gameCameraHLimit;
 
         public InfartGame(
             AssetsLoader assetsLoader,
-            //        Loader_menu LoaderMenu,
             SoundManager soundManager,
             int highScore,
             string metriString,
@@ -159,34 +121,13 @@ namespace Infart.ParticleSystem
             NewGame();
         }
 
-        protected void InitializeBackgroundManager()
-        {
-            Background = new BackgroundManager(PlayerCamera, (AssetsLoader as AssetsLoader), this);
-        }
-
-        protected void InitializeGroundManager()
-        {
-            Ground = new GroundManager(PlayerCamera, (AssetsLoader as AssetsLoader), this);
-        }
-
-        protected void InitializeGemmaManager()
-        {
-            Gemme = new GemmaManager(PlayerCamera, (AssetsLoader as AssetsLoader));
-        }
-
-        protected void InitializePlayer()
-        {
-            Player = new Player(new Vector2(240, 300), (AssetsLoader as AssetsLoader), this);
-        }
-
-        public void NewGame()
+        private void NewGame()
         {
             DeadExplosion.Reset();
 
             Paused = false;
             ForceToFinish = false;
             NewHighScore = false;
-            SoundManager.NewGame();
 
             _gameCameraHLimit = -GameH - PlayerCamera.ViewPortHeight;
 
@@ -212,6 +153,26 @@ namespace Infart.ParticleSystem
             Ground.Reset(PlayerCamera);
             Gemme.Reset(PlayerCamera);
             StatusBar.Reset();
+        }
+
+        private void InitializeBackgroundManager()
+        {
+            Background = new BackgroundManager(PlayerCamera, (AssetsLoader as AssetsLoader), this);
+        }
+
+        private void InitializeGroundManager()
+        {
+            Ground = new GroundManager(PlayerCamera, (AssetsLoader as AssetsLoader), this);
+        }
+
+        private void InitializeGemmaManager()
+        {
+            Gemme = new GemmaManager(PlayerCamera, (AssetsLoader as AssetsLoader));
+        }
+
+        private void InitializePlayer()
+        {
+            Player = new Player(new Vector2(240, 300), (AssetsLoader as AssetsLoader), this);
         }
 
         public int GetScoregge
@@ -258,7 +219,7 @@ namespace Infart.ParticleSystem
             return Ground.WalkableObjects();
         }
 
-        protected void SetRecordRectangle()
+        private void SetRecordRectangle()
         {
             HighScorePosition = new Rectangle(0, -1020, 20, 1500);
         }
@@ -309,7 +270,7 @@ namespace Infart.ParticleSystem
 
         public void StopScoreggia()
         {
-            SoundManager.StopScoreggia();
+            SoundManager.StopFart();
         }
 
         public void DecreaseParallaxSpeed()
@@ -330,7 +291,7 @@ namespace Infart.ParticleSystem
         public void AddScoreggia()
         {
             ++ScoreScoregge;
-            SoundManager.PlayScoreggia();
+            SoundManager.PlayFart();
         }
 
         public void MoveCamera(Vector2 where)
@@ -365,7 +326,7 @@ namespace Infart.ParticleSystem
         public void PlayerCollidedWithNormalGemma()
         {
             StatusBar.HamburgerEaten();
-            (SoundManager as SoundManager).PlayMorso();
+            (SoundManager as SoundManager).PlayBite();
         }
 
         public void Update(TimeSpan elapsed)
@@ -438,7 +399,7 @@ namespace Infart.ParticleSystem
             throw new NotImplementedException();
         }
 
-        protected void MakePlayerDead()
+        private void MakePlayerDead()
         {
             Player.Dead = true;
 
@@ -449,7 +410,7 @@ namespace Infart.ParticleSystem
             }
         }
 
-        protected void CheckDead()
+        private void CheckDead()
         {
             if (!FallSoundActive)
             {
@@ -490,7 +451,7 @@ namespace Infart.ParticleSystem
             }
         }
 
-        protected void LerpCameraPosition(float newCameraX, float newCameraY)
+        private void LerpCameraPosition(float newCameraX, float newCameraY)
         {
             PlayerCamera.Position = new Vector2(
               MathHelper.Lerp(PlayerCamera.Position.X, newCameraX, 0.08f),
@@ -502,7 +463,7 @@ namespace Infart.ParticleSystem
             get { return Player; }
         }
 
-        protected void RepositionCamera()
+        private void RepositionCamera()
         {
             float playerCameraY;
             float playerCameraX;
@@ -527,7 +488,7 @@ namespace Infart.ParticleSystem
             Player.Update(gametime);
         }
 
-        protected void DrawUi(SpriteBatch spriteBatch)
+        private void DrawUi(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 

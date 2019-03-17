@@ -67,48 +67,6 @@
 /processorParam:Quality=Best
 /build:Music/Effects/turu.wav
 
-#begin Music/Scoregge/fart1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart1.wav
-
-#begin Music/Scoregge/fart2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart2.wav
-
-#begin Music/Scoregge/fart3.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart3.wav
-
-#begin Music/Scoregge/fart4.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart4.wav
-
-#begin Music/Scoregge/fart5.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart5.wav
-
-#begin Music/Scoregge/fart6.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart6.wav
-
-#begin Music/Scoregge/fart7.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Scoregge/fart7.wav
-
 #begin Splashscreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -187,4 +145,46 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:manina.png
+
+#begin Music/Farts/fart1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart1.wav
+
+#begin Music/Farts/fart2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart2.wav
+
+#begin Music/Farts/fart3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart3.wav
+
+#begin Music/Farts/fart4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart4.wav
+
+#begin Music/Farts/fart5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart5.wav
+
+#begin Music/Farts/fart6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart6.wav
+
+#begin Music/Farts/fart7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Farts/fart7.wav
 

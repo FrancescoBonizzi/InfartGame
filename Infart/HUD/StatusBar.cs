@@ -9,27 +9,20 @@ namespace Infart.HUD
         private Vector2 _position;
 
         private readonly StatusBarSprite[] _statusBurgers;
-
         private readonly Texture2D _textureReference;
-
         private readonly SoundManager _soundManagerReference;
-
         private readonly Color _emptyColor = Color.Gray * 0.5f;
-
         private readonly Color _fullColor = Color.White;
 
         private double _elapsed = 0.0;
-
         private int _jumpCount = 0;
 
         private const int JumpNeededToRemoveHam = 1;
 
         private int _hamburgers = 0;
-
         private int _hamburgerMangiatiTotale = 0;
 
         private const int SogliaHamburgerPerStarMale = 4;
-
         private float _overlayDeathOpacity = 0.01f;
 
         private readonly Rectangle _sfondoMorteRect;

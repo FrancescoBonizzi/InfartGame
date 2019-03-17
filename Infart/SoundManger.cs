@@ -1,243 +1,134 @@
 using Infart.Assets;
-using Infart.Extensions;
 using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Infart
 {
     public class SoundManager
     {
-        //protected List<SoundEffectInstance> newgame_sounds_;
+        private IDictionary<string, SoundEffectInstance> _allSounds;
+        private List<SoundEffectInstance> _farts;
 
-        //protected List<SoundEffectInstance> all_sounds_;
-
-        //private List<SoundEffectInstance> scoreggia_sound_;
-
-        //protected bool sound_on_ = true;
-
-        //private SoundEffectInstance background_music_;
-
-        //private SoundEffectInstance explosion_sound_;
-
-        //private SoundEffectInstance fall_sound_;
-
-        //private SoundEffectInstance heart_beat_;
-
-        //private SoundEffectInstance jalapeno_sound_;
-
-        //private SoundEffectInstance merdone_sound_;
-
-        //private SoundEffectInstance morso_ = null;
-
-        public SoundManager(
-            bool soundFlag,
-            // Loader_menu Loader_menu,
-            AssetsLoader loaderEpisodio1)
+        public SoundManager(AssetsLoader assetsLoader)
         {
-            //sound_on_ = SoundFlag;
+            _allSounds = new Dictionary<string, SoundEffectInstance>();
+            _farts = new List<SoundEffectInstance>();
 
-            ////       LoadScoregge(Loader_menu);
-            //AddAllSounds(Loader_episodio1);
-            //AddNewGameSounds();
+            foreach (var environmentalSound in assetsLoader.EnvironmentalSounds)
+            {
+                var soundEffect = environmentalSound.Value.CreateInstance();
+                _allSounds.Add(environmentalSound.Key, soundEffect);
+            }
+
+            foreach (var fartSound in assetsLoader.FartsSounds)
+            {
+                var soundEffect = fartSound.Value.CreateInstance();
+                _allSounds.Add(fartSound.Key, soundEffect);
+                _farts.Add(soundEffect);
+            }
         }
 
-        //private void LoadScoregge(Loader_menu scoregge_loader)
-        //{
-        //    scoreggia_sound_ = new List<SoundEffectInstance>();
-        //    all_sounds_ = new List<SoundEffectInstance>();
-        //    foreach (SoundEffect s in scoregge_loader.sound_scoregge_)
-        //    {
-        //        SoundEffectInstance tmp = s.CreateInstance();
-        //        scoreggia_sound_.Add(tmp);
-        //        all_sounds_.Add(tmp);
-        //    }
-        //}
-        public void NewGame()
+        public void PlayFart()
         {
-            //if (sound_on_)
-            //{
-            //    foreach (SoundEffectInstance s in newgame_sounds_)
-            //        s.Play();
-            //}
+            bool alreadyAFartIsPlaying = _farts.Any(f => f.State == SoundState.Playing);
+
+            if (alreadyAFartIsPlaying)
+                return;
+
+            _farts[FbonizziMonoGame.Numbers.RandomBetween(0, _farts.Count)].Play();
         }
 
-        public void StopSounds()
+        public void StopFart()
         {
-            //foreach (SoundEffectInstance s in all_sounds_)
-            //{
-            //    s.Stop();
-            //}
-        }
-
-        public void PauseAll()
-        {
-            //foreach (SoundEffectInstance s in all_sounds_)
-            //{
-            //    if (s.State == SoundState.Playing)
-            //        s.Pause();
-            //}
-        }
-
-        public void ResumeAll()
-        {
-            //if (sound_on_)
-            //{
-            //    foreach (SoundEffectInstance s in all_sounds_)
-            //    {
-            //        if (s.State == SoundState.Paused)
-            //            s.Play();
-            //    }
-            //    NewGame();
-            //}
-        }
-
-        public void PlayScoreggia()
-        {
-            //if (sound_on_)
-            //{
-            //    bool one_playing = false;
-
-            //    foreach (SoundEffectInstance s in scoreggia_sound_)
-            //    {
-            //        if (s.State == SoundState.Playing)
-            //        {
-            //            one_playing = true;
-            //        }
-            //    }
-
-            //    if (!one_playing)
-            //    {
-            //        scoreggia_sound_[fbonizziHelper.random.Next(scoreggia_sound_.Count)].Play();
-            //    }
-            //}
-        }
-
-        public void StopScoreggia()
-        {
-            //foreach (SoundEffectInstance s in scoreggia_sound_)
-            //{
-            //    if (s.State == SoundState.Playing)
-            //    {
-            //        s.Stop();
-            //        break;
-            //    }
-            //}
-        }
-
-        public void SoundOff()
-        {
-            //StopSounds();
-            //sound_on_ = false;
-        }
-
-        public void SoundOn()
-        {
-            //sound_on_ = true;
-        }
-
-        protected void AddAllSounds(AssetsLoader myLoader)
-        {
-            //background_music_ = ((MyLoader) as AssetsLoader).sound_effects_["night"].CreateInstance();
-            //background_music_.IsLooped = true;
-            //all_sounds_.Add(background_music_);
-
-            //explosion_sound_ = ((MyLoader) as AssetsLoader).sound_effects_["esplosione"].CreateInstance();
-            //all_sounds_.Add(explosion_sound_);
-
-            //fall_sound_ = ((MyLoader) as AssetsLoader).sound_effects_["fall"].CreateInstance();
-            //all_sounds_.Add(fall_sound_);
-
-            //heart_beat_ = ((MyLoader) as AssetsLoader).sound_effects_["cuore"].CreateInstance();
-            //all_sounds_.Add(heart_beat_);
-
-            //morso_ = ((MyLoader) as AssetsLoader).sound_effects_["morso"].CreateInstance();
-            //all_sounds_.Add(morso_);
-
-            //jalapeno_sound_ = ((MyLoader) as AssetsLoader).sound_effects_["jalapeno"].CreateInstance();
-            //all_sounds_.Add(jalapeno_sound_);
-
-            //merdone_sound_ = ((MyLoader) as AssetsLoader).sound_effects_["merdone"].CreateInstance();
-            //all_sounds_.Add(merdone_sound_);
-        }
-
-        protected void AddNewGameSounds()
-        {
-            //newgame_sounds_ = new List<SoundEffectInstance>();
-            //newgame_sounds_.Add(background_music_);
+            foreach (var f in _farts)
+            {
+                if (f.State == SoundState.Playing)
+                {
+                    f.Stop();
+                    break;
+                }
+            }
         }
 
         public void PlayShit()
         {
-            //if (sound_on_)
-            //{
-            //    merdone_sound_.Play();
-            //}
+            _allSounds["merdone"].Play();
         }
 
         public void PlayExplosion()
         {
-            //if (sound_on_)
-            //{
-            //    heart_beat_.Stop();
-            //    merdone_sound_.Stop();
-            //    StopScoreggia();
-            //    jalapeno_sound_.Stop();
-            //    explosion_sound_.Play();
-            //}
+            _allSounds["cuore"].Stop();
+            _allSounds["merdone"].Stop();
+            StopFart();
+            _allSounds["jalapeno"].Stop();
+            _allSounds["esplosione"].Play();
         }
 
         public void PlayFall()
         {
-            //if (sound_on_)
-            //{
-            //    if (fall_sound_.State != SoundState.Playing)
-            //    {
-            //        heart_beat_.Stop();
-            //        fall_sound_.Play();
-            //    }
-            //}
+            if (_allSounds["fall"].State != SoundState.Playing)
+            {
+                _allSounds["cuore"].Stop();
+                _allSounds["fall"].Play();
+            }
         }
 
         public bool HasFallFinished()
         {
-            return false;
-       //     return fall_sound_.State == SoundState.Stopped;
+            return _allSounds["fall"].State == SoundState.Stopped;
         }
 
         public bool IsFallPlaying()
         {
-            return false;
-       //     return fall_sound_.State == SoundState.Playing;
+            return _allSounds["fall"].State == SoundState.Playing;
         }
 
         public void PlayHeartBeat()
         {
-            //if (sound_on_)
-            //{
-            //    if (heart_beat_.State != SoundState.Playing)
-            //        heart_beat_.Play();
-            //}
+            if (_allSounds["cuore"].State != SoundState.Playing)
+                _allSounds["cuore"].Play();
         }
 
         public void StopHeartBeat()
         {
-            //heart_beat_.Stop();
+            _allSounds["cuore"].Stop();
         }
 
-        public void PlayMorso()
+        public void PlayBite()
         {
-            //if (sound_on_)
-            //{
-            //    morso_.Play();
-            //}
+            _allSounds["morso"].Play();
         }
 
         public void PlayJalapeno()
         {
-            //if (sound_on_)
-            //{
-            //    jalapeno_sound_.Play();
-            //}
+            _allSounds["jalapeno"].Play();
+        }
+
+        public void StopSounds()
+        {
+            foreach (var s in _allSounds.Values)
+            {
+                s.Stop();
+            }
+        }
+
+        public void PauseAll()
+        {
+            foreach (var s in _allSounds.Values)
+            {
+                if (s.State == SoundState.Playing)
+                    s.Pause();
+            }
+        }
+
+        public void ResumeAll()
+        {
+            foreach (var s in _allSounds.Values)
+            {
+                if (s.State == SoundState.Paused)
+                    s.Play();
+            }
         }
     }
 }

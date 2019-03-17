@@ -25,7 +25,8 @@ namespace Infart.Assets
         
         public SpriteFont Font { get; private set; }
 
-        public IDictionary<string, SoundEffect> Sounds { get; private set; }
+        public IDictionary<string, SoundEffect> EnvironmentalSounds { get; private set; }
+        public IDictionary<string, SoundEffect> FartsSounds { get; private set; }
         public IDictionary<string, Rectangle> TexturesRectangles { get; private set; }
 
         public AssetsLoader(ContentManager contentManager)
@@ -471,18 +472,30 @@ namespace Infart.Assets
                 TexturesRectangles["merdone/merdone__019"]
             };
 
-            string musicFolder = Path.Combine("Music", "Effects");
-            Sounds = new Dictionary<string, SoundEffect>
+            string environmentalSoundsFolder = Path.Combine("Music", "Effects");
+            EnvironmentalSounds = new Dictionary<string, SoundEffect>
             {
-                { "culata", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "culata")) },
-                { "cuore", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "cuore")) },
-                { "esplosione", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "esplosione")) },
-                { "fall", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "fall")) },
-                { "jalapeno", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "jalapeno")) },
-                { "merdone", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "merdone")) },
-                { "morso", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "morso")) },
-                { "night", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "night")) },
-                { "turu", _contentManager.Load<SoundEffect>(Path.Combine(musicFolder, "turu")) }
+                { "culata", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "culata")) },
+                { "cuore", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "cuore")) },
+                { "esplosione", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "esplosione")) },
+                { "fall", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "fall")) },
+                { "jalapeno", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "jalapeno")) },
+                { "merdone", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "merdone")) },
+                { "morso", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "morso")) },
+                { "night", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "night")) },
+                { "turu", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "turu")) }
+            };
+
+            string fartsFolder = Path.Combine("Music", "Farts");
+            FartsSounds = new Dictionary<string, SoundEffect>
+            {
+                { "fart1", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart1")) },
+                { "fart2", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart2")) },
+                { "fart3", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart3")) },
+                { "fart4", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart4")) },
+                { "fart5", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart5")) },
+                { "fart6", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart6")) },
+                { "fart7", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart7")) },
             };
         }
     }

@@ -143,32 +143,32 @@
       <Link>Content\Music\Effects\turu.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart1.xnb">
-      <Link>Content\Music\Scoregge\fart1.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart1.xnb">
+      <Link>Content\Music\Farts\fart1.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart2.xnb">
-      <Link>Content\Music\Scoregge\fart2.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart2.xnb">
+      <Link>Content\Music\Farts\fart2.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart3.xnb">
-      <Link>Content\Music\Scoregge\fart3.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart3.xnb">
+      <Link>Content\Music\Farts\fart3.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart4.xnb">
-      <Link>Content\Music\Scoregge\fart4.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart4.xnb">
+      <Link>Content\Music\Farts\fart4.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart5.xnb">
-      <Link>Content\Music\Scoregge\fart5.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart5.xnb">
+      <Link>Content\Music\Farts\fart5.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart6.xnb">
-      <Link>Content\Music\Scoregge\fart6.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart6.xnb">
+      <Link>Content\Music\Farts\fart6.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Scoregge\fart7.xnb">
-      <Link>Content\Music\Scoregge\fart7.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart7.xnb">
+      <Link>Content\Music\Farts\fart7.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Splashscreen.xnb">
