@@ -483,9 +483,7 @@ namespace Infart.ParticleSystem
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
 
-            if (_deadExplosion.Started)
-                _deadExplosion.Draw(spritebatch);
-            else
+            if (!_deadExplosion.Started)
             {
                 PlayerReference.Draw(spritebatch);
             }
@@ -511,31 +509,12 @@ namespace Infart.ParticleSystem
             }
 
             //    record_explosion_.Draw(spritebatch);
+            if (_deadExplosion.Started)
+                _deadExplosion.Draw(spritebatch);
 
             spritebatch.End();
 
             DrawUi(spritebatch);
-        }
-
-        public void DrawForMenu(SpriteBatch spritebatch)
-        {
-            Matrix cameraTransformation = _playerCamera.GetTransformation();
-
-            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
-            _background.Draw(spritebatch);
-            _ground.Draw(spritebatch);
-            spritebatch.End();
-
-            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, cameraTransformation);
-            if (!_deadExplosion.Started)
-                PlayerReference.DrawParticles(spritebatch);
-            spritebatch.End();
-
-            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
-            if (!_deadExplosion.Started)
-                PlayerReference.Draw(spritebatch);
-            _background.DrawSpecial(spritebatch);
-            spritebatch.End();
         }
     }
 }
