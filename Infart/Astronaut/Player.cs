@@ -78,7 +78,7 @@ namespace Infart.Astronaut
             LoadAnimation("fart_sustain_up", assetsLoader.PlayerFartRects,
                 true, 0.05f, assetsLoader.Textures);
 
-            LoadAnimation("merdone", assetsLoader.PlayerMerdaRects,
+            LoadAnimation("truck", assetsLoader.PlayerMerdaRects,
                 true, 0.01f, assetsLoader.Textures);
 
             PlayAnimation("fall");
@@ -121,11 +121,6 @@ namespace Infart.Astronaut
         public bool JalapenosJump
         {
             get { return _jalapenos; }
-        }
-
-        public bool IsCulating
-        {
-            get { return CurrentAnimation == "culata"; }
         }
 
         public void Jump(float amount)
@@ -239,12 +234,12 @@ namespace Infart.Astronaut
                 }
 
                 if (_broccolo)
-                    newAnimation = "merdone";
+                    newAnimation = "truck";
 
                 if (newAnimation != CurrentAnimation)
                 {
                     PlayAnimation(newAnimation);
-                    if (newAnimation == "merdone")
+                    if (newAnimation == "truck")
                         _collisionRectangle.Width -= 120;
                 }
 

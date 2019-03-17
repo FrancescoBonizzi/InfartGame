@@ -112,6 +112,7 @@ namespace Infart
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
             
             _assetsLoader = new AssetsLoader(Content);
+            _mousePointer = _assetsLoader.Manina;
             _soundManager = new SoundManager(_assetsLoader);
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
@@ -269,6 +270,14 @@ namespace Infart
             {
                 if (!_orchestrator.IsPaused)
                 {
+                    var mouseState = Mouse.GetState();
+                    var mousePosition = new Vector2(mouseState.X - 32, mouseState.Y);
+                    if (mouseState.X != 0 && mouseState.Y != 0)
+                    {
+                        _spriteBatch.Begin();
+                        _spriteBatch.Draw(_mousePointer.Sheet, mousePosition, _mousePointer.SourceRectangle, Color.White);
+                        _spriteBatch.End();
+                    }
                 }
             }
 

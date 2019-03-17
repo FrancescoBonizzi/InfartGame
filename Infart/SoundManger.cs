@@ -53,23 +53,23 @@ namespace Infart
 
         public void PlayShit()
         {
-            _allSounds["merdone"].Play();
+            _allSounds["truck"].Play();
         }
 
         public void PlayExplosion()
         {
-            _allSounds["cuore"].Stop();
-            _allSounds["merdone"].Stop();
+            _allSounds["heartbeat"].Stop();
+            _allSounds["truck"].Stop();
             StopFart();
             _allSounds["jalapeno"].Stop();
-            _allSounds["esplosione"].Play();
+            _allSounds["explosion"].Play();
         }
 
         public void PlayFall()
         {
             if (_allSounds["fall"].State != SoundState.Playing)
             {
-                _allSounds["cuore"].Stop();
+                _allSounds["heartbeat"].Stop();
                 _allSounds["fall"].Play();
             }
         }
@@ -86,18 +86,18 @@ namespace Infart
 
         public void PlayHeartBeat()
         {
-            if (_allSounds["cuore"].State != SoundState.Playing)
-                _allSounds["cuore"].Play();
+            if (_allSounds["heartbeat"].State != SoundState.Playing)
+                _allSounds["heartbeat"].Play();
         }
 
         public void StopHeartBeat()
         {
-            _allSounds["cuore"].Stop();
+            _allSounds["heartbeat"].Stop();
         }
 
         public void PlayBite()
         {
-            _allSounds["morso"].Play();
+            _allSounds["bite"].Play();
         }
 
         public void PlayJalapeno()

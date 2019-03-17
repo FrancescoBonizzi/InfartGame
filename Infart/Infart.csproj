@@ -80,19 +80,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ContentBuilder\bin\gratta_back.xnb" />
-    <None Include="Assets\ContentBuilder\bin\gratta_ground.xnb" />
-    <None Include="Assets\ContentBuilder\bin\gratta_mid.xnb" />
+    <None Include="Assets\ContentBuilder\bin\buildings_back.xnb" />
+    <None Include="Assets\ContentBuilder\bin\buildings_ground.xnb" />
+    <None Include="Assets\ContentBuilder\bin\buildings_mid.xnb" />
     <None Include="Assets\ContentBuilder\bin\manina.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\culata.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\cuore.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\esplosione.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\bite.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\explosion.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\fall.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\heartbeat.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\jalapeno.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\merdone.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\morso.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\night.xnb" />
-    <None Include="Assets\ContentBuilder\bin\Music\Effects\turu.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Effects\truck.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart1.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart2.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart3.xnb" />
@@ -109,15 +106,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ContentBuilder\Music\Effects\culata.wav" />
-    <None Include="Assets\ContentBuilder\Music\Effects\cuore.wav" />
-    <None Include="Assets\ContentBuilder\Music\Effects\esplosione.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\heartbeat.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\explosion.wav" />
     <None Include="Assets\ContentBuilder\Music\Effects\fall.wav" />
     <None Include="Assets\ContentBuilder\Music\Effects\jalapeno.wav" />
-    <None Include="Assets\ContentBuilder\Music\Effects\merdone.wav" />
-    <None Include="Assets\ContentBuilder\Music\Effects\morso.wav" />
-    <None Include="Assets\ContentBuilder\Music\Effects\night.wav" />
-    <None Include="Assets\ContentBuilder\Music\Effects\turu.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\truck.wav" />
+    <None Include="Assets\ContentBuilder\Music\Effects\bite.wav" />
     <None Include="Assets\ContentBuilder\Music\Farts\fart1.wav" />
     <None Include="Assets\ContentBuilder\Music\Farts\fart2.wav" />
     <None Include="Assets\ContentBuilder\Music\Farts\fart3.wav" />
@@ -133,9 +127,9 @@
     <None Include="Assets\_Other\Background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\ContentBuilder\gratta_back.png" />
-    <Content Include="Assets\ContentBuilder\gratta_ground.png" />
-    <Content Include="Assets\ContentBuilder\gratta_mid.png" />
+    <Content Include="Assets\ContentBuilder\buildings_back.png" />
+    <Content Include="Assets\ContentBuilder\buildings_ground.png" />
+    <Content Include="Assets\ContentBuilder\buildings_mid.png" />
     <Content Include="Assets\ContentBuilder\manina.png" />
     <Content Include="Assets\ContentBuilder\Splashscreen.png" />
     <Content Include="Assets\ContentBuilder\textures.png" />

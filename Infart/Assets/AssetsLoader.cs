@@ -14,15 +14,16 @@ namespace Infart.Assets
         private readonly ContentManager _contentManager;
 
         public Texture2D Textures { get; private set; }
-        public Texture2D TexturesGrattaBack { get; private set; }
-        public Texture2D TexturesGrattaMid { get; private set; }
-        public Texture2D TexturesGrattaGround { get; private set; }
+        public Texture2D TexturesBuildingsBack { get; private set; }
+        public Texture2D TexturesBuildingsMid { get; private set; }
+        public Texture2D TexturesBuildingsGround { get; private set; }
         public List<Rectangle> PlayerRunRects { get; private set; }
         public List<Rectangle> PlayerIdleRects{ get; private set; }
         public List<Rectangle> PlayerFallRects{ get; private set; }
         public List<Rectangle> PlayerFartRects { get; private set; }
         public List<Rectangle> PlayerMerdaRects { get; private set; }
-        
+        public Sprite Manina { get; private set; }
+
         public SpriteFont Font { get; private set; }
 
         public IDictionary<string, SoundEffect> EnvironmentalSounds { get; private set; }
@@ -37,11 +38,22 @@ namespace Infart.Assets
 
         private void LoadResources()
         {
-            Font = _contentManager.Load<SpriteFont>(@"TextFont");
+            Font = _contentManager.Load<SpriteFont>("TextFont");
             Textures = _contentManager.Load<Texture2D>("textures");
-            TexturesGrattaBack = _contentManager.Load<Texture2D>(@"gratta_back");
-            TexturesGrattaMid = _contentManager.Load<Texture2D>(@"gratta_mid");
-            TexturesGrattaGround = _contentManager.Load<Texture2D>(@"gratta_ground");
+            TexturesBuildingsBack = _contentManager.Load<Texture2D>("buildings_back");
+            TexturesBuildingsMid = _contentManager.Load<Texture2D>("buildings_mid");
+            TexturesBuildingsGround = _contentManager.Load<Texture2D>("buildings_ground");
+
+            var littleHandTexture = _contentManager.Load<Texture2D>("manina");
+            Manina = new Sprite(
+                new FbonizziMonoGame.Assets.SpriteDescription()
+                {
+                    X = 0,
+                    Y = 0,
+                    Width = littleHandTexture.Width,
+                    Height = littleHandTexture.Height
+                },
+                littleHandTexture);
 
             TexturesRectangles = new Dictionary<string, Rectangle>
             {
@@ -475,16 +487,12 @@ namespace Infart.Assets
             string environmentalSoundsFolder = Path.Combine("Music", "Effects");
             EnvironmentalSounds = new Dictionary<string, SoundEffect>
             {
-                { "culata", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "culata")) },
-                { "cuore", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "cuore")) },
-                { "esplosione", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "esplosione")) },
+                { "heartbeat", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "heartbeat")) },
+                { "explosion", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "explosion")) },
                 { "fall", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "fall")) },
                 { "jalapeno", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "jalapeno")) },
-                { "merdone", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "merdone")) },
-                { "morso", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "morso")) },
-                { "night", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "night")) },
-                { "turu", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "turu")) }
-            };
+                { "truck", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "truck")) },
+                { "bite", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "bite")) }            };
 
             string fartsFolder = Path.Combine("Music", "Farts");
             FartsSounds = new Dictionary<string, SoundEffect>

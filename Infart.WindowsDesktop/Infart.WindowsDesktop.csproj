@@ -91,56 +91,44 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\gratta_back.xnb">
-      <Link>Content\gratta_back.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\buildings_back.xnb">
+      <Link>Content\buildings_back.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\gratta_ground.xnb">
-      <Link>Content\gratta_ground.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\buildings_ground.xnb">
+      <Link>Content\buildings_ground.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\gratta_mid.xnb">
-      <Link>Content\gratta_mid.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\buildings_mid.xnb">
+      <Link>Content\buildings_mid.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\manina.xnb">
       <Link>Content\manina.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\culata.xnb">
-      <Link>Content\Music\Effects\culata.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\bite.xnb">
+      <Link>Content\Music\Effects\bite.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\cuore.xnb">
-      <Link>Content\Music\Effects\cuore.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\esplosione.xnb">
-      <Link>Content\Music\Effects\esplosione.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\explosion.xnb">
+      <Link>Content\Music\Effects\explosion.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\fall.xnb">
       <Link>Content\Music\Effects\fall.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\heartbeat.xnb">
+      <Link>Content\Music\Effects\heartbeat.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\jalapeno.xnb">
       <Link>Content\Music\Effects\jalapeno.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\merdone.xnb">
-      <Link>Content\Music\Effects\merdone.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\morso.xnb">
-      <Link>Content\Music\Effects\morso.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\night.xnb">
-      <Link>Content\Music\Effects\night.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\turu.xnb">
-      <Link>Content\Music\Effects\turu.xnb</Link>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\truck.xnb">
+      <Link>Content\Music\Effects\truck.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart1.xnb">

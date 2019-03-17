@@ -13,23 +13,17 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Music/Effects/culata.wav
+#begin Music/Effects/heartbeat.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Effects/culata.wav
+/build:Music/Effects/heartbeat.wav
 
-#begin Music/Effects/cuore.wav
+#begin Music/Effects/explosion.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Effects/cuore.wav
-
-#begin Music/Effects/esplosione.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Effects/esplosione.wav
+/build:Music/Effects/explosion.wav
 
 #begin Music/Effects/fall.wav
 /importer:WavImporter
@@ -43,29 +37,17 @@
 /processorParam:Quality=Best
 /build:Music/Effects/jalapeno.wav
 
-#begin Music/Effects/merdone.wav
+#begin Music/Effects/truck.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Effects/merdone.wav
+/build:Music/Effects/truck.wav
 
-#begin Music/Effects/morso.wav
+#begin Music/Effects/bite.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Effects/morso.wav
-
-#begin Music/Effects/night.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Effects/night.wav
-
-#begin Music/Effects/turu.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Music/Effects/turu.wav
+/build:Music/Effects/bite.wav
 
 #begin Splashscreen.png
 /importer:TextureImporter
@@ -86,7 +68,7 @@
 /processorParam:TextureFormat=Compressed
 /build:TextFont.spritefont
 
-#begin gratta_back.png
+#begin buildings_back.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -96,9 +78,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gratta_back.png
+/build:buildings_back.png
 
-#begin gratta_ground.png
+#begin buildings_ground.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -108,9 +90,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gratta_ground.png
+/build:buildings_ground.png
 
-#begin gratta_mid.png
+#begin buildings_mid.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -120,7 +102,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gratta_mid.png
+/build:buildings_mid.png
 
 #begin textures.png
 /importer:TextureImporter

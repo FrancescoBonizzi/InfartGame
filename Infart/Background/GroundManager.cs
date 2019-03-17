@@ -32,7 +32,7 @@ namespace Infart.Background
             Random = FbonizziHelper.Random;
 
             _grattacieliCamminabili = new GrattacieliAutogeneranti(
-                assetsLoader.TexturesGrattaGround,
+                assetsLoader.TexturesBuildingsGround,
                 assetsLoader.TexturesRectangles,
                 "ground",
                 69,

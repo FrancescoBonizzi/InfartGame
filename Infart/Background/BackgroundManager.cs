@@ -66,12 +66,12 @@ namespace Infart.Background
             SfondoScale = Vector2.One;
 
             _grattacieliFondo = new GrattacieliAutogeneranti(
-                assetsLoader.TexturesGrattaBack, assetsLoader.TexturesRectangles, "back", 69, cameraInstance, gameManagerReference);
+                assetsLoader.TexturesBuildingsBack, assetsLoader.TexturesRectangles, "back", 69, cameraInstance, gameManagerReference);
 
             SfondoScale = new Vector2(1.8f);
 
             _grattacieliMid = new GrattacieliAutogeneranti(
-                assetsLoader.TexturesGrattaMid, assetsLoader.TexturesRectangles, "mid", 69, cameraInstance, gameManagerReference);
+                assetsLoader.TexturesBuildingsMid, assetsLoader.TexturesRectangles, "mid", 69, cameraInstance, gameManagerReference);
 
             _parallaxSpeedFondo = DefaultParallaxSpeedFondo;
             _parallaxSpeedMid = DefaultParallaxSpeedMid;
