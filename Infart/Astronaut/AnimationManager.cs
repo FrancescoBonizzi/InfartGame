@@ -1,81 +1,38 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace Infart.Astronaut
 {
-    public class AnimationManager : IDisposable
+    public class AnimationManager
     {
-        private readonly Texture2D _atlasReference;
-
         private readonly List<Rectangle> _frames;
-
         private float _frameTimer = 0f;
-
-        private float _frameDelay = 0.05f;
-
         private int _currentFrame;
 
-        private readonly int _lastFrame;
-
-        private bool _loopAnimation = true;
-
-        private bool _finishedPlaying = false;
-
-        private string _name;
-
-        private string _nextAnimation;
+        public Texture2D Texture { get; }
+        public string Name { get; set; }
+        public string NextAnimation { get; set; }
+        public bool LoopAnimation { get; set; } = true;
+        public bool FinishedPlaying { get; private set; } = false;
 
         public AnimationManager(
             List<Rectangle> frames,
             string name,
             Texture2D textureReference)
         {
-            _name = name;
+            Name = name;
 
             _frames = frames;
-            _atlasReference = textureReference;
+            Texture = textureReference;
 
-            _lastFrame = frames.Count - 1;
+            FrameCount = frames.Count - 1;
         }
-
-        public void Dispose()
-        {
-        }
-
-        public Texture2D Texture
-        {
-            get { return _atlasReference; }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        public string NextAnimation
-        {
-            get { return _nextAnimation; }
-            set { _nextAnimation = value; }
-        }
-
-        public bool LoopAnimation
-        {
-            get { return _loopAnimation; }
-            set { _loopAnimation = value; }
-        }
-
-        public bool FinishedPlaying
-        {
-            get { return _finishedPlaying; }
-        }
-
+        
         public int CurrentFrame
         {
             get { return _currentFrame; }
-            set { _currentFrame = value % _lastFrame; }
+            set { _currentFrame = value % FrameCount; }
         }
 
         public int FrameWidth
@@ -88,16 +45,9 @@ namespace Infart.Astronaut
             get { return _frames[_currentFrame].Height; }
         }
 
-        public int FrameCount
-        {
-            get { return _lastFrame; }
-        }
+        public int FrameCount { get; }
 
-        public float FrameLength
-        {
-            get { return _frameDelay; }
-            set { _frameDelay = value; }
-        }
+        public float FrameLength { get; set; } = 0.05f;
 
         public Rectangle FrameRectangle
         {
@@ -107,7 +57,7 @@ namespace Infart.Astronaut
         public void Play()
         {
             CurrentFrame = 0;
-            _finishedPlaying = false;
+            FinishedPlaying = false;
         }
 
         public void Update(double gameTime)
@@ -115,20 +65,20 @@ namespace Infart.Astronaut
             float elapsed = (float)gameTime / 1000.0f;
             _frameTimer += elapsed;
 
-            if (_frameTimer >= _frameDelay)
+            if (_frameTimer >= FrameLength)
             {
                 ++CurrentFrame;
 
                 if (_currentFrame >= FrameCount)
                 {
-                    if (_loopAnimation)
+                    if (LoopAnimation)
                     {
                         CurrentFrame = 0;
                     }
                     else
                     {
-                        CurrentFrame = _lastFrame;
-                        _finishedPlaying = true;
+                        CurrentFrame = FrameCount;
+                        FinishedPlaying = true;
                     }
                 }
 

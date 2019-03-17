@@ -6,16 +6,9 @@ namespace Infart.Drawing
     public class Gemma : GameObject
     {
         private float _moveYAmount = 10f;
-
         private float _elapsed = 0.0f;
-
         private readonly Texture2D _textureReference;
-
         private readonly Rectangle _textureRectangle;
-
-        private Rectangle _collisionRectangle;
-
-        private bool _active;
 
         public Gemma(
             Texture2D textureReference,
@@ -29,7 +22,7 @@ namespace Infart.Drawing
                    textureRectangle.Width - 40,
                    textureRectangle.Height - 40);
 
-            _active = false;
+            Active = false;
         }
 
         public Gemma(
@@ -41,11 +34,7 @@ namespace Infart.Drawing
             Position = startingPosition;
         }
 
-        public bool Active
-        {
-            get { return _active; }
-            set { _active = value; }
-        }
+        public bool Active { get; set; }
 
         public override Vector2 Position
         {
@@ -75,7 +64,7 @@ namespace Infart.Drawing
 
         public override void Update(double gameTime)
         {
-            if (_active)
+            if (Active)
             {
                 float elapsed = (float)gameTime / 1000.0f;
 
@@ -93,18 +82,18 @@ namespace Infart.Drawing
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (_active)
+            if (Active)
             {
                 spriteBatch.Draw(
                     _textureReference,
                     base.Position,
                     _textureRectangle,
-                    OverlayColor,
-                    Rotation,
-                    Origin,
-                    Scale,
-                    Flip,
-                    Depth);
+                    _overlayColor,
+                    _rotation,
+                    _origin,
+                    _scale,
+                    _flip,
+                    _depth);
             }
         }
     }

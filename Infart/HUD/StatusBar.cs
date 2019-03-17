@@ -18,10 +18,6 @@ namespace Infart.HUD
         private int _jumpCount = 0;
 
         private const int JumpNeededToRemoveHam = 1;
-
-        private int _hamburgers = 0;
-        private int _hamburgerMangiatiTotale = 0;
-
         private const int SogliaHamburgerPerStarMale = 4;
         private float _overlayDeathOpacity = 0.01f;
 
@@ -68,23 +64,17 @@ namespace Infart.HUD
                 _statusBurgers[i].FillColor = _emptyColor;
             }
             _overlayDeathOpacity = 0.01f;
-            _hamburgerMangiatiTotale = 0;
+            HamburgerMangiatiInTotale = 0;
             _jumpCount = 0;
         }
 
-        public int CurrentHamburgers
-        {
-            get { return _hamburgers; }
-        }
+        public int CurrentHamburgers { get; private set; } = 0;
 
-        public int HamburgerMangiatiInTotale
-        {
-            get { return _hamburgerMangiatiTotale; }
-        }
+        public int HamburgerMangiatiInTotale { get; private set; } = 0;
 
         public bool IsInfarting()
         {
-            if (_hamburgers > SogliaHamburgerPerStarMale || _infart)
+            if (CurrentHamburgers > SogliaHamburgerPerStarMale || _infart)
             {
                 _infart = true;
 
@@ -97,18 +87,18 @@ namespace Infart.HUD
         public void HamburgerEaten()
         {
             Hamburgers += 1;
-            _statusBurgers[_hamburgers - 1].Taken();
-            _statusBurgers[_hamburgers - 1].FillColor = _fullColor;
+            _statusBurgers[CurrentHamburgers - 1].Taken();
+            _statusBurgers[CurrentHamburgers - 1].FillColor = _fullColor;
             _jumpCount = 0;
 
-            if (_hamburgers >= SogliaHamburgerPerStarMale)
+            if (CurrentHamburgers >= SogliaHamburgerPerStarMale)
             {
-                _statusBurgers[_hamburgers - 1].FillColor = Color.LightCoral;
+                _statusBurgers[CurrentHamburgers - 1].FillColor = Color.LightCoral;
 
                 _soundManagerReference.PlayHeartBeat();
             }
 
-            ++_hamburgerMangiatiTotale;
+            ++HamburgerMangiatiInTotale;
         }
 
         public void PlayerJumped()
@@ -118,12 +108,12 @@ namespace Infart.HUD
             if (_jumpCount == JumpNeededToRemoveHam)
             {
                 --Hamburgers;
-                _statusBurgers[_hamburgers].Lost();
-                _statusBurgers[_hamburgers].FillColor = _emptyColor;
+                _statusBurgers[CurrentHamburgers].Lost();
+                _statusBurgers[CurrentHamburgers].FillColor = _emptyColor;
                 _jumpCount = 0;
             }
 
-            if (_hamburgers < SogliaHamburgerPerStarMale)
+            if (CurrentHamburgers < SogliaHamburgerPerStarMale)
             {
                 _soundManagerReference.StopHeartBeat();
             }
@@ -136,20 +126,20 @@ namespace Infart.HUD
 
         private int Hamburgers
         {
-            get { return _hamburgers; }
+            get { return CurrentHamburgers; }
             set
             {
-                int amount = value - _hamburgers;
+                int amount = value - CurrentHamburgers;
 
-                if (value < 0) _hamburgers = 0;
+                if (value < 0) CurrentHamburgers = 0;
                 else if (value > 4) _infart = true;
-                else _hamburgers = value;
+                else CurrentHamburgers = value;
             }
         }
 
         public void ComputeJalapenos()
         {
-            for (int i = 0; i < _hamburgers; ++i)
+            for (int i = 0; i < CurrentHamburgers; ++i)
             {
                 _statusBurgers[i].Lost();
                 _statusBurgers[i].FillColor = _emptyColor;
@@ -161,7 +151,7 @@ namespace Infart.HUD
 
         public void ComputeMerda()
         {
-            for (int i = 0; i < _hamburgers; ++i)
+            for (int i = 0; i < CurrentHamburgers; ++i)
             {
                 _statusBurgers[i].Lost();
                 _statusBurgers[i].FillColor = _emptyColor;
@@ -180,7 +170,7 @@ namespace Infart.HUD
                 for (int i = 0; i < 4; ++i)
                     _statusBurgers[i].Update(gametime);
 
-                if (_hamburgers == SogliaHamburgerPerStarMale)
+                if (CurrentHamburgers == SogliaHamburgerPerStarMale)
                 {
                     if (_overlayDeathOpacity < 1.0f)
                         _overlayDeathOpacity += 0.01f;

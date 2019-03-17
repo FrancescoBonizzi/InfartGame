@@ -18,21 +18,13 @@ namespace Infart
         }
 
         private GameStates _currentState;
-
         private readonly Func<InfartGame> _gameFactory;
-
         private InfartGame _game;
-
         private readonly IWebPageOpener _webPageOpener;
-
         private readonly GraphicsDevice _graphicsDevice;
-
         private readonly FadeObject _stateTransition;
-
         private Action _afterTransitionAction;
-
         private RenderTarget2D _renderTarget;
-
         private readonly IScreenTransformationMatrixProvider _matrixScaleProvider;
 
         public bool ShouldEndApplication { get; set; }
@@ -40,7 +32,6 @@ namespace Infart
         public bool IsPaused { get; set; }
 
         private readonly TimeSpan _fadeDuration = TimeSpan.FromMilliseconds(800);
-
         private readonly Uri _aboutUri = new Uri("https://www.fbonizzi.it");
 
         public GameOrchestrator(

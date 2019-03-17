@@ -7,21 +7,13 @@ namespace Infart.HUD
     public class StatusBarSprite : GameObject
     {
         private double _elapsed = 0.0;
-
         private bool _animateIn = false;
-
         private bool _animateOut = false;
-
         private readonly Texture2D _textureReference;
-
         private readonly Rectangle _textureRectangle;
-
         private readonly Vector2 _deactivatedScale;
-
         private readonly Vector2 _activatedScale;
-
         private Vector2 _scaleTo;
-
         private readonly Vector2 _scaleChangeAmount = new Vector2(0.005f);
 
         public StatusBarSprite(
@@ -42,16 +34,16 @@ namespace Infart.HUD
             Vector2 scale)
             : this(textureReference, textureRectangle, startingPosition)
         {
-            OverlayColor = overlayColor;
+            _overlayColor = overlayColor;
             _activatedScale = scale;
             _deactivatedScale = new Vector2(0.7f);
-            Scale = _deactivatedScale;
-            Origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
+            _scale = _deactivatedScale;
+            _origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
         }
 
         public void Reset()
         {
-            Scale = _deactivatedScale;
+            _scale = _deactivatedScale;
             _animateIn = false;
             _animateOut = false;
         }
@@ -99,15 +91,15 @@ namespace Infart.HUD
                 {
                     if (_animateIn)
                     {
-                        if (Scale.X <= _scaleTo.X)
-                            Scale += _scaleChangeAmount;
+                        if (_scale.X <= _scaleTo.X)
+                            _scale += _scaleChangeAmount;
                         else
                             _animateIn = false;
                     }
                     else if (_animateOut)
                     {
-                        if (Scale.X >= _scaleTo.X)
-                            Scale -= _scaleChangeAmount;
+                        if (_scale.X >= _scaleTo.X)
+                            _scale -= _scaleChangeAmount;
                         else
                             _animateOut = false;
                     }
@@ -125,12 +117,12 @@ namespace Infart.HUD
                 _textureReference,
                 base.Position,
                 _textureRectangle,
-                OverlayColor,
-                Rotation,
-                Origin,
-                Scale,
-                Flip,
-                Depth);
+                _overlayColor,
+                _rotation,
+                _origin,
+                _scale,
+                _flip,
+                _depth);
         }
     }
 }

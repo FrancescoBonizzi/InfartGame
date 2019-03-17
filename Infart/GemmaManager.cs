@@ -1,7 +1,6 @@
 using Infart.Assets;
 using Infart.Astronaut;
 using Infart.Drawing;
-using Infart.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,21 +11,18 @@ namespace Infart
     public class GemmaManager
     {
         private readonly Gemma _jalapenos = null;
-
         private readonly Gemma _broccolo = null;
 
-        protected const int MaxGemmeAttive = 10;
-
-        protected List<Gemma> GemmeAttive;
-
-        protected List<Gemma> GemmeInactive;
-
-        protected Random Random;
-
-        protected Camera CurrentCamera;
+        private const int MaxGemmeAttive = 10;
+        private List<Gemma> _gemmeAttive;
+        private List<Gemma> _gemmeInactive;
+        private Camera _currentCamera;
 
         private enum PowerUps
-        { Jalapeno, Merda };
+        {
+            Jalapeno,
+            Merda
+        };
 
         private PowerUps _nextPowerUp = PowerUps.Jalapeno;
 
@@ -34,13 +30,12 @@ namespace Infart
             Camera cameraReference,
             AssetsLoader assetsLoader)
         {
-            Random = FbonizziHelper.Random;
-            CurrentCamera = cameraReference;
-            GemmeAttive = new List<Gemma>();
-            GemmeInactive = new List<Gemma>();
+            _currentCamera = cameraReference;
+            _gemmeAttive = new List<Gemma>();
+            _gemmeInactive = new List<Gemma>();
 
             for (int i = 0; i < MaxGemmeAttive; ++i)
-                GemmeInactive.Add(new Gemma(
+                _gemmeInactive.Add(new Gemma(
                     assetsLoader.Textures,
                     assetsLoader.TexturesRectangles["Burger"]));
 
@@ -50,14 +45,14 @@ namespace Infart
 
         public void Reset(Camera cameraReference)
         {
-            for (int i = 0; i < GemmeAttive.Count; ++i)
+            for (int i = 0; i < _gemmeAttive.Count; ++i)
             {
-                GemmeInactive.Add(GemmeAttive[i]);
-                GemmeAttive.RemoveAt(i);
+                _gemmeInactive.Add(_gemmeAttive[i]);
+                _gemmeAttive.RemoveAt(i);
                 --i;
             }
 
-            CurrentCamera = cameraReference;
+            _currentCamera = cameraReference;
         }
 
         public void AddPowerUp(Vector2 position)
@@ -124,34 +119,34 @@ namespace Infart
 
         public void AddGemma(Vector2 startingPosition)
         {
-            if (GemmeInactive.Count > 0)
+            if (_gemmeInactive.Count > 0)
             {
-                GemmeInactive[0].Position = startingPosition;
-                GemmeInactive[0].Active = true;
-                GemmeAttive.Add(GemmeInactive[0]);
-                GemmeInactive.RemoveAt(0);
+                _gemmeInactive[0].Position = startingPosition;
+                _gemmeInactive[0].Active = true;
+                _gemmeAttive.Add(_gemmeInactive[0]);
+                _gemmeInactive.RemoveAt(0);
             }
         }
 
         private void RemoveGemma(int index)
         {
-            GemmeAttive[index].Active = false;
-            GemmeInactive.Add(GemmeAttive[index]);
-            GemmeAttive.RemoveAt(index);
+            _gemmeAttive[index].Active = false;
+            _gemmeInactive.Add(_gemmeAttive[index]);
+            _gemmeAttive.RemoveAt(index);
         }
 
-        protected bool ToBeRemoved(Vector2 position, float width)
+        private bool ToBeRemoved(Vector2 position, float width)
         {
-            if (position.X + width < CurrentCamera.Position.X)
+            if (position.X + width < _currentCamera.Position.X)
                 return true;
             return false;
         }
 
         public bool CheckCollisionWithPlayer(Player p)
         {
-            for (int i = 0; i < GemmeAttive.Count; ++i)
+            for (int i = 0; i < _gemmeAttive.Count; ++i)
             {
-                if (GemmeAttive[i].CollisionRectangle.Intersects(p.CollisionRectangle))
+                if (_gemmeAttive[i].CollisionRectangle.Intersects(p.CollisionRectangle))
                 {
                     RemoveGemma(i);
                     --i;
@@ -163,8 +158,8 @@ namespace Infart
 
         public void Update(double gametime)
         {
-            for (int i = 0; i < GemmeAttive.Count; ++i)
-                GemmeAttive[i].Update(gametime);
+            for (int i = 0; i < _gemmeAttive.Count; ++i)
+                _gemmeAttive[i].Update(gametime);
 
             _jalapenos.Update(gametime);
             _broccolo.Update(gametime);
@@ -172,9 +167,9 @@ namespace Infart
 
         public void Draw(SpriteBatch spritebatch)
         {
-            for (int i = 0; i < GemmeAttive.Count; ++i)
+            for (int i = 0; i < _gemmeAttive.Count; ++i)
             {
-                Gemma g = GemmeAttive[i];
+                Gemma g = _gemmeAttive[i];
 
                 if (ToBeRemoved(g.Position, g.Width))
                 {

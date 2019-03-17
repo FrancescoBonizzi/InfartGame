@@ -1,6 +1,5 @@
 using Infart.Assets;
 using Infart.Drawing;
-using Infart.Extensions;
 using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,46 +10,26 @@ namespace Infart.Background
     public class BackgroundManager
     {
         private readonly GrattacieliAutogeneranti _grattacieliFondo = null;
-
         private readonly GrattacieliAutogeneranti _grattacieliMid = null;
-
         private float _parallaxSpeedFondo;
-
         private float _parallaxSpeedMid;
-
         private const float DefaultParallaxSpeedFondo = -10.0f;
-
         private const float DefaultParallaxSpeedMid = -18.0f;
-
         private readonly Nuvolificio _nuvolificioVicino;
-
         private readonly Nuvolificio _nuvolificioMedio;
-
         private readonly Nuvolificio _nuvolificioLontano;
-
         private readonly Vector2 _nuvoleDefaultSpawnYRange = new Vector2(300.0f, -300.0f);
-
         private readonly StarFieldParticleSystem _starfield;
-
         private readonly Vector2 _cieloStellatoSpawnYRange = new Vector2(-960.0f, -300.0f);
-
         private const double TimeBetweenNewStar = 20.0f;
-
         private double _timeTillNewStar = 0.0f;
-
-        protected Camera CurrentCamera;
-
-        protected float OldCameraXPos;
-
-        protected float ParallaxDir = +1;
-
-        protected Texture2D TextureReference;
-
-        protected Rectangle SfondoRectangle;
-
-        protected Vector2 SfondoOrigin;
-
-        protected Vector2 SfondoScale;
+        private Camera CurrentCamera;
+        private float OldCameraXPos;
+        private float ParallaxDir = +1;
+        private Texture2D TextureReference;
+        private Rectangle SfondoRectangle;
+        private Vector2 SfondoOrigin;
+        private Vector2 SfondoScale;
 
         public BackgroundManager(
             Camera cameraInstance,
@@ -171,12 +150,11 @@ namespace Infart.Background
             _timeTillNewStar -= dt;
             if (_timeTillNewStar < 0)
             {
-                Vector2 where = new Vector2(
-                    FbonizziHelper.Random.Next((int)CurrentCamera.Position.X, (int)CurrentCamera.Position.X + CurrentCamera.ViewPortWidth),
-                    FbonizziHelper.Random.Next((int)_cieloStellatoSpawnYRange.X, (int)_cieloStellatoSpawnYRange.Y));
+                var where = new Vector2(
+                    FbonizziMonoGame.Numbers.RandomBetween((int)CurrentCamera.Position.X, (int)CurrentCamera.Position.X + CurrentCamera.ViewPortWidth),
+                    FbonizziMonoGame.Numbers.RandomBetween((int)_cieloStellatoSpawnYRange.X, (int)_cieloStellatoSpawnYRange.Y));
 
                 _starfield.AddParticles(where);
-
                 _timeTillNewStar = TimeBetweenNewStar;
             }
         }

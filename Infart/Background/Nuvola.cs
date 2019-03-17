@@ -7,25 +7,18 @@ namespace Infart.Background
     public class Nuvola : GameObject
     {
         private float _velocity;
-
         private Vector2 _currentMoveAmount = Vector2.Zero;
-
         private readonly Rectangle _textureRectangle;
-
         private readonly Texture2D _textureReference;
-
         private float _scaleFloatAmount = 0.05f;
-
         private float _scaleElapsed = 0.0f;
-
-        private bool _active = false;
 
         public Nuvola(Texture2D textureReference, Rectangle textureRectangle)
         {
             _textureRectangle = textureRectangle;
             _textureReference = textureReference;
-            Origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
-            Scale = Vector2.One;
+            _origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
+            _scale = Vector2.One;
         }
 
         public void Set(
@@ -36,16 +29,13 @@ namespace Infart.Background
         {
             this.Position = pos;
             this._velocity = speed;
-            this.OverlayColor = overlayColor;
-            this.Scale = scale;
+            this._overlayColor = overlayColor;
+            this._scale = scale;
 
-            _active = true;
+            Active = true;
         }
 
-        public bool Active
-        {
-            get { return _active; }
-        }
+        public bool Active { get; private set; } = false;
 
         public override Rectangle CollisionRectangle
         {
@@ -54,7 +44,7 @@ namespace Infart.Background
 
         public override void Update(double gameTime)
         {
-            if (_active)
+            if (Active)
             {
                 float elapsed = (float)gameTime / 1000.0f;
 
@@ -65,23 +55,23 @@ namespace Infart.Background
                     _scaleFloatAmount *= -1;
                     _scaleElapsed = 0.0f;
                 }
-                Scale += new Vector2(_scaleFloatAmount * elapsed, _scaleFloatAmount * elapsed);
+                _scale += new Vector2(_scaleFloatAmount * elapsed, _scaleFloatAmount * elapsed);
                 _scaleElapsed += elapsed;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (_active)
+            if (Active)
             {
                 spriteBatch.Draw(
                     _textureReference,
                     Position,
                     _textureRectangle,
-                    OverlayColor,
+                    _overlayColor,
                     0.0f,
-                    Origin,
-                    Scale,
+                    _origin,
+                    _scale,
                     SpriteEffects.None,
                     1.0f);
             }

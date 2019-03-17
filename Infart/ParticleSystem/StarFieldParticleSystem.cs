@@ -14,26 +14,26 @@ namespace Infart.ParticleSystem
 
         protected override void InitializeConstants()
         {
-            MinInitialSpeed = 10f;
-            MaxInitialSpeed = 15f;
+            _minInitialSpeed = 10f;
+            _maxInitialSpeed = 15f;
 
-            MinAcceleration = 30f;
-            MaxAcceleration = 40f;
+            _minAcceleration = 30f;
+            _maxAcceleration = 40f;
 
-            MinLifetime = 1.50f;
-            MaxLifetime = 3.0f;
+            _minLifetime = 1.50f;
+            _maxLifetime = 3.0f;
 
-            MinScale = .2f;
-            MaxScale = 1.0f;
+            _minScale = .2f;
+            _maxScale = 1.0f;
 
-            MinSpawnAngle = 0.0f;
-            MaxSpawnAngle = 360.0f;
+            _minSpawnAngle = 0.0f;
+            _maxSpawnAngle = 360.0f;
 
-            MinNumParticles = 4;
-            MaxNumParticles = 8;
+            _minNumParticles = 4;
+            _maxNumParticles = 8;
 
-            MinRotationSpeed = -MathHelper.PiOver2;
-            MaxRotationSpeed = MathHelper.PiOver2;
+            _minRotationSpeed = -MathHelper.PiOver2;
+            _maxRotationSpeed = MathHelper.PiOver2;
         }
 
         protected override void InitializeParticle(Particle p, Vector2 where)

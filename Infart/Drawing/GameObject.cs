@@ -13,18 +13,12 @@ namespace Infart.Drawing
             set => _position = value;
         }
 
-        protected float Rotation = 0.0f;
-
-        protected Vector2 Scale = Vector2.One;
-
-        protected Vector2 Origin = Vector2.Zero;
-
-        protected float Depth = 0.0f;
-
-        protected Color OverlayColor = Color.White;
-
-        protected SpriteEffects Flip = SpriteEffects.None;
-        
+        protected float _rotation = 0.0f;
+        protected Vector2 _scale = Vector2.One;
+        protected Vector2 _origin = Vector2.Zero;
+        protected float _depth = 0.0f;
+        protected Color _overlayColor = Color.White;
+        protected SpriteEffects _flip = SpriteEffects.None;
 
         public float PositionX
         {
@@ -42,10 +36,10 @@ namespace Infart.Drawing
         {
             set
             {
-                Scale.X = value;
-                Scale.Y = value;
+                _scale.X = value;
+                _scale.Y = value;
             }
-            get { return Scale.X; }
+            get { return _scale.X; }
         }
         
 
@@ -54,23 +48,23 @@ namespace Infart.Drawing
             get
             {
                 return
-                         Matrix.CreateTranslation(new Vector3(-Origin, 0.0f)) *
-                         Matrix.CreateScale(Scale.X, Scale.Y, 1.0f) *
-                         Matrix.CreateRotationZ(Rotation) *
+                         Matrix.CreateTranslation(new Vector3(-_origin, 0.0f)) *
+                         Matrix.CreateScale(_scale.X, _scale.Y, 1.0f) *
+                         Matrix.CreateRotationZ(_rotation) *
                          Matrix.CreateTranslation(new Vector3(Position, 0.0f));
             }
         }
 
         public SpriteEffects FlipEffect
         {
-            set { Flip = value; }
-            get { return Flip; }
+            set { _flip = value; }
+            get { return _flip; }
         }
 
         public virtual Color FillColor
         {
-            set { OverlayColor = value; }
-            get { return OverlayColor; }
+            set { _overlayColor = value; }
+            get { return _overlayColor; }
         }
 
         public virtual void Dispose()

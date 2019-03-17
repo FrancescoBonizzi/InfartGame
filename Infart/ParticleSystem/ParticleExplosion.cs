@@ -6,27 +6,17 @@ namespace Infart.ParticleSystem
     public class ParticleExplosion
     {
         private readonly Texture2D _texture;
-
         private readonly Rectangle _textureRectangle;
-
-        public Vector2 Position;
-
-        private Vector2 _velocity;
-
-        private float _angle;
-
-        private float _angularVelocity;
-
-        private Color _color;
-
-        private float _scale;
-
-        private int _ttl;
-
         private readonly Vector2 _origin;
 
-        private bool _fading = false;
+        public Vector2 Position { get; set; }
 
+        private Vector2 _velocity;
+        private float _angle;
+        private float _angularVelocity;
+        private Color _color;
+        private int _ttl;
+        private bool _fading = false;
         private bool _active = false;
 
         public ParticleExplosion(
@@ -47,7 +37,7 @@ namespace Infart.ParticleSystem
             _angle = angle;
             _angularVelocity = angularVelocity;
             _color = color;
-            _scale = size;
+            Scale = size;
             _ttl = ttl;
 
             _fading = false;
@@ -70,7 +60,7 @@ namespace Infart.ParticleSystem
             _angle = angle;
             _angularVelocity = angularVelocity;
             _color = color;
-            _scale = size;
+            Scale = size;
             _ttl = ttl;
 
             _active = true;
@@ -89,18 +79,14 @@ namespace Infart.ParticleSystem
             _angle = angle;
             _angularVelocity = angularVelocity;
             _color = color;
-            _scale = size;
+            Scale = size;
             _ttl = ttl;
 
             _fading = false;
             _active = true;
         }
-        
-        public float Scale
-        {
-            get { return _scale; }
-            set { _scale = value; }
-        }
+
+        public float Scale { get; set; }
 
         public bool IsDead
         {
@@ -149,7 +135,7 @@ namespace Infart.ParticleSystem
                     _color,
                     _angle,
                     _origin,
-                    _scale,
+                    Scale,
                     SpriteEffects.None,
                     0f);
             }

@@ -1,4 +1,3 @@
-using Infart.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,49 +8,29 @@ namespace Infart.ParticleSystem
     public abstract class ParticleSystem
     {
         private readonly Texture2D _texture;
-
         private readonly Rectangle _textureRectangle;
-
         private readonly Vector2 _origin;
-
         private readonly int _density;
-
         private Particle[] _activeParticles;
 
-        protected Queue<Particle> FreeParticles;
-
-        protected int MinNumParticles;
-
-        protected int MaxNumParticles;
-
-        protected float MinInitialSpeed;
-
-        protected float MaxInitialSpeed;
-
-        protected float MinAcceleration;
-
-        protected float MaxAcceleration;
-
-        protected float MinRotationSpeed;
-
-        protected float MaxRotationSpeed;
-
-        protected float MinLifetime;
-
-        protected float MaxLifetime;
-
-        protected float MinScale;
-
-        protected float MaxScale;
-
-        protected float MinSpawnAngle;
-
-        protected float MaxSpawnAngle;
+        protected Queue<Particle> _freeParticles;
+        protected int _minNumParticles;
+        protected int _maxNumParticles;
+        protected float _minInitialSpeed;
+        protected float _maxInitialSpeed;
+        protected float _minAcceleration;
+        protected float _maxAcceleration;
+        protected float _minRotationSpeed;
+        protected float _maxRotationSpeed;
+        protected float _minLifetime;
+        protected float _maxLifetime;
+        protected float _minScale;
+        protected float _maxScale;
+        protected float _minSpawnAngle;
+        protected float _maxSpawnAngle;
 
         private Vector2 _emitterLocation = Vector2.Zero;
-
-        private static Random _random;
-
+        
         public ParticleSystem(
             int density,
             Texture2D texture,
@@ -81,14 +60,12 @@ namespace Infart.ParticleSystem
         {
             InitializeConstants();
 
-            _random = FbonizziHelper.Random;
-
-            _activeParticles = new Particle[_density * MaxNumParticles];
-            FreeParticles = new Queue<Particle>(_density * MaxNumParticles);
+            _activeParticles = new Particle[_density * _maxNumParticles];
+            _freeParticles = new Queue<Particle>(_density * _maxNumParticles);
             for (int i = 0; i < _activeParticles.Length; ++i)
             {
                 _activeParticles[i] = new Particle();
-                FreeParticles.Enqueue(_activeParticles[i]);
+                _freeParticles.Enqueue(_activeParticles[i]);
             }
         }
 
@@ -96,11 +73,11 @@ namespace Infart.ParticleSystem
 
         public virtual void AddParticles(Vector2 where)
         {
-            int numParticles = _random.Next(MinNumParticles, MaxNumParticles);
+            int numParticles = FbonizziMonoGame.Numbers.RandomBetween(_minNumParticles, _maxNumParticles);
 
-            for (int i = 0; i < numParticles && FreeParticles.Count > 0; ++i)
+            for (int i = 0; i < numParticles && _freeParticles.Count > 0; ++i)
             {
-                Particle p = FreeParticles.Dequeue();
+                Particle p = _freeParticles.Dequeue();
                 InitializeParticle(p, where);
             }
         }
@@ -110,15 +87,15 @@ namespace Infart.ParticleSystem
             Vector2 direction = PickRandomDirection();
 
             float velocity =
-                FbonizziHelper.RandomBetween(MinInitialSpeed, MaxInitialSpeed);
+                FbonizziMonoGame.Numbers.RandomBetween(_minInitialSpeed, _maxInitialSpeed);
             float acceleration =
-                FbonizziHelper.RandomBetween(MinAcceleration, MaxAcceleration);
+                FbonizziMonoGame.Numbers.RandomBetween(_minAcceleration, _maxAcceleration);
             float lifetime =
-                FbonizziHelper.RandomBetween(MinLifetime, MaxLifetime);
+                FbonizziMonoGame.Numbers.RandomBetween(_minLifetime, _maxLifetime);
             float scale =
-                FbonizziHelper.RandomBetween(MinScale, MaxScale);
+                FbonizziMonoGame.Numbers.RandomBetween(_minScale, _maxScale);
             float rotationSpeed =
-                FbonizziHelper.RandomBetween(MinRotationSpeed, MaxRotationSpeed);
+                FbonizziMonoGame.Numbers.RandomBetween(_minRotationSpeed, _maxRotationSpeed);
 
             p.Initialize(
                 where,
@@ -132,8 +109,8 @@ namespace Infart.ParticleSystem
 
         private Vector2 PickRandomDirection()
         {
-            float radians = FbonizziHelper.RandomBetween(
-                MathHelper.ToRadians(MinSpawnAngle), MathHelper.ToRadians(MaxSpawnAngle));
+            float radians = FbonizziMonoGame.Numbers.RandomBetween(
+                MathHelper.ToRadians(_minSpawnAngle), MathHelper.ToRadians(_maxSpawnAngle));
 
             Vector2 direction = new Vector2(
                 direction.X = (float)Math.Cos(radians), direction.Y = -(float)Math.Sin(radians));
@@ -155,7 +132,7 @@ namespace Infart.ParticleSystem
 
                     if (!p.Active)
                     {
-                        FreeParticles.Enqueue(p);
+                        _freeParticles.Enqueue(p);
                     }
                 }
             }

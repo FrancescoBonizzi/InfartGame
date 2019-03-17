@@ -9,13 +9,7 @@ namespace Infart.Astronaut
     public abstract class Actor : AnimatedGameObject
     {
         protected Vector2 Velocity = Vector2.Zero;
-
         protected float XMoveSpeed = 180.0f;
-
-        private float _yFallSpeed = 20.0f;
-
-        private bool _onGround = false;
-
         public bool Dead = false;
 
         protected List<GameObject> CollidingObjsReference;
@@ -26,7 +20,7 @@ namespace Infart.Astronaut
             List<GameObject> collidingObjs)
             : base()
         {
-            Velocity.Y = _yFallSpeed;
+            Velocity.Y = FallSpeed;
 
             CollidingObjsReference = collidingObjs;
         }
@@ -47,16 +41,9 @@ namespace Infart.Astronaut
             set { XMoveSpeed = value; }
         }
 
-        public float FallSpeed
-        {
-            get { return _yFallSpeed; }
-            set { _yFallSpeed = value; }
-        }
-        
-        public bool OnGround
-        {
-            get { return _onGround; }
-        }
+        public float FallSpeed { get; set; } = 20.0f;
+
+        public bool OnGround { get; private set; } = false;
 
         private Vector2 CollisionTest(Vector2 moveAmount)
         {
@@ -111,7 +98,7 @@ namespace Infart.Astronaut
 
                     if (collIndex != -1)
                     {
-                        _onGround = true;
+                        OnGround = true;
 
                         moveAmount.Y = 0;
                         Velocity.Y = 0;
@@ -131,7 +118,7 @@ namespace Infart.Astronaut
 
         public override void Update(double gameTime)
         {
-            Velocity.Y += _yFallSpeed;
+            Velocity.Y += FallSpeed;
 
             if (!Dead)
             {
@@ -142,7 +129,7 @@ namespace Infart.Astronaut
 
                 if (Velocity.Y < 0)
                 {
-                    _onGround = false;
+                    OnGround = false;
                 }
 
                 Position += moveAmount;

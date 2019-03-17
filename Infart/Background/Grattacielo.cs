@@ -6,16 +6,9 @@ namespace Infart.Background
 {
     public class Grattacielo : GameObject
     {
-        private readonly int _h;
-
         private readonly int _oneBlockHeight = 25;
-
         private readonly int _wGrattacielo;
-
-        private Rectangle _collisionRectangle;
-
         private readonly Rectangle _textureRectangle;
-
         private readonly Texture2D _textureReference;
 
         public Grattacielo(Rectangle textureRectangle, Texture2D textureReference)
@@ -23,8 +16,8 @@ namespace Infart.Background
             Position = Vector2.Zero;
 
             _wGrattacielo = textureRectangle.Width;
-            _h = textureRectangle.Height / _oneBlockHeight;
-            Origin = new Vector2(0, textureRectangle.Height);
+            HeightInBlocksNumber = textureRectangle.Height / _oneBlockHeight;
+            _origin = new Vector2(0, textureRectangle.Height);
             _collisionRectangle.Width = textureRectangle.Width;
             _collisionRectangle.Height = textureRectangle.Height;
 
@@ -54,7 +47,7 @@ namespace Infart.Background
             set
             {
                 _collisionRectangle.X = (int)value.X;
-                _collisionRectangle.Y = (int)(value.Y - Origin.Y);
+                _collisionRectangle.Y = (int)(value.Y - _origin.Y);
                 base.Position = value;
             }
         }
@@ -69,16 +62,13 @@ namespace Infart.Background
             get { return _textureRectangle.Height; }
         }
 
-        public int HeightInBlocksNumber
-        {
-            get { return _h; }
-        }
+        public int HeightInBlocksNumber { get; }
 
         public Vector2 PositionAtTopLeftCorner()
         {
             return new Vector2(
                 Position.X,
-                Position.Y - Origin.Y);
+                Position.Y - _origin.Y);
         }
 
         public override void Update(double gameTime)
@@ -93,10 +83,10 @@ namespace Infart.Background
                 _textureRectangle,
                 Color.White,
                 0.0f,
-                Origin,
-                Scale,
-                Flip,
-                Depth);
+                _origin,
+                _scale,
+                _flip,
+                _depth);
         }
     }
 }

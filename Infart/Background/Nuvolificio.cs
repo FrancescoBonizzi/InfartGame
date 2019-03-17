@@ -1,8 +1,6 @@
 using Infart.Drawing;
-using Infart.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace Infart.Background
@@ -10,31 +8,17 @@ namespace Infart.Background
     public class Nuvolificio
     {
         private List<Nuvola> _nuvole;
-
         private readonly int _nuvoleNumber = 5;
-
         private readonly Vector2 _scale;
-
         private readonly Color _overlayColor;
-
         private readonly Vector2 _speedRange;
-
         private Vector2 _nuvoleSpawnYRange;
-
         private bool _active = true;
-
-        private static Random _random;
-
         private float _elapsed = 0.0f;
-
         private Camera _currentCamera;
-
         private float _cameraPosY;
-
         private float _cameraPosX;
-
         private readonly float _cameraW;
-
         private readonly float _cameraH;
 
         public Nuvolificio(
@@ -46,8 +30,6 @@ namespace Infart.Background
             List<Rectangle> nuvolaRectangles,
             Texture2D nuvolaTexture)
         {
-            _random = FbonizziHelper.Random;
-
             _currentCamera = currentCamera;
             _overlayColor = overlayColor;
             _scale = new Vector2(scale, scale);
@@ -76,7 +58,7 @@ namespace Infart.Background
             for (int i = 0; i < _nuvoleNumber; ++i)
                 _nuvole.Add(new Nuvola(
                     nuvolaTexture,
-                    nuvoleRects[_random.Next(nuvoleRects.Count)]));
+                    nuvoleRects[FbonizziMonoGame.Numbers.RandomBetween(0, nuvoleRects.Count)]));
         }
 
         public Vector2 NuvoleYSpawnRange
@@ -110,26 +92,26 @@ namespace Infart.Background
 
         private void SetNuvola(int index)
         {
-            float yPos = _random.Next(
+            float yPos = FbonizziMonoGame.Numbers.RandomBetween(
                 (int)_nuvoleSpawnYRange.X,
                 (int)_nuvoleSpawnYRange.Y);
 
             float xPos;
             int direction;
-            if (_random.NextDouble() > 0.5)
+            if (FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) > 0.5)
             {
-                xPos = (int)_currentCamera.Position.X - 200 + _random.Next(1, 20);
+                xPos = (int)_currentCamera.Position.X - 200 + FbonizziMonoGame.Numbers.RandomBetween(1, 20);
                 direction = +1;
             }
             else
             {
-                xPos = (int)_currentCamera.Position.X + (int)_currentCamera.ViewPortWidth + 200 - _random.Next(1, 20);
+                xPos = (int)_currentCamera.Position.X + (int)_currentCamera.ViewPortWidth + 200 - FbonizziMonoGame.Numbers.RandomBetween(1, 20);
                 direction = -1;
             }
 
             Vector2 randPos = new Vector2(xPos, yPos);
 
-            float randSpeed = _random.Next((int)_speedRange.X, (int)_speedRange.Y);
+            float randSpeed = FbonizziMonoGame.Numbers.RandomBetween((int)_speedRange.X, (int)_speedRange.Y);
 
             _nuvole[index].Set(
                     randPos,

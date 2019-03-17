@@ -20,12 +20,6 @@ namespace Infart.Drawing
             _collisionRectangle = Rectangle.Empty;
         }
 
-        public override void Dispose()
-        {
-            foreach (KeyValuePair<string, AnimationManager> i in Animations)
-                Animations[i.Key].Dispose();
-        }
-        
         public int Width
         {
             get { return CurrentFrameWidth; }
@@ -91,12 +85,12 @@ namespace Infart.Drawing
                        Animations[CurrentAnimation].Texture,
                        base.Position,
                        Animations[CurrentAnimation].FrameRectangle,
-                       OverlayColor,
-                       Rotation,
-                       Origin,
-                       Scale,
-                       Flip,
-                       Depth);
+                       _overlayColor,
+                       _rotation,
+                       _origin,
+                       _scale,
+                       _flip,
+                       _depth);
             }
         }
     }

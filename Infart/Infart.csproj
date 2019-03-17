@@ -35,19 +35,15 @@
   <ItemGroup>
     <Compile Include="Assets\AssetsLoader.cs" />
     <Compile Include="Assets\GameStringsLoader.cs" />
-    <Compile Include="Extensions\CollisionSolver.cs" />
-    <Compile Include="Extensions\fbonizziHelper.cs" />
-    <Compile Include="Extensions\StringBuilderExtension.cs" />
-    <Compile Include="Drawing\AbstractGameObject.cs" />
-    <Compile Include="Drawing\AnimatedGameObject.cs" />
     <Compile Include="Drawing\Camera.cs" />
+    <Compile Include="Extensions\CollisionSolver.cs" />
+    <Compile Include="Drawing\AnimatedGameObject.cs" />
     <Compile Include="Drawing\GameObject.cs" />
     <Compile Include="Drawing\Gemma.cs" />
     <Compile Include="Background\Nuvola.cs" />
     <Compile Include="Drawing\SingleTextureGameObject.cs" />
     <Compile Include="HUD\StatusBarSprite.cs" />
     <Compile Include="ParticleSystem\ParticleExplosion.cs" />
-    <Compile Include="ParticleSystem\RecordExplosion.cs" />
     <Compile Include="GameOrchestrator.cs" />
     <Compile Include="InfartBootstrap.cs" />
     <Compile Include="ParticleSystem\Particle.cs" />

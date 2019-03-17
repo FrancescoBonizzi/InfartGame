@@ -6,7 +6,6 @@ using Infart.Drawing;
 using Infart.HUD;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,37 +14,27 @@ namespace Infart.ParticleSystem
 {
     public class InfartGame
     {
-        private readonly int _resolutionW;
-        private readonly int _resolutionH;
+        private Camera _playerCamera;
+        private BackgroundManager _background;
+        private GroundManager _ground;
+        private GemmaManager _gemme;
+        private SoundManager _soundManager;
+        private StatusBar _statusBar;
+        private readonly AssetsLoader _assetsLoader;
+        private bool _isPaused = false;
+        private InfartExplosion _deadExplosion;
+        private bool _newHighScore = false;
+        private bool _forceToFinish;
+        private Rectangle _highScorePosition;
+        private readonly Color _highScoreColor = Color.Blue;
+        private readonly SpriteFont _font;
 
-        private int GameH;
-        private Camera PlayerCamera;
-        private Player Player;
-        private BackgroundManager Background;
-        private GroundManager Ground;
-        private GemmaManager Gemme;
-        private SoundManager SoundManager;
-        private StatusBar StatusBar;
-        private AssetsLoader AssetsLoader;
-        private bool Paused = false;
-        private InfartExplosion DeadExplosion;
-        private RecordExplosion RecordExplosion;
-        private Random Random;
-        private int HighScore;
-        private int ScoreScoregge;
-        private bool NewHighScore = false;
-        private bool ForceToFinish;
-        private Rectangle HighScorePosition;
-        private Color HighScoreColor = Color.Blue;
-        private SpriteFont Font;
-        private Texture2D PxTexture;
-
-        public double BucoProbability;
-        public double PowerUpProbability;
-        public double PeperoncinoDuration;
-        public double GemmaProbability;
-        public double BroccoloDuration;
-        public Vector2 LarghezzaBuchi;
+        public double BucoProbability { get; private set; }
+        public double PowerUpProbability { get; private set; }
+        public double PeperoncinoDuration { get; private set; }
+        public double GemmaProbability { get; private set; }
+        public double BroccoloDuration { get; private set; }
+        public Vector2 LarghezzaBuchi { get => _larghezzaBuchi; private set => _larghezzaBuchi = value; }
 
         private const double DefaultBucoProbability = 0.005;
         private const double DefaultPoweupProbability = 0.03;
@@ -56,23 +45,24 @@ namespace Infart.ParticleSystem
         private const float DefaultBucoMaxW = 250.0f;
         private int _oldScoreMetri = 0;
 
-        public int ScoreMetri = 0;
+        public int ScoreMetri { get; set; } = 0;
 
         private readonly StringBuilder _scoreString;
         private readonly Vector2 _scoreStringPosition = new Vector2(680, 438);
 
         private Rectangle _barRectangle = new Rectangle(400, 430, 800, 50);
-        private Color _barColor = Color.LightCyan * 0.5f;
+        private readonly Color _barColor = Color.LightCyan * 0.5f;
 
         private readonly string _metriString;
 
         private int _highScoreX;
 
-        public bool FallSoundActive;
-        public bool MerdaModeActive;
-        public bool JalapenosModeActive;
+        public bool FallSoundActive { get; set; }
+        public bool MerdaModeActive { get; set; }
+        public bool JalapenosModeActive { get; set; }
 
         private int _gameCameraHLimit;
+        private Vector2 _larghezzaBuchi;
 
         public InfartGame(
             AssetsLoader assetsLoader,
@@ -81,31 +71,31 @@ namespace Infart.ParticleSystem
             string metriString,
             string pauseString)
         {
-            _resolutionW = 800;
-            _resolutionH = 480;
-            GameH = 1500;
+            ResolutionWidth = 800;
+            ResolutionHeight = 480;
+            PlayableGameWindowHeight = 1500;
 
-            this.AssetsLoader = assetsLoader;
+            this._assetsLoader = assetsLoader;
 
-            this.SoundManager = soundManager;
+            this._soundManager = soundManager;
 
-            StatusBar = new StatusBar(new Vector2(460, 435), assetsLoader, soundManager);
+            _statusBar = new StatusBar(new Vector2(460, 435), assetsLoader, soundManager);
 
-            this.HighScore = highScore;
+            this.GetScore = highScore;
             SetRecordRectangle();
             SetHighScore(highScore);
 
-            Font = assetsLoader.Font;
+            _font = assetsLoader.Font;
             //   px_texture_ = AssetsLoader.px_texture_;
 
-            PlayerCamera = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
+            _playerCamera = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
-            DeadExplosion = new InfartExplosion(assetsLoader);
+            _deadExplosion = new InfartExplosion(assetsLoader);
             //     record_explosion_ = new RecordExplosion_episodio1(AssetsLoader);
 #warning TODO: mettere un popup per il record
 
-            Paused = false;
-            ForceToFinish = false;
+            _isPaused = false;
+            _forceToFinish = false;
 
             InitializeBackgroundManager();
             InitializeGroundManager();
@@ -114,7 +104,7 @@ namespace Infart.ParticleSystem
 
             _scoreString = new StringBuilder();
 
-            HighScoreColor = new Color(22, 232, 86) * 0.5f;
+            _highScoreColor = new Color(22, 232, 86) * 0.5f;
             //     px_texture_ = AssetsLoader.px_texture_;
             _metriString = metriString;
 
@@ -123,13 +113,13 @@ namespace Infart.ParticleSystem
 
         private void NewGame()
         {
-            DeadExplosion.Reset();
+            _deadExplosion.Reset();
 
-            Paused = false;
-            ForceToFinish = false;
-            NewHighScore = false;
+            _isPaused = false;
+            _forceToFinish = false;
+            _newHighScore = false;
 
-            _gameCameraHLimit = -GameH - PlayerCamera.ViewPortHeight;
+            _gameCameraHLimit = -PlayableGameWindowHeight - _playerCamera.ViewPortHeight;
 
             FallSoundActive = false;
             MerdaModeActive = false;
@@ -137,7 +127,7 @@ namespace Infart.ParticleSystem
 
             _oldScoreMetri = 0;
             ScoreMetri = 0;
-            ScoreScoregge = 0;
+            GetScoregge = 0;
 
             BucoProbability = DefaultBucoProbability;
             PowerUpProbability = DefaultPoweupProbability;
@@ -146,39 +136,36 @@ namespace Infart.ParticleSystem
             GemmaProbability = DefaultGemmaProbability;
             LarghezzaBuchi = new Vector2(DefaultBucoMinW, DefaultBucoMaxW);
 
-            PlayerCamera.Reset(Vector2.Zero);
-            Player.Reset(new Vector2(240, 300));
+            _playerCamera.Reset(Vector2.Zero);
+            PlayerReference.Reset(new Vector2(240, 300));
 
-            Background.Reset(PlayerCamera);
-            Ground.Reset(PlayerCamera);
-            Gemme.Reset(PlayerCamera);
-            StatusBar.Reset();
+            _background.Reset(_playerCamera);
+            _ground.Reset(_playerCamera);
+            _gemme.Reset(_playerCamera);
+            _statusBar.Reset();
         }
 
         private void InitializeBackgroundManager()
         {
-            Background = new BackgroundManager(PlayerCamera, (AssetsLoader as AssetsLoader), this);
+            _background = new BackgroundManager(_playerCamera, (_assetsLoader as AssetsLoader), this);
         }
 
         private void InitializeGroundManager()
         {
-            Ground = new GroundManager(PlayerCamera, (AssetsLoader as AssetsLoader), this);
+            _ground = new GroundManager(_playerCamera, (_assetsLoader as AssetsLoader), this);
         }
 
         private void InitializeGemmaManager()
         {
-            Gemme = new GemmaManager(PlayerCamera, (AssetsLoader as AssetsLoader));
+            _gemme = new GemmaManager(_playerCamera, (_assetsLoader as AssetsLoader));
         }
 
         private void InitializePlayer()
         {
-            Player = new Player(new Vector2(240, 300), (AssetsLoader as AssetsLoader), this);
+            PlayerReference = new Player(new Vector2(240, 300), (_assetsLoader as AssetsLoader), this);
         }
 
-        public int GetScoregge
-        {
-            get { return ScoreScoregge; }
-        }
+        public int GetScoregge { get; private set; }
 
         public int GetCurrentScore
         {
@@ -187,51 +174,48 @@ namespace Infart.ParticleSystem
 
         public void HandleInput()
         {
-            if (!Player.Dead)
+            if (!PlayerReference.Dead)
             {
-                Player.HandleInput();
+                PlayerReference.HandleInput();
             }
 
-            if (FallSoundActive && !DeadExplosion.Started)
+            if (FallSoundActive && !_deadExplosion.Started)
             {
-                ForceToFinish = true;
+                _forceToFinish = true;
 
-                if ((SoundManager as SoundManager).HasFallFinished())
+                if ((_soundManager as SoundManager).HasFallFinished())
                 {
-                    DeadExplosion.Explode(Player.Position, false, (SoundManager as SoundManager));
-                    StatusBar.SetInfart();
+                    _deadExplosion.Explode(PlayerReference.Position, false, (_soundManager as SoundManager));
+                    _statusBar.SetInfart();
                 }
             }
 
-            if (DeadExplosion.Started)
+            if (_deadExplosion.Started)
             {
-                ForceToFinish = true;
+                _forceToFinish = true;
             }
         }
 
         public int GetHamburger
         {
-            get { return StatusBar.HamburgerMangiatiInTotale; }
+            get { return _statusBar.HamburgerMangiatiInTotale; }
         }
 
         public List<GameObject> GroundObjects()
         {
-            return Ground.WalkableObjects();
+            return _ground.WalkableObjects();
         }
 
         private void SetRecordRectangle()
         {
-            HighScorePosition = new Rectangle(0, -1020, 20, 1500);
+            _highScorePosition = new Rectangle(0, -1020, 20, 1500);
         }
 
-        public int GetScore
-        {
-            get { return HighScore; }
-        }
+        public int GetScore { get; private set; }
 
         public bool IsPaused
         {
-            get { return Paused; }
+            get { return _isPaused; }
             set
             {
                 if (value)
@@ -242,116 +226,101 @@ namespace Infart.ParticleSystem
 
         public void Pause()
         {
-            Paused = true;
-            SoundManager.PauseAll();
+            _isPaused = true;
+            _soundManager.PauseAll();
             GC.Collect();
         }
 
         public void ResumeFromPause()
         {
-            Paused = false;
-            SoundManager.ResumeAll();
+            _isPaused = false;
+            _soundManager.ResumeAll();
         }
 
-        public int ResolutionWidth
-        {
-            get { return _resolutionW; }
-        }
+        public int ResolutionWidth { get; }
 
-        public int ResolutionHeight
-        {
-            get { return _resolutionH; }
-        }
+        public int ResolutionHeight { get; }
 
-        public int PlayableGameWindowHeight
-        {
-            get { return GameH; }
-        }
+        public int PlayableGameWindowHeight { get; }
 
         public void StopScoreggia()
         {
-            SoundManager.StopFart();
+            _soundManager.StopFart();
         }
 
         public void DecreaseParallaxSpeed()
         {
-            Background.DecreaseParallaxSpeed();
+            _background.DecreaseParallaxSpeed();
         }
 
         public void IncreaseParallaxSpeed()
         {
-            Background.IncreaseParallaxSpeed();
+            _background.IncreaseParallaxSpeed();
         }
 
         public void PlayerJumped()
         {
-            StatusBar.PlayerJumped();
+            _statusBar.PlayerJumped();
         }
 
         public void AddScoreggia()
         {
-            ++ScoreScoregge;
-            SoundManager.PlayFart();
-        }
-
-        public void MoveCamera(Vector2 where)
-        {
-            PlayerCamera.MoveTo(where);
+            ++GetScoregge;
+            _soundManager.PlayFart();
         }
 
         public void SetHighScore(int value)
         {
-            HighScore = value;
-            HighScorePosition.X = value * 100;
+            GetScore = value;
+            _highScorePosition.X = value * 100;
             _highScoreX = value * 100;
         }
 
         public void AddGemma(Vector2 position)
         {
-            if (position.X > Player.Position.X + _resolutionW / 2)
-                Gemme.AddGemma(position);
+            if (position.X > PlayerReference.Position.X + ResolutionWidth / 2)
+                _gemme.AddGemma(position);
         }
 
         public int HamburgerMangiati()
         {
-            return StatusBar.HamburgerMangiatiInTotale;
+            return _statusBar.HamburgerMangiatiInTotale;
         }
 
         public void AddPowerUp(Vector2 position)
         {
-            if (position.X > Player.Position.X)
-                (Gemme as GemmaManager).AddPowerUp(position);
+            if (position.X > PlayerReference.Position.X)
+                (_gemme as GemmaManager).AddPowerUp(position);
         }
 
         public void PlayerCollidedWithNormalGemma()
         {
-            StatusBar.HamburgerEaten();
-            (SoundManager as SoundManager).PlayBite();
+            _statusBar.HamburgerEaten();
+            (_soundManager as SoundManager).PlayBite();
         }
 
         public void Update(TimeSpan elapsed)
         {
             var gametime = elapsed.TotalMilliseconds;
-            if (!Paused)
+            if (!_isPaused)
             {
                 RepositionCamera();
-                PlayerCamera.Update(gametime);
 
                 CheckDead();
-                Background.Update(gametime);
-                Ground.Update(gametime);
-                Player.Update(gametime);
-                Player.CollidingObjectsReference = Ground.WalkableObjects();
-                Gemme.Update(gametime);
+                _background.Update(gametime);
+                _ground.Update(gametime);
+                PlayerReference.Update(gametime);
+                PlayerReference.CollidingObjectsReference = _ground.WalkableObjects();
+                _gemme.Update(gametime);
                 CheckPlayerGemmaCollision();
                 //         record_explosion_.Update(gametime);
 
-                if (StatusBar != null)
-                    StatusBar.Update(gametime);
+                if (_statusBar != null)
+                    _statusBar.Update(gametime);
 
-                if (DeadExplosion.Started)
+                if (_deadExplosion.Started)
                 {
-                    DeadExplosion.Update(gametime);
+                    _deadExplosion.Update(gametime);
                 }
             }
 
@@ -359,12 +328,12 @@ namespace Infart.ParticleSystem
             {
                 if (_oldScoreMetri != ScoreMetri)
                 {
-                    (Player as Player).IncreaseMoveSpeed();
-                    Background.IncreaseParallaxSpeed();
+                    (PlayerReference as Player).IncreaseMoveSpeed();
+                    _background.IncreaseParallaxSpeed();
                     if (LarghezzaBuchi.Y < 600)
                     {
-                        LarghezzaBuchi.X += 80.0f;
-                        LarghezzaBuchi.Y += 80.0f;
+                        _larghezzaBuchi.X += 80.0f;
+                        _larghezzaBuchi.Y += 80.0f;
                     }
                 }
             }
@@ -373,23 +342,23 @@ namespace Infart.ParticleSystem
 
         public void CheckPlayerGemmaCollision()
         {
-            if (Gemme.CheckCollisionWithPlayer(Player))
+            if (_gemme.CheckCollisionWithPlayer(PlayerReference))
             {
                 PlayerCollidedWithNormalGemma();
             }
 
-            if ((Gemme as GemmaManager).CheckJalapenoCollisionWithPlayer(Player))
+            if ((_gemme as GemmaManager).CheckJalapenoCollisionWithPlayer(PlayerReference))
             {
-                StatusBar.ComputeJalapenos();
-                (Player as Player).ActivateJalapenos();
-                (SoundManager as SoundManager).PlayJalapeno();
+                _statusBar.ComputeJalapenos();
+                (PlayerReference as Player).ActivateJalapenos();
+                (_soundManager as SoundManager).PlayJalapeno();
                 JalapenosModeActive = true;
             }
-            else if ((Gemme as GemmaManager).CheckMerdaCollisionWithPlayer(Player))
+            else if ((_gemme as GemmaManager).CheckMerdaCollisionWithPlayer(PlayerReference))
             {
-                StatusBar.ComputeMerda();
-                (Player as Player).ActivateBroccolo();
-                (SoundManager as SoundManager).PlayShit();
+                _statusBar.ComputeMerda();
+                (PlayerReference as Player).ActivateBroccolo();
+                (_soundManager as SoundManager).PlayShit();
                 MerdaModeActive = true;
             }
         }
@@ -401,12 +370,12 @@ namespace Infart.ParticleSystem
 
         private void MakePlayerDead()
         {
-            Player.Dead = true;
+            PlayerReference.Dead = true;
 
-            if (HighScore < ScoreMetri)
+            if (GetScore < ScoreMetri)
             {
                 SetHighScore(ScoreMetri);
-                RecordExplosion.Explode(Player.Position, 90);
+                //       RecordExplosion.Explode(PlayerReference.Position, 90);
             }
         }
 
@@ -414,32 +383,32 @@ namespace Infart.ParticleSystem
         {
             if (!FallSoundActive)
             {
-                if (Player.Position.Y > PlayerCamera.ViewPortHeight)
+                if (PlayerReference.Position.Y > _playerCamera.ViewPortHeight)
                 {
                     MakePlayerDead();
-                    (SoundManager as SoundManager).PlayFall();
+                    (_soundManager as SoundManager).PlayFall();
                     FallSoundActive = true;
                 }
             }
 
-            if (StatusBar.IsInfarting() && !Player.Dead)
+            if (_statusBar.IsInfarting() && !PlayerReference.Dead)
             {
-                DeadExplosion.Explode(Player.Position, true, (SoundManager as SoundManager));
+                _deadExplosion.Explode(PlayerReference.Position, true, (_soundManager as SoundManager));
                 MakePlayerDead();
             }
         }
 
         public bool IsTimeToGameOver()
         {
-            if (ForceToFinish)
+            if (_forceToFinish)
             {
-                SoundManager.StopSounds();
+                _soundManager.StopSounds();
                 return true;
             }
 
-            if (DeadExplosion.Started)
+            if (_deadExplosion.Started)
             {
-                return DeadExplosion.Finished;
+                return _deadExplosion.Finished;
             }
             else if (FallSoundActive)
             {
@@ -447,29 +416,26 @@ namespace Infart.ParticleSystem
             }
             else
             {
-                return Player.Dead;
+                return PlayerReference.Dead;
             }
         }
 
         private void LerpCameraPosition(float newCameraX, float newCameraY)
         {
-            PlayerCamera.Position = new Vector2(
-              MathHelper.Lerp(PlayerCamera.Position.X, newCameraX, 0.08f),
-              MathHelper.Lerp(PlayerCamera.Position.Y, newCameraY, 0.08f));
+            _playerCamera.Position = new Vector2(
+              MathHelper.Lerp(_playerCamera.Position.X, newCameraX, 0.08f),
+              MathHelper.Lerp(_playerCamera.Position.Y, newCameraY, 0.08f));
         }
 
-        public Player PlayerReference
-        {
-            get { return Player; }
-        }
+        public Player PlayerReference { get; private set; }
 
         private void RepositionCamera()
         {
             float playerCameraY;
             float playerCameraX;
 
-            playerCameraX = Player.Position.X - 150;
-            playerCameraY = Player.Position.Y - 200;
+            playerCameraX = PlayerReference.Position.X - 150;
+            playerCameraY = PlayerReference.Position.Y - 200;
 
             if (playerCameraY < _gameCameraHLimit)
                 playerCameraY = _gameCameraHLimit;
@@ -477,15 +443,6 @@ namespace Infart.ParticleSystem
                 playerCameraY = 0;
 
             LerpCameraPosition(playerCameraX, playerCameraY);
-        }
-
-        public void UpdateForMenu(double gametime, TouchCollection touch)
-        {
-            Background.Update(gametime);
-            Ground.Update(gametime);
-            PlayerCamera.Update(gametime);
-
-            Player.Update(gametime);
         }
 
         private void DrawUi(SpriteBatch spriteBatch)
@@ -499,47 +456,47 @@ namespace Infart.ParticleSystem
 
             _scoreString.Clear();
             StringBuilderExtensions.AppendNumber(_scoreString, ScoreMetri).Append(_metriString);
-            spriteBatch.DrawString(Font, _scoreString, _scoreStringPosition, Color.DarkBlue);
-            StatusBar.Draw(spriteBatch);
+            spriteBatch.DrawString(_font, _scoreString, _scoreStringPosition, Color.DarkBlue);
+            _statusBar.Draw(spriteBatch);
 
             spriteBatch.End();
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            Matrix cameraTransformation = PlayerCamera.GetTransformation();
+            Matrix cameraTransformation = _playerCamera.GetTransformation();
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
 
-            Background.Draw(spritebatch);
-            Ground.Draw(spritebatch);
-            Gemme.Draw(spritebatch);
+            _background.Draw(spritebatch);
+            _ground.Draw(spritebatch);
+            _gemme.Draw(spritebatch);
 
             spritebatch.End();
 
-            if (!DeadExplosion.Started)
+            if (!_deadExplosion.Started)
             {
                 spritebatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, cameraTransformation);
-                Player.DrawParticles(spritebatch);
+                PlayerReference.DrawParticles(spritebatch);
                 spritebatch.End();
             }
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
 
-            if (DeadExplosion.Started)
-                DeadExplosion.Draw(spritebatch);
+            if (_deadExplosion.Started)
+                _deadExplosion.Draw(spritebatch);
             else
             {
-                Player.Draw(spritebatch);
+                PlayerReference.Draw(spritebatch);
             }
 
-            Background.DrawSpecial(spritebatch);
+            _background.DrawSpecial(spritebatch);
 
-            if (HighScore != 0
-               && Player.Position.X >= HighScorePosition.X - _resolutionW
-               && !NewHighScore)
+            if (GetScore != 0
+               && PlayerReference.Position.X >= _highScorePosition.X - ResolutionWidth
+               && !_newHighScore)
             {
-                if (Player.Position.X < HighScorePosition.X)
+                if (PlayerReference.Position.X < _highScorePosition.X)
                 {
                     //spritebatch.Draw(
                     //    px_texture_,
@@ -548,8 +505,8 @@ namespace Infart.ParticleSystem
                 }
                 else
                 {
-                    RecordExplosion.Explode(Player.Position, 0);
-                    NewHighScore = true;
+                    //  RecordExplosion.Explode(PlayerReference.Position, 0);
+                    _newHighScore = true;
                 }
             }
 
@@ -562,22 +519,22 @@ namespace Infart.ParticleSystem
 
         public void DrawForMenu(SpriteBatch spritebatch)
         {
-            Matrix cameraTransformation = PlayerCamera.GetTransformation();
+            Matrix cameraTransformation = _playerCamera.GetTransformation();
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
-            Background.Draw(spritebatch);
-            Ground.Draw(spritebatch);
+            _background.Draw(spritebatch);
+            _ground.Draw(spritebatch);
             spritebatch.End();
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, cameraTransformation);
-            if (!DeadExplosion.Started)
-                Player.DrawParticles(spritebatch);
+            if (!_deadExplosion.Started)
+                PlayerReference.DrawParticles(spritebatch);
             spritebatch.End();
 
             spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
-            if (!DeadExplosion.Started)
-                Player.Draw(spritebatch);
-            Background.DrawSpecial(spritebatch);
+            if (!_deadExplosion.Started)
+                PlayerReference.Draw(spritebatch);
+            _background.DrawSpecial(spritebatch);
             spritebatch.End();
         }
     }

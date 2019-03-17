@@ -1,32 +1,20 @@
-using Infart.Extensions;
 using Microsoft.Xna.Framework;
 
 namespace Infart.ParticleSystem
 {
     public class Particle
     {
-        public Vector2 Position;
-
-        public Color Color;
-
-        public float Scale;
-
-        public Vector2 Velocity;
-
-        public Vector2 Acceleration;
-
-        public float Rotation;
+        public Vector2 Position { get; set; }
+        public Color Color { get; set; }
+        public float Scale { get; set; }
+        public Vector2 Velocity { get; set; }
+        public Vector2 Acceleration { get; set; }
+        public float Rotation { get; set; }
+        public float TimeSinceStart { get; set; }
+        public float LifeTime { get; set; }
 
         private float _rotationSpeed;
-
-        public float TimeSinceStart;
-
-        public float LifeTime;
-
-        public Particle()
-        {
-        }
-
+        
         public void Initialize(
              Vector2 position,
              Vector2 velocity,
@@ -45,7 +33,7 @@ namespace Infart.ParticleSystem
             this._rotationSpeed = rotationSpeed;
             this.LifeTime = lifetime;
             this.TimeSinceStart = 0.0f;
-            this.Rotation = FbonizziHelper.RandomBetween(0, MathHelper.TwoPi);
+            this.Rotation = FbonizziMonoGame.Numbers.RandomBetween(0, MathHelper.TwoPi);
         }
 
         public bool Active

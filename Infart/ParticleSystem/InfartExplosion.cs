@@ -1,5 +1,4 @@
 using Infart.Assets;
-using Infart.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,15 +9,10 @@ namespace Infart.ParticleSystem
     public class InfartExplosion
     {
         private double _elapsed = 0.0;
-
         private const double TimeToFinish = 5000.0;
-
         private const float ScrittaScaleIncreaseAmount = 0.004f;
-
         private const int ParticelleNumber = 100;
-
         private readonly List<ParticleExplosion> _particelle;
-
         private ParticleExplosion _scritta = null;
 
         private readonly List<Color> _fartColors = new List<Color> {
@@ -29,29 +23,14 @@ namespace Infart.ParticleSystem
 
         private readonly Vector2 _emitterLocation = Vector2.Zero;
 
-        private static Random _random;
-
-        private bool _finished = false;
-
-        private bool _started = false;
-
         private bool _active = false;
-
         private bool _withText;
 
-        public bool Finished
-        {
-            get { return _finished; }
-        }
-
-        public bool Started
-        {
-            get { return _started; }
-        }
+        public bool Finished { get; private set; } = false;
+        public bool Started { get; private set; } = false;
 
         public InfartExplosion(AssetsLoader assetsLoader)
         {
-            _random = FbonizziHelper.Random;
             _particelle = new List<ParticleExplosion>();
 
             AddNewScritta(assetsLoader.Textures, assetsLoader.TexturesRectangles["Bang"]);
@@ -60,7 +39,7 @@ namespace Infart.ParticleSystem
 
         public void Explode(Vector2 centerPosition, bool withText, SoundManager soundManager)
         {
-            _started = true;
+            Started = true;
             _withText = withText;
 
             _active = true;
@@ -70,8 +49,8 @@ namespace Infart.ParticleSystem
 
         public void Reset()
         {
-            _finished = false;
-            _started = false;
+            Finished = false;
+            Started = false;
             _elapsed = 0.0;
             _active = false;
 
@@ -91,19 +70,19 @@ namespace Infart.ParticleSystem
         {
             for (int i = 0; i < ParticelleNumber; ++i)
             {
-                float angle = _random.Next(0, 360);
+                float angle = FbonizziMonoGame.Numbers.RandomBetween(0, 360);
                 angle = MathHelper.ToRadians(-angle);
                 Vector2 velocity = new Vector2(
                     (float)Math.Cos(angle),
                     (float)Math.Sin(angle))
-                    * _random.Next(80, 140);
+                    * FbonizziMonoGame.Numbers.RandomBetween(80, 140);
 
                 _particelle[i].Refactor(
                         velocity,
                         angle,
-                        (float)(_random.NextDouble() * 5),
-                        _fartColors[_random.Next(_fartColors.Count)],
-                        (float)_random.NextDouble() - 0.3f,
+                        (float)(FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) * 5),
+                        _fartColors[FbonizziMonoGame.Numbers.RandomBetween(0, _fartColors.Count)],
+                        (float)FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) - 0.3f,
                         500);
             }
         }
@@ -112,8 +91,8 @@ namespace Infart.ParticleSystem
         {
             _scritta.Refactor(
                Vector2.Zero,
-               (float)_random.NextDouble(),
-               (float)_random.NextDouble() * 10,
+               (float)FbonizziMonoGame.Numbers.RandomBetween(0D, 1D),
+               (float)FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) * 10,
                Color.White,
                1.0f,
                500);
@@ -126,23 +105,23 @@ namespace Infart.ParticleSystem
         {
             for (int i = 0; i < ParticelleNumber; ++i)
             {
-                float angle = _random.Next(0, 360);
+                float angle = FbonizziMonoGame.Numbers.RandomBetween(0, 360);
                 angle = MathHelper.ToRadians(-angle);
                 Vector2 velocity = new Vector2(
                     (float)Math.Cos(angle),
                     (float)Math.Sin(angle))
-                    * _random.Next(80, 140);
+                    * FbonizziMonoGame.Numbers.RandomBetween(80, 140);
 
                 _particelle.Add(
                     new ParticleExplosion(
                        texture,
-                        _random.NextDouble() < 0.5 ? particleRectangle1 : particleRectangle2,
+                        FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) < 0.5 ? particleRectangle1 : particleRectangle2,
                         _emitterLocation,
                         velocity,
                         angle,
-                        (float)(_random.NextDouble() * 5),
-                        _fartColors[_random.Next(_fartColors.Count)],
-                        (float)_random.NextDouble() - 0.3f,
+                        (float)(FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) * 5),
+                        _fartColors[FbonizziMonoGame.Numbers.RandomBetween(0, _fartColors.Count)],
+                        (float)FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) - 0.3f,
                         500));
             }
         }
@@ -156,8 +135,8 @@ namespace Infart.ParticleSystem
                 textureRectangle,
                 _emitterLocation,
                 Vector2.Zero,
-                (float)_random.NextDouble(),
-                (float)_random.NextDouble() * 10,
+                (float)FbonizziMonoGame.Numbers.RandomBetween(0D, 1D),
+                (float)FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) * 10,
                 Color.White,
                 1.0f,
                 500);
@@ -170,7 +149,7 @@ namespace Infart.ParticleSystem
                 _elapsed += gameTime;
 
                 if (_elapsed >= TimeToFinish)
-                    _finished = true;
+                    Finished = true;
 
                 for (int i = 0; i < _particelle.Count; ++i)
                     _particelle[i].Update(gameTime);
