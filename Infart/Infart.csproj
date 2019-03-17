@@ -83,6 +83,7 @@
     <None Include="Assets\ContentBuilder\bin\gratta_back.xnb" />
     <None Include="Assets\ContentBuilder\bin\gratta_ground.xnb" />
     <None Include="Assets\ContentBuilder\bin\gratta_mid.xnb" />
+    <None Include="Assets\ContentBuilder\bin\manina.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\culata.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\cuore.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\esplosione.xnb" />
@@ -135,6 +136,7 @@
     <Content Include="Assets\ContentBuilder\gratta_back.png" />
     <Content Include="Assets\ContentBuilder\gratta_ground.png" />
     <Content Include="Assets\ContentBuilder\gratta_mid.png" />
+    <Content Include="Assets\ContentBuilder\manina.png" />
     <Content Include="Assets\ContentBuilder\Splashscreen.png" />
     <Content Include="Assets\ContentBuilder\textures.png" />
     <Content Include="Assets\_TextureProject\Export\readme.txt" />
