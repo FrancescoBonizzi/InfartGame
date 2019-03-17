@@ -118,7 +118,8 @@ namespace Infart
                 () => new InfartGame(
                     _assetsLoader,
                     _soundManager,
-                    100, "Metri", "Pausa"));
+                    _settingsRepository,
+                    _localizedStringsRepository));
 
             _orchestrator = new GameOrchestrator(
                 gameFactory,

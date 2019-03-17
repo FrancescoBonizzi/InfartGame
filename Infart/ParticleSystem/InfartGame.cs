@@ -1,4 +1,6 @@
 using FbonizziMonoGame.Extensions;
+using FbonizziMonoGame.PlatformAbstractions;
+using FbonizziMonoGame.StringsLocalization.Abstractions;
 using Infart.Assets;
 using Infart.Astronaut;
 using Infart.Background;
@@ -67,23 +69,19 @@ namespace Infart.ParticleSystem
         public InfartGame(
             AssetsLoader assetsLoader,
             SoundManager soundManager,
-            int highScore,
-            string metriString,
-            string pauseString)
+            ISettingsRepository settingsRepository,
+            ILocalizedStringsRepository localizedStringsRepository)
         {
             ResolutionWidth = 800;
             ResolutionHeight = 480;
-            PlayableGameWindowHeight = 1500;
+            PlayableGameWorldHeight = 1500;
 
-            this._assetsLoader = assetsLoader;
-
-            this._soundManager = soundManager;
-
+            _assetsLoader = assetsLoader;
+            _soundManager = soundManager;
             _statusBar = new StatusBar(new Vector2(460, 435), assetsLoader, soundManager);
 
-            this.GetScore = highScore;
             SetRecordRectangle();
-            SetHighScore(highScore);
+            SetHighScore(settingsRepository.GetOrSetInt(GameScores.BestAliveTimeScoreKey.ToString(), 0));
 
             _font = assetsLoader.Font;
             //   px_texture_ = AssetsLoader.px_texture_;
@@ -106,7 +104,7 @@ namespace Infart.ParticleSystem
 
             _highScoreColor = new Color(22, 232, 86) * 0.5f;
             //     px_texture_ = AssetsLoader.px_texture_;
-            _metriString = metriString;
+            _metriString = localizedStringsRepository.Get(GameStringsLoader.MetriTimeString);
 
             NewGame();
         }
@@ -119,7 +117,7 @@ namespace Infart.ParticleSystem
             _forceToFinish = false;
             _newHighScore = false;
 
-            _gameCameraHLimit = -PlayableGameWindowHeight - _playerCamera.ViewPortHeight;
+            _gameCameraHLimit = -PlayableGameWorldHeight - _playerCamera.ViewPortHeight;
 
             FallSoundActive = false;
             MerdaModeActive = false;
@@ -211,7 +209,7 @@ namespace Infart.ParticleSystem
             _highScorePosition = new Rectangle(0, -1020, 20, 1500);
         }
 
-        public int GetScore { get; private set; }
+        public int HighScore { get; private set; }
 
         public bool IsPaused
         {
@@ -241,7 +239,7 @@ namespace Infart.ParticleSystem
 
         public int ResolutionHeight { get; }
 
-        public int PlayableGameWindowHeight { get; }
+        public int PlayableGameWorldHeight { get; }
 
         public void StopScoreggia()
         {
@@ -271,7 +269,7 @@ namespace Infart.ParticleSystem
 
         public void SetHighScore(int value)
         {
-            GetScore = value;
+            HighScore = value;
             _highScorePosition.X = value * 100;
             _highScoreX = value * 100;
         }
@@ -372,7 +370,7 @@ namespace Infart.ParticleSystem
         {
             PlayerReference.Dead = true;
 
-            if (GetScore < ScoreMetri)
+            if (HighScore < ScoreMetri)
             {
                 SetHighScore(ScoreMetri);
                 //       RecordExplosion.Explode(PlayerReference.Position, 90);
@@ -428,6 +426,7 @@ namespace Infart.ParticleSystem
         }
 
         public Player PlayerReference { get; private set; }
+        public bool IsGameOver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private void RepositionCamera()
         {
@@ -490,7 +489,7 @@ namespace Infart.ParticleSystem
 
             _background.DrawSpecial(spritebatch);
 
-            if (GetScore != 0
+            if (HighScore != 0
                && PlayerReference.Position.X >= _highScorePosition.X - ResolutionWidth
                && !_newHighScore)
             {

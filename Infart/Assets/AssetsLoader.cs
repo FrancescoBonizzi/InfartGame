@@ -24,6 +24,10 @@ namespace Infart.Assets
         public List<Rectangle> PlayerMerdaRects { get; private set; }
         public Sprite Manina { get; private set; }
 
+        // In this class there are two different ways to load textures/sprites,
+        // because this is an old project that I reworked to make it build with MonoGame
+        public IDictionary<string, Sprite> OtherSprites { get; private set; }
+
         public SpriteFont Font { get; private set; }
 
         public IDictionary<string, SoundEffect> EnvironmentalSounds { get; private set; }
@@ -492,7 +496,7 @@ namespace Infart.Assets
                 { "fall", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "fall")) },
                 { "jalapeno", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "jalapeno")) },
                 { "truck", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "truck")) },
-                { "bite", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "bite")) }            };
+                { "bite", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "bite")) } };
 
             string fartsFolder = Path.Combine("Music", "Farts");
             FartsSounds = new Dictionary<string, SoundEffect>

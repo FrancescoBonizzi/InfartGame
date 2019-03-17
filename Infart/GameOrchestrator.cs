@@ -2,6 +2,7 @@
 using FbonizziMonoGame.Drawing.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
 using FbonizziMonoGame.TransformationObjects;
+using Infart.Pages;
 using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,21 +15,34 @@ namespace Infart
         public enum GameStates
         {
             Menu,
-            Playing
+            Playing,
+            GameOver,
+            Score
         }
 
         private GameStates _currentState;
+
         private readonly Func<InfartGame> _gameFactory;
         private InfartGame _game;
+
+        private readonly Func<MainMenuPage> _menuFactory;
+        private MainMenuPage _menu;
+
+        private readonly Func<ScorePage> _scoreFactory;
+        private ScorePage _score;
+
+        private GameOverPage _gameOver;
+        public event EventHandler GameOver;
+
         private readonly IWebPageOpener _webPageOpener;
         private readonly GraphicsDevice _graphicsDevice;
         private readonly FadeObject _stateTransition;
         private Action _afterTransitionAction;
+
         private RenderTarget2D _renderTarget;
         private readonly IScreenTransformationMatrixProvider _matrixScaleProvider;
 
         public bool ShouldEndApplication { get; set; }
-
         public bool IsPaused { get; set; }
 
         private readonly TimeSpan _fadeDuration = TimeSpan.FromMilliseconds(800);
@@ -36,16 +50,18 @@ namespace Infart
 
         public GameOrchestrator(
              Func<InfartGame> gameFactory,
-
+             Func<MainMenuPage> menuFactory,
+             Func<ScorePage> scoreFactory,
              GraphicsDevice graphicsDevice,
              IScreenTransformationMatrixProvider matrixScaleProvider,
              SoundManager soundManager,
              IWebPageOpener webPageOpener)
         {
             _gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));
+            _menuFactory = menuFactory ?? throw new ArgumentNullException(nameof(menuFactory));
+            _scoreFactory = scoreFactory ?? throw new ArgumentNullException(nameof(scoreFactory));
 
             _webPageOpener = webPageOpener ?? throw new ArgumentNullException(nameof(webPageOpener));
-
             _graphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
 
             _matrixScaleProvider = matrixScaleProvider ?? throw new ArgumentNullException(nameof(matrixScaleProvider));
@@ -59,60 +75,19 @@ namespace Infart
 
             _stateTransition = new FadeObject(_fadeDuration, Color.White);
             _stateTransition.FadeOutCompleted += _stateTransition_FadeOutCompleted;
+
+            Start();
         }
+
 
         private void GameOrchestrator_ScaleMatrixChanged(object sender, EventArgs e)
             => RegenerateRenderTarget();
 
         public void Start()
         {
-            _currentState = GameStates.Playing;
-            _game = _gameFactory();
+            _currentState = GameStates.Menu;
+            _menu = _menuFactory();
             _stateTransition.FadeIn();
-        }
-
-        public void SetMenuState()
-        {
-        }
-
-        public void Replay()
-        {
-            ShouldEndApplication = false;
-            _stateTransition.FadeOut();
-            _afterTransitionAction = new Action(
-                () =>
-                {
-                    _stateTransition.FadeIn();
-                    _currentState = GameStates.Playing;
-                    _game = _gameFactory();
-                });
-        }
-
-        public void HandleTouchInput(Vector2? touchLocation = null)
-        {
-            switch (_currentState)
-            {
-                case GameStates.Menu:
-                    if (touchLocation == null)
-                        return;
-
-                    break;
-
-                case GameStates.Playing:
-                    _game.HandleInput();
-                    break;
-            }
-        }
-
-        public void SetGameState()
-        {
-            if (_currentState == GameStates.Playing)
-                return;
-
-            if (_stateTransition.IsFading)
-                return;
-
-            Replay();
         }
 
         public void RegenerateRenderTarget()
@@ -123,11 +98,141 @@ namespace Infart
                 _matrixScaleProvider.RealScreenHeight);
         }
 
+        private void _stateTransition_FadeOutCompleted(object sender, EventArgs e)
+            => _afterTransitionAction();
+
+        public void SetScoreState()
+        {
+            if (_currentState == GameStates.Score)
+                return;
+
+            if (_stateTransition.IsFading)
+                return;
+
+            ShouldEndApplication = false;
+            _stateTransition.FadeOut();
+            _afterTransitionAction = new Action(
+                () =>
+                {
+                    _stateTransition.FadeIn();
+
+                    _currentState = GameStates.Score;
+                    _game = null;
+                    _menu = null;
+                    _score = _scoreFactory();
+                });
+        }
+
+        public void SetMenuState()
+        {
+            if (_currentState == GameStates.Menu)
+                return;
+
+            if (_stateTransition.IsFading)
+                return;
+
+            _stateTransition.FadeOut();
+            _afterTransitionAction = new Action(
+                () =>
+                {
+                    _stateTransition.FadeIn();
+
+                    if (_currentState == GameStates.Playing && _game.IsGameOver)
+                    {
+                        // Significa che sono uscito dal gioco
+                        // perché ho perso
+                        GameOver?.Invoke(this, EventArgs.Empty);
+                    }
+
+                    _currentState = GameStates.Menu;
+                    _game = null;
+                    _score = null;
+                    _menu = _menuFactory();
+                });
+        }
+
         public void SetAboutState()
             => _webPageOpener.OpenWebpage(_aboutUri);
 
-        private void _stateTransition_FadeOutCompleted(object sender, EventArgs e)
-            => _afterTransitionAction();
+        public void SetGameState()
+        {
+            if (_currentState == GameStates.Playing)
+                return;
+
+            if (_stateTransition.IsFading)
+                return;
+
+            ShouldEndApplication = false;
+            _stateTransition.FadeOut();
+            _afterTransitionAction = new Action(
+                () =>
+                {
+                    _stateTransition.FadeIn();
+
+                    _currentState = GameStates.Playing;
+                    _game = _gameFactory();
+                    _menu = null;
+                    _score = null;
+                });
+        }
+
+        public void SetGameOverState(
+            TimeSpan? thisGameBestJump,
+            TimeSpan thisGameAliveTime,
+            int thisGameNumberOfGlows)
+        {
+            if (_currentState == GameStates.GameOver)
+                return;
+
+            if (_stateTransition.IsFading)
+                return;
+
+            ShouldEndApplication = false;
+            _stateTransition.FadeOut();
+            _afterTransitionAction = new Action(
+                () =>
+                {
+                    _stateTransition.FadeIn();
+
+                    _currentState = GameStates.GameOver;
+                    _game = null;
+                    _menu = null;
+                    _score = null;
+                    _gameOver = new GameOverPage(
+                        _matrixScaleProvider,
+                        _assets,
+                        _settingsRepository,
+                        thisGameBestJump,
+                        thisGameAliveTime,
+                        thisGameNumberOfGlows,
+                        _localizedStringsRepository);
+                });
+        }
+
+        public void HandleInput(Vector2? touchLocation = null)
+        {
+            switch (_currentState)
+            {
+                case GameStates.Menu:
+                    if (touchLocation == null)
+                        return;
+
+                    _menu.HandleInput(touchLocation.Value, this);
+                    break;
+
+                case GameStates.Playing:
+                    _game.HandleInput();
+                    break;
+
+                case GameStates.GameOver:
+                    _gameOver.HandleInput(this);
+                    break;
+
+                case GameStates.Score:
+                    SetMenuState();
+                    break;
+            }
+        }
 
         public void Update(TimeSpan elapsed)
         {
@@ -142,14 +247,22 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    throw new NotImplementedException();
-
+                    _menu.Update(elapsed);
                     break;
 
                 case GameStates.Playing:
                     _game.Update(elapsed);
                     break;
+
+                case GameStates.GameOver:
+                    _gameOver.Update(elapsed);
+                    break;
+
+                case GameStates.Score:
+                    _score.Update(elapsed);
+                    break;
             }
+
         }
 
         public void Resume()
@@ -176,11 +289,19 @@ namespace Infart
             switch (_currentState)
             {
                 case GameStates.Menu:
-
-                    throw new NotImplementedException();
+                    ShouldEndApplication = true;
                     break;
 
                 case GameStates.Playing:
+                    _game.StopMusic();
+                    SetMenuState();
+                    break;
+
+                case GameStates.GameOver:
+                    SetMenuState();
+                    break;
+
+                case GameStates.Score:
                     SetMenuState();
                     break;
             }
@@ -191,26 +312,36 @@ namespace Infart
             if (IsPaused)
                 return;
 
+            // Disegno tutto su un render target...
             graphics.SetRenderTarget(_renderTarget);
             graphics.Clear(Color.Black);
 
             switch (_currentState)
             {
                 case GameStates.Menu:
-                    throw new NotImplementedException();
-
+                    _menu.Draw(spriteBatch);
                     break;
 
                 case GameStates.Playing:
                     _game.Draw(spriteBatch);
                     break;
+
+                case GameStates.GameOver:
+                    _gameOver.Draw(spriteBatch);
+                    break;
+
+                case GameStates.Score:
+                    _score.Draw(spriteBatch);
+                    break;
             }
 
+            // ...per poter fare il fade dei vari componenti in modo indipendente
             graphics.SetRenderTarget(null);
             graphics.Clear(Color.Black);
             spriteBatch.Begin();
             spriteBatch.Draw(_renderTarget, Vector2.Zero, _stateTransition.OverlayColor);
             spriteBatch.End();
         }
+
     }
 }
