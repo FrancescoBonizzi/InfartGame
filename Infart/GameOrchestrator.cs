@@ -1,7 +1,9 @@
 ﻿using FbonizziMonoGame.Drawing;
 using FbonizziMonoGame.Drawing.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
+using FbonizziMonoGame.StringsLocalization.Abstractions;
 using FbonizziMonoGame.TransformationObjects;
+using Infart.Assets;
 using Infart.Pages;
 using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
@@ -34,7 +36,11 @@ namespace Infart
         private GameOverPage _gameOver;
         public event EventHandler GameOver;
 
+        private readonly AssetsLoader _assets;
+        private readonly ISettingsRepository _settingsRepository;
         private readonly IWebPageOpener _webPageOpener;
+        private readonly ILocalizedStringsRepository _localizedStringsRepository;
+
         private readonly GraphicsDevice _graphicsDevice;
         private readonly FadeObject _stateTransition;
         private Action _afterTransitionAction;
@@ -53,9 +59,11 @@ namespace Infart
              Func<MainMenuPage> menuFactory,
              Func<ScorePage> scoreFactory,
              GraphicsDevice graphicsDevice,
+             AssetsLoader assets,
+             ISettingsRepository settingsRepository,
              IScreenTransformationMatrixProvider matrixScaleProvider,
-             SoundManager soundManager,
-             IWebPageOpener webPageOpener)
+             IWebPageOpener webPageOpener,
+             ILocalizedStringsRepository localizedStringsRepository)
         {
             _gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));
             _menuFactory = menuFactory ?? throw new ArgumentNullException(nameof(menuFactory));
@@ -63,6 +71,10 @@ namespace Infart
 
             _webPageOpener = webPageOpener ?? throw new ArgumentNullException(nameof(webPageOpener));
             _graphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
+
+            _assets = assets ?? throw new ArgumentNullException(nameof(assets));
+            _settingsRepository = settingsRepository ?? throw new ArgumentNullException(nameof(settingsRepository));
+            _localizedStringsRepository = localizedStringsRepository ?? throw new ArgumentNullException(nameof(localizedStringsRepository));
 
             _matrixScaleProvider = matrixScaleProvider ?? throw new ArgumentNullException(nameof(matrixScaleProvider));
             if (_matrixScaleProvider is DynamicScalingMatrixProvider)
@@ -177,9 +189,9 @@ namespace Infart
         }
 
         public void SetGameOverState(
-            TimeSpan? thisGameBestJump,
+            int thisGameNumberOfHamburgersEaten,
             TimeSpan thisGameAliveTime,
-            int thisGameNumberOfGlows)
+            int thisGameNumberOfFarts)
         {
             if (_currentState == GameStates.GameOver)
                 return;
@@ -202,9 +214,9 @@ namespace Infart
                         _matrixScaleProvider,
                         _assets,
                         _settingsRepository,
-                        thisGameBestJump,
+                        thisGameNumberOfHamburgersEaten,
                         thisGameAliveTime,
-                        thisGameNumberOfGlows,
+                        thisGameNumberOfFarts,
                         _localizedStringsRepository);
                 });
         }

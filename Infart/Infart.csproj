@@ -81,10 +81,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ContentBuilder\BaksoSapi.otf" />
     <None Include="Assets\ContentBuilder\bin\buildings_back.xnb" />
     <None Include="Assets\ContentBuilder\bin\buildings_ground.xnb" />
     <None Include="Assets\ContentBuilder\bin\buildings_mid.xnb" />
+    <None Include="Assets\ContentBuilder\bin\gameoverBackground.xnb" />
+    <None Include="Assets\ContentBuilder\bin\gameTitle.xnb" />
     <None Include="Assets\ContentBuilder\bin\manina.xnb" />
+    <None Include="Assets\ContentBuilder\bin\menuBackground.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\bite.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\explosion.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Effects\fall.xnb" />
@@ -98,6 +102,7 @@
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart5.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart6.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart7.xnb" />
+    <None Include="Assets\ContentBuilder\bin\scoreBackground.xnb" />
     <None Include="Assets\ContentBuilder\bin\Splashscreen.xnb" />
     <None Include="Assets\ContentBuilder\bin\TextFont.xnb" />
     <None Include="Assets\ContentBuilder\bin\textures.xnb" />
@@ -131,7 +136,11 @@
     <Content Include="Assets\ContentBuilder\buildings_back.png" />
     <Content Include="Assets\ContentBuilder\buildings_ground.png" />
     <Content Include="Assets\ContentBuilder\buildings_mid.png" />
+    <Content Include="Assets\ContentBuilder\gameoverBackground.png" />
+    <Content Include="Assets\ContentBuilder\gameTitle.png" />
     <Content Include="Assets\ContentBuilder\manina.png" />
+    <Content Include="Assets\ContentBuilder\menuBackground.png" />
+    <Content Include="Assets\ContentBuilder\scoreBackground.png" />
     <Content Include="Assets\ContentBuilder\Splashscreen.png" />
     <Content Include="Assets\ContentBuilder\textures.png" />
     <Content Include="Assets\_TextureProject\Export\readme.txt" />

@@ -1,5 +1,6 @@
 using Infart.Assets;
 using Microsoft.Xna.Framework.Audio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -105,6 +106,18 @@ namespace Infart
             _allSounds["jalapeno"].Play();
         }
 
+        public void PlayMenuBackground()
+        {
+            StopSounds();
+#warning TODO PlayMenuBackground
+        }
+
+        public void PlayGameMusicBackground()
+        {
+            StopSounds();
+#warning TODO PlayMenuBackground
+        }
+
         public void StopSounds()
         {
             foreach (var s in _allSounds.Values)
@@ -130,5 +143,6 @@ namespace Infart
                     s.Play();
             }
         }
+
     }
 }

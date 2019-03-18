@@ -36,7 +36,7 @@ namespace Infart.Pages
             ILocalizedStringsRepository localizedStringsRepository)
         {
             _font = assets.Font;
-            _background = assets.OtherSprites["gameover"];
+            _background = assets.OtherSprites["scoreBackground"];
             _matrixScaleProvider = matrixScaleProvider;
 
             _titleText = localizedStringsRepository.Get(GameStringsLoader.ScorePageTitleString);

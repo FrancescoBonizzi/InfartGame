@@ -1,13 +1,16 @@
 ﻿using FbonizziMonoGame.Assets;
 using FbonizziMonoGame.Drawing;
 using FbonizziMonoGame.Drawing.Abstractions;
+using FbonizziMonoGame.Extensions;
 using FbonizziMonoGame.Input;
 using FbonizziMonoGame.Input.Abstractions;
 using FbonizziMonoGame.PlatformAbstractions;
 using FbonizziMonoGame.Sprites;
 using FbonizziMonoGame.StringsLocalization;
 using FbonizziMonoGame.StringsLocalization.Abstractions;
+using FbonizziMonoGame.UI.RateMe;
 using Infart.Assets;
+using Infart.Pages;
 using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -112,8 +115,9 @@ namespace Infart
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
             
             _assetsLoader = new AssetsLoader(Content);
-            _mousePointer = _assetsLoader.Manina;
+            _mousePointer = _assetsLoader.OtherSprites["manina"];
             _soundManager = new SoundManager(_assetsLoader);
+
             var gameFactory = new Func<InfartGame>(
                 () => new InfartGame(
                     _assetsLoader,
@@ -121,12 +125,65 @@ namespace Infart
                     _settingsRepository,
                     _localizedStringsRepository));
 
+            var dialogDefinition = new Rectangle(
+                _matrixScaleProvider.VirtualWidth / 2 - 350, 24, 700, _matrixScaleProvider.VirtualHeight - 60);
+
+            var rateMeDialog = new RateMeDialog(
+                launchesUntilPrompt: 2,
+                maxRateShowTimes: 2,
+                rateAppUri: _rateMeUri,
+                dialogDefinition: dialogDefinition,
+                font: _assetsLoader.Font,
+                localizedStringsRepository: _localizedStringsRepository,
+                rateMeDialogStrings: _gameCulture.TwoLetterISOLanguageName == "it" 
+                    ? (RateMeDialogStrings)new DefaultItalianRateMeDialogStrings(GameName) 
+                    : (RateMeDialogStrings)new DefaultEnglishRateMeDialogStrings(GameName),
+                webPageOpener: _webPageOpener,
+                settingsRepository: _settingsRepository,
+                buttonADefinition: new Rectangle(
+                    dialogDefinition.X + 150,
+                    dialogDefinition.Y + 350,
+                    140, 40),
+                buttonBDefinition: new Rectangle(
+                    dialogDefinition.X + dialogDefinition.Width - 140 - 150,
+                    dialogDefinition.Y + 350,
+                    140, 40),
+                backgroundColor: Color.DarkGray.WithAlpha(1f),
+                buttonsBackgroundColor: (new Color(255, 18, 67)).WithAlpha(1f),
+                buttonsShadowColor: Color.Black,
+                backgroundShadowColor: Color.Black.WithAlpha(1f),
+                titleColor: Color.Black,
+                buttonsTextColor: new Color(255, 234, 135),
+                titlePositionOffset: new Vector2(dialogDefinition.Width / 2, 80f),
+                buttonTextPadding: 40f,
+                titlePadding: 160f);
+
+            var menuFactory = new Func<MainMenuPage>(
+                () => new MainMenuPage(
+                    _assetsLoader,
+                    rateMeDialog,
+                    _soundManager,
+                    _settingsRepository,
+                    _matrixScaleProvider,
+                    _localizedStringsRepository));
+
+            var scoreFactory = new Func<ScorePage>(
+                () => new ScorePage(
+                    _assetsLoader,
+                    _settingsRepository,
+                    _matrixScaleProvider,
+                    _localizedStringsRepository));
+
             _orchestrator = new GameOrchestrator(
                 gameFactory,
+                menuFactory,
+                scoreFactory,
                 GraphicsDevice,
+                _assetsLoader,
+                _settingsRepository,
                 _matrixScaleProvider,
-                _soundManager,
-                _webPageOpener);
+                _webPageOpener,
+                _localizedStringsRepository);
 
             _inputListeners = new List<IInputListener>();
 
@@ -194,15 +251,15 @@ namespace Infart
             }
             else
             {
-                _orchestrator.HandleTouchInput(null);
+                _orchestrator.HandleInput(null);
             }
         }
 
         private void TouchListener_TouchEnded(object sender, TouchEventArgs e)
-            => _orchestrator.HandleTouchInput(e.Position);
+            => _orchestrator.HandleInput(e.Position);
 
         private void MouseListener_MouseClicked(object sender, MouseEventArgs e)
-            => _orchestrator.HandleTouchInput(e.Position);
+            => _orchestrator.HandleInput(e.Position);
 
         protected override void LoadContent()
         {

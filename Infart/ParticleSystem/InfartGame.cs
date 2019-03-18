@@ -141,6 +141,8 @@ namespace Infart.ParticleSystem
             _ground.Reset(_playerCamera);
             _gemme.Reset(_playerCamera);
             _statusBar.Reset();
+
+            _soundManager.PlayGameMusicBackground();
         }
 
         private void InitializeBackgroundManager()
@@ -336,6 +338,11 @@ namespace Infart.ParticleSystem
                 }
             }
             _oldScoreMetri = ScoreMetri;
+        }
+
+        internal void StopMusic()
+        {
+            _soundManager.StopSounds();
         }
 
         public void CheckPlayerGemmaCollision()

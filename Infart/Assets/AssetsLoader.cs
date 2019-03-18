@@ -18,11 +18,10 @@ namespace Infart.Assets
         public Texture2D TexturesBuildingsMid { get; private set; }
         public Texture2D TexturesBuildingsGround { get; private set; }
         public List<Rectangle> PlayerRunRects { get; private set; }
-        public List<Rectangle> PlayerIdleRects{ get; private set; }
-        public List<Rectangle> PlayerFallRects{ get; private set; }
+        public List<Rectangle> PlayerIdleRects { get; private set; }
+        public List<Rectangle> PlayerFallRects { get; private set; }
         public List<Rectangle> PlayerFartRects { get; private set; }
         public List<Rectangle> PlayerMerdaRects { get; private set; }
-        public Sprite Manina { get; private set; }
 
         // In this class there are two different ways to load textures/sprites,
         // because this is an old project that I reworked to make it build with MonoGame
@@ -48,16 +47,32 @@ namespace Infart.Assets
             TexturesBuildingsMid = _contentManager.Load<Texture2D>("buildings_mid");
             TexturesBuildingsGround = _contentManager.Load<Texture2D>("buildings_ground");
 
-            var littleHandTexture = _contentManager.Load<Texture2D>("manina");
-            Manina = new Sprite(
-                new FbonizziMonoGame.Assets.SpriteDescription()
-                {
-                    X = 0,
-                    Y = 0,
-                    Width = littleHandTexture.Width,
-                    Height = littleHandTexture.Height
-                },
-                littleHandTexture);
+            OtherSprites = new Dictionary<string, Sprite>();
+
+            {
+                var texture = _contentManager.Load<Texture2D>("manina");
+                OtherSprites.Add("manina", LoadSpriteFromTexture(texture));
+            }
+
+            {
+                var texture = _contentManager.Load<Texture2D>("menuBackground");
+                OtherSprites.Add("menuBackground", LoadSpriteFromTexture(texture));
+            }
+
+            {
+                var texture = _contentManager.Load<Texture2D>("gameoverBackground");
+                OtherSprites.Add("gameoverBackground", LoadSpriteFromTexture(texture));
+            }
+
+            {
+                var texture = _contentManager.Load<Texture2D>("scoreBackground");
+                OtherSprites.Add("scoreBackground", LoadSpriteFromTexture(texture));
+            }
+
+            {
+                var texture = _contentManager.Load<Texture2D>("gameTitle");
+                OtherSprites.Add("gameTitle", LoadSpriteFromTexture(texture));
+            }
 
             TexturesRectangles = new Dictionary<string, Rectangle>
             {
@@ -509,6 +524,19 @@ namespace Infart.Assets
                 { "fart6", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart6")) },
                 { "fart7", _contentManager.Load<SoundEffect>(Path.Combine(fartsFolder, "fart7")) },
             };
+        }
+
+        private Sprite LoadSpriteFromTexture(Texture2D texture)
+        {
+            return new Sprite(
+                new FbonizziMonoGame.Assets.SpriteDescription()
+                {
+                    X = 0,
+                    Y = 0,
+                    Width = texture.Width,
+                    Height = texture.Height
+                },
+                texture);
         }
     }
 }

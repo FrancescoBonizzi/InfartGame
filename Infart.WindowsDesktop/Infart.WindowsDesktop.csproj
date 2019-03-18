@@ -103,8 +103,20 @@
       <Link>Content\buildings_mid.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\gameoverBackground.xnb">
+      <Link>Content\gameoverBackground.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\gameTitle.xnb">
+      <Link>Content\gameTitle.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\manina.xnb">
       <Link>Content\manina.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\menuBackground.xnb">
+      <Link>Content\menuBackground.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\bite.xnb">
@@ -157,6 +169,10 @@
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Farts\fart7.xnb">
       <Link>Content\Music\Farts\fart7.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\scoreBackground.xnb">
+      <Link>Content\scoreBackground.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Splashscreen.xnb">

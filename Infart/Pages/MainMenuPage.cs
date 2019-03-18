@@ -8,7 +8,6 @@ using FbonizziMonoGame.TransformationObjects;
 using FbonizziMonoGame.UI.RateMe;
 using Infart.Assets;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -16,13 +15,17 @@ namespace Infart.Pages
 {
     public class MainMenuPage
     {
-        private readonly Sprite _background;
-        private readonly SpriteFont _font;
         private readonly IScreenTransformationMatrixProvider _matrixScaleProvider;
+
+        private readonly SpriteFont _font;
         private readonly RateMeDialog _rateMeDialog;
+        private readonly SoundManager _soundManager;
+
+        private readonly Sprite _background;
+
         private readonly ScalingObject _titleScalingObject;
         private readonly DrawingInfos _titleDrawingInfos;
-        private readonly string _titleText;
+        private readonly Sprite _titleImage;
 
         private readonly ScalingObject _playScalingObject;
         private readonly DrawingInfos _playDrawingInfos;
@@ -44,11 +47,10 @@ namespace Infart.Pages
         private readonly string _achievementText;
         private readonly Vector2 _aboutTextSize;
 
-        private readonly SoundEffectInstance _backgroundMusic;
-
         public MainMenuPage(
             AssetsLoader assets,
             RateMeDialog rateMeDialog,
+            SoundManager soundManager,
             ISettingsRepository settingsRepository,
             IScreenTransformationMatrixProvider matrixScaleProvider,
             ILocalizedStringsRepository localizedStringsRepository)
@@ -56,19 +58,20 @@ namespace Infart.Pages
             _font = assets.Font;
             _matrixScaleProvider = matrixScaleProvider;
             _rateMeDialog = rateMeDialog ?? throw new ArgumentNullException(nameof(rateMeDialog));
+            _soundManager = soundManager ?? throw new ArgumentNullException(nameof(soundManager));
 
             _background = assets.OtherSprites["menuBackground"];
-            _titleText = "INFART";
             _playText = localizedStringsRepository.Get(GameStringsLoader.PlayButtonString);
             _scoreText = localizedStringsRepository.Get(GameStringsLoader.ScoreButtonString);
             _fartText = localizedStringsRepository.Get(GameStringsLoader.FartButtonString);
+            _titleImage = assets.OtherSprites["gameTitle"];
             _achievementText = "about";
 
             _titleScalingObject = new ScalingObject(1f, 1.2f, 1.0f);
             _titleDrawingInfos = new DrawingInfos()
             {
                 Position = new Vector2(matrixScaleProvider.VirtualWidth / 2f, 100f),
-                Origin = _font.GetTextCenter(_titleText)
+                Origin = _titleImage.SpriteCenter
             };
 
             _playScalingObject = new ScalingObject(0.5f, 0.7f, 1f);
@@ -83,7 +86,8 @@ namespace Infart.Pages
             _fartDrawingInfos = new DrawingInfos()
             {
                 Position = new Vector2(140f, 320f),
-                Origin = _font.GetTextCenter(_fartText)
+                Origin = _font.GetTextCenter(_fartText),
+                OverlayColor = new Color(155, 88, 48)
             };
             _fartTextSize = _font.MeasureString(_fartText);
 
@@ -103,9 +107,7 @@ namespace Infart.Pages
                 Origin = _font.GetTextCenter(_achievementText)
             };
 
-            _backgroundMusic = assets.Sounds[AssetsLoader.SoundsNames.menu].CreateInstance();
-            _backgroundMusic.IsLooped = true;
-            _backgroundMusic.Play();
+            _soundManager.PlayMenuBackground();
         }
 
         public void HandleInput(
@@ -121,25 +123,21 @@ namespace Infart.Pages
                 if (_playDrawingInfos.HitBox((int)_playTextSize.X, (int)_playTextSize.Y)
                     .Contains(touchPoint))
                 {
-                    _backgroundMusic.Stop();
                     orchestrator.SetGameState();
                 }
                 else if (_fartDrawingInfos.HitBox((int)_fartTextSize.X, (int)_fartTextSize.Y)
                     .Contains(touchPoint))
                 {
-                    _backgroundMusic.Stop();
-                    orchestrator.SetFartState();
+                    _soundManager.PlayFart();
                 }
                 else if (_scoreDrawingInfos.HitBox((int)_scoreTextSize.X, (int)_scoreTextSize.Y)
                     .Contains(touchPoint))
                 {
-                    _backgroundMusic.Stop();
                     orchestrator.SetScoreState();
                 }
                 else if (_aboutDrawingInfos.HitBox((int)_aboutTextSize.X, (int)_aboutTextSize.Y)
                     .Contains(touchPoint))
                 {
-                    _backgroundMusic.Stop();
                     orchestrator.SetAboutState();
                 }
             }
@@ -169,7 +167,7 @@ namespace Infart.Pages
 
             spriteBatch.Draw(_background);
 
-            spriteBatch.DrawString(_font, _titleText, _titleDrawingInfos);
+            spriteBatch.Draw(_titleImage, _titleDrawingInfos);
             spriteBatch.DrawString(_font, _playText, _playDrawingInfos);
             spriteBatch.DrawString(_font, _fartText, _fartDrawingInfos);
             spriteBatch.DrawString(_font, _scoreText, _scoreDrawingInfos);
