@@ -6,25 +6,26 @@ using Infart.Astronaut;
 using Infart.Background;
 using Infart.Drawing;
 using Infart.HUD;
+using Infart.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infart.ParticleSystem
+namespace Infart
 {
     public class InfartGame
     {
-        private Camera _playerCamera;
+        private readonly Camera _playerCamera;
         private BackgroundManager _background;
         private GroundManager _ground;
         private GemmaManager _gemme;
-        private SoundManager _soundManager;
-        private StatusBar _statusBar;
+        private readonly SoundManager _soundManager;
+        private readonly StatusBar _statusBar;
         private readonly AssetsLoader _assetsLoader;
-        private bool _isPaused = false;
-        private InfartExplosion _deadExplosion;
+        private bool _isPaused;
+        private readonly InfartExplosion _deadExplosion;
         private bool _newHighScore = false;
         private bool _forceToFinish;
         private Rectangle _highScorePosition;
@@ -51,9 +52,6 @@ namespace Infart.ParticleSystem
 
         private readonly StringBuilder _scoreString;
         private readonly Vector2 _scoreStringPosition = new Vector2(680, 438);
-
-        private Rectangle _barRectangle = new Rectangle(400, 430, 800, 50);
-        private readonly Color _barColor = Color.LightCyan * 0.5f;
 
         private readonly string _metriString;
 
@@ -84,7 +82,6 @@ namespace Infart.ParticleSystem
             SetHighScore(settingsRepository.GetOrSetInt(GameScores.BestAliveTimeScoreKey.ToString(), 0));
 
             _font = assetsLoader.Font;
-            //   px_texture_ = AssetsLoader.px_texture_;
 
             _playerCamera = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
@@ -461,8 +458,8 @@ namespace Infart.ParticleSystem
             //    bar_color_);
 
             _scoreString.Clear();
-            StringBuilderExtensions.AppendNumber(_scoreString, ScoreMetri).Append(_metriString);
-            spriteBatch.DrawString(_font, _scoreString, _scoreStringPosition, Color.DarkBlue);
+            _scoreString.AppendNumber(ScoreMetri).Append(_metriString);
+            spriteBatch.DrawString(_font, _scoreString, _scoreStringPosition, Color.DarkBlue, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 1f);
             _statusBar.Draw(spriteBatch);
 
             spriteBatch.End();

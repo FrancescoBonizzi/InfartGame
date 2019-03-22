@@ -14,16 +14,17 @@ namespace Infart.HUD
         private readonly Color _emptyColor = Color.Gray * 0.5f;
         private readonly Color _fullColor = Color.White;
 
-        private double _elapsed = 0.0;
-        private int _jumpCount = 0;
+        private double _elapsed;
+        private int _jumpCount;
 
         private const int JumpNeededToRemoveHam = 1;
         private const int SogliaHamburgerPerStarMale = 4;
         private float _overlayDeathOpacity = 0.01f;
 
-        private readonly Rectangle _sfondoMorteRect;
+        private readonly Rectangle _sfondoMorteSourceRect;
+        private readonly Rectangle _sfondoMorteDestinationRect = new Rectangle(0, 0, 800, 480);
 
-        private bool _infart = false;
+        private bool _infart;
 
         public StatusBar(
             Vector2 position,
@@ -39,7 +40,7 @@ namespace Infart.HUD
             Vector2 tmpPos = new Vector2(position.X, position.Y + 20);
             int hamWidth = assetsLoader.TexturesRectangles["Burger"].Width;
             Vector2 hamScale = new Vector2(0.9f);
-            _sfondoMorteRect = assetsLoader.TexturesRectangles["death_screen"];
+            _sfondoMorteSourceRect = assetsLoader.TexturesRectangles["death_screen"];
 
             for (int i = 0; i < 4; ++i)
             {
@@ -86,7 +87,7 @@ namespace Infart.HUD
 
         public void HamburgerEaten()
         {
-            Hamburgers += 1;
+            Hamburgers++;
             _statusBurgers[CurrentHamburgers - 1].Taken();
             _statusBurgers[CurrentHamburgers - 1].FillColor = _fullColor;
             _jumpCount = 0;
@@ -192,8 +193,8 @@ namespace Infart.HUD
             {
                 spriteBatch.Draw(
                     _textureReference,
-                    Vector2.Zero,
-                    _sfondoMorteRect,
+                    _sfondoMorteDestinationRect,
+                    _sfondoMorteSourceRect,
                     Color.White * _overlayDeathOpacity);
             }
         }

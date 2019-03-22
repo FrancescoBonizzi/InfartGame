@@ -33,7 +33,7 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(BestHamburgersEatenScoreKey, "Minor numero di hamburger mangiati: ");
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Maggior numero di scoregge: ");
 
-                localizedStringsRepository.AddString(MetriTimeString, "metri");
+                localizedStringsRepository.AddString(MetriTimeString, " metri");
                 localizedStringsRepository.AddString(AliveTimeString, "Tempo in vita: ");
             }
             else
@@ -47,7 +47,7 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(BestHamburgersEatenScoreKey, "Lowest number of hamburgers eaten: ");
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Highest number of farts: ");
 
-                localizedStringsRepository.AddString(MetriTimeString, "meters");
+                localizedStringsRepository.AddString(MetriTimeString, " meters");
                 localizedStringsRepository.AddString(AliveTimeString, "Alive time: ");
             }
         }
