@@ -2,7 +2,7 @@
 {
     public class GameScores
     {
-        public const string BestAliveTimeScoreKey = "bestAliveTimeKey";
+        public const string BestNumberOfMetersScoreKey = "bestAliveTimeKey";
         public const string BestFartsScoreKey = "maxFartsScoreKey";
         public const string BestHamburgersEatenScoreKey = "maxHamburgersEatenScoreKey";
     }

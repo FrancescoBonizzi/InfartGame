@@ -23,6 +23,7 @@ namespace Infart
         private GemmaManager _gemme;
         private readonly SoundManager _soundManager;
         private readonly StatusBar _statusBar;
+        private readonly GameOrchestrator _gameOrchestrator;
         private readonly AssetsLoader _assetsLoader;
         private bool _isPaused;
         private readonly InfartExplosion _deadExplosion;
@@ -67,6 +68,7 @@ namespace Infart
         public InfartGame(
             AssetsLoader assetsLoader,
             SoundManager soundManager,
+            GameOrchestrator gameOrchestrator,
             ISettingsRepository settingsRepository,
             ILocalizedStringsRepository localizedStringsRepository)
         {
@@ -77,9 +79,10 @@ namespace Infart
             _assetsLoader = assetsLoader;
             _soundManager = soundManager;
             _statusBar = new StatusBar(new Vector2(460, 435), assetsLoader, soundManager);
+            _gameOrchestrator = gameOrchestrator;
 
             SetRecordRectangle();
-            SetHighScore(settingsRepository.GetOrSetInt(GameScores.BestAliveTimeScoreKey.ToString(), 0));
+            SetHighScore(settingsRepository.GetOrSetInt(GameScores.BestNumberOfMetersScoreKey, 0));
 
             _font = assetsLoader.Font;
 
@@ -100,7 +103,6 @@ namespace Infart
             _scoreString = new StringBuilder();
 
             _highScoreColor = new Color(22, 232, 86) * 0.5f;
-            //     px_texture_ = AssetsLoader.px_texture_;
             _metriString = localizedStringsRepository.Get(GameStringsLoader.MetriTimeString);
 
             NewGame();
@@ -144,22 +146,22 @@ namespace Infart
 
         private void InitializeBackgroundManager()
         {
-            _background = new BackgroundManager(_playerCamera, (_assetsLoader as AssetsLoader), this);
+            _background = new BackgroundManager(_playerCamera, _assetsLoader, this);
         }
 
         private void InitializeGroundManager()
         {
-            _ground = new GroundManager(_playerCamera, (_assetsLoader as AssetsLoader), this);
+            _ground = new GroundManager(_playerCamera, _assetsLoader, this);
         }
 
         private void InitializeGemmaManager()
         {
-            _gemme = new GemmaManager(_playerCamera, (_assetsLoader as AssetsLoader));
+            _gemme = new GemmaManager(_playerCamera, _assetsLoader);
         }
 
         private void InitializePlayer()
         {
-            PlayerReference = new Player(new Vector2(240, 300), (_assetsLoader as AssetsLoader), this);
+            PlayerReference = new Player(new Vector2(240, 300), _assetsLoader, this);
         }
 
         public int GetScoregge { get; private set; }
@@ -182,7 +184,7 @@ namespace Infart
 
                 if ((_soundManager as SoundManager).HasFallFinished())
                 {
-                    _deadExplosion.Explode(PlayerReference.Position, false, (_soundManager as SoundManager));
+                    _deadExplosion.Explode(PlayerReference.Position, false, _soundManager);
                     _statusBar.SetInfart();
                 }
             }
@@ -275,7 +277,7 @@ namespace Infart
 
         public void AddGemma(Vector2 position)
         {
-            if (position.X > PlayerReference.Position.X + ResolutionWidth / 2)
+            if (position.X > PlayerReference.Position.X + (ResolutionWidth / 2))
                 _gemme.AddGemma(position);
         }
 
@@ -312,8 +314,7 @@ namespace Infart
                 CheckPlayerGemmaCollision();
                 //         record_explosion_.Update(gametime);
 
-                if (_statusBar != null)
-                    _statusBar.Update(gametime);
+                _statusBar?.Update(gametime);
 
                 if (_deadExplosion.Started)
                 {
@@ -335,6 +336,9 @@ namespace Infart
                 }
             }
             _oldScoreMetri = ScoreMetri;
+
+            if (IsTimeToGameOver())
+                _gameOrchestrator.SetGameOverState(HamburgerMangiati(), ScoreMetri, _statusBar.TotalJumps);
         }
 
         internal void StopMusic()
@@ -366,9 +370,7 @@ namespace Infart
         }
 
         public void Resume()
-        {
-            throw new NotImplementedException();
-        }
+            => ResumeFromPause();
 
         private void MakePlayerDead()
         {
@@ -395,7 +397,7 @@ namespace Infart
 
             if (_statusBar.IsInfarting() && !PlayerReference.Dead)
             {
-                _deadExplosion.Explode(PlayerReference.Position, true, (_soundManager as SoundManager));
+                _deadExplosion.Explode(PlayerReference.Position, true, _soundManager);
                 MakePlayerDead();
             }
         }
@@ -430,7 +432,7 @@ namespace Infart
         }
 
         public Player PlayerReference { get; private set; }
-        public bool IsGameOver { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsGameOver => IsTimeToGameOver();
 
         private void RepositionCamera()
         {
@@ -451,11 +453,6 @@ namespace Infart
         private void DrawUi(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-
-            //spriteBatch.Draw(
-            //    px_texture_,
-            //    bar_rectangle_,
-            //    bar_color_);
 
             _scoreString.Clear();
             _scoreString.AppendNumber(ScoreMetri).Append(_metriString);
@@ -497,14 +494,7 @@ namespace Infart
                && PlayerReference.Position.X >= _highScorePosition.X - ResolutionWidth
                && !_newHighScore)
             {
-                if (PlayerReference.Position.X < _highScorePosition.X)
-                {
-                    //spritebatch.Draw(
-                    //    px_texture_,
-                    //    high_score_position_,
-                    //    high_score_color_);
-                }
-                else
+                if (PlayerReference.Position.X >= _highScorePosition.X)
                 {
                     //  RecordExplosion.Explode(PlayerReference.Position, 0);
                     _newHighScore = true;

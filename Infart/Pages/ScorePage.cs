@@ -50,7 +50,7 @@ namespace Infart.Pages
             float textsScale = 0.4f;
 
             var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestHamburgersEatenScoreKey, default(int));
-            var bestAliveTime = settingsRepository.GetOrSetTimeSpan(GameScores.BestAliveTimeScoreKey, default(TimeSpan));
+            var bestAliveTime = settingsRepository.GetOrSetTimeSpan(GameScores.BestNumberOfMetersScoreKey, default(TimeSpan));
             var bestHamburgersEaten = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
 
             _scoreInfos = new List<ScoreRecordText>()

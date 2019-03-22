@@ -122,6 +122,7 @@ namespace Infart
                 () => new InfartGame(
                     _assetsLoader,
                     _soundManager,
+                    _orchestrator,
                     _settingsRepository,
                     _localizedStringsRepository));
 

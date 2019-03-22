@@ -14,10 +14,10 @@ namespace Infart.Assets
         public const string BestHamburgersEatenScoreKey = "BestHamburgersEatenScoreKey";
         public const string BestFartsScoreKey = "BestFartsScoreKey";
 
-        public const string AliveTimeString = "AliveTimeStringKey";
+        public const string NumberOfMetersString = "NumberOfMetersKey";
         public const string NumberOfHamburgersEaten = "NumberOfHamburgersEaten";
         public const string NumbersOfFartsString = "NumbersOfFartsString";
-        
+
         public const string MetriTimeString = "MetriStringKey";
 
         public GameStringsLoader(ILocalizedStringsRepository localizedStringsRepository, CultureInfo cultureInfo)
@@ -34,7 +34,7 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Maggior numero di scoregge: ");
 
                 localizedStringsRepository.AddString(MetriTimeString, " metri");
-                localizedStringsRepository.AddString(AliveTimeString, "Tempo in vita: ");
+                localizedStringsRepository.AddString(NumberOfMetersString, "Numero di metri: ");
             }
             else
             {
@@ -48,7 +48,7 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Highest number of farts: ");
 
                 localizedStringsRepository.AddString(MetriTimeString, " meters");
-                localizedStringsRepository.AddString(AliveTimeString, "Alive time: ");
+                localizedStringsRepository.AddString(NumberOfMetersString, "Number of meters: ");
             }
         }
     }

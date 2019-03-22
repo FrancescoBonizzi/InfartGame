@@ -16,6 +16,7 @@ namespace Infart.HUD
 
         private double _elapsed;
         private int _jumpCount;
+        public int TotalJumps { get; private set; }
 
         private const int JumpNeededToRemoveHam = 1;
         private const int SogliaHamburgerPerStarMale = 4;
@@ -105,6 +106,7 @@ namespace Infart.HUD
         public void PlayerJumped()
         {
             ++_jumpCount;
+            TotalJumps++;
 
             if (_jumpCount == JumpNeededToRemoveHam)
             {

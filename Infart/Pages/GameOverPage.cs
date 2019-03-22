@@ -35,7 +35,7 @@ namespace Infart.Pages
             AssetsLoader assets,
             ISettingsRepository settingsRepository,
             int thisGameNumberOfHamburgersEaten,
-            TimeSpan thisGameAliveTime,
+            int thisGameNumberOfMeters,
             int thisGameNumberOfFarts,
             ILocalizedStringsRepository localizedStringsRepository)
         {
@@ -51,7 +51,7 @@ namespace Infart.Pages
             _gameOverScalingObject = new ScalingObject(1f, 1.2f, 1.0f);
 
             var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestHamburgersEatenScoreKey, default(int));
-            var bestAliveTime = settingsRepository.GetOrSetTimeSpan(GameScores.BestAliveTimeScoreKey, default(TimeSpan));
+            var bestNumberOfMeters = settingsRepository.GetOrSetInt(GameScores.BestNumberOfMetersScoreKey, default(int));
             var bestHamburgersEaten = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
 
             var bestNumberOfHamburgersEatenRecord = false;
@@ -62,9 +62,9 @@ namespace Infart.Pages
             }
 
             var bestAliveTimeRecord = false;
-            if (thisGameAliveTime > bestAliveTime)
+            if (thisGameNumberOfMeters > bestNumberOfMeters)
             {
-                settingsRepository.SetTimeSpan(GameScores.BestAliveTimeScoreKey, thisGameAliveTime);
+                settingsRepository.SetInt(GameScores.BestNumberOfMetersScoreKey, thisGameNumberOfMeters);
                 bestAliveTimeRecord = true;
             }
 
@@ -75,12 +75,12 @@ namespace Infart.Pages
                 bestNumberOfFartsRecord = true;
             }
 
-            float textsScale = 0.4f;
+            const float textsScale = 0.4f;
 
             _scoreInfos = new List<ScoreRecordText>()
             {
                  new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.AliveTimeString)}{thisGameAliveTime.ToMinuteSecondsFormat()}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfMetersString)}: {thisGameNumberOfMeters}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 200f),
@@ -90,7 +90,7 @@ namespace Infart.Pages
                     !bestAliveTimeRecord ? null : "Record!"),
 
                  new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.NumbersOfFartsString)}{thisGameNumberOfFarts}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumbersOfFartsString)}: {thisGameNumberOfFarts}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 125f),
@@ -100,7 +100,7 @@ namespace Infart.Pages
                     !bestNumberOfFartsRecord ? null : "Record!"),
 
                 new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfHamburgersEaten)}{thisGameNumberOfHamburgersEaten}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfHamburgersEaten)}: {thisGameNumberOfHamburgersEaten}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 162f),

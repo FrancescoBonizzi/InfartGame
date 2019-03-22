@@ -91,7 +91,6 @@ namespace Infart
             Start();
         }
 
-
         private void GameOrchestrator_ScaleMatrixChanged(object sender, EventArgs e)
             => RegenerateRenderTarget();
 
@@ -190,7 +189,7 @@ namespace Infart
 
         public void SetGameOverState(
             int thisGameNumberOfHamburgersEaten,
-            TimeSpan thisGameAliveTime,
+            int thisGameNumberOfMeters,
             int thisGameNumberOfFarts)
         {
             if (_currentState == GameStates.GameOver)
@@ -215,7 +214,7 @@ namespace Infart
                         _assets,
                         _settingsRepository,
                         thisGameNumberOfHamburgersEaten,
-                        thisGameAliveTime,
+                        thisGameNumberOfMeters,
                         thisGameNumberOfFarts,
                         _localizedStringsRepository);
                 });
@@ -274,7 +273,6 @@ namespace Infart
                     _score.Update(elapsed);
                     break;
             }
-
         }
 
         public void Resume()
@@ -354,6 +352,5 @@ namespace Infart
             spriteBatch.Draw(_renderTarget, Vector2.Zero, _stateTransition.OverlayColor);
             spriteBatch.End();
         }
-
     }
 }
