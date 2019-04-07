@@ -23,10 +23,10 @@ namespace Infart.Pages
         private readonly DrawingInfos _titleDrawingInfos;
         private readonly string _titleText;
 
-        private List<ScoreRecordText> _scoreInfos;
+        private readonly List<ScoreRecordText> _scoreInfos;
         private readonly int _nTexts;
 
-        private FadeObject _fadeObject;
+        private readonly FadeObject _fadeObject;
         private int _currentTextId;
 
         public ScorePage(
@@ -49,9 +49,9 @@ namespace Infart.Pages
 
             float textsScale = 0.4f;
 
-            var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestHamburgersEatenScoreKey, default(int));
+            var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
             var bestAliveTime = settingsRepository.GetOrSetTimeSpan(GameScores.BestNumberOfMetersScoreKey, default(TimeSpan));
-            var bestHamburgersEaten = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
+            var bestVegetablesEaten = settingsRepository.GetOrSetInt(GameScores.BestVegetablesEatenScoreKey, default(int));
 
             _scoreInfos = new List<ScoreRecordText>()
             {
@@ -65,10 +65,10 @@ namespace Infart.Pages
                     }),
 
                new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.BestHamburgersEatenScoreKey)}{bestHamburgersEaten}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.BestVegetablesEatenScoreKey)}{bestVegetablesEaten}",
                     new DrawingInfos()
                     {
-                        Position = new Vector2(_titleDrawingInfos.Position.X / 2, _titleDrawingInfos.Position.Y + 180f),
+                        Position = new Vector2(_titleDrawingInfos.Position.X / 2, _titleDrawingInfos.Position.Y + 140f),
                         OverlayColor = Color.White.WithAlpha(0),
                         Scale = textsScale
                     }),
@@ -77,7 +77,7 @@ namespace Infart.Pages
                     $"{localizedStringsRepository.Get(GameStringsLoader.BestFartsScoreKey)}{bestFarts}",
                     new DrawingInfos()
                     {
-                        Position = new Vector2(_titleDrawingInfos.Position.X / 2, _titleDrawingInfos.Position.Y + 260f),
+                        Position = new Vector2(_titleDrawingInfos.Position.X / 2, _titleDrawingInfos.Position.Y + 180f),
                         OverlayColor = Color.White.WithAlpha(0),
                         Scale = textsScale
                     }),
@@ -108,7 +108,9 @@ namespace Infart.Pages
             }
 
             foreach (var text in _scoreInfos)
+            {
                 text.Update(elapsed);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -118,7 +120,9 @@ namespace Infart.Pages
             spriteBatch.Draw(_background);
             spriteBatch.DrawString(_font, _titleText, _titleDrawingInfos);
             foreach (var score in _scoreInfos)
+            {
                 score.Draw(spriteBatch, _font);
+            }
 
             spriteBatch.End();
         }

@@ -11,11 +11,11 @@ namespace Infart.Assets
 
         public const string ScorePageTitleString = "ScorePageTitleStringKey";
         public const string BestAliveTimeString = "BestAliveTimeStringKey";
-        public const string BestHamburgersEatenScoreKey = "BestHamburgersEatenScoreKey";
+        public const string BestVegetablesEatenScoreKey = "BestHamburgersEatenScoreKey";
         public const string BestFartsScoreKey = "BestFartsScoreKey";
 
         public const string NumberOfMetersString = "NumberOfMetersKey";
-        public const string NumberOfHamburgersEaten = "NumberOfHamburgersEaten";
+        public const string NumberOfVegetablesEaten = "NumberOfHamburgersEaten";
         public const string NumbersOfFartsString = "NumbersOfFartsString";
 
         public const string MetriTimeString = "MetriStringKey";
@@ -30,12 +30,12 @@ namespace Infart.Assets
 
                 localizedStringsRepository.AddString(ScorePageTitleString, "Punteggi");
                 localizedStringsRepository.AddString(BestAliveTimeString, "Miglior tempo in vita: ");
-                localizedStringsRepository.AddString(BestHamburgersEatenScoreKey, "Minor numero di hamburger mangiati: ");
+                localizedStringsRepository.AddString(BestVegetablesEatenScoreKey, "Maggior numero di verdure mangiate: ");
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Maggior numero di scoregge: ");
 
                 localizedStringsRepository.AddString(MetriTimeString, " metri");
                 localizedStringsRepository.AddString(NumberOfMetersString, "Numero di metri: ");
-                localizedStringsRepository.AddString(NumberOfHamburgersEaten, "Numero di hamburger ingeriti: ");
+                localizedStringsRepository.AddString(NumberOfVegetablesEaten, "Numero di verdure mangiate: ");
                 localizedStringsRepository.AddString(NumbersOfFartsString, "Numero di scoregge flatulate: ");
             }
             else
@@ -46,12 +46,12 @@ namespace Infart.Assets
 
                 localizedStringsRepository.AddString(ScorePageTitleString, "Score");
                 localizedStringsRepository.AddString(BestAliveTimeString, "Best alive time: ");
-                localizedStringsRepository.AddString(BestHamburgersEatenScoreKey, "Lowest number of hamburgers eaten: ");
+                localizedStringsRepository.AddString(BestVegetablesEatenScoreKey, "Highest number of vegetables eaten: ");
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Highest number of farts: ");
 
                 localizedStringsRepository.AddString(MetriTimeString, " meters");
                 localizedStringsRepository.AddString(NumberOfMetersString, "Number of meters: ");
-                localizedStringsRepository.AddString(NumberOfHamburgersEaten, "Number of hamburgers eaten: ");
+                localizedStringsRepository.AddString(NumberOfVegetablesEaten, "Number of vegetables eaten: ");
                 localizedStringsRepository.AddString(NumbersOfFartsString, "Number of farts farted: ");
             }
         }

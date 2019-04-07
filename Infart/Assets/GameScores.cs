@@ -4,6 +4,6 @@
     {
         public const string BestNumberOfMetersScoreKey = "bestAliveTimeKey";
         public const string BestFartsScoreKey = "maxFartsScoreKey";
-        public const string BestHamburgersEatenScoreKey = "maxHamburgersEatenScoreKey";
+        public const string BestVegetablesEatenScoreKey = "maxHamburgersEatenScoreKey";
     }
 }

@@ -197,7 +197,7 @@ namespace Infart
 
         public int GetHamburger
         {
-            get { return _statusBar.HamburgerMangiatiInTotale; }
+            get { return _statusBar.VerdureMangiateInTotale; }
         }
 
         public List<GameObject> GroundObjects()
@@ -281,9 +281,9 @@ namespace Infart
                 _gemme.AddGemma(position);
         }
 
-        public int HamburgerMangiati()
+        public int VerdureMangiate()
         {
-            return _statusBar.HamburgerMangiatiInTotale;
+            return _statusBar.VerdureMangiateInTotale;
         }
 
         public void AddPowerUp(Vector2 position)
@@ -326,7 +326,7 @@ namespace Infart
             {
                 if (_oldScoreMetri != ScoreMetri)
                 {
-                    (PlayerReference as Player).IncreaseMoveSpeed();
+                    (PlayerReference as Player)?.IncreaseMoveSpeed();
                     _background.IncreaseParallaxSpeed();
                     if (LarghezzaBuchi.Y < 600)
                     {
@@ -338,7 +338,7 @@ namespace Infart
             _oldScoreMetri = ScoreMetri;
 
             if (IsTimeToGameOver())
-                _gameOrchestrator.SetGameOverState(HamburgerMangiati(), ScoreMetri, _statusBar.TotalJumps);
+                _gameOrchestrator.SetGameOverState(VerdureMangiate(), ScoreMetri, _statusBar.TotalJumps);
         }
 
         internal void StopMusic()
@@ -362,7 +362,7 @@ namespace Infart
             }
             else if ((_gemme as GemmaManager).CheckMerdaCollisionWithPlayer(PlayerReference))
             {
-                _statusBar.ComputeMerda();
+                _statusBar.ComputeBroccolo();
                 (PlayerReference as Player).ActivateBroccolo();
                 (_soundManager as SoundManager).PlayShit();
                 MerdaModeActive = true;

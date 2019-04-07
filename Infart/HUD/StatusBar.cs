@@ -58,7 +58,7 @@ namespace Infart.HUD
         public void Reset()
         {
             _infart = false;
-            Hamburgers = 0;
+            SetHamburgers(0);
 
             for (int i = 0; i < 4; ++i)
             {
@@ -66,13 +66,13 @@ namespace Infart.HUD
                 _statusBurgers[i].FillColor = _emptyColor;
             }
             _overlayDeathOpacity = 0.01f;
-            HamburgerMangiatiInTotale = 0;
+            VerdureMangiateInTotale = 0;
             _jumpCount = 0;
         }
 
         public int CurrentHamburgers { get; private set; } = 0;
 
-        public int HamburgerMangiatiInTotale { get; private set; } = 0;
+        public int VerdureMangiateInTotale { get; private set; } = 0;
 
         public bool IsInfarting()
         {
@@ -88,7 +88,7 @@ namespace Infart.HUD
 
         public void HamburgerEaten()
         {
-            Hamburgers++;
+            SetHamburgers(GetHamburgers() + 1);
             _statusBurgers[CurrentHamburgers - 1].Taken();
             _statusBurgers[CurrentHamburgers - 1].FillColor = _fullColor;
             _jumpCount = 0;
@@ -99,8 +99,6 @@ namespace Infart.HUD
 
                 _soundManagerReference.PlayHeartBeat();
             }
-
-            ++HamburgerMangiatiInTotale;
         }
 
         public void PlayerJumped()
@@ -110,7 +108,7 @@ namespace Infart.HUD
 
             if (_jumpCount == JumpNeededToRemoveHam)
             {
-                --Hamburgers;
+                SetHamburgers(GetHamburgers() - 1);
                 _statusBurgers[CurrentHamburgers].Lost();
                 _statusBurgers[CurrentHamburgers].FillColor = _emptyColor;
                 _jumpCount = 0;
@@ -127,16 +125,24 @@ namespace Infart.HUD
             _infart = true;
         }
 
-        private int Hamburgers
+        private int GetHamburgers()
         {
-            get { return CurrentHamburgers; }
-            set
-            {
-                int amount = value - CurrentHamburgers;
+            return CurrentHamburgers;
+        }
 
-                if (value < 0) CurrentHamburgers = 0;
-                else if (value > 4) _infart = true;
-                else CurrentHamburgers = value;
+        private void SetHamburgers(int value)
+        {
+            if (value < 0)
+            {
+                CurrentHamburgers = 0;
+            }
+            else if (value > 4)
+            {
+                _infart = true;
+            }
+            else
+            {
+                CurrentHamburgers = value;
             }
         }
 
@@ -148,11 +154,12 @@ namespace Infart.HUD
                 _statusBurgers[i].FillColor = _emptyColor;
             }
 
-            Hamburgers = 0;
+            SetHamburgers(0);
+            ++VerdureMangiateInTotale;
             _soundManagerReference.StopHeartBeat();
         }
 
-        public void ComputeMerda()
+        public void ComputeBroccolo()
         {
             for (int i = 0; i < CurrentHamburgers; ++i)
             {
@@ -160,7 +167,8 @@ namespace Infart.HUD
                 _statusBurgers[i].FillColor = _emptyColor;
             }
 
-            Hamburgers = 0;
+            SetHamburgers(0);
+            ++VerdureMangiateInTotale;
             _soundManagerReference.StopHeartBeat();
         }
 
@@ -171,17 +179,23 @@ namespace Infart.HUD
             if (!_infart)
             {
                 for (int i = 0; i < 4; ++i)
+                {
                     _statusBurgers[i].Update(gametime);
+                }
 
                 if (CurrentHamburgers == SogliaHamburgerPerStarMale)
                 {
                     if (_overlayDeathOpacity < 1.0f)
+                    {
                         _overlayDeathOpacity += 0.01f;
+                    }
                 }
                 else
                 {
                     if (_overlayDeathOpacity >= 0.01)
+                    {
                         _overlayDeathOpacity -= 0.01f;
+                    }
                 }
             }
         }
@@ -189,7 +203,9 @@ namespace Infart.HUD
         public void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < 4; ++i)
+            {
                 _statusBurgers[i].Draw(spriteBatch);
+            }
 
             if (_overlayDeathOpacity > 0.01f)
             {

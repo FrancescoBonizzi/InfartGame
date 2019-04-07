@@ -34,7 +34,7 @@ namespace Infart.Pages
             IScreenTransformationMatrixProvider matrixScaleProvider,
             AssetsLoader assets,
             ISettingsRepository settingsRepository,
-            int thisGameNumberOfHamburgersEaten,
+            int thisGameNumberOfVegetablesEaten,
             int thisGameNumberOfMeters,
             int thisGameNumberOfFarts,
             ILocalizedStringsRepository localizedStringsRepository)
@@ -50,15 +50,15 @@ namespace Infart.Pages
             };
             _gameOverScalingObject = new ScalingObject(1f, 1.2f, 1.0f);
 
-            var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestHamburgersEatenScoreKey, default(int));
+            var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
             var bestNumberOfMeters = settingsRepository.GetOrSetInt(GameScores.BestNumberOfMetersScoreKey, default(int));
-            var bestHamburgersEaten = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
+            var bestVegetablesEaten = settingsRepository.GetOrSetInt(GameScores.BestVegetablesEatenScoreKey, default(int));
 
-            var bestNumberOfHamburgersEatenRecord = false;
-            if (thisGameNumberOfHamburgersEaten < bestHamburgersEaten)
+            var bestNumberOfVegetablesEatenRecord = false;
+            if (thisGameNumberOfVegetablesEaten < bestVegetablesEaten)
             {
-                settingsRepository.SetInt(GameScores.BestHamburgersEatenScoreKey, thisGameNumberOfHamburgersEaten);
-                bestNumberOfHamburgersEatenRecord = true;
+                settingsRepository.SetInt(GameScores.BestVegetablesEatenScoreKey, thisGameNumberOfVegetablesEaten);
+                bestNumberOfVegetablesEatenRecord = true;
             }
 
             var bestAliveTimeRecord = false;
@@ -100,14 +100,14 @@ namespace Infart.Pages
                     !bestNumberOfFartsRecord ? "       " : "Record!"),
 
                 new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfHamburgersEaten)}{thisGameNumberOfHamburgersEaten}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfVegetablesEaten)}{thisGameNumberOfVegetablesEaten}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 162f),
                         OverlayColor = Color.White.WithAlpha(0),
                         Scale = textsScale
                     },
-                    !bestNumberOfHamburgersEatenRecord ? "       " : "Record!"),
+                    !bestNumberOfVegetablesEatenRecord ? "       " : "Record!"),
             };
 
             _nTexts = _scoreInfos.Count;

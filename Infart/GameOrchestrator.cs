@@ -188,7 +188,7 @@ namespace Infart
         }
 
         public void SetGameOverState(
-            int thisGameNumberOfHamburgersEaten,
+            int thisGameNumberOfVegetablesEaten,
             int thisGameNumberOfMeters,
             int thisGameNumberOfFarts)
         {
@@ -210,13 +210,13 @@ namespace Infart
                     _menu = null;
                     _score = null;
                     _gameOver = new GameOverPage(
-                        _matrixScaleProvider,
-                        _assets,
-                        _settingsRepository,
-                        thisGameNumberOfHamburgersEaten,
-                        thisGameNumberOfMeters,
-                        thisGameNumberOfFarts,
-                        _localizedStringsRepository);
+                        matrixScaleProvider: _matrixScaleProvider,
+                        assets: _assets,
+                        settingsRepository: _settingsRepository,
+                        thisGameNumberOfVegetablesEaten: thisGameNumberOfVegetablesEaten,
+                        thisGameNumberOfMeters: thisGameNumberOfMeters,
+                        thisGameNumberOfFarts: thisGameNumberOfFarts,
+                        localizedStringsRepository: _localizedStringsRepository);
                 });
         }
 
