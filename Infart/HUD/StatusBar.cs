@@ -79,7 +79,6 @@ namespace Infart.HUD
             if (CurrentHamburgers > SogliaHamburgerPerStarMale || _infart)
             {
                 _infart = true;
-
                 return true;
             }
 
@@ -96,7 +95,6 @@ namespace Infart.HUD
             if (CurrentHamburgers >= SogliaHamburgerPerStarMale)
             {
                 _statusBurgers[CurrentHamburgers - 1].FillColor = Color.LightCoral;
-
                 _soundManagerReference.PlayHeartBeat();
             }
         }

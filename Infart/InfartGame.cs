@@ -178,17 +178,6 @@ namespace Infart
                 PlayerReference.HandleInput();
             }
 
-            if (FallSoundActive && !_deadExplosion.Started)
-            {
-                _forceToFinish = true;
-
-                if ((_soundManager as SoundManager).HasFallFinished())
-                {
-                    _deadExplosion.Explode(PlayerReference.Position, false, _soundManager);
-                    _statusBar.SetInfart();
-                }
-            }
-
             if (_deadExplosion.Started)
             {
                 _forceToFinish = true;
@@ -390,8 +379,20 @@ namespace Infart
                 if (PlayerReference.Position.Y > _playerCamera.ViewPortHeight)
                 {
                     MakePlayerDead();
-                    (_soundManager as SoundManager).PlayFall();
+                    (_soundManager)?.PlayFall();
                     FallSoundActive = true;
+                }
+            }
+            else
+            {
+                if (!_deadExplosion.Started)
+                {
+                    if ((_soundManager as SoundManager).HasFallFinished())
+                    {
+                        _deadExplosion.Explode(PlayerReference.Position, false, _soundManager);
+                        _statusBar.SetInfart();
+                        _forceToFinish = true;
+                    }
                 }
             }
 
