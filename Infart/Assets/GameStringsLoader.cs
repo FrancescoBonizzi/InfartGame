@@ -35,6 +35,8 @@ namespace Infart.Assets
 
                 localizedStringsRepository.AddString(MetriTimeString, " metri");
                 localizedStringsRepository.AddString(NumberOfMetersString, "Numero di metri: ");
+                localizedStringsRepository.AddString(NumberOfHamburgersEaten, "Numero di hamburger ingeriti: ");
+                localizedStringsRepository.AddString(NumbersOfFartsString, "Numero di scoregge flatulate: ");
             }
             else
             {
@@ -49,6 +51,8 @@ namespace Infart.Assets
 
                 localizedStringsRepository.AddString(MetriTimeString, " meters");
                 localizedStringsRepository.AddString(NumberOfMetersString, "Number of meters: ");
+                localizedStringsRepository.AddString(NumberOfHamburgersEaten, "Number of hamburgers eaten: ");
+                localizedStringsRepository.AddString(NumbersOfFartsString, "Number of farts farted: ");
             }
         }
     }

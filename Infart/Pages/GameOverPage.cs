@@ -80,34 +80,34 @@ namespace Infart.Pages
             _scoreInfos = new List<ScoreRecordText>()
             {
                  new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfMetersString)}: {thisGameNumberOfMeters}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfMetersString)}{thisGameNumberOfMeters}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 200f),
                         OverlayColor = Color.White.WithAlpha(0),
                         Scale = textsScale
                     },
-                    !bestAliveTimeRecord ? null : "Record!"),
+                    !bestAliveTimeRecord ? "       " : "Record!"),
 
                  new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.NumbersOfFartsString)}: {thisGameNumberOfFarts}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumbersOfFartsString)}{thisGameNumberOfFarts}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 125f),
                         OverlayColor = Color.White.WithAlpha(0),
                         Scale = textsScale
                     },
-                    !bestNumberOfFartsRecord ? null : "Record!"),
+                    !bestNumberOfFartsRecord ? "       " : "Record!"),
 
                 new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfHamburgersEaten)}: {thisGameNumberOfHamburgersEaten}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.NumberOfHamburgersEaten)}{thisGameNumberOfHamburgersEaten}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_gameOverTextDrawingInfos.Position.X / 2, _gameOverTextDrawingInfos.Position.Y + 162f),
                         OverlayColor = Color.White.WithAlpha(0),
                         Scale = textsScale
                     },
-                    !bestNumberOfHamburgersEatenRecord ? null : "Record!"),
+                    !bestNumberOfHamburgersEatenRecord ? "       " : "Record!"),
             };
 
             _nTexts = _scoreInfos.Count;
