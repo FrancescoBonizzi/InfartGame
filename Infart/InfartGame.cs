@@ -41,7 +41,7 @@ namespace Infart
         public Vector2 LarghezzaBuchi { get => _larghezzaBuchi; private set => _larghezzaBuchi = value; }
 
         private const double DefaultBucoProbability = 0.005;
-        private const double DefaultPoweupProbability = 0.03;
+        private const double DefaultPowerupProbability = 0.035;
         private const double DefaultPeperoncinoDuration = 6000.0;
         private const double DefaultMerdoneDuration = 3500.0;
         private const double DefaultGemmaProbability = 0.4;
@@ -127,7 +127,7 @@ namespace Infart
             GetScoregge = 0;
 
             BucoProbability = DefaultBucoProbability;
-            PowerUpProbability = DefaultPoweupProbability;
+            PowerUpProbability = DefaultPowerupProbability;
             PeperoncinoDuration = DefaultPeperoncinoDuration;
             BroccoloDuration = DefaultMerdoneDuration;
             GemmaProbability = DefaultGemmaProbability;
@@ -207,8 +207,13 @@ namespace Infart
             set
             {
                 if (value)
+                {
                     Pause();
-                else ResumeFromPause();
+                }
+                else
+                {
+                    ResumeFromPause();
+                }
             }
         }
 
@@ -267,7 +272,9 @@ namespace Infart
         public void AddGemma(Vector2 position)
         {
             if (position.X > PlayerReference.Position.X + (ResolutionWidth / 2))
+            {
                 _gemme.AddGemma(position);
+            }
         }
 
         public int VerdureMangiate()
@@ -278,7 +285,9 @@ namespace Infart
         public void AddPowerUp(Vector2 position)
         {
             if (position.X > PlayerReference.Position.X)
+            {
                 (_gemme).AddPowerUp(position);
+            }
         }
 
         public void PlayerCollidedWithNormalGemma()
@@ -327,7 +336,9 @@ namespace Infart
             _oldScoreMetri = ScoreMetri;
 
             if (IsTimeToGameOver())
+            {
                 _gameOrchestrator.SetGameOverState(VerdureMangiate(), ScoreMetri, _statusBar.TotalJumps);
+            }
         }
 
         internal void StopMusic()
@@ -450,9 +461,13 @@ namespace Infart
             playerCameraY = PlayerReference.Position.Y - 200;
 
             if (playerCameraY < _gameCameraHLimit)
+            {
                 playerCameraY = _gameCameraHLimit;
+            }
             else if (playerCameraY > 0)
+            {
                 playerCameraY = 0;
+            }
 
             LerpCameraPosition(playerCameraX, playerCameraY);
         }
@@ -510,7 +525,9 @@ namespace Infart
 
             //    record_explosion_.Draw(spritebatch);
             if (_deadExplosion.Started)
+            {
                 _deadExplosion.Draw(spritebatch);
+            }
 
             spritebatch.End();
 

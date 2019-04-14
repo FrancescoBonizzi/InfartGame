@@ -61,12 +61,10 @@ namespace Infart
             {
                 case PowerUps.Jalapeno:
                     AddJalapenos(position);
-
                     break;
 
                 case PowerUps.Merda:
                     AddMerda(position);
-
                     break;
             }
         }
@@ -137,9 +135,7 @@ namespace Infart
 
         private bool ToBeRemoved(Vector2 position, float width)
         {
-            if (position.X + width < _currentCamera.Position.X)
-                return true;
-            return false;
+            return position.X + width < _currentCamera.Position.X;
         }
 
         public bool CheckCollisionWithPlayer(Player p)
@@ -149,7 +145,6 @@ namespace Infart
                 if (_gemmeAttive[i].CollisionRectangle.Intersects(p.CollisionRectangle))
                 {
                     RemoveGemma(i);
-                    --i;
                     return true;
                 }
             }
@@ -177,7 +172,9 @@ namespace Infart
                     --i;
                 }
                 else
+                {
                     g.Draw(spritebatch);
+                }
             }
 
             if (_jalapenos.Active)
