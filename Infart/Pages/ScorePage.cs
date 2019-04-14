@@ -49,14 +49,14 @@ namespace Infart.Pages
 
             float textsScale = 0.4f;
 
-            var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default(int));
-            var bestAliveTime = settingsRepository.GetOrSetTimeSpan(GameScores.BestNumberOfMetersScoreKey, default(TimeSpan));
-            var bestVegetablesEaten = settingsRepository.GetOrSetInt(GameScores.BestVegetablesEatenScoreKey, default(int));
+            var bestFarts = settingsRepository.GetOrSetInt(GameScores.BestFartsScoreKey, default);
+            var bestNumberOfMeters = settingsRepository.GetOrSetInt(GameScores.BestNumberOfMetersScoreKey, default);
+            var bestVegetablesEaten = settingsRepository.GetOrSetInt(GameScores.BestVegetablesEatenScoreKey, default);
 
             _scoreInfos = new List<ScoreRecordText>()
             {
                 new ScoreRecordText(
-                    $"{localizedStringsRepository.Get(GameStringsLoader.BestAliveTimeString)}{bestAliveTime.ToMinuteSecondsFormat()}",
+                    $"{localizedStringsRepository.Get(GameStringsLoader.BestNumberOfMetersScoreKey)}{bestNumberOfMeters}",
                     new DrawingInfos()
                     {
                         Position = new Vector2(_titleDrawingInfos.Position.X / 2, _titleDrawingInfos.Position.Y + 100f),

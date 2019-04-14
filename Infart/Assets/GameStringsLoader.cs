@@ -10,7 +10,7 @@ namespace Infart.Assets
         public const string FartButtonString = "FartButtonStringKey";
 
         public const string ScorePageTitleString = "ScorePageTitleStringKey";
-        public const string BestAliveTimeString = "BestAliveTimeStringKey";
+        public const string BestNumberOfMetersScoreKey = "BestNumberOfMetersScoreKey";
         public const string BestVegetablesEatenScoreKey = "BestHamburgersEatenScoreKey";
         public const string BestFartsScoreKey = "BestFartsScoreKey";
 
@@ -29,7 +29,7 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(FartButtonString, "scoreggia");
 
                 localizedStringsRepository.AddString(ScorePageTitleString, "Punteggi");
-                localizedStringsRepository.AddString(BestAliveTimeString, "Miglior tempo in vita: ");
+                localizedStringsRepository.AddString(BestNumberOfMetersScoreKey, "Maggior numero di metri percorsi: ");
                 localizedStringsRepository.AddString(BestVegetablesEatenScoreKey, "Maggior numero di verdure mangiate: ");
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Maggior numero di scoregge: ");
 
@@ -45,7 +45,7 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(FartButtonString, "fart");
 
                 localizedStringsRepository.AddString(ScorePageTitleString, "Score");
-                localizedStringsRepository.AddString(BestAliveTimeString, "Best alive time: ");
+                localizedStringsRepository.AddString(BestNumberOfMetersScoreKey, "Highest number of meters: ");
                 localizedStringsRepository.AddString(BestVegetablesEatenScoreKey, "Highest number of vegetables eaten: ");
                 localizedStringsRepository.AddString(BestFartsScoreKey, "Highest number of farts: ");
 

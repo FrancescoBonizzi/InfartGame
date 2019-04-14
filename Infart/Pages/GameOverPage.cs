@@ -55,7 +55,7 @@ namespace Infart.Pages
             var bestVegetablesEaten = settingsRepository.GetOrSetInt(GameScores.BestVegetablesEatenScoreKey, default(int));
 
             var bestNumberOfVegetablesEatenRecord = false;
-            if (thisGameNumberOfVegetablesEaten < bestVegetablesEaten)
+            if (thisGameNumberOfVegetablesEaten > bestVegetablesEaten)
             {
                 settingsRepository.SetInt(GameScores.BestVegetablesEatenScoreKey, thisGameNumberOfVegetablesEaten);
                 bestNumberOfVegetablesEatenRecord = true;

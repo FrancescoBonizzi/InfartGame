@@ -1,9 +1,9 @@
 ﻿namespace Infart.Assets
 {
-    public class GameScores
+    public static class GameScores
     {
         public const string BestNumberOfMetersScoreKey = "bestAliveTimeKey";
         public const string BestFartsScoreKey = "maxFartsScoreKey";
-        public const string BestVegetablesEatenScoreKey = "maxHamburgersEatenScoreKey";
+        public const string BestVegetablesEatenScoreKey = "maxVegetablesEatenScoreKey";
     }
 }
