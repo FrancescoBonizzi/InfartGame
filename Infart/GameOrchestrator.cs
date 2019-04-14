@@ -22,7 +22,7 @@ namespace Infart
             Score
         }
 
-        private GameStates _currentState;
+        private GameStates? _currentState;
 
         private readonly Func<InfartGame> _gameFactory;
         private InfartGame _game;
@@ -87,19 +87,10 @@ namespace Infart
 
             _stateTransition = new FadeObject(_fadeDuration, Color.White);
             _stateTransition.FadeOutCompleted += _stateTransition_FadeOutCompleted;
-
-            Start();
         }
 
         private void GameOrchestrator_ScaleMatrixChanged(object sender, EventArgs e)
             => RegenerateRenderTarget();
-
-        public void Start()
-        {
-            _currentState = GameStates.Menu;
-            _menu = _menuFactory();
-            _stateTransition.FadeIn();
-        }
 
         public void RegenerateRenderTarget()
         {

@@ -279,7 +279,7 @@ namespace Infart
         private void _splashScreenAssetsLoader_Completed(object sender, EventArgs e)
         {
             _splashScreenAssetsLoader = null;
-            _orchestrator.Start();
+            _orchestrator.SetMenuState();
             _currentState = RunningStates.Running;
         }
 
