@@ -90,7 +90,6 @@ namespace Infart
 
             _deadExplosion = new InfartExplosion(assetsLoader);
             //     record_explosion_ = new RecordExplosion_episodio1(AssetsLoader);
-#warning TODO: mettere un popup per il record
 
             _isPaused = false;
             _forceToFinish = false;
@@ -196,7 +195,7 @@ namespace Infart
 
         private void SetRecordRectangle()
         {
-            _highScorePosition = new Rectangle(0, -1020, 20, 1500);
+            _highScorePosition = new Rectangle(0, -2020, 20, 2500);
         }
 
         public int HighScore { get; private set; }
@@ -520,6 +519,11 @@ namespace Infart
                 {
                     //  RecordExplosion.Explode(PlayerReference.Position, 0);
                     _newHighScore = true;
+                }
+                else
+                {
+                    // E' la sbarra verticale
+                    spritebatch.DrawRectangle(_highScorePosition, _highScoreColor);
                 }
             }
 
