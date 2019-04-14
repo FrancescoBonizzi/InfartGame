@@ -37,6 +37,7 @@
     <Compile Include="Assets\GameScores.cs" />
     <Compile Include="Assets\GameStringsLoader.cs" />
     <Compile Include="Drawing\Camera.cs" />
+    <Compile Include="Drawing\PopupText.cs" />
     <Compile Include="Extensions\CollisionSolver.cs" />
     <Compile Include="Drawing\AnimatedGameObject.cs" />
     <Compile Include="Drawing\GameObject.cs" />

@@ -1,6 +1,8 @@
+using FbonizziMonoGame.Drawing;
 using FbonizziMonoGame.Extensions;
 using FbonizziMonoGame.PlatformAbstractions;
 using FbonizziMonoGame.StringsLocalization.Abstractions;
+using FbonizziMonoGame.TransformationObjects;
 using Infart.Assets;
 using Infart.Astronaut;
 using Infart.Background;
@@ -55,7 +57,6 @@ namespace Infart
         private readonly Vector2 _scoreStringPosition = new Vector2(680, 438);
 
         private readonly string _metriString;
-
         private int _highScoreX;
 
         public bool FallSoundActive { get; set; }
@@ -64,6 +65,10 @@ namespace Infart
 
         private int _gameCameraHLimit;
         private Vector2 _larghezzaBuchi;
+
+        private bool _recordMetersNotified = false;
+        private PopupText _recordMetersPopup;
+        private readonly string _recordMetersText;
 
         public InfartGame(
             AssetsLoader assetsLoader,
@@ -103,6 +108,7 @@ namespace Infart
 
             _highScoreColor = new Color(22, 232, 86) * 0.5f;
             _metriString = localizedStringsRepository.Get(GameStringsLoader.MetriTimeString);
+            _recordMetersText = localizedStringsRepository.Get(GameStringsLoader.MetriRecordPopupString);
 
             NewGame();
         }
@@ -133,7 +139,7 @@ namespace Infart
             LarghezzaBuchi = new Vector2(DefaultBucoMinW, DefaultBucoMaxW);
 
             _playerCamera.Reset(Vector2.Zero);
-            PlayerReference.Reset(new Vector2(240, 300));
+            Player.Reset(new Vector2(240, 300));
 
             _background.Reset(_playerCamera);
             _ground.Reset(_playerCamera);
@@ -160,7 +166,7 @@ namespace Infart
 
         private void InitializePlayer()
         {
-            PlayerReference = new Player(new Vector2(240, 300), _assetsLoader, this);
+            Player = new Player(new Vector2(240, 300), _assetsLoader, this);
         }
 
         public int GetScoregge { get; private set; }
@@ -172,9 +178,9 @@ namespace Infart
 
         public void HandleInput()
         {
-            if (!PlayerReference.Dead)
+            if (!Player.Dead)
             {
-                PlayerReference.HandleInput();
+                Player.HandleInput();
             }
 
             if (_deadExplosion.Started)
@@ -195,7 +201,7 @@ namespace Infart
 
         private void SetRecordRectangle()
         {
-            _highScorePosition = new Rectangle(0, -2020, 20, 2500);
+            _highScorePosition = new Rectangle(0, -1000, 20, 2500);
         }
 
         public int HighScore { get; private set; }
@@ -230,7 +236,6 @@ namespace Infart
         }
 
         public int ResolutionWidth { get; }
-
         public int ResolutionHeight { get; }
 
         public int PlayableGameWorldHeight { get; }
@@ -270,7 +275,7 @@ namespace Infart
 
         public void AddGemma(Vector2 position)
         {
-            if (position.X > PlayerReference.Position.X + (ResolutionWidth / 2))
+            if (position.X > Player.Position.X + (ResolutionWidth / 2))
             {
                 _gemme.AddGemma(position);
             }
@@ -283,7 +288,7 @@ namespace Infart
 
         public void AddPowerUp(Vector2 position)
         {
-            if (position.X > PlayerReference.Position.X)
+            if (position.X > Player.Position.X)
             {
                 (_gemme).AddPowerUp(position);
             }
@@ -305,11 +310,25 @@ namespace Infart
                 CheckDead();
                 _background.Update(gametime);
                 _ground.Update(gametime);
-                PlayerReference.Update(gametime);
-                PlayerReference.CollidingObjectsReference = _ground.WalkableObjects();
+                Player.Update(gametime);
+                Player.CollidingObjectsReference = _ground.WalkableObjects();
                 _gemme.Update(gametime);
                 CheckPlayerGemmaCollision();
-                //         record_explosion_.Update(gametime);
+
+                if (!_recordMetersNotified && ScoreMetri > HighScore)
+                {
+                    PopupRecord();
+                }
+
+                if (_recordMetersPopup != null)
+                {
+                    _recordMetersPopup.Update(elapsed);
+
+                    if (_recordMetersPopup.PopupObject.IsCompleted)
+                    {
+                        _recordMetersPopup = null;
+                    }
+                }
 
                 _statusBar?.Update(gametime);
 
@@ -323,7 +342,7 @@ namespace Infart
             {
                 if (_oldScoreMetri != ScoreMetri)
                 {
-                    (PlayerReference)?.IncreaseMoveSpeed();
+                    (Player)?.IncreaseMoveSpeed();
                     _background.IncreaseParallaxSpeed();
                     if (LarghezzaBuchi.Y < 600)
                     {
@@ -347,22 +366,22 @@ namespace Infart
 
         public void CheckPlayerGemmaCollision()
         {
-            if (_gemme.CheckCollisionWithPlayer(PlayerReference))
+            if (_gemme.CheckCollisionWithPlayer(Player))
             {
                 PlayerCollidedWithNormalGemma();
             }
 
-            if ((_gemme).CheckJalapenoCollisionWithPlayer(PlayerReference))
+            if ((_gemme).CheckJalapenoCollisionWithPlayer(Player))
             {
                 _statusBar.ComputeJalapenos();
-                (PlayerReference).ActivateJalapenos();
+                (Player).ActivateJalapenos();
                 (_soundManager).PlayJalapeno();
                 JalapenosModeActive = true;
             }
-            else if ((_gemme).CheckMerdaCollisionWithPlayer(PlayerReference))
+            else if ((_gemme).CheckMerdaCollisionWithPlayer(Player))
             {
                 _statusBar.ComputeBroccolo();
-                (PlayerReference).ActivateBroccolo();
+                (Player).ActivateBroccolo();
                 (_soundManager).PlayShit();
                 MerdaModeActive = true;
             }
@@ -373,20 +392,40 @@ namespace Infart
 
         private void MakePlayerDead()
         {
-            PlayerReference.Dead = true;
+            Player.Dead = true;
 
             if (HighScore < ScoreMetri)
             {
                 SetHighScore(ScoreMetri);
-                //       RecordExplosion.Explode(PlayerReference.Position, 90);
+                PopupRecord();
             }
+        }
+
+        private void PopupRecord()
+        {
+            _recordMetersPopup = new PopupText()
+            {
+                Text = _recordMetersText,
+                DrawingInfos = new DrawingInfos()
+                {
+                    Position = Player.Position
+                },
+                PopupObject = new PopupObject(
+                    TimeSpan.FromSeconds(1.5),
+                    Player.Position,
+                    Color.LimeGreen,
+                    260f)
+            };
+
+            _recordMetersPopup.PopupObject.Popup();
+            _recordMetersNotified = true;
         }
 
         private void CheckDead()
         {
             if (!FallSoundActive)
             {
-                if (PlayerReference.Position.Y > _playerCamera.ViewPortHeight)
+                if (Player.Position.Y > _playerCamera.ViewPortHeight)
                 {
                     MakePlayerDead();
                     (_soundManager)?.PlayFall();
@@ -399,7 +438,7 @@ namespace Infart
                 {
                     if (_soundManager.HasFallFinished())
                     {
-                        _deadExplosion.Explode(PlayerReference.Position, false, _soundManager);
+                        _deadExplosion.Explode(Player.Position, false, _soundManager);
                         _statusBar.SetInfart();
 
                     }
@@ -413,9 +452,9 @@ namespace Infart
                 }
             }
 
-            if (_statusBar.IsInfarting() && !PlayerReference.Dead)
+            if (_statusBar.IsInfarting() && !Player.Dead)
             {
-                _deadExplosion.Explode(PlayerReference.Position, true, _soundManager);
+                _deadExplosion.Explode(Player.Position, true, _soundManager);
                 MakePlayerDead();
             }
         }
@@ -437,7 +476,7 @@ namespace Infart
             }
             else
             {
-                return PlayerReference.Dead;
+                return Player.Dead;
             }
         }
 
@@ -448,7 +487,7 @@ namespace Infart
               MathHelper.Lerp(_playerCamera.Position.Y, newCameraY, 0.08f));
         }
 
-        public Player PlayerReference { get; private set; }
+        public Player Player { get; private set; }
         public bool IsGameOver => IsTimeToGameOver();
 
         private void RepositionCamera()
@@ -456,8 +495,8 @@ namespace Infart
             float playerCameraY;
             float playerCameraX;
 
-            playerCameraX = PlayerReference.Position.X - 150;
-            playerCameraY = PlayerReference.Position.Y - 200;
+            playerCameraX = Player.Position.X - 150;
+            playerCameraY = Player.Position.Y - 200;
 
             if (playerCameraY < _gameCameraHLimit)
             {
@@ -483,59 +522,62 @@ namespace Infart
             spriteBatch.End();
         }
 
-        public void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             Matrix cameraTransformation = _playerCamera.GetTransformation();
 
-            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
 
-            _background.Draw(spritebatch);
-            _ground.Draw(spritebatch);
-            _gemme.Draw(spritebatch);
+            _background.Draw(spriteBatch);
+            _ground.Draw(spriteBatch);
+            _gemme.Draw(spriteBatch);
 
-            spritebatch.End();
-
-            if (!_deadExplosion.Started)
-            {
-                spritebatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, cameraTransformation);
-                PlayerReference.DrawParticles(spritebatch);
-                spritebatch.End();
-            }
-
-            spritebatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
+            spriteBatch.End();
 
             if (!_deadExplosion.Started)
             {
-                PlayerReference.Draw(spritebatch);
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, cameraTransformation);
+                Player.DrawParticles(spriteBatch);
+                spriteBatch.End();
             }
 
-            _background.DrawSpecial(spritebatch);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cameraTransformation);
+
+            if (!_deadExplosion.Started)
+            {
+                Player.Draw(spriteBatch);
+            }
+
+            _background.DrawSpecial(spriteBatch);
 
             if (HighScore != 0
-               && PlayerReference.Position.X >= _highScorePosition.X - ResolutionWidth
+               && Player.Position.X >= _highScorePosition.X - ResolutionWidth
                && !_newHighScore)
             {
-                if (PlayerReference.Position.X >= _highScorePosition.X)
+                if (Player.Position.X >= _highScorePosition.X)
                 {
-                    //  RecordExplosion.Explode(PlayerReference.Position, 0);
                     _newHighScore = true;
                 }
                 else
                 {
                     // E' la sbarra verticale
-                    spritebatch.DrawRectangle(_highScorePosition, _highScoreColor);
+                    spriteBatch.DrawRectangle(_highScorePosition, _highScoreColor);
                 }
             }
 
-            //    record_explosion_.Draw(spritebatch);
-            if (_deadExplosion.Started)
+            if (_recordMetersPopup != null)
             {
-                _deadExplosion.Draw(spritebatch);
+                spriteBatch.DrawString(_font, _recordMetersPopup.Text, _recordMetersPopup.DrawingInfos);
             }
 
-            spritebatch.End();
+            if (_deadExplosion.Started)
+            {
+                _deadExplosion.Draw(spriteBatch);
+            }
 
-            DrawUi(spritebatch);
+            spriteBatch.End();
+
+            DrawUi(spriteBatch);
         }
     }
 }

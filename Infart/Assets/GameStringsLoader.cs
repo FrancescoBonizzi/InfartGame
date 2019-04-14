@@ -20,6 +20,8 @@ namespace Infart.Assets
 
         public const string MetriTimeString = "MetriStringKey";
 
+        public const string MetriRecordPopupString = "MetriRecordPopupString";
+
         public GameStringsLoader(ILocalizedStringsRepository localizedStringsRepository, CultureInfo cultureInfo)
         {
             if (cultureInfo.TwoLetterISOLanguageName == "it")
@@ -37,6 +39,8 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(NumberOfMetersString, "Numero di metri: ");
                 localizedStringsRepository.AddString(NumberOfVegetablesEaten, "Numero di verdure mangiate: ");
                 localizedStringsRepository.AddString(NumbersOfFartsString, "Numero di scoregge flatulate: ");
+
+                localizedStringsRepository.AddString(MetriRecordPopupString, "Corridore instancabile!");
             }
             else
             {
@@ -53,6 +57,8 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(NumberOfMetersString, "Number of meters: ");
                 localizedStringsRepository.AddString(NumberOfVegetablesEaten, "Number of vegetables eaten: ");
                 localizedStringsRepository.AddString(NumbersOfFartsString, "Number of farts farted: ");
+
+                localizedStringsRepository.AddString(MetriRecordPopupString, "Tireless runner!");
             }
         }
     }
