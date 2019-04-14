@@ -107,9 +107,12 @@ namespace Infart
 
         public void PlayMenuBackground()
         {
-            StopSounds();
-            _allSounds["Music-Menu"].IsLooped = true;
-            _allSounds["Music-Menu"].Play();
+            if (_allSounds["Music-Menu"].State != SoundState.Playing)
+            {
+                StopSounds();
+                _allSounds["Music-Menu"].IsLooped = true;
+                _allSounds["Music-Menu"].Play();
+            }
         }
 
         public void PlayGameMusicBackground()

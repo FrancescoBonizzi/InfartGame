@@ -407,7 +407,6 @@ namespace Infart
         {
             if (_forceToFinish)
             {
-                _soundManager.StopSounds();
                 return true;
             }
 
