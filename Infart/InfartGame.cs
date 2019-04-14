@@ -278,13 +278,13 @@ namespace Infart
         public void AddPowerUp(Vector2 position)
         {
             if (position.X > PlayerReference.Position.X)
-                (_gemme as GemmaManager).AddPowerUp(position);
+                (_gemme).AddPowerUp(position);
         }
 
         public void PlayerCollidedWithNormalGemma()
         {
             _statusBar.HamburgerEaten();
-            (_soundManager as SoundManager).PlayBite();
+            (_soundManager).PlayBite();
         }
 
         public void Update(TimeSpan elapsed)
@@ -315,7 +315,7 @@ namespace Infart
             {
                 if (_oldScoreMetri != ScoreMetri)
                 {
-                    (PlayerReference as Player)?.IncreaseMoveSpeed();
+                    (PlayerReference)?.IncreaseMoveSpeed();
                     _background.IncreaseParallaxSpeed();
                     if (LarghezzaBuchi.Y < 600)
                     {
@@ -342,18 +342,18 @@ namespace Infart
                 PlayerCollidedWithNormalGemma();
             }
 
-            if ((_gemme as GemmaManager).CheckJalapenoCollisionWithPlayer(PlayerReference))
+            if ((_gemme).CheckJalapenoCollisionWithPlayer(PlayerReference))
             {
                 _statusBar.ComputeJalapenos();
-                (PlayerReference as Player).ActivateJalapenos();
-                (_soundManager as SoundManager).PlayJalapeno();
+                (PlayerReference).ActivateJalapenos();
+                (_soundManager).PlayJalapeno();
                 JalapenosModeActive = true;
             }
-            else if ((_gemme as GemmaManager).CheckMerdaCollisionWithPlayer(PlayerReference))
+            else if ((_gemme).CheckMerdaCollisionWithPlayer(PlayerReference))
             {
                 _statusBar.ComputeBroccolo();
-                (PlayerReference as Player).ActivateBroccolo();
-                (_soundManager as SoundManager).PlayShit();
+                (PlayerReference).ActivateBroccolo();
+                (_soundManager).PlayShit();
                 MerdaModeActive = true;
             }
         }
@@ -387,7 +387,7 @@ namespace Infart
             {
                 if (!_deadExplosion.Started)
                 {
-                    if ((_soundManager as SoundManager).HasFallFinished())
+                    if ((_soundManager).HasFallFinished())
                     {
                         _deadExplosion.Explode(PlayerReference.Position, false, _soundManager);
                         _statusBar.SetInfart();

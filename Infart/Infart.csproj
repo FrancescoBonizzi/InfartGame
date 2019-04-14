@@ -102,12 +102,17 @@
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart5.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart6.xnb" />
     <None Include="Assets\ContentBuilder\bin\Music\Farts\fart7.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Music-Game.xnb" />
+    <None Include="Assets\ContentBuilder\bin\Music\Music-Menu.xnb" />
     <None Include="Assets\ContentBuilder\bin\scoreBackground.xnb" />
     <None Include="Assets\ContentBuilder\bin\Splashscreen.xnb" />
     <None Include="Assets\ContentBuilder\bin\TextFont.xnb" />
     <None Include="Assets\ContentBuilder\bin\textures.xnb" />
     <None Include="Assets\ContentBuilder\InfartContent.mgcb" />
     <None Include="Assets\ContentBuilder\TextFont.spritefont" />
+    <None Include="Assets\_Other\gameTitle.psd" />
+    <None Include="Assets\_Other\Infart-Game.flp" />
+    <None Include="Assets\_Other\Infart-Menu_2.flp" />
     <None Include="Assets\_TextureProject\Splashscreen.psd" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -128,8 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Other\ApplicationIcon.png" />
-    <None Include="Assets\_Other\infart.png" />
-    <None Include="Assets\_Other\scritta_small.png" />
     <None Include="Assets\_Other\Background.png" />
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +143,13 @@
     <Content Include="Assets\ContentBuilder\gameTitle.png" />
     <Content Include="Assets\ContentBuilder\manina.png" />
     <Content Include="Assets\ContentBuilder\menuBackground.png" />
+    <Content Include="Assets\ContentBuilder\Music\Music-Game.wav" />
+    <Content Include="Assets\ContentBuilder\Music\Music-Menu.wav" />
     <Content Include="Assets\ContentBuilder\scoreBackground.png" />
     <Content Include="Assets\ContentBuilder\Splashscreen.png" />
     <Content Include="Assets\ContentBuilder\textures.png" />
+    <Content Include="Assets\_Other\Music-Game.wav" />
+    <Content Include="Assets\_Other\Music-Menu.wav" />
     <Content Include="Assets\_TextureProject\Export\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

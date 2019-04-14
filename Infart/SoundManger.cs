@@ -1,6 +1,5 @@
 using Infart.Assets;
 using Microsoft.Xna.Framework.Audio;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,8 +7,8 @@ namespace Infart
 {
     public class SoundManager
     {
-        private IDictionary<string, SoundEffectInstance> _allSounds;
-        private List<SoundEffectInstance> _farts;
+        private readonly IDictionary<string, SoundEffectInstance> _allSounds;
+        private readonly List<SoundEffectInstance> _farts;
 
         public SoundManager(AssetsLoader assetsLoader)
         {
@@ -109,13 +108,15 @@ namespace Infart
         public void PlayMenuBackground()
         {
             StopSounds();
-#warning TODO PlayMenuBackground
+            _allSounds["Music-Menu"].IsLooped = true;
+            _allSounds["Music-Menu"].Play();
         }
 
         public void PlayGameMusicBackground()
         {
             StopSounds();
-#warning TODO PlayMenuBackground
+            _allSounds["Music-Game"].IsLooped = true;
+            _allSounds["Music-Game"].Play();
         }
 
         public void StopSounds()

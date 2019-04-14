@@ -171,6 +171,14 @@
       <Link>Content\Music\Farts\fart7.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Music-Game.xnb">
+      <Link>Content\Music\Music-Game.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Music-Menu.xnb">
+      <Link>Content\Music\Music-Menu.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\scoreBackground.xnb">
       <Link>Content\scoreBackground.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

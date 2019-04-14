@@ -511,7 +511,10 @@ namespace Infart.Assets
                 { "fall", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "fall")) },
                 { "jalapeno", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "jalapeno")) },
                 { "truck", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "truck")) },
-                { "bite", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "bite")) } };
+                { "bite", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "bite")) },
+                { "Music-Menu", _contentManager.Load<SoundEffect>("Music/Music-Menu") },
+                { "Music-Game", _contentManager.Load<SoundEffect>("Music/Music-Game") }
+            };
 
             string fartsFolder = Path.Combine("Music", "Farts");
             FartsSounds = new Dictionary<string, SoundEffect>

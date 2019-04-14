@@ -218,3 +218,15 @@
 /processorParam:TextureFormat=Color
 /build:gameTitle.png
 
+#begin Music/Music-Game.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Music-Game.wav
+
+#begin Music/Music-Menu.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Music-Menu.wav
+
