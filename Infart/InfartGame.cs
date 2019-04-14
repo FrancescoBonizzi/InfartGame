@@ -387,10 +387,17 @@ namespace Infart
             {
                 if (!_deadExplosion.Started)
                 {
-                    if ((_soundManager).HasFallFinished())
+                    if (_soundManager.HasFallFinished())
                     {
                         _deadExplosion.Explode(PlayerReference.Position, false, _soundManager);
                         _statusBar.SetInfart();
+
+                    }
+                }
+                else
+                {
+                    if (_deadExplosion.Finished)
+                    {
                         _forceToFinish = true;
                     }
                 }
