@@ -13,7 +13,7 @@ namespace Infart.Drawing
 
         public PopupText()
         {
-            _scalingObject = new ScalingObject(1f, 3f, 2.2f);
+            _scalingObject = new ScalingObject(1f, 1.8f, 2f);
         }
 
         public void Update(TimeSpan elapsed)

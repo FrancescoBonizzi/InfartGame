@@ -426,7 +426,7 @@ namespace Infart
                     },
                     PopupObject = new PopupObject(
                         TimeSpan.FromSeconds(3),
-                        Player.Position + new Vector2(650, 0),
+                        new Vector2(200, 300),
                         Color.Red,
                         260f)
                 };
@@ -448,7 +448,7 @@ namespace Infart
                     },
                     PopupObject = new PopupObject(
                         TimeSpan.FromSeconds(3),
-                        Player.Position + new Vector2(650, 0),
+                        new Vector2(200, 300),
                         Color.ForestGreen,
                         260f)
                 };
@@ -490,7 +490,7 @@ namespace Infart
                 },
                 PopupObject = new PopupObject(
                     TimeSpan.FromSeconds(2.8),
-                    recordPosition,
+                    new Vector2(200, 300),
                     Color.LimeGreen,
                     260f)
             };
@@ -590,6 +590,26 @@ namespace Infart
             spriteBatch.DrawString(_font, _scoreString, _scoreStringPosition, Color.DarkBlue, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 1f);
             _statusBar.Draw(spriteBatch);
 
+            if (_jalapenoPopup != null)
+            {
+                spriteBatch.DrawString(_font, _jalapenoPopup.Text, _jalapenoPopup.DrawingInfos);
+            }
+
+            if (_broccoloPopup != null)
+            {
+                spriteBatch.DrawString(_font, _broccoloPopup.Text, _broccoloPopup.DrawingInfos);
+            }
+
+            if (_recordMetersPopup != null)
+            {
+                spriteBatch.DrawString(_font, _recordMetersPopup.Text, _recordMetersPopup.DrawingInfos);
+            }
+
+            if (_beanPopup != null)
+            {
+                spriteBatch.DrawString(_font, _beanPopup.Text, _beanPopup.DrawingInfos);
+            }
+
             spriteBatch.End();
         }
 
@@ -634,26 +654,6 @@ namespace Infart
                     // E' la sbarra verticale
                     spriteBatch.DrawRectangle(_highScorePosition, _highScoreColor);
                 }
-            }
-
-            if (_recordMetersPopup != null)
-            {
-                spriteBatch.DrawString(_font, _recordMetersPopup.Text, _recordMetersPopup.DrawingInfos);
-            }
-
-            if (_jalapenoPopup != null)
-            {
-                spriteBatch.DrawString(_font, _jalapenoPopup.Text, _jalapenoPopup.DrawingInfos);
-            }
-
-            if (_broccoloPopup != null)
-            {
-                spriteBatch.DrawString(_font, _broccoloPopup.Text, _broccoloPopup.DrawingInfos);
-            }
-
-            if (_beanPopup != null)
-            {
-                spriteBatch.DrawString(_font, _beanPopup.Text, _beanPopup.DrawingInfos);
             }
 
             if (_deadExplosion.Started)
