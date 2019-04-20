@@ -37,12 +37,12 @@ namespace Infart
 
         public double BucoProbability { get; private set; }
         public double PeperoncinoDuration { get; private set; }
+        public double BeanDuration { get; private set; }
         public double GemmaProbability { get; private set; }
         public double BroccoloDuration { get; private set; }
         public Vector2 LarghezzaBuchi { get => _larghezzaBuchi; private set => _larghezzaBuchi = value; }
 
         private const double DefaultBucoProbability = 0.005;
-        private const double DefaultPowerupProbability = 0.035;
         private const double DefaultPeperoncinoDuration = 6000.0;
         private const double DefaultMerdoneDuration = 3500.0;
         private const double DefaultGemmaProbability = 0.4;
@@ -60,6 +60,7 @@ namespace Infart
 
         public bool FallSoundActive { get; set; }
         public bool MerdaModeActive { get; set; }
+        public bool BeanModeActive { get; set; }
         public bool JalapenosModeActive { get; set; }
 
         private int _gameCameraHLimit;
@@ -115,7 +116,7 @@ namespace Infart
 
             _highScoreColor = new Color(22, 232, 86) * 0.5f;
             _metriString = localizedStringsRepository.Get(GameStringsLoader.MetriTimeString);
-            _recordMetersText = localizedStringsRepository.Get(GameStringsLoader.MetriRecordPopupString);
+            _recordMetersText = "RECORD!";
 
             _jalapenoPopupText = "JALAPENO!";
             _broccoloPopupText = "RIDING ON A POO!";
@@ -144,6 +145,7 @@ namespace Infart
 
             BucoProbability = DefaultBucoProbability;
             PeperoncinoDuration = DefaultPeperoncinoDuration;
+            BeanDuration = 6000;
             BroccoloDuration = DefaultMerdoneDuration;
             GemmaProbability = DefaultGemmaProbability;
             LarghezzaBuchi = new Vector2(DefaultBucoMinW, DefaultBucoMaxW);
@@ -454,6 +456,27 @@ namespace Infart
                 };
                 _broccoloPopup.PopupObject.Popup();
             }
+            else if(_gemme.CheckBeanCollisionWithPlayer(Player))
+            {
+                _statusBar.ComputeBean();
+                Player.ActivateBean();
+                _soundManager.PlayBean();
+                BeanModeActive = true;
+                _beanPopup = new PopupText()
+                {
+                    Text = _beanPopupText,
+                    DrawingInfos = new DrawingInfos()
+                    {
+                        Position = Player.Position
+                    },
+                    PopupObject = new PopupObject(
+                        TimeSpan.FromSeconds(3),
+                        new Vector2(200, 300),
+                        Color.Brown,
+                        260f)
+                };
+                _beanPopup.PopupObject.Popup();
+            }
         }
 
         public void Resume()
@@ -622,6 +645,11 @@ namespace Infart
             _background.Draw(spriteBatch);
             _ground.Draw(spriteBatch);
             _gemme.Draw(spriteBatch);
+
+            if (!_deadExplosion.Started)
+            {
+                Player.DrawBeanParticles(spriteBatch);
+            }
 
             spriteBatch.End();
 

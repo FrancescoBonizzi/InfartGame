@@ -13,11 +13,13 @@ namespace Infart.Astronaut
         private readonly ScoreggiaParticleSystem _scoreggiaSystem;
         private readonly JalapenoParticleSystem _jalapenoSystem;
         private readonly BroccoloParticleSystem _broccoloSystem;
+        private readonly BeanParticleSystem _beanSystem;
         private readonly InfartGame _gameManagerReference;
 
         private const double TimeBetweenNewParticleScoregge = 30.0f;
         private double _timeTillNewParticleScoregge = 0.0f;
         private const double TimeBetweenNewParticleJalapeno = 20.0f;
+        private const double TimeBetweenNewParticleBean = 0f;
         private double _timeTillNewParticleJalapeno = 0.0f;
         private const double TimeBetweenNewParticleBroccolo = 80.0f;
         private double _timeTillNewParticleBroccolo = 0.0f;
@@ -27,7 +29,10 @@ namespace Infart.Astronaut
         private bool _broccolo = false;
         private double _elapsedJalapenos = 0.0;
         private double _elapsedBroccolo = 0.0;
+        private double _elapsedBean;
         private Color _fillColor;
+        private bool _bean;
+        private double _timeTillNewParticleBean;
 
         public Player(
             Vector2 startingPos,
@@ -45,6 +50,7 @@ namespace Infart.Astronaut
             _scoreggiaSystem = new ScoreggiaParticleSystem(10, assetsLoader.Textures, assetsLoader.TexturesRectangles["ScoreggiaParticle"]);
             _jalapenoSystem = new JalapenoParticleSystem(10, assetsLoader);
             _broccoloSystem = new BroccoloParticleSystem(8, assetsLoader);
+            _beanSystem = new BeanParticleSystem(10, assetsLoader);
 
             LoadAnimation("idle", assetsLoader.PlayerIdleRects,
                 true, 0.1f, assetsLoader.Textures);
@@ -89,6 +95,7 @@ namespace Infart.Astronaut
             JalapenosJump = false;
             _jalapenosJumpCount = 0;
             _broccolo = false;
+            _bean = false;
             _elapsedJalapenos = 0.0;
             _elapsedBroccolo = 0.0;
             _fillColor = Color.White;
@@ -143,7 +150,7 @@ namespace Infart.Astronaut
         public void ActivateBroccolo()
         {
             _elapsedBroccolo = 0.0;
-            _fillColor = Color.Brown;
+            _fillColor = Color.Green;
             _broccolo = true;
             Jump(200);
             HorizontalMoveSpeed += 400.0f;
@@ -152,12 +159,30 @@ namespace Infart.Astronaut
             _gameManagerReference.IncreaseParallaxSpeed();
         }
 
+        public void ActivateBean()
+        {
+            _elapsedBean = 0.0;
+            _fillColor = Color.Brown;
+            _bean = true;
+            Jump(300);
+        }
+
         public void DeactivateBroccolo()
         {
             _broccolo = false;
             _gameManagerReference.MerdaModeActive = false;
             _elapsedBroccolo = 0.0;
             HorizontalMoveSpeed -= 400.0f;
+            _fillColor = _overlayColor;
+            _gameManagerReference.DecreaseParallaxSpeed();
+            _gameManagerReference.DecreaseParallaxSpeed();
+        }
+
+        public void DeactivateBean()
+        {
+            _bean = false;
+            _gameManagerReference.BeanModeActive = false;
+            _elapsedBean = 0.0;
             _fillColor = _overlayColor;
             _gameManagerReference.DecreaseParallaxSpeed();
             _gameManagerReference.DecreaseParallaxSpeed();
@@ -174,6 +199,10 @@ namespace Infart.Astronaut
                 }
             }
             else if (_broccolo)
+            {
+                Jump(500);
+            }
+            else if(_bean)
             {
                 Jump(500);
             }
@@ -229,11 +258,14 @@ namespace Infart.Astronaut
                 _scoreggiaSystem.Update(dt);
                 _jalapenoSystem.Update(dt);
                 _broccoloSystem.Update(dt);
+                _beanSystem.Update(dt);
 
-                if (JalapenosJump && !_broccolo)
+                if (JalapenosJump && !_broccolo && !_bean)
                     JalapenoGeneration(dt);
-                else if (!JalapenosJump && _broccolo)
+                else if (!JalapenosJump && _broccolo && !_bean)
                     BroccoloGeneration(dt);
+                else if (!JalapenosJump && _bean && !_broccolo)
+                    BeanGeneration(dt);
                 else
                     ScoreggiaGeneration(dt);
 
@@ -269,6 +301,25 @@ namespace Infart.Astronaut
                 _jalapenoSystem.AddParticles(where);
 
                 _timeTillNewParticleJalapeno = TimeBetweenNewParticleJalapeno;
+            }
+        }
+
+        private void BeanGeneration(double dt)
+        {
+            _elapsedBean += dt;
+            if (_elapsedBean >= _gameManagerReference.BeanDuration)
+                DeactivateBean();
+
+            _timeTillNewParticleBean -= dt;
+            if (_timeTillNewParticleBean < 0)
+            {
+                Vector2 where = ((GameObject)this).Position + new Vector2(
+                   Animations[CurrentAnimation].FrameWidth / 3,
+                   (Animations[CurrentAnimation].FrameHeight / 2) + 30);
+
+                _beanSystem.AddParticles(where);
+
+                _timeTillNewParticleBean = TimeBetweenNewParticleBean;
             }
         }
 
@@ -337,5 +388,14 @@ namespace Infart.Astronaut
                 _broccoloSystem.Draw(spriteBatch);
             }
         }
+
+        public void DrawBeanParticles(SpriteBatch spriteBatch)
+        {
+            if (!Dead)
+            {
+                _beanSystem.Draw(spriteBatch);
+            }
+        }
+
     }
 }

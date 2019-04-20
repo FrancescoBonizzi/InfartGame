@@ -11,6 +11,7 @@ namespace Infart
     {
         private readonly Gemma _jalapenos;
         private readonly Gemma _broccolo;
+        private readonly Gemma _bean;
 
         private const int MaxGemmeAttive = 10;
         private readonly List<Gemma> _gemmeAttive;
@@ -20,10 +21,11 @@ namespace Infart
         private enum PowerUps
         {
             Jalapeno,
-            Broccolo
+            Broccolo,
+            Bean
         };
 
-        private PowerUps _nextPowerUp;
+        private PowerUps _nextPowerUp = PowerUps.Bean;
 
         public GemmaManager(
             Camera cameraReference,
@@ -40,6 +42,7 @@ namespace Infart
 
             _jalapenos = new Gemma(assetsLoader.Textures, assetsLoader.TexturesRectangles["Jalapenos"]);
             _broccolo = new Gemma(assetsLoader.Textures, assetsLoader.TexturesRectangles["Verdura"]);
+            _bean = new Gemma(assetsLoader.Textures, assetsLoader.TexturesRectangles["Bean"]);
         }
 
         public void Reset(Camera cameraReference)
@@ -65,12 +68,16 @@ namespace Infart
                 case PowerUps.Broccolo:
                     AddMerda(position);
                     break;
+
+                case PowerUps.Bean:
+                    AddBean(position);
+                    break;
             }
         }
 
         private void AddJalapenos(Vector2 position)
         {
-            if (!_jalapenos.Active && !_broccolo.Active)
+            if (!_jalapenos.Active && !_broccolo.Active && !_bean.Active)
             {
                 _jalapenos.Position = position;
                 _jalapenos.Active = true;
@@ -80,10 +87,20 @@ namespace Infart
 
         private void AddMerda(Vector2 position)
         {
-            if (!_jalapenos.Active && !_broccolo.Active)
+            if (!_jalapenos.Active && !_broccolo.Active && !_bean.Active)
             {
                 _broccolo.Position = position;
                 _broccolo.Active = true;
+                _nextPowerUp = PowerUps.Bean;
+            }
+        }
+
+        private void AddBean(Vector2 position)
+        {
+            if (!_jalapenos.Active && !_broccolo.Active && !_bean.Active)
+            {
+                _bean.Position = position;
+                _bean.Active = true;
                 _nextPowerUp = PowerUps.Jalapeno;
             }
         }
@@ -108,6 +125,19 @@ namespace Infart
                 if (_broccolo.CollisionRectangle.Intersects(p.CollisionRectangle))
                 {
                     _broccolo.Active = false;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CheckBeanCollisionWithPlayer(Player p)
+        {
+            if (_bean.Active)
+            {
+                if (_bean.CollisionRectangle.Intersects(p.CollisionRectangle))
+                {
+                    _bean.Active = false;
                     return true;
                 }
             }
@@ -190,6 +220,14 @@ namespace Infart
                     _broccolo.Active = false;
                 else
                     _broccolo.Draw(spritebatch);
+            }
+
+            if (_bean.Active)
+            {
+                if (ToBeRemoved(_bean.Position, _bean.Width))
+                    _bean.Active = false;
+                else
+                    _bean.Draw(spritebatch);
             }
         }
     }

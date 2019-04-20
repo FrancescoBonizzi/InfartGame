@@ -1,5 +1,6 @@
 using Infart.Assets;
 using Microsoft.Xna.Framework.Audio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -148,5 +149,9 @@ namespace Infart
             }
         }
 
+        public void PlayBean()
+        {
+            _allSounds["thunder"].Play();
+        }
     }
 }

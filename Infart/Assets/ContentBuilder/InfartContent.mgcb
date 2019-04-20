@@ -230,3 +230,9 @@
 /processorParam:Quality=Best
 /build:Music/Music-Menu.wav
 
+#begin Music/Effects/thunder.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Effects/thunder.wav
+

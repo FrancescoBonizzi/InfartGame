@@ -1,3 +1,4 @@
+using System;
 using Infart.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -166,6 +167,19 @@ namespace Infart.HUD
             _soundManagerReference.StopHeartBeat();
         }
 
+        public void ComputeBean()
+        {
+            for (int i = 0; i < CurrentHamburgers; ++i)
+            {
+                _statusBurgers[i].Lost();
+                _statusBurgers[i].FillColor = _emptyColor;
+            }
+
+            SetHamburgers(0);
+            ++VerdureMangiateInTotale;
+            _soundManagerReference.StopHeartBeat();
+        }
+
         public void Update(double gametime)
         {
             if (!_infart)
@@ -208,5 +222,6 @@ namespace Infart.HUD
                     Color.White * _overlayDeathOpacity);
             }
         }
+
     }
 }

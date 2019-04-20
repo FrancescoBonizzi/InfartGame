@@ -49,6 +49,7 @@
     <Compile Include="Pages\MainMenuPage.cs" />
     <Compile Include="Pages\ScorePage.cs" />
     <Compile Include="Pages\ScoreRecordText.cs" />
+    <Compile Include="ParticleSystem\BeanParticleSystem.cs" />
     <Compile Include="ParticleSystem\ParticleExplosion.cs" />
     <Compile Include="GameOrchestrator.cs" />
     <Compile Include="InfartBootstrap.cs" />
@@ -114,6 +115,7 @@
     <None Include="Assets\_Other\gameTitle.psd" />
     <None Include="Assets\_Other\Infart-Game.flp" />
     <None Include="Assets\_Other\Infart-Menu_2.flp" />
+    <None Include="Assets\_TextureProject\gameoverBackground.psd" />
     <None Include="Assets\_TextureProject\Splashscreen.psd" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -144,6 +146,7 @@
     <Content Include="Assets\ContentBuilder\gameTitle.png" />
     <Content Include="Assets\ContentBuilder\manina.png" />
     <Content Include="Assets\ContentBuilder\menuBackground.png" />
+    <Content Include="Assets\ContentBuilder\Music\Effects\thunder.wav" />
     <Content Include="Assets\ContentBuilder\Music\Music-Game.wav" />
     <Content Include="Assets\ContentBuilder\Music\Music-Menu.wav" />
     <Content Include="Assets\ContentBuilder\scoreBackground.png" />

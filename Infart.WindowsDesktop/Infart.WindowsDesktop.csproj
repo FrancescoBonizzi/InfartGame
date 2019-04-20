@@ -139,6 +139,10 @@
       <Link>Content\Music\Effects\jalapeno.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\thunder.xnb">
+      <Link>Content\Music\Effects\thunder.xnb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\Infart\Assets\ContentBuilder\bin\Music\Effects\truck.xnb">
       <Link>Content\Music\Effects\truck.xnb</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -78,6 +78,7 @@ namespace Infart.Assets
             {
                 { "Bang", new Rectangle(824, 68, 251, 171) },
                 { "BroccoloParticle", new Rectangle(1719, 542, 64, 64) },
+                { "Bean", new Rectangle(2000, 105, 34, 48) },
                 { "Burger", new Rectangle(1992, 2, 51, 43) },
                 { "GameOver", new Rectangle(824, 2, 400, 64) },
                 { "JalapenoParticle", new Rectangle(1077, 250, 128, 128) },
@@ -513,7 +514,8 @@ namespace Infart.Assets
                 { "truck", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "truck")) },
                 { "bite", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "bite")) },
                 { "Music-Menu", _contentManager.Load<SoundEffect>("Music/Music-Menu") },
-                { "Music-Game", _contentManager.Load<SoundEffect>("Music/Music-Game") }
+                { "Music-Game", _contentManager.Load<SoundEffect>("Music/Music-Game") },
+                { "thunder", _contentManager.Load<SoundEffect>(Path.Combine(environmentalSoundsFolder, "thunder"))}
             };
 
             string fartsFolder = Path.Combine("Music", "Farts");
