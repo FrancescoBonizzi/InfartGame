@@ -6,15 +6,12 @@ namespace Infart.HUD
 {
     public class StatusBar
     {
-        private Vector2 _position;
-
         private readonly StatusBarSprite[] _statusBurgers;
         private readonly Texture2D _textureReference;
         private readonly SoundManager _soundManagerReference;
         private readonly Color _emptyColor = Color.Gray * 0.5f;
         private readonly Color _fullColor = Color.White;
 
-        private double _elapsed;
         private int _jumpCount;
         public int TotalJumps { get; private set; }
 
@@ -32,7 +29,6 @@ namespace Infart.HUD
             AssetsLoader assetsLoader,
             SoundManager soundManagerReference)
         {
-            _position = position;
             _textureReference = assetsLoader.Textures;
 
             _soundManagerReference = soundManagerReference;
@@ -172,8 +168,6 @@ namespace Infart.HUD
 
         public void Update(double gametime)
         {
-            _elapsed += gametime;
-
             if (!_infart)
             {
                 for (int i = 0; i < 4; ++i)

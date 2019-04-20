@@ -384,7 +384,7 @@ namespace Infart
                 {
                     (Player)?.IncreaseMoveSpeed();
                     _background.IncreaseParallaxSpeed();
-                    if (LarghezzaBuchi.Y < 600)
+                    if (LarghezzaBuchi.Y < 1000)
                     {
                         _larghezzaBuchi.X += 80.0f;
                         _larghezzaBuchi.Y += 80.0f;

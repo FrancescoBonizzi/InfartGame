@@ -23,6 +23,7 @@ namespace Infart.Astronaut
         private double _timeTillNewParticleBroccolo = 0.0f;
         private bool _allowInput = true;
         private int _jalapenosJumpCount = 0;
+        private int _noPowerUpsJumpCount;
         private bool _broccolo = false;
         private double _elapsedJalapenos = 0.0;
         private double _elapsedBroccolo = 0.0;
@@ -83,7 +84,7 @@ namespace Infart.Astronaut
 
         public void Reset(Vector2 position)
         {
-            ((GameObject) this).Position = position;
+            ((GameObject)this).Position = position;
             Dead = false;
             JalapenosJump = false;
             _jalapenosJumpCount = 0;
@@ -166,18 +167,20 @@ namespace Infart.Astronaut
         {
             if (JalapenosJump)
             {
-                if (_jalapenosJumpCount < 1)
+                if (_jalapenosJumpCount < 2)
                 {
                     ++_jalapenosJumpCount;
                     Jump(800);
                 }
             }
             else if (_broccolo)
-                Jump(500);
-            else
             {
-                if (OnGround)
-                    Jump(650);
+                Jump(500);
+            }
+            else if (_noPowerUpsJumpCount < 1)
+            {
+                ++_noPowerUpsJumpCount;
+                Jump(650);
             }
         }
 
@@ -208,6 +211,10 @@ namespace Infart.Astronaut
                         newAnimation = "fall";
                     }
                 }
+                else
+                {
+                    _noPowerUpsJumpCount = 0;
+                }
 
                 if (_broccolo)
                     newAnimation = "truck";
@@ -232,17 +239,21 @@ namespace Infart.Astronaut
 
                 if (!Dead)
                 {
-                    _gameManagerReference.ScoreMetri = ((int)(((GameObject) this).Position.X / 100));
+                    _gameManagerReference.ScoreMetri = ((int)(((GameObject)this).Position.X / 100));
                 }
             }
 
             base.Update(dt);
         }
 
+        public bool IsFalling => CurrentAnimation == "fall";
+
         private void JalapenoGeneration(double dt)
         {
             if (OnGround)
+            {
                 _jalapenosJumpCount = 0;
+            }
 
             _elapsedJalapenos += dt;
             if (_elapsedJalapenos >= _gameManagerReference.PeperoncinoDuration)
@@ -251,7 +262,7 @@ namespace Infart.Astronaut
             _timeTillNewParticleJalapeno -= dt;
             if (_timeTillNewParticleJalapeno < 0)
             {
-                Vector2 where = ((GameObject) this).Position + new Vector2(
+                Vector2 where = ((GameObject)this).Position + new Vector2(
                    Animations[CurrentAnimation].FrameWidth / 3,
                    (Animations[CurrentAnimation].FrameHeight / 2) + 30);
 
@@ -270,7 +281,7 @@ namespace Infart.Astronaut
             _timeTillNewParticleBroccolo -= dt;
             if (_timeTillNewParticleBroccolo < 0)
             {
-                Vector2 where = ((GameObject) this).Position + new Vector2(
+                Vector2 where = ((GameObject)this).Position + new Vector2(
                    Animations[CurrentAnimation].FrameWidth / 3,
                    (Animations[CurrentAnimation].FrameHeight / 2) + 30);
 
@@ -287,7 +298,7 @@ namespace Infart.Astronaut
                 _timeTillNewParticleScoregge -= dt;
                 if (_timeTillNewParticleScoregge < 0)
                 {
-                    Vector2 where = ((GameObject) this).Position + new Vector2(
+                    Vector2 where = ((GameObject)this).Position + new Vector2(
                        Animations[CurrentAnimation].FrameWidth / 3,
                        (Animations[CurrentAnimation].FrameHeight / 2) + 30);
 
@@ -306,7 +317,7 @@ namespace Infart.Astronaut
             {
                 spriteBatch.Draw(
                     Animations[CurrentAnimation].Texture,
-                    ((GameObject) this).Position,
+                    ((GameObject)this).Position,
                     Animations[CurrentAnimation].FrameRectangle,
                     _fillColor,
                     _rotation,

@@ -7,7 +7,7 @@ namespace Infart.Drawing
         public Vector2 Position = Vector2.Zero;
         public int ViewPortWidth;
         public int ViewPortHeight;
-        private float _zoom = 1.0f;
+        private float _zoom = 1f;
         private Matrix _transform;
         private Vector2 _velocity = Vector2.Zero;
 
