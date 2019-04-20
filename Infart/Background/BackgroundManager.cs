@@ -131,8 +131,8 @@ namespace Infart.Background
             _nuvolificioLontano.MoveX((float)((_parallaxSpeedFondo) * dt * ParallaxDir));
             _nuvolificioMedio.MoveX((float)((_parallaxSpeedMid) * dt * ParallaxDir));
 
-            _grattacieliFondo.Update(gametime, CurrentCamera);
-            _grattacieliMid.Update(gametime, CurrentCamera);
+            _grattacieliFondo.Update(gametime);
+            _grattacieliMid.Update(gametime);
 
             _starfield.Update(gametime);
 

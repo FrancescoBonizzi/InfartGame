@@ -30,11 +30,6 @@ namespace Infart.Astronaut
             set { CollidingObjsReference = value; }
         }
 
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
-
         public float HorizontalMoveSpeed
         {
             get { return XMoveSpeed; }

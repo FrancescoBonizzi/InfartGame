@@ -1,6 +1,7 @@
 using Infart.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,10 +23,13 @@ namespace Infart.Background
 
         private readonly InfartGame _gameManagerReference;
 
+        private TimeSpan _powerUpGenerationInterval = TimeSpan.FromSeconds(10);
+        private TimeSpan _powerUpGenerationIntervalElapsed = TimeSpan.Zero;
+
         public GrattacieliAutogeneranti(
             Texture2D texture,
             IDictionary<string, Rectangle> grattaRects,
-            string entryName,
+            string layerName,
             int grattaNumber,
             Camera playerCamera,
             InfartGame gameManagerReference)
@@ -44,16 +48,9 @@ namespace Infart.Background
             CachedObjectList = new List<Grattacielo>();
             GrattacieliToDraw = new List<Grattacielo>();
 
-            LoadGrattacieli(entryName, grattaRects, grattaNumber);
+            LoadGrattacieli(layerName, grattaRects, grattaNumber);
 
-            if (entryName == "ground")
-            {
-                _innestGemma = true;
-            }
-            else
-            {
-                _innestGemma = false;
-            }
+            _innestGemma = layerName == "ground";
         }
 
         public Vector2 NextGrattacieloPosition { get => _nextGrattacieloPosition; set => _nextGrattacieloPosition = value; }
@@ -144,9 +141,10 @@ namespace Infart.Background
             return cameraPositionX > objPositionX + width;
         }
 
-        public void Update(double gametime, Camera currentCamera)
+        public void Update(double gametime)
         {
             CameraPositionX = (int)CurrentCamera.Position.X;
+            _powerUpGenerationIntervalElapsed += TimeSpan.FromMilliseconds(gametime);
 
             if (GrattacieliToDraw.Count < NumGrattacieliToDraw)
             {
@@ -188,8 +186,8 @@ namespace Infart.Background
                 CachedObjectList[0].Position = NextGrattacieloPosition;
 
                 _nextGrattacieloPosition.X +=
-                     CachedObjectList[0].Width +
-                     FbonizziMonoGame.Numbers.RandomBetween(1, MaxGrattacieloPositionOffset);
+                     CachedObjectList[0].Width
+                     + FbonizziMonoGame.Numbers.RandomBetween(1, MaxGrattacieloPositionOffset);
 
                 if (_innestGemma)
                 {
@@ -200,10 +198,11 @@ namespace Infart.Background
                                   CachedObjectList[0].Position.X + 15,
                                   _resolutionH - CachedObjectList[0].Height - 70)));
                     }
-                    else if (FbonizziMonoGame.Numbers.RandomBetween(0D, 1D) < _gameManagerReference.PowerUpProbability)
+                    else if (_powerUpGenerationIntervalElapsed >= _powerUpGenerationInterval)
                     {
                         if (!_gameManagerReference.JalapenosModeActive && !_gameManagerReference.MerdaModeActive)
                         {
+                            _powerUpGenerationIntervalElapsed = TimeSpan.Zero;
                             _gameManagerReference.AddPowerUp(new Vector2(
                                     CachedObjectList[0].PositionAtTopLeftCorner().X,
                                     CachedObjectList[0].PositionAtTopLeftCorner().Y - 180));

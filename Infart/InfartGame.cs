@@ -36,7 +36,6 @@ namespace Infart
         private readonly SpriteFont _font;
 
         public double BucoProbability { get; private set; }
-        public double PowerUpProbability { get; private set; }
         public double PeperoncinoDuration { get; private set; }
         public double GemmaProbability { get; private set; }
         public double BroccoloDuration { get; private set; }
@@ -68,7 +67,16 @@ namespace Infart
 
         private bool _recordMetersNotified = false;
         private PopupText _recordMetersPopup;
-        private readonly string _recordMetersText;
+        private string _recordMetersText;
+
+        private PopupText _jalapenoPopup;
+        private readonly string _jalapenoPopupText;
+
+        private PopupText _broccoloPopup;
+        private readonly string _broccoloPopupText;
+
+        private PopupText _beanPopup;
+        private readonly string _beanPopupText;
 
         public InfartGame(
             AssetsLoader assetsLoader,
@@ -94,7 +102,6 @@ namespace Infart
             _playerCamera = new Camera(Vector2.Zero, new Vector2(800, 480), 0.8f);
 
             _deadExplosion = new InfartExplosion(assetsLoader);
-            //     record_explosion_ = new RecordExplosion_episodio1(AssetsLoader);
 
             _isPaused = false;
             _forceToFinish = false;
@@ -109,6 +116,10 @@ namespace Infart
             _highScoreColor = new Color(22, 232, 86) * 0.5f;
             _metriString = localizedStringsRepository.Get(GameStringsLoader.MetriTimeString);
             _recordMetersText = localizedStringsRepository.Get(GameStringsLoader.MetriRecordPopupString);
+
+            _jalapenoPopupText = "JALAPENO!";
+            _broccoloPopupText = "RIDING ON A POO!";
+            _beanPopupText = "ASS STORM!";
 
             NewGame();
         }
@@ -132,7 +143,6 @@ namespace Infart
             GetScoregge = 0;
 
             BucoProbability = DefaultBucoProbability;
-            PowerUpProbability = DefaultPowerupProbability;
             PeperoncinoDuration = DefaultPeperoncinoDuration;
             BroccoloDuration = DefaultMerdoneDuration;
             GemmaProbability = DefaultGemmaProbability;
@@ -330,6 +340,36 @@ namespace Infart
                     }
                 }
 
+                if (_jalapenoPopup != null)
+                {
+                    _jalapenoPopup.Update(elapsed);
+
+                    if (_jalapenoPopup.PopupObject.IsCompleted)
+                    {
+                        _jalapenoPopup = null;
+                    }
+                }
+
+                if (_broccoloPopup != null)
+                {
+                    _broccoloPopup.Update(elapsed);
+
+                    if (_broccoloPopup.PopupObject.IsCompleted)
+                    {
+                        _broccoloPopup = null;
+                    }
+                }
+
+                if (_beanPopup != null)
+                {
+                    _beanPopup.Update(elapsed);
+
+                    if (_beanPopup.PopupObject.IsCompleted)
+                    {
+                        _beanPopup = null;
+                    }
+                }
+
                 _statusBar?.Update(gametime);
 
                 if (_deadExplosion.Started)
@@ -377,13 +417,42 @@ namespace Infart
                 (Player).ActivateJalapenos();
                 (_soundManager).PlayJalapeno();
                 JalapenosModeActive = true;
+                _jalapenoPopup = new PopupText()
+                {
+                    Text = _jalapenoPopupText,
+                    DrawingInfos = new DrawingInfos()
+                    {
+                        Position = Player.Position
+                    },
+                    PopupObject = new PopupObject(
+                        TimeSpan.FromSeconds(3),
+                        Player.Position + new Vector2(650, 0),
+                        Color.Red,
+                        260f)
+                };
+                _jalapenoPopup.PopupObject.Popup();
+
             }
-            else if ((_gemme).CheckMerdaCollisionWithPlayer(Player))
+            else if ((_gemme).CheckBroccoloCollisionWithPlayer(Player))
             {
                 _statusBar.ComputeBroccolo();
                 (Player).ActivateBroccolo();
                 (_soundManager).PlayShit();
                 MerdaModeActive = true;
+                _broccoloPopup = new PopupText()
+                {
+                    Text = _broccoloPopupText,
+                    DrawingInfos = new DrawingInfos()
+                    {
+                        Position = Player.Position
+                    },
+                    PopupObject = new PopupObject(
+                        TimeSpan.FromSeconds(3),
+                        Player.Position + new Vector2(650, 0),
+                        Color.ForestGreen,
+                        260f)
+                };
+                _broccoloPopup.PopupObject.Popup();
             }
         }
 
@@ -403,6 +472,15 @@ namespace Infart
 
         private void PopupRecord()
         {
+            if (Player.Dead)
+            {
+                _recordMetersText = "RECORD!";
+            }
+
+            var recordPosition = Player.Dead
+                ? Player.Position
+                : Player.Position + new Vector2(600, 0);
+
             _recordMetersPopup = new PopupText()
             {
                 Text = _recordMetersText,
@@ -411,8 +489,8 @@ namespace Infart
                     Position = Player.Position
                 },
                 PopupObject = new PopupObject(
-                    TimeSpan.FromSeconds(1.5),
-                    Player.Position,
+                    TimeSpan.FromSeconds(2.8),
+                    recordPosition,
                     Color.LimeGreen,
                     260f)
             };
@@ -432,24 +510,17 @@ namespace Infart
                     FallSoundActive = true;
                 }
             }
-            else
+            else if (!_deadExplosion.Started)
             {
-                if (!_deadExplosion.Started)
+                if (_soundManager.HasFallFinished())
                 {
-                    if (_soundManager.HasFallFinished())
-                    {
-                        _deadExplosion.Explode(Player.Position, false, _soundManager);
-                        _statusBar.SetInfart();
-
-                    }
+                    _deadExplosion.Explode(Player.Position, false, _soundManager);
+                    _statusBar.SetInfart();
                 }
-                else
-                {
-                    if (_deadExplosion.Finished)
-                    {
-                        _forceToFinish = true;
-                    }
-                }
+            }
+            else if (_deadExplosion.Finished)
+            {
+                _forceToFinish = true;
             }
 
             if (_statusBar.IsInfarting() && !Player.Dead)
@@ -568,6 +639,21 @@ namespace Infart
             if (_recordMetersPopup != null)
             {
                 spriteBatch.DrawString(_font, _recordMetersPopup.Text, _recordMetersPopup.DrawingInfos);
+            }
+
+            if (_jalapenoPopup != null)
+            {
+                spriteBatch.DrawString(_font, _jalapenoPopup.Text, _jalapenoPopup.DrawingInfos);
+            }
+
+            if (_broccoloPopup != null)
+            {
+                spriteBatch.DrawString(_font, _broccoloPopup.Text, _broccoloPopup.DrawingInfos);
+            }
+
+            if (_beanPopup != null)
+            {
+                spriteBatch.DrawString(_font, _beanPopup.Text, _beanPopup.DrawingInfos);
             }
 
             if (_deadExplosion.Started)

@@ -67,7 +67,7 @@ namespace Infart.Background
                 }
             }
 
-            _grattacieliCamminabili.Update(gametime, CurrentCamera);
+            _grattacieliCamminabili.Update(gametime);
         }
 
         public void Draw(SpriteBatch spritebatch)

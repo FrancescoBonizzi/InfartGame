@@ -3,28 +3,27 @@ using Infart.Astronaut;
 using Infart.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace Infart
 {
     public class GemmaManager
     {
-        private readonly Gemma _jalapenos = null;
-        private readonly Gemma _broccolo = null;
+        private readonly Gemma _jalapenos;
+        private readonly Gemma _broccolo;
 
         private const int MaxGemmeAttive = 10;
-        private List<Gemma> _gemmeAttive;
-        private List<Gemma> _gemmeInactive;
+        private readonly List<Gemma> _gemmeAttive;
+        private readonly List<Gemma> _gemmeInactive;
         private Camera _currentCamera;
 
         private enum PowerUps
         {
             Jalapeno,
-            Merda
+            Broccolo
         };
 
-        private PowerUps _nextPowerUp = PowerUps.Jalapeno;
+        private PowerUps _nextPowerUp;
 
         public GemmaManager(
             Camera cameraReference,
@@ -63,7 +62,7 @@ namespace Infart
                     AddJalapenos(position);
                     break;
 
-                case PowerUps.Merda:
+                case PowerUps.Broccolo:
                     AddMerda(position);
                     break;
             }
@@ -75,7 +74,7 @@ namespace Infart
             {
                 _jalapenos.Position = position;
                 _jalapenos.Active = true;
-                _nextPowerUp = PowerUps.Merda;
+                _nextPowerUp = PowerUps.Broccolo;
             }
         }
 
@@ -102,7 +101,7 @@ namespace Infart
             return false;
         }
 
-        public bool CheckMerdaCollisionWithPlayer(Player p)
+        public bool CheckBroccoloCollisionWithPlayer(Player p)
         {
             if (_broccolo.Active)
             {
