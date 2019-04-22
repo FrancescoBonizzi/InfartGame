@@ -106,7 +106,7 @@ namespace Infart
                   new GameWindowScreenSizeChangedNotifier(Window),
                   GraphicsDeviceManager.GraphicsDevice,
                   800, 480,
-                  !GraphicsDeviceManager.IsFullScreen);
+                  true);
             base.Initialize();
         }
 

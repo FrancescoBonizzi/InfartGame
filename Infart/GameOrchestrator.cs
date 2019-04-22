@@ -96,8 +96,8 @@ namespace Infart
         {
             _renderTarget = new RenderTarget2D(
                 _graphicsDevice,
-                _matrixScaleProvider.RealScreenWidth,
-                _matrixScaleProvider.RealScreenHeight);
+                _matrixScaleProvider.VirtualWidth,
+                _matrixScaleProvider.VirtualHeight);
         }
 
         private void _stateTransition_FadeOutCompleted(object sender, EventArgs e)
