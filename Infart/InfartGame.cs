@@ -53,7 +53,7 @@ namespace Infart
         public int ScoreMetri { get; set; } = 0;
 
         private readonly StringBuilder _scoreString;
-        private readonly Vector2 _scoreStringPosition = new Vector2(680, 438);
+        private readonly Vector2 _scoreStringPosition = new Vector2(670, 438);
 
         private readonly string _metriString;
         private int _highScoreX;

@@ -15,7 +15,7 @@ namespace Infart.WindowsDesktop
                 textFileAssetsLoader: new WindowsTextFileImporter(),
                 settingsRepository: new FileWindowsSettingsRepository("infart-settings.txt"),
                 webPageOpener: new WindowsWebSiteOpener(),
-                gameCulture: CultureInfo.CreateSpecificCulture("it-IT"),
+                gameCulture: CultureInfo.CreateSpecificCulture("en-US"),
                 isPc: true,
                 isFullScreen: false,
                 rateMeUri: new Uri("https://www.fbonizzi.it"),
