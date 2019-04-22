@@ -21,11 +21,13 @@ Features:
 
 # Screenshots
 
-<img src="https://github.com/FrancescoBonizzi/StarfallGame/raw/master/Starfall/Assets/_TextureProject/Screenshots/1.png" width="500">
+<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/1.png" width="500">
 
-<img src="https://github.com/FrancescoBonizzi/StarfallGame/raw/master/Starfall/Assets/_TextureProject/Screenshots/2.png" width="500">
+<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/2.png" width="500">
 
-<img src="https://github.com/FrancescoBonizzi/StarfallGame/raw/master/Starfall/Assets/_TextureProject/Screenshots/3.png" width="500">
+<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/3.png" width="500">
+
+<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/4.png" width="500">
 
 ---
 
