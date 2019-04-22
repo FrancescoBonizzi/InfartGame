@@ -115,7 +115,7 @@ namespace Infart.Pages
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(transformMatrix: _matrixScaleProvider.ScaleMatrix);
+            spriteBatch.Begin();
 
             spriteBatch.Draw(_background);
             spriteBatch.DrawString(_font, _titleText, _titleDrawingInfos);

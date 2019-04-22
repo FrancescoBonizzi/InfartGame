@@ -299,9 +299,6 @@ namespace Infart
                     break;
 
                 case GameStates.GameOver:
-                    SetMenuState();
-                    break;
-
                 case GameStates.Score:
                     SetMenuState();
                     break;
@@ -339,7 +336,7 @@ namespace Infart
             // ...per poter fare il fade dei vari componenti in modo indipendente
             graphics.SetRenderTarget(null);
             graphics.Clear(Color.Black);
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: _matrixScaleProvider.ScaleMatrix);
             spriteBatch.Draw(_renderTarget, Vector2.Zero, _stateTransition.OverlayColor);
             spriteBatch.End();
         }

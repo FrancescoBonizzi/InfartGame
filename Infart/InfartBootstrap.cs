@@ -115,6 +115,7 @@ namespace Infart
             new GameStringsLoader(_localizedStringsRepository, _gameCulture);
             
             _assetsLoader = new AssetsLoader(Content);
+            _assetsLoader.LoadResources();
             _mousePointer = _assetsLoader.OtherSprites["manina"];
             _soundManager = new SoundManager(_assetsLoader);
 
@@ -164,7 +165,6 @@ namespace Infart
                     _assetsLoader,
                     rateMeDialog,
                     _soundManager,
-                    _settingsRepository,
                     _matrixScaleProvider,
                     _localizedStringsRepository));
 

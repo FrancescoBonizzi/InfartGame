@@ -49,10 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FbonizziMonoGame, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FbonizziMonoGame.1.0.8-alpha\lib\net45\FbonizziMonoGame.dll</HintPath>
+      <HintPath>..\packages\FbonizziMonoGame.1.0.1\lib\net45\FbonizziMonoGame.dll</HintPath>
     </Reference>
     <Reference Include="FbonizziMonoGameWindowsDesktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FbonizziMonoGame.WindowsDesktop.1.0.1-alpha\lib\net462\FbonizziMonoGameWindowsDesktop.dll</HintPath>
+      <HintPath>..\packages\FbonizziMonoGame.WindowsDesktop.1.0.0\lib\net462\FbonizziMonoGameWindowsDesktop.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>

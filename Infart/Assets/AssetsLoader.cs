@@ -36,10 +36,9 @@ namespace Infart.Assets
         public AssetsLoader(ContentManager contentManager)
         {
             _contentManager = contentManager ?? throw new ArgumentNullException(nameof(contentManager));
-            LoadResources();
         }
 
-        private void LoadResources()
+        public void LoadResources()
         {
             Font = _contentManager.Load<SpriteFont>("TextFont");
             Textures = _contentManager.Load<Texture2D>("textures");

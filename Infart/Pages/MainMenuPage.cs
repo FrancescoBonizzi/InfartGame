@@ -51,7 +51,6 @@ namespace Infart.Pages
             AssetsLoader assets,
             RateMeDialog rateMeDialog,
             SoundManager soundManager,
-            ISettingsRepository settingsRepository,
             IScreenTransformationMatrixProvider matrixScaleProvider,
             ILocalizedStringsRepository localizedStringsRepository)
         {
@@ -163,7 +162,7 @@ namespace Infart.Pages
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(transformMatrix: _matrixScaleProvider.ScaleMatrix);
+            spriteBatch.Begin();
 
             spriteBatch.Draw(_background);
 
