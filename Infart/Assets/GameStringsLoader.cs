@@ -19,8 +19,10 @@ namespace Infart.Assets
         public const string NumbersOfFartsString = "NumbersOfFartsString";
 
         public const string MetriTimeString = "MetriStringKey";
-
         public const string MetriRecordPopupString = "MetriRecordPopupString";
+
+        public const string BeanPowerupText = "BeanPowerupTextKey";
+        public const string BroccoloPowerupText = "BroccoloPowerupTextKey";
 
         public GameStringsLoader(ILocalizedStringsRepository localizedStringsRepository, CultureInfo cultureInfo)
         {
@@ -39,6 +41,9 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(NumberOfMetersString, "Numero di metri: ");
                 localizedStringsRepository.AddString(NumberOfVegetablesEaten, "Numero di verdure mangiate: ");
                 localizedStringsRepository.AddString(NumbersOfFartsString, "Numero di scoregge flatulate: ");
+
+                localizedStringsRepository.AddString(BeanPowerupText, "SEDERE IN TEMPESTA!");
+                localizedStringsRepository.AddString(BroccoloPowerupText, "CAVALCA LA CACCA!");
             }
             else
             {
@@ -55,6 +60,9 @@ namespace Infart.Assets
                 localizedStringsRepository.AddString(NumberOfMetersString, "Number of meters: ");
                 localizedStringsRepository.AddString(NumberOfVegetablesEaten, "Number of vegetables eaten: ");
                 localizedStringsRepository.AddString(NumbersOfFartsString, "Number of farts farted: ");
+
+                localizedStringsRepository.AddString(BeanPowerupText, "ASS STORM!");
+                localizedStringsRepository.AddString(BroccoloPowerupText, "RIDING ON A POO!");
             }
         }
     }

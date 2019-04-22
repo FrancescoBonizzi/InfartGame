@@ -119,8 +119,8 @@ namespace Infart
             _recordMetersText = "RECORD!";
 
             _jalapenoPopupText = "JALAPENO!";
-            _broccoloPopupText = "RIDING ON A POO!";
-            _beanPopupText = "ASS STORM!";
+            _broccoloPopupText = localizedStringsRepository.Get(GameStringsLoader.BroccoloPowerupText);
+            _beanPopupText = localizedStringsRepository.Get(GameStringsLoader.BeanPowerupText);
 
             NewGame();
         }
