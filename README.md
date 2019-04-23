@@ -1,6 +1,15 @@
 # ![Logo](Infart/Assets/_Other/asset-main2-72.png) INFART
 
-The ozone hole has widened due to farts. There is no more atmosphere on earth. It is destroyed.
+ [<img 
+	height="60px" 
+	alt='Get it on Google Play' 
+	src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>](https://play.google.com/store/apps/details?id=com.francescobonizzi.infart)
+[<img 
+	height="60px"
+	src='https://assets.windowsphone.com/85864462-9c82-451e-9355-a3d5f874397a/English_get-it-from-MS_InvariantCulture_Default.png' 
+	alt='English badge' />](https://www.microsoft.com/store/apps/9WZDNCRDHRJH)
+
+The ozone hole has widened due to farts. There is no more atmosphere on earth!
 
 Set in an abstract city, constantly changing, INFART is a very simple RUN AND FART game, where you have to eat vegetables, avoid hamburgers and holes. 
 
