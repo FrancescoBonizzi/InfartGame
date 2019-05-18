@@ -1,0 +1,329 @@
+{
+	"bones": [
+		{
+			"name": "root",
+			"x": 242,
+			"y": -552
+		},
+		{
+			"name": "body",
+			"parent": "root",
+			"x": -4,
+			"y": 129
+		},
+		{
+			"name": "backpack",
+			"parent": "body",
+			"x": -134,
+			"y": 161
+		},
+		{
+			"name": "backshoulder",
+			"parent": "body",
+			"x": 9,
+			"y": 138
+		},
+		{
+			"name": "backarm",
+			"parent": "backshoulder",
+			"x": -32,
+			"y": -88
+		},
+		{
+			"name": "frontshoulder",
+			"parent": "body",
+			"x": -41,
+			"y": 138
+		},
+		{
+			"name": "frontarm",
+			"parent": "frontshoulder",
+			"x": -55,
+			"y": -92
+		},
+		{
+			"name": "backthigh",
+			"parent": "body",
+			"x": 37,
+			"y": -23
+		},
+		{
+			"name": "backshin",
+			"parent": "backthigh",
+			"x": 12,
+			"y": -46
+		},
+		{
+			"name": "frontthigh",
+			"parent": "body",
+			"x": -32,
+			"y": -23
+		},
+		{
+			"name": "frontshin",
+			"parent": "frontthigh",
+			"x": 21,
+			"y": -41
+		},
+		{
+			"name": "head",
+			"parent": "body",
+			"x": -18,
+			"y": 161
+		},
+		{
+			"name": "visor",
+			"parent": "head",
+			"x": 38,
+			"y": 101
+		}
+	],
+	"slots": [
+		{
+			"name": "backthigh",
+			"bone": "backthigh",
+			"attachment": "backthigh"
+		},
+		{
+			"name": "backshin",
+			"bone": "backshin",
+			"attachment": "backshin"
+		},
+		{
+			"name": "backpack",
+			"bone": "backpack",
+			"attachment": "backpack"
+		},
+		{
+			"name": "backshoulder",
+			"bone": "backshoulder",
+			"attachment": "backshoulder"
+		},
+		{
+			"name": "backarm",
+			"bone": "backarm",
+			"attachment": "backarm"
+		},
+		{
+			"name": "body",
+			"bone": "body",
+			"attachment": "body"
+		},
+		{
+			"name": "head",
+			"bone": "head",
+			"attachment": "head"
+		},
+		{
+			"name": "visor",
+			"bone": "visor",
+			"attachment": "visor"
+		},
+		{
+			"name": "frontthigh",
+			"bone": "frontthigh",
+			"attachment": "frontthigh"
+		},
+		{
+			"name": "frontshin",
+			"bone": "frontshin",
+			"attachment": "frontshin"
+		},
+		{
+			"name": "frontshoulder",
+			"bone": "frontshoulder",
+			"attachment": "frontshoulder"
+		},
+		{
+			"name": "frontarm",
+			"bone": "frontarm",
+			"attachment": "frontarm"
+		},
+		{
+			"name": "bone",
+			"bone": "root",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "body",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "head",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "visor",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "frontthigh",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "frontshin",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "backthigh",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "backshin",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "frontshoulder",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "frontarm",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "backshoulder",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "backarm",
+			"attachment": "bone"
+		},
+		{
+			"name": "bone",
+			"bone": "backpack",
+			"attachment": "bone"
+		}
+	],
+	"skins": {
+		"spriteside3-Recovered": {
+			"backthigh": {
+				"backthigh": {
+					"x": 1,
+					"y": -29,
+					"name": "backthigh",
+					"width": 104,
+					"height": 80
+				}
+			},
+			"backshin": {
+				"backshin": {
+					"x": -22.5,
+					"y": 11,
+					"name": "backshin",
+					"width": 111,
+					"height": 138
+				}
+			},
+			"backpack": {
+				"backpack": {
+					"x": -21,
+					"y": -1.5,
+					"name": "backpack",
+					"width": 120,
+					"height": 247
+				}
+			},
+			"backshoulder": {
+				"backshoulder": {
+					"x": -3,
+					"y": -50,
+					"name": "backshoulder",
+					"width": 102,
+					"height": 122
+				}
+			},
+			"backarm": {
+				"backarm": {
+					"x": 14,
+					"y": -25.5,
+					"name": "backarm",
+					"width": 128,
+					"height": 137
+				}
+			},
+			"body": {
+				"body": {
+					"x": -16.5,
+					"y": 72,
+					"name": "body",
+					"width": 331,
+					"height": 292
+				}
+			},
+			"head": {
+				"head": {
+					"x": 46,
+					"y": 78.5,
+					"name": "head",
+					"width": 282,
+					"height": 247
+				}
+			},
+			"visor": {
+				"visor": {
+					"x": 60.5,
+					"y": 34.5,
+					"name": "visor",
+					"width": 159,
+					"height": 109
+				}
+			},
+			"frontthigh": {
+				"frontthigh": {
+					"x": -0.5,
+					"y": -27.5,
+					"name": "frontthigh",
+					"width": 179,
+					"height": 91
+				}
+			},
+			"frontshin": {
+				"frontshin": {
+					"x": -19,
+					"y": -19,
+					"name": "frontshin",
+					"width": 162,
+					"height": 80
+				}
+			},
+			"frontshoulder": {
+				"frontshoulder": {
+					"x": -16,
+					"y": -39.5,
+					"name": "frontshoulder",
+					"width": 132,
+					"height": 141
+				}
+			},
+			"frontarm": {
+				"frontarm": {
+					"x": 16,
+					"y": -4,
+					"name": "frontarm",
+					"width": 100,
+					"height": 192
+				}
+			},
+			"bone": {
+				"bone": {
+					"x": 0,
+					"y": 0,
+					"name": "root/body/backpack/bone",
+					"width": 26,
+					"height": 26
+				}
+			}
+		}
+	}
+}
