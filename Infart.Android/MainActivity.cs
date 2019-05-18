@@ -10,7 +10,7 @@ namespace Infart.Android
 {
     [Activity(
         Label = "INFART",
-        Icon = "@drawable/icon",
+        Icon = "@mipmap/ic_launcher",
         MainLauncher = true,
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
