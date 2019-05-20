@@ -186,8 +186,6 @@
     <Content Include="Assets\_Animations\visor.png" />
     <Content Include="Assets\_Other\android-feature.png" />
     <Content Include="Assets\_Other\asset-main.png" />
-    <Content Include="Assets\_Other\asset-main2-72.png" />
-    <Content Include="Assets\_Other\asset-main2.png" />
     <Content Include="Assets\_Other\Music-Game.wav" />
     <Content Include="Assets\_Other\Music-Menu.wav" />
     <Content Include="Assets\_Other\Screenshots\EN\1.png" />
@@ -198,6 +196,8 @@
     <Content Include="Assets\_Other\Screenshots\IT\2.png" />
     <Content Include="Assets\_Other\Screenshots\IT\3.png" />
     <Content Include="Assets\_Other\Screenshots\IT\4.png" />
+    <Content Include="Assets\_Other\test_000.png" />
+    <Content Include="Assets\_Other\web_hi_res_512.png" />
     <Content Include="Assets\_TextureProject\Export\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

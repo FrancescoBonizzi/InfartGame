@@ -11,6 +11,7 @@ namespace Infart.Android
     [Activity(
         Label = "INFART",
         Icon = "@mipmap/ic_launcher",
+        RoundIcon = "@mipmap/ic_launcher_round",
         MainLauncher = true,
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
