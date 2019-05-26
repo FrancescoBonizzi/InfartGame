@@ -1,4 +1,4 @@
-# ![Logo](Infart/Assets/_Other/asset-main2-72.png) INFART
+# <img src="Infart/Assets/_Other/web_hi_res_512.png" alt="drawing" width="72"/> INFART
 
  [<img 
 	height="60px" 
