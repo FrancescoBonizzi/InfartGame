@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infart.UWP", "Infart.UWP\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infart.Android", "Infart.Android\Infart.Android.csproj", "{F0E6988C-0036-4B1D-ABD6-DDF1046D8B01}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeryStupidLauncher", "VeryStupidLauncher\VeryStupidLauncher.csproj", "{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,26 @@ Global
 		{F0E6988C-0036-4B1D-ABD6-DDF1046D8B01}.Release|x86.ActiveCfg = Release|Any CPU
 		{F0E6988C-0036-4B1D-ABD6-DDF1046D8B01}.Release|x86.Build.0 = Release|Any CPU
 		{F0E6988C-0036-4B1D-ABD6-DDF1046D8B01}.Release|x86.Deploy.0 = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|x64.Build.0 = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Debug|x86.Build.0 = Debug|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|ARM.Build.0 = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|ARM64.Build.0 = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|x64.ActiveCfg = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|x64.Build.0 = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|x86.ActiveCfg = Release|Any CPU
+		{CB9D1274-70B7-40A3-A0B1-8F3FB6D60DD3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
