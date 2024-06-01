@@ -1,13 +1,6 @@
-# <img src="Infart/Assets/_Other/web_hi_res_512.png" alt="drawing" width="72"/> INFART
+# <img src="CSharp version/Infart/Assets/_Other/web_hi_res_512.png" alt="drawing" width="72"/> INFART
 
- [<img 
-	height="60px" 
-	alt='Get it on Google Play' 
-	src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>](https://play.google.com/store/apps/details?id=com.francescobonizzi.infart)
-[<img 
-	height="60px"
-	src='https://assets.windowsphone.com/85864462-9c82-451e-9355-a3d5f874397a/English_get-it-from-MS_InvariantCulture_Default.png' 
-	alt='English badge' />](https://www.microsoft.com/store/apps/9WZDNCRDHRJH)
+**TODO: Link to play**
 
 The ozone hole has widened due to farts. There is no more atmosphere on earth!
 
@@ -33,9 +26,14 @@ Features:
 
 The game is entirely **free** and open source: I didn't use any third party library to track or log user events. There are no ads too.
 
-I coded this game with these libraries:
-- [MonoGame](https://github.com/MonoGame)
-- [FbonizziMonoGame](https://github.com/FrancescoBonizzi/FbonizziMonoGame)
+There are two versions:
+- The CSharp version, that you can find in the `CSharp version` folder
+  - I coded this version (Android, Windows...) with these libraries:
+    - [MonoGame](https://github.com/MonoGame)
+    - [FbonizziMonoGame](https://github.com/FrancescoBonizzi/FbonizziMonoGame)
+- The Web version, that you can play **HERE (TODO)**
+  - I coded this version with [PixiJS](https://pixijs.com). **I will only support this**
+
 
 ---
 
