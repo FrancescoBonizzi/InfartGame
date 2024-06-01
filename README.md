@@ -1,4 +1,4 @@
-# <img src="CSharp version/Infart/Assets/_Other/web_hi_res_512.png" alt="drawing" width="72"/> INFART
+# <img src="CSharp/Infart/Assets/_Other/web_hi_res_512.png" alt="drawing" width="72"/> INFART
 
 **TODO: Link to play**
 
@@ -27,7 +27,7 @@ Features:
 The game is entirely **free** and open source: I didn't use any third party library to track or log user events. There are no ads too.
 
 There are two versions:
-- The CSharp version, that you can find in the `CSharp version` folder
+- The CSharp version, that you can find in the `CSharp` folder
   - I coded this version (Android, Windows...) with these libraries:
     - [MonoGame](https://github.com/MonoGame)
     - [FbonizziMonoGame](https://github.com/FrancescoBonizzi/FbonizziMonoGame)
