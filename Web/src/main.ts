@@ -25,10 +25,10 @@ import LoadingThing from "./uiKit/LoadingThing.ts";
         loadingThing.hide();
 
         // Menu
-        const menuBackground = infartAssets.menu.background;
-        menuBackground.x = 0;
-        menuBackground.y = 0;
-        app.stage.addChild(menuBackground);
+        const testSprite = infartAssets.menu.background;
+        testSprite.x = 0;
+        testSprite.y = 0;
+        app.stage.addChild(testSprite);
 
         // Spritesheet
         const playerRun = infartAssets.player.run;
