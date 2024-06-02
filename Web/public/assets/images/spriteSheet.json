@@ -1,27 +1,188 @@
 {
   "frames": {
-    "run__000": {
+    "playerRun_0": {
       "frame": {
         "x": 1770,
         "y": 616,
         "w": 79,
         "h": 94
-      },
-      "sourceSize": {
+      }
+    },
+    "playerRun_1": {
+      "frame": {
+        "x": 1831,
+        "y": 722,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_2": {
+      "frame": {
+        "x": 1931,
+        "y": 702,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_3": {
+      "frame": {
+        "x": 1487,
+        "y": 922,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_4": {
+      "frame": {
+        "x": 1326,
+        "y": 833,
         "w": 79,
         "h": 94
-      },
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
+      }
+    },
+    "playerRun_5": {
+      "frame": {
+        "x": 1505,
+        "y": 616,
+        "w": 81,
+        "h": 92
+      }
+    },
+    "playerRun_6": {
+      "frame": {
+        "x": 1687,
+        "y": 608,
+        "w": 81,
+        "h": 96
+      }
+    },
+    "playerRun_7": {
+      "frame": {
+        "x": 1416,
+        "y": 812,
         "w": 79,
+        "h": 96
+      }
+    },
+    "playerRun_8": {
+      "frame": {
+        "x": 1256,
+        "y": 529,
+        "w": 77,
+        "h": 96
+      }
+    },
+    "playerRun_9": {
+      "frame": {
+        "x": 1910,
+        "y": 798,
+        "w": 73,
+        "h": 94
+      }
+    },
+    "playerRun_10": {
+      "frame": {
+        "x": 1002,
+        "y": 651,
+        "w": 71,
+        "h": 92
+      }
+    },
+    "playerRun_11": {
+      "frame": {
+        "x": 1971,
+        "y": 416,
+        "w": 75,
+        "h": 92
+      }
+    },
+    "playerRun_12": {
+      "frame": {
+        "x": 1971,
+        "y": 510,
+        "w": 73,
+        "h": 94
+      }
+    },
+    "playerRun_13": {
+      "frame": {
+        "x": 1577,
+        "y": 874,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_14": {
+      "frame": {
+        "x": 1245,
+        "y": 819,
+        "w": 79,
+        "h": 94
+      }
+    },
+    "playerRun_15": {
+      "frame": {
+        "x": 1162,
+        "y": 731,
+        "w": 81,
+        "h": 92
+      }
+    },
+    "playerRun_16": {
+      "frame": {
+        "x": 1335,
+        "y": 639,
+        "w": 81,
+        "h": 94
+      }
+    },
+    "playerRun_17": {
+      "frame": {
+        "x": 1335,
+        "y": 735,
+        "w": 79,
+        "h": 96
+      }
+    },
+    "playerRun_18": {
+      "frame": {
+        "x": 1418,
+        "y": 714,
+        "w": 79,
+        "h": 96
+      }
+    },
+    "playerRun_19": {
+      "frame": {
+        "x": 1256,
+        "y": 627,
+        "w": 77,
         "h": 94
       }
     }
   },
   "animations": {
     "playerRun": [
-      "run__000"
+      "playerRun_0",
+      "playerRun_1",
+      "playerRun_2",
+      "playerRun_3",
+      "playerRun_4",
+      "playerRun_5",
+      "playerRun_6",
+      "playerRun_7",
+      "playerRun_8",
+      "playerRun_9",
+      "playerRun_10",
+      "playerRun_11",
+      "playerRun_12",
+      "playerRun_13",
+      "playerRun_14",
+      "playerRun_15",
+      "playerRun_16",
+      "playerRun_17",
+      "playerRun_18",
+      "playerRun_19"
     ]
   },
   "meta": {
