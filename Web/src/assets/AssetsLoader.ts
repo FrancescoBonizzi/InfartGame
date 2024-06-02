@@ -3,6 +3,9 @@ import InfartAssets from "./InfartAssets";
 
 export const loadAssets = async () : Promise<InfartAssets> => {
 
+  // simultate 2 seconds timeout
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
   // Menu
   const texture = await Assets.load(
     "/assets/images/menuBackground.png"
@@ -169,3 +172,16 @@ export const loadAssets = async () : Promise<InfartAssets> => {
         }
   }
 };
+
+
+/*
+ Assets.addBundle('fonts', [
+        { alias: 'ChaChicle', src: 'https://pixijs.com/assets/webfont-loader/ChaChicle.ttf' },
+        { alias: 'Lineal', src: 'https://pixijs.com/assets/webfont-loader/Lineal.otf' },
+        { alias: 'Dotrice Regular', src: 'https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff' },
+        { alias: 'Crosterian', src: 'https://pixijs.com/assets/webfont-loader/Crosterian.woff2' },
+    ]);
+
+    // Load the font bundle
+    await Assets.loadBundle('fonts');
+ */

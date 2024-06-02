@@ -1,35 +1,38 @@
-import { Application } from "pixi.js";
-import { loadAssets } from "./assets/AssetsLoader";
+import {Application} from "pixi.js";
+import {loadAssets} from "./assets/AssetsLoader";
+import LoadingText from "./uiKit/LoadingText.ts";
 
 (async () => {
-  // Create a PixiJS application.
-  const app = new Application();
+    // Create a PixiJS application.
+    const app = new Application();
 
-  // Intialize the application.
-  await app.init({
-    background: "#1099aa",
-    width: 800,
-    height: 480,
-  });
+    // Intialize the application.
+    await app.init({
+        background: "#1099aa",
+        width: 800,
+        height: 480,
+    });
 
-  // Then adding the application's canvas to the DOM body.
-  document.body.appendChild(app.canvas);
+    // Then adding the application's canvas to the DOM body.
+    document.body.appendChild(app.canvas);
 
-  const infartAssets = await loadAssets();
+    const loadingText = new LoadingText(app, "Farting...");
+    loadingText.show();
+    const infartAssets = await loadAssets();
+    loadingText.hide();
 
+    // Menu
+    const menuBackground = infartAssets.menu.background;
+    menuBackground.x = 0;
+    menuBackground.y = 0;
+    app.stage.addChild(menuBackground);
 
-  // Menu
-  const menuBackground =infartAssets.menu.background;
-  menuBackground.x = 0;
-  menuBackground.y = 0;
-  app.stage.addChild(menuBackground);
+    // Spritesheet
+    const playerRun = infartAssets.player.run;
+    playerRun.anchor.set(0.5);
+    playerRun.x = app.screen.width / 2;
+    playerRun.y = app.screen.height / 2;
 
-  // Spritesheet
-  const playerRun = infartAssets.player.run;
-  playerRun.anchor.set(0.5);
-  playerRun.x = app.screen.width / 2;
-  playerRun.y = app.screen.height / 2;
-
-  // add it to the stage to render
-  app.stage.addChild(playerRun);
+    // add it to the stage to render
+    app.stage.addChild(playerRun);
 })();
