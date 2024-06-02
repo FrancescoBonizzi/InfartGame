@@ -45,42 +45,47 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     const buildingsGroundSpriteSheet = await loadSpriteSheet("buildingsGround");
 
     return {
-        menu: {
-            background: menuBackground,
-            gameTitle: gameTitle,
-            scoreBackground: scoreBackground,
-            gameOverBackground: gameOverBackground
+        sprites: {
+            menu: {
+                background: menuBackground,
+                gameTitle: gameTitle,
+                scoreBackground: scoreBackground,
+                gameOverBackground: gameOverBackground
+            },
+            buildings: {
+                back: loadAllSpritesFromSpriteSheet(buildingsBackSpriteSheet),
+                mid: loadAllSpritesFromSpriteSheet(buildingsMidSpriteSheet),
+                ground: loadAllSpritesFromSpriteSheet(buildingsGroundSpriteSheet)
+            },
+            bang: loadSpriteFromSpriteSheet(playerSpriteSheet, "bang"),
+            broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
+            bean: loadSpriteFromSpriteSheet(playerSpriteSheet, "bean"),
+            burger: loadSpriteFromSpriteSheet(playerSpriteSheet, "burger"),
+            gameOver: loadSpriteFromSpriteSheet(playerSpriteSheet, "gameOver"),
+            jalapenoParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenoParticle"),
+            jalapenos: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenos"),
+            merda: loadSpriteFromSpriteSheet(playerSpriteSheet, "merda"),
+            pause: loadSpriteFromSpriteSheet(playerSpriteSheet, "pause"),
+            play: loadSpriteFromSpriteSheet(playerSpriteSheet, "play"),
+            record: loadSpriteFromSpriteSheet(playerSpriteSheet, "record"),
+            scoreggiaParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "scoreggiaParticle"),
+            stella: loadSpriteFromSpriteSheet(playerSpriteSheet, "stella"),
+            verdura: loadSpriteFromSpriteSheet(playerSpriteSheet, "verdura"),
+            background: loadSpriteFromSpriteSheet(playerSpriteSheet, "background"),
+            deathScreen: loadSpriteFromSpriteSheet(playerSpriteSheet, "deathScreen"),
+            nuvola1: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola1"),
+            nuvola2: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola2"),
+            nuvola3: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola3"),
+            player: {
+                run: new AnimatedSprite(playerSpriteSheet.animations.playerRun),
+                idle: new AnimatedSprite(playerSpriteSheet.animations.playerIdle),
+                fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart),
+                fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall),
+                merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda),
+            }
         },
-        buildings: {
-            back: loadAllSpritesFromSpriteSheet(buildingsBackSpriteSheet),
-            mid: loadAllSpritesFromSpriteSheet(buildingsMidSpriteSheet),
-            ground: loadAllSpritesFromSpriteSheet(buildingsGroundSpriteSheet)
-        },
-        bang: loadSpriteFromSpriteSheet(playerSpriteSheet, "bang"),
-        broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
-        bean: loadSpriteFromSpriteSheet(playerSpriteSheet, "bean"),
-        burger: loadSpriteFromSpriteSheet(playerSpriteSheet, "burger"),
-        gameOver: loadSpriteFromSpriteSheet(playerSpriteSheet, "gameOver"),
-        jalapenoParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenoParticle"),
-        jalapenos: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenos"),
-        merda: loadSpriteFromSpriteSheet(playerSpriteSheet, "merda"),
-        pause: loadSpriteFromSpriteSheet(playerSpriteSheet, "pause"),
-        play: loadSpriteFromSpriteSheet(playerSpriteSheet, "play"),
-        record: loadSpriteFromSpriteSheet(playerSpriteSheet, "record"),
-        scoreggiaParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "scoreggiaParticle"),
-        stella: loadSpriteFromSpriteSheet(playerSpriteSheet, "stella"),
-        verdura: loadSpriteFromSpriteSheet(playerSpriteSheet, "verdura"),
-        background: loadSpriteFromSpriteSheet(playerSpriteSheet, "background"),
-        deathScreen: loadSpriteFromSpriteSheet(playerSpriteSheet, "deathScreen"),
-        nuvola1: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola1"),
-        nuvola2: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola2"),
-        nuvola3: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola3"),
-        player: {
-            run: new AnimatedSprite(playerSpriteSheet.animations.playerRun),
-            idle: new AnimatedSprite(playerSpriteSheet.animations.playerIdle),
-            fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart),
-            fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall),
-            merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda),
+        sounds: {
+            // TODO
         }
     }
 };
