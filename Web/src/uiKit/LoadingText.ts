@@ -1,4 +1,4 @@
-import {Application, Renderer, Text} from "pixi.js";
+import {Application, Renderer, Text } from "pixi.js";
 
 class LoadingText {
     private readonly _loadingText: Text;
