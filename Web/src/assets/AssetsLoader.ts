@@ -3,9 +3,6 @@ import InfartAssets from "./InfartAssets";
 
 export const loadAssets = async () : Promise<InfartAssets> => {
 
-  // simultate 2 seconds timeout
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
   // Menu
   const texture = await Assets.load(
     "/assets/images/menuBackground.png"

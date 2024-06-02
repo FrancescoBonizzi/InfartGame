@@ -1,22 +1,25 @@
-import {Application, Renderer, Text } from "pixi.js";
+import {Application, Renderer, Text} from "pixi.js";
+import StringHelper from "../services/StringHelper.ts";
 
-class LoadingText {
+class LoadingThing {
     private readonly _loadingText: Text;
-
-    private _isShown: boolean;
     private _app: Application<Renderer>;
 
     constructor(
         app: Application<Renderer>,
         text: string = 'Loading...') {
+
+        if (StringHelper.isNullOrWhitespace(text)) {
+            text = 'Loading...';
+        }
+
         this._app = app;
-        this._isShown = false;
         this._loadingText = new Text({
             text: text,
             style: {
                 fontSize: 40,
                 fontWeight: 'bold',
-                fill: { color: '#ffffff' },
+                fill: {color: '#ffffff'},
             }
         });
         this._loadingText.anchor.set(0.5);
@@ -25,18 +28,14 @@ class LoadingText {
     }
 
     show(): void {
-        if (!this._isShown) {
-            this._app.stage.addChild(this._loadingText);
-            this._isShown = true;
-        }
+        // I don't use something like _isShown because addChild is idempotent
+        this._app.stage.addChild(this._loadingText);
     }
 
     hide(): void {
-        if (this._isShown) {
-            this._app.stage.removeChild(this._loadingText);
-            this._isShown = false;
-        }
+        // I don't use something like _isShown because removeChild is idempotent
+        this._app.stage.removeChild(this._loadingText);
     }
 }
 
-export default LoadingText;
+export default LoadingThing;

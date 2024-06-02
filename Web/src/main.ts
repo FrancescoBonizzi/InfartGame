@@ -1,6 +1,6 @@
 import {Application} from "pixi.js";
 import {loadAssets} from "./assets/AssetsLoader";
-import LoadingText from "./uiKit/LoadingText.ts";
+import LoadingThing from "./uiKit/LoadingThing.ts";
 
 (async () => {
     // Create a PixiJS application.
@@ -16,10 +16,10 @@ import LoadingText from "./uiKit/LoadingText.ts";
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
 
-    const loadingText = new LoadingText(app, "Farting...");
-    loadingText.show();
+    const loadingThing = new LoadingThing(app, "Farting...");
+    loadingThing.show();
     const infartAssets = await loadAssets();
-    loadingText.hide();
+    loadingThing.hide();
 
     // Menu
     const menuBackground = infartAssets.menu.background;
