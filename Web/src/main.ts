@@ -35,6 +35,8 @@ import LoadingThing from "./uiKit/LoadingThing.ts";
         playerRun.anchor.set(0.5);
         playerRun.x = app.screen.width / 2;
         playerRun.y = app.screen.height / 2;
+        playerRun.animationSpeed = 0.4;
+        playerRun.play();
 
         // add it to the stage to render
         app.stage.addChild(playerRun);
