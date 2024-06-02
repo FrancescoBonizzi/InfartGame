@@ -16,23 +16,31 @@ import LoadingThing from "./uiKit/LoadingThing.ts";
     // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
 
-    const loadingThing = new LoadingThing(app, "Farting...");
-    loadingThing.show();
-    const infartAssets = await loadAssets();
-    loadingThing.hide();
+    try {
+        const loadingThing = new LoadingThing(
+            app,
+            "Farting...");
+        loadingThing.show();
+        const infartAssets = await loadAssets();
+        loadingThing.hide();
 
-    // Menu
-    const menuBackground = infartAssets.menu.background;
-    menuBackground.x = 0;
-    menuBackground.y = 0;
-    app.stage.addChild(menuBackground);
+        // Menu
+        const menuBackground = infartAssets.menu.background;
+        menuBackground.x = 0;
+        menuBackground.y = 0;
+        app.stage.addChild(menuBackground);
 
-    // Spritesheet
-    const playerRun = infartAssets.player.run;
-    playerRun.anchor.set(0.5);
-    playerRun.x = app.screen.width / 2;
-    playerRun.y = app.screen.height / 2;
+        // Spritesheet
+        const playerRun = infartAssets.player.run;
+        playerRun.anchor.set(0.5);
+        playerRun.x = app.screen.width / 2;
+        playerRun.y = app.screen.height / 2;
 
-    // add it to the stage to render
-    app.stage.addChild(playerRun);
+        // add it to the stage to render
+        app.stage.addChild(playerRun);
+    }
+    catch (e) {
+        alert("Ooops! Errore!");
+        console.error(e);
+    }
 })();
