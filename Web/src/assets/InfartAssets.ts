@@ -14,6 +14,11 @@ interface InfartAssets {
         fall: AnimatedSprite;
         merda: AnimatedSprite;
     },
+    buildings: {
+        back: Sprite[];
+        mid: Sprite[];
+        ground: Sprite[];
+    },
     bang: Sprite;
     broccoloParticle: Sprite;
     bean: Sprite;

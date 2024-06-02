@@ -24,6 +24,12 @@ const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
     return spriteSheet as Spritesheet;
 }
 
+const loadAllSpritesFromSpriteSheet = (spriteSheet: Spritesheet): Sprite[] => {
+    return Object.keys(spriteSheet.textures).map((key) => {
+        return new Sprite(spriteSheet.textures[key]);
+    });
+}
+
 export const loadAssets = async (): Promise<InfartAssets> => {
 
     // Single image sprites
@@ -34,6 +40,9 @@ export const loadAssets = async (): Promise<InfartAssets> => {
 
     // Sprite sheets
     const playerSpriteSheet = await loadSpriteSheet("player");
+    const buildingsBackSpriteSheet = await loadSpriteSheet("buildingsBack");
+    const buildingsMidSpriteSheet = await loadSpriteSheet("buildingsMid");
+    const buildingsGroundSpriteSheet = await loadSpriteSheet("buildingsGround");
 
     return {
         menu: {
@@ -41,6 +50,11 @@ export const loadAssets = async (): Promise<InfartAssets> => {
             gameTitle: gameTitle,
             scoreBackground: scoreBackground,
             gameOverBackground: gameOverBackground
+        },
+        buildings: {
+            back: loadAllSpritesFromSpriteSheet(buildingsBackSpriteSheet),
+            mid: loadAllSpritesFromSpriteSheet(buildingsMidSpriteSheet),
+            ground: loadAllSpritesFromSpriteSheet(buildingsGroundSpriteSheet)
         },
         bang: loadSpriteFromSpriteSheet(playerSpriteSheet, "bang"),
         broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
