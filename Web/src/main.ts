@@ -1,10 +1,12 @@
+import { AnimatedSprite, Application, Assets, Sprite, Spritesheet } from "pixi.js";
+
 (async () => {
   // Create a PixiJS application.
-  const app = new PIXI.Application();
+  const app = new Application();
 
   // Intialize the application.
   await app.init({
-    background: "#1099bb",
+    background: "#1099aa",
     width: 800,
     height: 480,
   });
@@ -13,10 +15,10 @@
   document.body.appendChild(app.canvas);
 
   // Menu
-  const texture = await PIXI.Assets.load(
-    "src/assets/images/menuBackground.png"
+  const texture = await Assets.load(
+    "/assets/images/menuBackground.png"
   );
-  const sprite1 = new PIXI.Sprite(texture);
+  const sprite1 = new Sprite(texture);
 
   sprite1.x = 0;
   sprite1.y = 0;
@@ -129,7 +131,7 @@
       },
     },
     meta: {
-      image: "src/assets/images/textures.png",
+      image: "/assets/images/textures.png",
       format: "RGBA8888",
       size: { w: 2048, h: 2048 },
       scale: 1,
@@ -160,8 +162,8 @@
     },
   };
 
-  const spritesheet = new PIXI.Spritesheet(
-    await PIXI.Assets.load(spritesheetConfiguration.meta.image),
+  const spritesheet = new Spritesheet(
+    await Assets.load(spritesheetConfiguration.meta.image),
     spritesheetConfiguration
   );
 
@@ -169,7 +171,7 @@
   await spritesheet.parse();
 
   // spritesheet is ready to use!
-  const anim = new PIXI.AnimatedSprite(spritesheet.animations.playerRun);
+  const anim = new AnimatedSprite(spritesheet.animations.playerRun);
 
   anim.anchor.set(0.5);
   anim.x = app.screen.width / 2;
