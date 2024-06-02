@@ -1,4 +1,5 @@
 import { AnimatedSprite, Sprite } from "pixi.js";
+import {Sound} from "@pixi/sound";
 
 interface InfartAssets {
     sprites: {
@@ -41,7 +42,20 @@ interface InfartAssets {
         nuvola3: Sprite;
     }
     sounds: {
-
+        music: {
+            game: Sound,
+            menu: Sound
+        },
+        farts: Sound[],
+        effects: {
+            bite: Sound,
+            explosion: Sound,
+            fall: Sound,
+            heartBeat: Sound,
+            jalapenos: Sound,
+            thunder: Sound,
+            truck: Sound,
+        }
     }
 }
 

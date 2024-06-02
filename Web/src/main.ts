@@ -40,6 +40,9 @@ import LoadingThing from "./uiKit/LoadingThing.ts";
 
         // add it to the stage to render
         app.stage.addChild(playerRun);
+
+        infartAssets.sounds.music.menu.loop = true;
+        infartAssets.sounds.music.menu.play();
     }
     catch (e) {
         alert("Ooops! Errore!");

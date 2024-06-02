@@ -1,34 +1,11 @@
 import {AnimatedSprite, Assets, Sprite, Spritesheet} from "pixi.js";
 import InfartAssets from "./InfartAssets";
+import {Sound, sound} from "@pixi/sound";
 
 const _assetsRoot: string = '/assets';
 const _imagesAssetsRoot: string = `${_assetsRoot}/images`;
 const _spriteSheetsAssetsRoot: string = `${_imagesAssetsRoot}/spriteSheets`;
-
-const loadSpriteFromFile = async (name: string): Promise<Sprite> => {
-    const texture = await Assets.load(`${_imagesAssetsRoot}/${name}`);
-    return new Sprite(texture);
-}
-
-const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Sprite => {
-    const texture = spriteSheet.textures[`${name}.png`];
-    return new Sprite(texture);
-}
-
-const loadMenuSprite = async (name: string): Promise<Sprite> => {
-    return await loadSpriteFromFile(`menu/${name}.png`);
-}
-
-const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
-    const spriteSheet = await Assets.load(`${_spriteSheetsAssetsRoot}/${name}.json`);
-    return spriteSheet as Spritesheet;
-}
-
-const loadAllSpritesFromSpriteSheet = (spriteSheet: Spritesheet): Sprite[] => {
-    return Object.keys(spriteSheet.textures).map((key) => {
-        return new Sprite(spriteSheet.textures[key]);
-    });
-}
+const _soundsAssetsRoot: string = `${_assetsRoot}/sounds`;
 
 export const loadAssets = async (): Promise<InfartAssets> => {
 
@@ -85,7 +62,58 @@ export const loadAssets = async (): Promise<InfartAssets> => {
             }
         },
         sounds: {
-            // TODO
+            music: {
+                game: loadSound("music", "game"),
+                menu: loadSound("music", "menu")
+            },
+            effects: {
+                bite: loadSound("effects", "bite"),
+                explosion: loadSound("effects", "explosion"),
+                fall: loadSound("effects", "fall"),
+                heartBeat: loadSound("effects", "heartBeat"),
+                jalapenos: loadSound("effects", "jalapenos"),
+                thunder: loadSound("effects", "thunder"),
+                truck: loadSound("effects", "truck"),
+            },
+            farts: [
+                loadSound("farts", "fart1"),
+                loadSound("farts", "fart2"),
+                loadSound("farts", "fart3"),
+                loadSound("farts", "fart4"),
+                loadSound("farts", "fart5"),
+                loadSound("farts", "fart6"),
+                loadSound("farts", "fart7")
+            ]
         }
     }
 };
+
+
+const loadSpriteFromFile = async (name: string): Promise<Sprite> => {
+    const texture = await Assets.load(`${_imagesAssetsRoot}/${name}`);
+    return new Sprite(texture);
+}
+
+const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Sprite => {
+    const texture = spriteSheet.textures[`${name}.png`];
+    return new Sprite(texture);
+}
+
+const loadMenuSprite = async (name: string): Promise<Sprite> => {
+    return await loadSpriteFromFile(`menu/${name}.png`);
+}
+
+const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
+    const spriteSheet = await Assets.load(`${_spriteSheetsAssetsRoot}/${name}.json`);
+    return spriteSheet as Spritesheet;
+}
+
+const loadAllSpritesFromSpriteSheet = (spriteSheet: Spritesheet): Sprite[] => {
+    return Object.keys(spriteSheet.textures).map((key) => {
+        return new Sprite(spriteSheet.textures[key]);
+    });
+}
+
+const loadSound = (folder: string, name: string): Sound => {
+    return sound.add(name, `${_soundsAssetsRoot}/${folder}/${name}.mp3`);
+}
