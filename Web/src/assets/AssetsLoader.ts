@@ -12,7 +12,7 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     // SpriteSheet
     const spriteSheet = await Assets.load('/assets/images/spriteSheet.json');
 
-    const anim = new AnimatedSprite(spriteSheet.animations.playerIdle);
+    const anim = new AnimatedSprite(spriteSheet.animations.playerMerda);
     anim.animationSpeed = 0.4;
     anim.play();
 
