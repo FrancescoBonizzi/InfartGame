@@ -824,7 +824,7 @@
     ]
   },
   "meta": {
-    "image": "textures.png",
+    "image": "playerTextures.png",
     "format": "RGBA8888",
     "size": {
       "w": 2048,

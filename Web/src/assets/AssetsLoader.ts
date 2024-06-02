@@ -10,9 +10,9 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     const menuBackground = new Sprite(texture);
 
     // SpriteSheet
-    const spriteSheet = await Assets.load('/assets/images/spriteSheet.json');
+    const playerSpriteSheet = await Assets.load('/assets/images/spriteSheets/playerTexturesSpriteSheet.json');
 
-    const anim = new AnimatedSprite(spriteSheet.animations.playerMerda);
+    const anim = new AnimatedSprite(playerSpriteSheet.animations.playerMerda);
     anim.animationSpeed = 0.4;
     anim.play();
 
