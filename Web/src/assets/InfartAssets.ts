@@ -6,7 +6,8 @@ interface InfartAssets {
     },
     player: {
         run: AnimatedSprite;
-    }
+    },
+    jalapeno: Sprite;
 }
 
 export default InfartAssets;

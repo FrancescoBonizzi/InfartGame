@@ -12,14 +12,17 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     // SpriteSheet
     const playerSpriteSheet = await Assets.load('/assets/images/spriteSheets/playerTexturesSpriteSheet.json');
 
-    const anim = new AnimatedSprite(playerSpriteSheet.animations.playerMerda);
-    anim.animationSpeed = 0.4;
+    const anim = new AnimatedSprite(playerSpriteSheet.animations.playerRun);
+    anim.animationSpeed = 0.3;
     anim.play();
+
+    const singleFrame = new Sprite(playerSpriteSheet.textures['jalapenos']);
 
     return {
         menu: {
-            background: menuBackground,
+            background: menuBackground
         },
+        jalapeno: singleFrame,
         player: {
             run: anim,
         }
