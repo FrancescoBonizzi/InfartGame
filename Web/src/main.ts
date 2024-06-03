@@ -1,6 +1,7 @@
 import {Application} from "pixi.js";
 import {loadAssets} from "./assets/AssetsLoader";
 import LoadingThing from "./uiKit/LoadingThing.ts";
+import GrattacieliGroup from "./background/GrattacieliGroup.ts";
 
 (async () => {
     // Create a PixiJS application.
@@ -24,7 +25,22 @@ import LoadingThing from "./uiKit/LoadingThing.ts";
         const infartAssets = await loadAssets();
         loadingThing.hide();
 
-        // Menu
+        const grattacieliGroup = new GrattacieliGroup(
+            app,
+            infartAssets);
+        app.ticker.add((time) => {
+            grattacieliGroup.update(time);
+        });
+
+    }
+    catch (e) {
+        alert("Ooops! Errore!");
+        console.error(e);
+    }
+})();
+
+/*
+ // Menu
         const testSprite = infartAssets.sprites.menu.background;
         testSprite.x = 0;
         testSprite.y = 0;
@@ -43,9 +59,5 @@ import LoadingThing from "./uiKit/LoadingThing.ts";
 
         infartAssets.sounds.music.menu.loop = true;
         infartAssets.sounds.music.menu.play();
-    }
-    catch (e) {
-        alert("Ooops! Errore!");
-        console.error(e);
-    }
-})();
+
+ */
