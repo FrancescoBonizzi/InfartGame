@@ -1,15 +1,18 @@
-import {Application, Renderer, Sprite} from "pixi.js";
+import {Sprite} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
+import World from "../world/World.ts";
 
 class GrattacieliAutogeneranti {
     private _maxGrattacieloPositionOffset = 20;
     private _grattacieli: Sprite[];
     private _lastGrattacieloX = 0;
+    private _world: World;
 
     constructor(
-        app: Application<Renderer>,
+        world: World,
         grattacieli: Sprite[]) {
 
+        this._world = world;
         this._grattacieli = grattacieli;
         this._lastGrattacieloX = 0;
 
@@ -17,10 +20,10 @@ class GrattacieliAutogeneranti {
         this._grattacieli.forEach(grattacielo => {
 
             // TODO: tutto questo in una classe Grattacielo
-            app.stage.addChild(grattacielo);
+            world.addChild(grattacielo);
 
             grattacielo.anchor.set(0, 1);
-            grattacielo.y = app.screen.height;
+            grattacielo.y = 0;
 
             grattacielo.x =
                 this._lastGrattacieloX
@@ -46,8 +49,9 @@ class GrattacieliAutogeneranti {
         this._lastGrattacieloX = grattacielo.x;
     }
 
+    // TODO!
     hasToBeRepositioned(grattacielo: Sprite) {
-        return grattacielo.x + grattacielo.width <= 0;
+   return false;  //   return grattacielo.x + grattacielo.width <= 0;
     }
 
     update() {

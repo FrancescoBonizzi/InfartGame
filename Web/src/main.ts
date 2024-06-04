@@ -2,6 +2,7 @@ import {Application} from "pixi.js";
 import {loadAssets} from "./assets/AssetsLoader";
 import LoadingThing from "./uiKit/LoadingThing.ts";
 import GrattacieliGroup from "./background/GrattacieliGroup.ts";
+import World from "./world/World.ts";
 
 (async () => {
     // Create a PixiJS application.
@@ -25,8 +26,10 @@ import GrattacieliGroup from "./background/GrattacieliGroup.ts";
         const infartAssets = await loadAssets();
         loadingThing.hide();
 
+        const world = new World(app);
+
         const grattacieliGroup = new GrattacieliGroup(
-            app,
+            world,
             infartAssets);
         app.ticker.add((time) => {
             grattacieliGroup.update(time);

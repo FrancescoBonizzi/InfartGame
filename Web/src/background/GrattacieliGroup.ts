@@ -1,6 +1,7 @@
-import {Application, Renderer, Ticker} from "pixi.js";
+import {Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import GrattacieliAutogeneranti from "./GrattacieliAutogeneranti.ts";
+import World from "../world/World.ts";
 
 class GrattacieliGroup {
 
@@ -10,21 +11,20 @@ class GrattacieliGroup {
 
 
     constructor(
-        app: Application<Renderer>,
+        world: World,
         infartAssets: InfartAssets) {
 
         this._grattacieliBack = new GrattacieliAutogeneranti(
-            app,
+            world,
             infartAssets.sprites.buildings.back);
 
         this._grattacieliMid = new GrattacieliAutogeneranti(
-            app,
+            world,
             infartAssets.sprites.buildings.mid);
 
         this._grattacieliGround = new GrattacieliAutogeneranti(
-            app,
+            world,
             infartAssets.sprites.buildings.ground);
-
     }
 
     update(time: Ticker) {
