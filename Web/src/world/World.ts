@@ -17,6 +17,10 @@ class World {
         app.stage.addChild(this._world);
     }
 
+    get container() {
+        return this._world;
+    }
+
     get height() {
         return this._world.height;
     }

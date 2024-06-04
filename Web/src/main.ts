@@ -3,10 +3,12 @@ import {loadAssets} from "./assets/AssetsLoader";
 import LoadingThing from "./uiKit/LoadingThing.ts";
 import GrattacieliGroup from "./background/GrattacieliGroup.ts";
 import World from "./world/World.ts";
+import Controller from "./interaction/Controller.ts";
 
 (async () => {
     // Create a PixiJS application.
     const app = new Application();
+    const controller = new Controller();
 
     // Intialize the application.
     await app.init({
@@ -31,8 +33,19 @@ import World from "./world/World.ts";
         const grattacieliGroup = new GrattacieliGroup(
             world,
             infartAssets);
+
         app.ticker.add((time) => {
             grattacieliGroup.update(time);
+
+            // TODO TMP -> per i salti del player
+            // const rightPressed = controller.keys.right.pressed;
+            // if (upPressed) {
+            //     world.container.y += 1;
+            // }
+            // if (downPressed) {
+            //     world.container.y -= 1;
+            // }
+
         });
 
     }
