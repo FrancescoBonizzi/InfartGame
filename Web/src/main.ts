@@ -39,10 +39,10 @@ import Controller from "./interaction/Controller.ts";
 
             // TODO TMP -> per i salti del player
             if (controller.Keys.up.pressed) {
-                world.container.y += 1;
+                world.container.y -= 1;
             }
             if (controller.Keys.down.pressed) {
-                world.container.y -= 1;
+                world.container.y += 1;
             }
 
         });
