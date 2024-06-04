@@ -9,7 +9,6 @@ class GrattacieliGroup {
     private _grattacieliMid: GrattacieliAutogeneranti;
     private _grattacieliGround: GrattacieliAutogeneranti;
 
-
     constructor(
         world: World,
         infartAssets: InfartAssets) {

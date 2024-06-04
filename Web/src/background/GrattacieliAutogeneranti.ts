@@ -49,9 +49,8 @@ class GrattacieliAutogeneranti {
         this._lastGrattacieloX = grattacielo.x;
     }
 
-    // TODO!
     hasToBeRepositioned(grattacielo: Sprite) {
-   return false;  //   return grattacielo.x + grattacielo.width <= 0;
+        return grattacielo.x + grattacielo.width <= this._world.x;
     }
 
     update() {
