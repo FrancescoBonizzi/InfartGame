@@ -1,48 +1,68 @@
-const keyMap = {
-    Space: 'space'
+const keyMap: Record<string, string> = {
+    Space: 'space',
+    ArrowUp: 'up',
+    ArrowDown: 'down'
 };
 
 interface KeyState {
     pressed: boolean;
 }
 
-class Controller
-{
-    Keys: {
-        space: KeyState;
-    };
+interface Keys {
+    space: KeyState;
+    up: KeyState;
+    down: KeyState;
+}
 
-    constructor()
-    {
-        this.Keys = {
+class Controller {
+
+    private readonly _keys: Keys;
+
+    constructor() {
+        this._keys = {
             space: { pressed: false },
+            up: { pressed: false },
+            down: { pressed: false }
         };
 
-        window.addEventListener('keydown', (event) => this.keydownHandler(event));
-        window.addEventListener('keyup', (event) => this.keyupHandler(event));
+        window.addEventListener('keydown', this.keydownHandler.bind(this));
+        window.addEventListener('keyup', this.keyupHandler.bind(this));
     }
 
-    keydownHandler(event: KeyboardEvent)
-    {
+    private keydownHandler(event: KeyboardEvent): void {
         const key = keyMap[event.code];
 
         if (!key)
             return;
 
-        // Toggle on the key pressed state.
-        this.Keys[key].pressed = true;
+        if (key === 'space') {
+            this._keys.space.pressed = true;
+        } else if (key === 'up') {
+            this._keys.up.pressed = true;
+        } else if (key === 'down') {
+            this._keys.down.pressed = true;
+        }
     }
 
-    keyupHandler(event : KeyboardEvent)
-    {
+    private keyupHandler(event: KeyboardEvent): void {
         const key = keyMap[event.code];
 
         if (!key)
             return;
 
-        // Reset the key pressed state.
-        this.Keys[key].pressed = false;
+        if (key === 'space') {
+            this._keys.space.pressed = false;
+        } else if (key === 'up') {
+            this._keys.up.pressed = false;
+        } else if (key === 'down') {
+            this._keys.down.pressed = false;
+        }
     }
+
+    get Keys(): Keys {
+        return this._keys;
+    }
+
 }
 
 export default Controller;

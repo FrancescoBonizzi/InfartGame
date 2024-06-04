@@ -38,13 +38,12 @@ import Controller from "./interaction/Controller.ts";
             grattacieliGroup.update(time);
 
             // TODO TMP -> per i salti del player
-            // const rightPressed = controller.keys.right.pressed;
-            // if (upPressed) {
-            //     world.container.y += 1;
-            // }
-            // if (downPressed) {
-            //     world.container.y -= 1;
-            // }
+            if (controller.Keys.up.pressed) {
+                world.container.y += 1;
+            }
+            if (controller.Keys.down.pressed) {
+                world.container.y -= 1;
+            }
 
         });
 
