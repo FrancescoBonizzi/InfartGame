@@ -30,13 +30,13 @@ class GrattacieliGroup {
     update(time: Ticker) {
         const dx = -time.deltaTime;
 
-        this._grattacieliBack.moveX(dx * 0.1);
+        this._grattacieliBack.moveX(dx * 0.05);
         this._grattacieliBack.update();
 
-        this._grattacieliMid.moveX(dx * 0.3);
+        this._grattacieliMid.moveX(dx * 0.2);
         this._grattacieliMid.update();
 
-        this._grattacieliGround.moveX(dx * 0.5);
+        this._grattacieliGround.moveX(dx * 0.4);
         this._grattacieliGround.update();
     }
 }
