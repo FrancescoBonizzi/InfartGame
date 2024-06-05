@@ -37,6 +37,21 @@ class World {
         this._world.addChild(child);
     }
 
+    /*
+      Quando hai un Sprite (come il grattacielo) all'interno di un Container (come World),
+      le coordinate del Sprite sono relative al suo Container.
+      Quindi, se grattacielo.x è 100, significa che il grattacielo è posizionato a 100 pixel
+      dall'origine del Container (World).
+
+      D'altra parte, il Container stesso (World) ha delle coordinate
+      rispetto alla scena principale (l'intera applicazione).
+      Quindi, this._world.x rappresenta la posizione orizzontale
+      di World rispetto alla scena principale.
+   */
+    worldToScreenX(x: number) {
+        return x + this._world.x;
+    }
+
 }
 
 export default World;

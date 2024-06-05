@@ -7,7 +7,7 @@ class GrattacieliAutogeneranti {
     private _grattacieli: Sprite[];
     private _lastGrattacieloX = 0;
     private _world: World;
-    private _parallaxSpeed: number;
+    private readonly _parallaxSpeed: number;
 
     constructor(
         world: World,
@@ -46,7 +46,8 @@ class GrattacieliAutogeneranti {
     }
 
     hasToBeRepositioned(grattacielo: Sprite) {
-        return grattacielo.x + grattacielo.width <= this._world.x;
+        const globalX = this._world.worldToScreenX(grattacielo.x);
+        return globalX + grattacielo.width <= 0;
     }
 
     update(time: Ticker) {
