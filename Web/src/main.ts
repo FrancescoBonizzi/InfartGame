@@ -15,6 +15,7 @@ import Controller from "./interaction/Controller.ts";
         background: "#1099aa",
         width: 800,
         height: 480,
+        premultipliedAlpha: false
     });
 
     // Then adding the application's canvas to the DOM body.
