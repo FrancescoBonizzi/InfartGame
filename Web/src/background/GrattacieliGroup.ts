@@ -15,28 +15,24 @@ class GrattacieliGroup {
 
         this._grattacieliBack = new GrattacieliAutogeneranti(
             world,
-            infartAssets.sprites.buildings.back);
+            infartAssets.sprites.buildings.back,
+            0.05);
 
         this._grattacieliMid = new GrattacieliAutogeneranti(
             world,
-            infartAssets.sprites.buildings.mid);
+            infartAssets.sprites.buildings.mid,
+            0.2);
 
         this._grattacieliGround = new GrattacieliAutogeneranti(
             world,
-            infartAssets.sprites.buildings.ground);
+            infartAssets.sprites.buildings.ground,
+            0.4);
     }
 
     update(time: Ticker) {
-        const dx = -time.deltaTime;
-
-        this._grattacieliBack.moveX(dx * 0.05);
-        this._grattacieliBack.update();
-
-        this._grattacieliMid.moveX(dx * 0.2);
-        this._grattacieliMid.update();
-
-        this._grattacieliGround.moveX(dx * 0.4);
-        this._grattacieliGround.update();
+        this._grattacieliBack.update(time);
+        this._grattacieliMid.update(time);
+        this._grattacieliGround.update(time);
     }
 }
 

@@ -1,4 +1,4 @@
-import {Sprite} from "pixi.js";
+import {Sprite, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 import World from "../world/World.ts";
 
@@ -7,14 +7,17 @@ class GrattacieliAutogeneranti {
     private _grattacieli: Sprite[];
     private _lastGrattacieloX = 0;
     private _world: World;
+    private _parallaxSpeed: number;
 
     constructor(
         world: World,
-        grattacieli: Sprite[]) {
+        grattacieli: Sprite[],
+        parallaxSpeed: number) {
 
         this._world = world;
         this._grattacieli = grattacieli;
         this._lastGrattacieloX = 0;
+        this._parallaxSpeed = parallaxSpeed;
 
         let previousGrattacieloWidth = 0;
         this._grattacieli.forEach(grattacielo => {
@@ -35,12 +38,6 @@ class GrattacieliAutogeneranti {
 
     }
 
-    moveX(x: number) {
-        this._grattacieli.forEach(grattacielo => {
-            grattacielo.x += x;
-        });
-    }
-
     repositionGrattacielo(grattacielo: Sprite) {
         grattacielo.x =
             this._lastGrattacieloX
@@ -53,10 +50,14 @@ class GrattacieliAutogeneranti {
         return grattacielo.x + grattacielo.width <= this._world.x;
     }
 
-    update() {
+    update(time: Ticker) {
         this._grattacieli.forEach(grattacielo => {
+            // When the grattacielo is out of the screen,
+            // reposition it at the end of the last grattacielo on the right
             if (this.hasToBeRepositioned(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
+            } else {
+                grattacielo.x -= time.deltaTime * this._parallaxSpeed;
             }
         });
     }
