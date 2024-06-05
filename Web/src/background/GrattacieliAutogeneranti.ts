@@ -45,16 +45,14 @@ class GrattacieliAutogeneranti {
         this._lastGrattacieloX = grattacielo.x;
     }
 
-    hasToBeRepositioned(grattacielo: Sprite) {
+    isOutOfScreenLeft(grattacielo: Sprite) {
         const globalX = this._world.worldToScreenX(grattacielo.x);
         return globalX + grattacielo.width <= 0;
     }
 
     update(time: Ticker) {
         this._grattacieli.forEach(grattacielo => {
-            // When the grattacielo is out of the screen,
-            // reposition it at the end of the last grattacielo on the right
-            if (this.hasToBeRepositioned(grattacielo)) {
+            if (this.isOutOfScreenLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
             } else {
                 grattacielo.x -= time.deltaTime * this._parallaxSpeed;
