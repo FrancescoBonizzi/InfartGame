@@ -22,7 +22,6 @@ class GrattacieliAutogeneranti {
         let previousGrattacieloWidth = 0;
         this._grattacieli.forEach(grattacielo => {
 
-            // TODO: tutto questo in una classe Grattacielo
             world.addChild(grattacielo);
 
             grattacielo.anchor.set(0, 1);

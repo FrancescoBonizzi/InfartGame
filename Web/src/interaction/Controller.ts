@@ -1,7 +1,9 @@
 const keyMap: Record<string, string> = {
     Space: 'space',
     ArrowUp: 'up',
-    ArrowDown: 'down'
+    ArrowDown: 'down',
+    ArrowRight: 'right',
+    ArrowLeft: 'left'
 };
 
 interface KeyState {
@@ -12,6 +14,8 @@ interface Keys {
     space: KeyState;
     up: KeyState;
     down: KeyState;
+    right: KeyState;
+    left: KeyState;
 }
 
 class Controller {
@@ -20,9 +24,11 @@ class Controller {
 
     constructor() {
         this._keys = {
-            space: { pressed: false },
-            up: { pressed: false },
-            down: { pressed: false }
+            space: {pressed: false},
+            up: {pressed: false},
+            down: {pressed: false},
+            right: {pressed: false},
+            left: {pressed: false}
         };
 
         window.addEventListener('keydown', this.keydownHandler.bind(this));
@@ -32,30 +38,48 @@ class Controller {
     private keydownHandler(event: KeyboardEvent): void {
         const key = keyMap[event.code];
 
-        if (!key)
+        if (!key) {
             return;
+        }
 
         if (key === 'space') {
             this._keys.space.pressed = true;
-        } else if (key === 'up') {
+        }
+        else if (key === 'up') {
             this._keys.up.pressed = true;
-        } else if (key === 'down') {
+        }
+        else if (key === 'down') {
             this._keys.down.pressed = true;
+        }
+        else if (key === 'right') {
+            this._keys.right.pressed = true;
+        }
+        else if (key === 'left') {
+            this._keys.left.pressed = true;
         }
     }
 
     private keyupHandler(event: KeyboardEvent): void {
         const key = keyMap[event.code];
 
-        if (!key)
+        if (!key) {
             return;
+        }
 
         if (key === 'space') {
             this._keys.space.pressed = false;
-        } else if (key === 'up') {
+        }
+        else if (key === 'up') {
             this._keys.up.pressed = false;
-        } else if (key === 'down') {
+        }
+        else if (key === 'down') {
             this._keys.down.pressed = false;
+        }
+        else if (key === 'right') {
+            this._keys.right.pressed = false;
+        }
+        else if (key === 'left') {
+            this._keys.left.pressed = false;
         }
     }
 

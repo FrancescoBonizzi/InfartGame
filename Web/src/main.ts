@@ -9,7 +9,7 @@ import Game from "./game.ts";
 
     // Intialize the application.
     await app.init({
-        background: "#1099aa",
+        background: "#ff0000",
         width: 800,
         height: 480,
         premultipliedAlpha: false

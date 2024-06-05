@@ -95,7 +95,7 @@ const loadSpriteFromFile = async (name: string): Promise<Sprite> => {
 }
 
 const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Sprite => {
-    const texture = spriteSheet.textures[`${name}.png`];
+    const texture = spriteSheet.textures[`${name}`];
     return new Sprite(texture);
 }
 

@@ -34,10 +34,16 @@ class Game {
 
         // TODO TMP -> per i salti del player
         if (this._controller.Keys.up.pressed) {
-            this._world.container.y -= 1;
+            this._world.y += 20;
         }
         if (this._controller.Keys.down.pressed) {
-            this._world.container.y += 1;
+            this._world.y -= 20;
+        }
+        if (this._controller.Keys.right.pressed) {
+            this._world.x -= 20;
+        }
+        if (this._controller.Keys.left.pressed) {
+            this._world.x += 20;
         }
     }
 

@@ -17,24 +17,20 @@ class World {
         app.stage.addChild(this._world);
     }
 
-    get container() {
-        return this._world;
-    }
-
-    get height() {
-        return this._world.height;
-    }
-
-    get width() {
-        return this._world.width;
-    }
-
     get x() {
         return this._world.x;
     }
 
     get y() {
         return this._world.y;
+    }
+
+    set x(x: number) {
+        this._world.x = x;
+    }
+
+    set y(y: number) {
+        this._world.y = y;
     }
 
     addChild(child: Container) {
