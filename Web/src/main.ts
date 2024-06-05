@@ -1,14 +1,11 @@
 import {Application} from "pixi.js";
 import {loadAssets} from "./assets/AssetsLoader";
 import LoadingThing from "./uiKit/LoadingThing.ts";
-import GrattacieliGroup from "./background/GrattacieliGroup.ts";
-import World from "./world/World.ts";
-import Controller from "./interaction/Controller.ts";
+import Game from "./game.ts";
 
 (async () => {
     // Create a PixiJS application.
     const app = new Application();
-    const controller = new Controller();
 
     // Intialize the application.
     await app.init({
@@ -29,25 +26,11 @@ import Controller from "./interaction/Controller.ts";
         const infartAssets = await loadAssets();
         loadingThing.hide();
 
-        const world = new World(app);
-
-        const grattacieliGroup = new GrattacieliGroup(
-            world,
-            infartAssets);
+        const game = new Game(infartAssets, app);
 
         app.ticker.add((time) => {
-            grattacieliGroup.update(time);
-
-            // TODO TMP -> per i salti del player
-            if (controller.Keys.up.pressed) {
-                world.container.y -= 1;
-            }
-            if (controller.Keys.down.pressed) {
-                world.container.y += 1;
-            }
-
+            game.update(time);
         });
-
     }
     catch (e) {
         alert("Ooops! Errore!");
