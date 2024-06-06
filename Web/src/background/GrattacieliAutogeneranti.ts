@@ -1,4 +1,4 @@
-import {Sprite, Ticker} from "pixi.js";
+import {Sprite, Texture, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 import World from "../world/World.ts";
 
@@ -12,11 +12,11 @@ class GrattacieliAutogeneranti {
 
     constructor(
         world: World,
-        grattacieli: Sprite[],
+        grattacieli: Texture[],
         parallaxSpeed: number | null) {
 
         this._world = world;
-        this._grattacieli = grattacieli;
+        this._grattacieli = grattacieli.map(texture => new Sprite(texture));
         this._lastGrattacieloX = 0;
         this._parallaxSpeed = parallaxSpeed;
 

@@ -1,13 +1,13 @@
-import { AnimatedSprite, Sprite } from "pixi.js";
+import {AnimatedSprite, Texture} from "pixi.js";
 import {Sound} from "@pixi/sound";
 
 interface InfartAssets {
-    sprites: {
+    textures: {
         menu: {
-            background: Sprite;
-            gameTitle: Sprite;
-            scoreBackground: Sprite;
-            gameOverBackground: Sprite;
+            background: Texture;
+            gameTitle: Texture;
+            scoreBackground: Texture;
+            gameOverBackground: Texture;
         },
         player: {
             run: AnimatedSprite;
@@ -17,29 +17,29 @@ interface InfartAssets {
             merda: AnimatedSprite;
         },
         buildings: {
-            back: Sprite[];
-            mid: Sprite[];
-            ground: Sprite[];
+            back: Texture[];
+            mid: Texture[];
+            ground: Texture[];
         },
-        bang: Sprite;
-        broccoloParticle: Sprite;
-        bean: Sprite;
-        burger: Sprite;
-        gameOver: Sprite;
-        jalapenoParticle: Sprite;
-        jalapenos: Sprite;
-        merda: Sprite,
-        pause: Sprite;
-        play: Sprite;
-        record: Sprite;
-        scoreggiaParticle: Sprite;
-        stella: Sprite;
-        verdura: Sprite;
-        background: Sprite;
-        deathScreen: Sprite;
-        nuvola1: Sprite;
-        nuvola2: Sprite;
-        nuvola3: Sprite;
+        bang: Texture;
+        broccoloParticle: Texture;
+        bean: Texture;
+        burger: Texture;
+        gameOver: Texture;
+        jalapenoParticle: Texture;
+        jalapenos: Texture;
+        merda: Texture,
+        pause: Texture;
+        play: Texture;
+        record: Texture;
+        scoreggiaParticle: Texture;
+        stella: Texture;
+        verdura: Texture;
+        background: Texture;
+        deathScreen: Texture;
+        nuvola1: Texture;
+        nuvola2: Texture;
+        nuvola3: Texture;
     }
     sounds: {
         music: {

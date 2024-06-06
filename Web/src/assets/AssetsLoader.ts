@@ -1,4 +1,4 @@
-import {AnimatedSprite, Assets, Sprite, Spritesheet} from "pixi.js";
+import {AnimatedSprite, Assets, Spritesheet, Texture} from "pixi.js";
 import InfartAssets from "./InfartAssets";
 import {Sound, sound} from "@pixi/sound";
 
@@ -10,10 +10,10 @@ const _soundsAssetsRoot: string = `${_assetsRoot}/sounds`;
 export const loadAssets = async (): Promise<InfartAssets> => {
 
     // Single image sprites
-    const menuBackground = await loadMenuSprite("menuBackground");
-    const gameTitle = await loadMenuSprite("gameTitle");
-    const scoreBackground = await loadMenuSprite("scoreBackground");
-    const gameOverBackground = await loadMenuSprite("gameOverBackground");
+    const menuBackground = await loadMenuTexture("menuBackground");
+    const gameTitle = await loadMenuTexture("gameTitle");
+    const scoreBackground = await loadMenuTexture("scoreBackground");
+    const gameOverBackground = await loadMenuTexture("gameOverBackground");
 
     // Sprite sheets
     const playerSpriteSheet = await loadSpriteSheet("player");
@@ -22,7 +22,7 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     const buildingsGroundSpriteSheet = await loadSpriteSheet("buildingsGround");
 
     return {
-        sprites: {
+        textures: {
             menu: {
                 background: menuBackground,
                 gameTitle: gameTitle,
@@ -30,9 +30,9 @@ export const loadAssets = async (): Promise<InfartAssets> => {
                 gameOverBackground: gameOverBackground
             },
             buildings: {
-                back: loadAllSpritesFromSpriteSheet(buildingsBackSpriteSheet),
-                mid: loadAllSpritesFromSpriteSheet(buildingsMidSpriteSheet),
-                ground: loadAllSpritesFromSpriteSheet(buildingsGroundSpriteSheet)
+                back: loadAllTexturesFromSpriteSheet(buildingsBackSpriteSheet),
+                mid: loadAllTexturesFromSpriteSheet(buildingsMidSpriteSheet),
+                ground: loadAllTexturesFromSpriteSheet(buildingsGroundSpriteSheet)
             },
             bang: loadSpriteFromSpriteSheet(playerSpriteSheet, "bang"),
             broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
@@ -89,18 +89,16 @@ export const loadAssets = async (): Promise<InfartAssets> => {
 };
 
 
-const loadSpriteFromFile = async (name: string): Promise<Sprite> => {
-    const texture = await Assets.load(`${_imagesAssetsRoot}/${name}`);
-    return new Sprite(texture);
+const loadTextureFromFile = async (name: string): Promise<Texture> => {
+    return await Assets.load(`${_imagesAssetsRoot}/${name}`);
 }
 
-const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Sprite => {
-    const texture = spriteSheet.textures[`${name}`];
-    return new Sprite(texture);
+const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Texture => {
+    return spriteSheet.textures[`${name}`];
 }
 
-const loadMenuSprite = async (name: string): Promise<Sprite> => {
-    return await loadSpriteFromFile(`menu/${name}.png`);
+const loadMenuTexture = async (name: string): Promise<Texture> => {
+    return await loadTextureFromFile(`menu/${name}.png`);
 }
 
 const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
@@ -108,9 +106,9 @@ const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
     return spriteSheet as Spritesheet;
 }
 
-const loadAllSpritesFromSpriteSheet = (spriteSheet: Spritesheet): Sprite[] => {
+const loadAllTexturesFromSpriteSheet = (spriteSheet: Spritesheet): Texture[] => {
     return Object.keys(spriteSheet.textures).map((key) => {
-        return new Sprite(spriteSheet.textures[key]);
+        return spriteSheet.textures[key];
     });
 }
 

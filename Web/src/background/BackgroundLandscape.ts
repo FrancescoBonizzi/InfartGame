@@ -28,28 +28,28 @@ class BackgroundLandscape {
             world,
             infartAssets,
             0.2,
-            "green",//"#051728",
+            "#051728",
             {
-                min: 10 / 100,
-                max: 20 / 100
+                min: 5 / 100,
+                max: 8 / 100
             });
         this._grattacieliBack = new GrattacieliAutogeneranti(
             world,
-            infartAssets.sprites.buildings.back,
+            infartAssets.textures.buildings.back,
             0.01);
 
         this._nuvolificioMid = new NuvoleAutogeneranti(
             world,
             infartAssets,
             0.4,
-            "yellow", //"#093243",
+            "#093243",
             {
-                min: 30 / 100,
-                max: 40 / 100
+                min: 10 / 100,
+                max: 15 / 100
             });
         this._grattacieliMid = new GrattacieliAutogeneranti(
             world,
-            infartAssets.sprites.buildings.mid,
+            infartAssets.textures.buildings.mid,
             0.18);
     }
 

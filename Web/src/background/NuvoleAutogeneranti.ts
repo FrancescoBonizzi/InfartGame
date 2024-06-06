@@ -28,9 +28,9 @@ class NuvoleAutogeneranti {
         this._speedRange = speedRange;
         
         const nuvoleSprites = [
-            assets.sprites.nuvola1,
-            assets.sprites.nuvola2,
-            assets.sprites.nuvola3,
+            assets.textures.nuvola1,
+            assets.textures.nuvola2,
+            assets.textures.nuvola3,
         ];
 
         this._nuvole = [];
@@ -46,9 +46,10 @@ class NuvoleAutogeneranti {
     }
     
     isOutOfScreen(nuvola: Nuvola) {
+        const outOfScreenMargin = nuvola.width * 2;
         const globalX = this._world.worldToScreenX(nuvola.x);
-        return globalX + nuvola.width * 2 <= 0
-            || globalX - nuvola.width * 2 >= this._world.viewPortWidth;
+        return globalX + nuvola.width <= -outOfScreenMargin
+            || globalX - nuvola.width >= this._world.viewPortWidth + outOfScreenMargin;
     }
 
     repositionNuvola(nuvola: Nuvola) {

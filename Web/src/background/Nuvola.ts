@@ -1,5 +1,5 @@
 import World from "../world/World.ts";
-import {ColorSource, Sprite, Ticker} from "pixi.js";
+import {ColorSource, Sprite, Texture, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 
 class Nuvola {
@@ -13,18 +13,18 @@ class Nuvola {
 
     constructor(
         world: World,
-        sprite: Sprite,
+        texture: Texture,
         startingScale: number,
         tint: ColorSource
     ) {
+        const sprite = new Sprite(texture);
         world.addChild(sprite);
-        sprite.anchor.set(0.5, 0.5);
         sprite.tint = tint;
 
         this._sprite = sprite;
         this._speed = 0;
         this._elapsed = 0;
-        this._scaleFactor = Numbers.randomBetween(0.05, 0.1);
+        this._scaleFactor = Numbers.randomBetween(0.02, 0.1);
         this._startingScale = startingScale;
     }
 
@@ -58,9 +58,14 @@ class Nuvola {
         this._elapsed += time.deltaTime;
         const scaleVariation = this._startingScale
             + this._scaleFactor
-            * Math.sin(this._elapsed / 50);
+            * Math.sin(this._elapsed / 70);
         this._sprite.scale.set(scaleVariation);
     }
+
+    // TODO:
+    // -> La varziaione di scala è un po' troppo veloce e bruttina,
+    // in infart originale era molto meno invadente
+    // -> Ancora errori di spawn, sopratutto a destra
 
 
 }

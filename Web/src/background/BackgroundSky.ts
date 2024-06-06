@@ -12,7 +12,7 @@ class BackgroundSky {
         world: World) {
 
         this._world = world;
-        this._sprite = assets.sprites.background;
+        this._sprite = new Sprite(assets.textures.background);
         this._sprite.anchor.set(0, 1);
         this._sprite.y = 0;
         this._sprite.scale.set(1.8);
