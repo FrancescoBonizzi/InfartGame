@@ -8,12 +8,12 @@ class GrattacieliAutogeneranti {
     private _lastGrattacieloX = 0;
     private _lastGrattacieloWidth = 0;
     private _world: World;
-    private readonly _parallaxSpeed: number;
+    private readonly _parallaxSpeed: number | null;
 
     constructor(
         world: World,
         grattacieli: Sprite[],
-        parallaxSpeed: number) {
+        parallaxSpeed: number | null) {
 
         this._world = world;
         this._grattacieli = grattacieli;
@@ -48,7 +48,9 @@ class GrattacieliAutogeneranti {
             if (this.isOutOfScreenLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
             } else {
-                grattacielo.x -= time.deltaTime * this._parallaxSpeed;
+                if (this._parallaxSpeed !== null) {
+                    grattacielo.x -= time.deltaTime * this._parallaxSpeed;
+                }
             }
         });
     }

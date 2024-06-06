@@ -30,13 +30,13 @@ class BackgroundLandscape {
             0.2,
             "green",//"#051728",
             {
-                min: 0.1,
-                max: 0.2
+                min: 10 / 100,
+                max: 20 / 100
             });
         this._grattacieliBack = new GrattacieliAutogeneranti(
             world,
             infartAssets.sprites.buildings.back,
-            0.05);
+            0.01);
 
         this._nuvolificioMid = new NuvoleAutogeneranti(
             world,
@@ -44,13 +44,13 @@ class BackgroundLandscape {
             0.4,
             "yellow", //"#093243",
             {
-                min: 0.3,
-                max: 0.4
+                min: 30 / 100,
+                max: 40 / 100
             });
         this._grattacieliMid = new GrattacieliAutogeneranti(
             world,
             infartAssets.sprites.buildings.mid,
-            0.2);
+            0.18);
     }
 
     update(time: Ticker) {

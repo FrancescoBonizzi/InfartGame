@@ -15,15 +15,15 @@ class Foreground {
         this._grattacieliGround = new GrattacieliAutogeneranti(
             world,
             infartAssets.sprites.buildings.ground,
-            0.4);
+            null);
         this._nuvolificioGround = new NuvoleAutogeneranti(
             world,
             infartAssets,
             0.6,
             "#ffffff",
             {
-                min: 0.45,
-                max: 0.60
+                min: 45 / 100,
+                max: 60 / 100
             });
     }
 

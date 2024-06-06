@@ -45,9 +45,8 @@ class NuvoleAutogeneranti {
         }
     }
     
-    isOutOfScreenLeft(nuvola: Nuvola) {
+    isOutOfScreen(nuvola: Nuvola) {
         const globalX = this._world.worldToScreenX(nuvola.x);
-        // width / 2 perché il punto di riferimento è al centro
         return globalX + nuvola.width <= 0
             || globalX - nuvola.width / 2 >= this._world.viewPortWidth;
     }
@@ -75,7 +74,6 @@ class NuvoleAutogeneranti {
             this._speedRange.max)
             * direction;
 
-        console.log("Repositioning nuvola, x: " + x + ", y: " + y + ", speed: " + speed);
         nuvola.x = x;
         nuvola.y = y;
         nuvola.speed = speed;
@@ -83,8 +81,7 @@ class NuvoleAutogeneranti {
 
     update(time: Ticker) {
         this._nuvole.forEach(nuvola => {
-            if (this.isOutOfScreenLeft(nuvola)) {
-                console.log("Repositioning nuvola");
+            if (this.isOutOfScreen(nuvola)) {
                 this.repositionNuvola(nuvola);
             } else {
                 nuvola.update(time);
