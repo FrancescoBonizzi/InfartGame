@@ -6,6 +6,7 @@ class GrattacieliAutogeneranti {
     private _maxGrattacieloPositionOffset = 20;
     private _grattacieli: Sprite[];
     private _lastGrattacieloX = 0;
+    private _lastGrattacieloWidth = 0;
     private _world: World;
     private readonly _parallaxSpeed: number;
 
@@ -19,30 +20,22 @@ class GrattacieliAutogeneranti {
         this._lastGrattacieloX = 0;
         this._parallaxSpeed = parallaxSpeed;
 
-        let previousGrattacieloWidth = 0;
+        this._lastGrattacieloWidth = this._grattacieli[0].width;
         this._grattacieli.forEach(grattacielo => {
-
             world.addChild(grattacielo);
-
             grattacielo.anchor.set(0, 1);
             grattacielo.y = 0;
-
-            grattacielo.x =
-                this._lastGrattacieloX
-                + previousGrattacieloWidth
-                + Numbers.randomBetween(1, this._maxGrattacieloPositionOffset);
-            this._lastGrattacieloX = grattacielo.x
-            previousGrattacieloWidth = grattacielo.width;
+            this.repositionGrattacielo(grattacielo);
         });
-
     }
 
     repositionGrattacielo(grattacielo: Sprite) {
         grattacielo.x =
             this._lastGrattacieloX
-            + grattacielo.width
+            + this._lastGrattacieloWidth
             + Numbers.randomBetween(1, this._maxGrattacieloPositionOffset);
         this._lastGrattacieloX = grattacielo.x;
+        this._lastGrattacieloWidth = grattacielo.width;
     }
 
     isOutOfScreenLeft(grattacielo: Sprite) {
