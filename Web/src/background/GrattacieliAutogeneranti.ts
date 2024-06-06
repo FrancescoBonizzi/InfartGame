@@ -47,10 +47,9 @@ class GrattacieliAutogeneranti {
         this._grattacieli.forEach(grattacielo => {
             if (this.isOutOfScreenLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
-            } else {
-                if (this._parallaxSpeed !== null) {
-                    grattacielo.x -= time.deltaTime * this._parallaxSpeed;
-                }
+            }
+            else if (this._parallaxSpeed !== null) {
+                grattacielo.x -= time.deltaTime * this._parallaxSpeed;
             }
         });
     }
