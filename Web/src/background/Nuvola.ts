@@ -53,7 +53,7 @@ class Nuvola {
     }
 
     update(time: Ticker) {
-        this._sprite.x -= time.deltaTime * this._speed;
+        this._sprite.x += time.deltaTime * this._speed;
 
         this._elapsed += time.deltaTime;
         const scaleVariation = this._startingScale

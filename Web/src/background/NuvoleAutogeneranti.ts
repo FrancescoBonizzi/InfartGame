@@ -47,8 +47,8 @@ class NuvoleAutogeneranti {
     
     isOutOfScreen(nuvola: Nuvola) {
         const globalX = this._world.worldToScreenX(nuvola.x);
-        return globalX + nuvola.width <= 0
-            || globalX - nuvola.width / 2 >= this._world.viewPortWidth;
+        return globalX + nuvola.width * 2 <= 0
+            || globalX - nuvola.width * 2 >= this._world.viewPortWidth;
     }
 
     repositionNuvola(nuvola: Nuvola) {
@@ -56,8 +56,8 @@ class NuvoleAutogeneranti {
             this._ySpawnRange.min,
             this._ySpawnRange.max);
 
-        const outOfScreenDistance = 0; // TODO: impostarlo a 200
-        const randomDistance = 0; //Numbers.randomBetween(1, 20);
+        const outOfScreenDistance = 0;//200;
+        const randomDistance = 0;//Numbers.randomBetween(1, 20);
         let direction: number;
         let x: number;
 

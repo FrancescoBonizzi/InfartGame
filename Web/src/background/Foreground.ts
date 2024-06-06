@@ -22,8 +22,8 @@ class Foreground {
             0.6,
             "#ffffff",
             {
-                min: 45 / 100,
-                max: 60 / 100
+                min: 0.50,
+                max: 0.60
             });
     }
 
