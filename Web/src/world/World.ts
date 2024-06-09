@@ -24,6 +24,14 @@ class World {
         return this._viewPortWidth;
     }
 
+    get cameraX() {
+        return -this._world.x;
+    }
+
+    get cameraWidth() {
+        return this._viewPortWidth;
+    }
+
     get x() {
         return this._world.x;
     }
@@ -40,10 +48,6 @@ class World {
         this._world.y = y;
     }
 
-    get width() {
-        return this._world.width;
-    }
-
     addChild(child: Container) {
         this._world.addChild(child);
     }
@@ -57,10 +61,27 @@ class World {
       D'altra parte, il Container stesso (World) ha delle coordinate
       rispetto alla scena principale (l'intera applicazione).
       Quindi, this._world.x rappresenta la posizione orizzontale
-      di World rispetto alla scena principale.
+      di World, worldX è la coordinata x nel mondo di gioco.
    */
-    worldToScreenX(x: number) {
-        return x + this._world.x;
+    worldToScreenX(worldX: number) {
+        return worldX - this.cameraX;
+    }
+
+    /* Si basa sul fatto che l'Anchor sia a sinistra */
+    isOutOfScreenLeft(sprite: { x: number, width: number }) {
+        const globalX = this.worldToScreenX(sprite.x);
+        return globalX + sprite.width <= 0;
+    }
+
+    /* Si basa sul fatto che l'Anchor sia a sinistra */
+    isOutOfScreenRight(sprite: { x: number }) {
+        const globalX = this.worldToScreenX(sprite.x);
+        return globalX >= this._viewPortWidth;
+    }
+
+    isOutOfScreenHorizontal(sprite: { x: number, width: number }) {
+        return this.isOutOfScreenLeft(sprite)
+            || this.isOutOfScreenRight(sprite);
     }
 
 }

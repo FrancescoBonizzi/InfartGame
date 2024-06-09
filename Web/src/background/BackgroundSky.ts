@@ -21,7 +21,7 @@ class BackgroundSky {
     }
 
     update() {
-        this._sprite.x = -this._world.x;
+        this._sprite.x = this._world.cameraX;
     }
 }
 

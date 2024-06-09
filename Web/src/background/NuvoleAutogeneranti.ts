@@ -8,7 +8,6 @@ import Interval from "../primitives/Interval.ts";
 class NuvoleAutogeneranti {
 
     private _nuvole: Nuvola[];
-    private readonly _nuvoleCount = 5;
     private readonly _world: World;
     private readonly _ySpawnRange: Interval;
     private readonly _speedRange: Interval;
@@ -19,7 +18,8 @@ class NuvoleAutogeneranti {
         startingScale: number,
         tint: ColorSource,
         speedRange: Interval,
-        shouldAnimateScale: boolean) {
+        shouldAnimateScale: boolean,
+        count: number) {
 
         this._world = world;
         this._ySpawnRange = {
@@ -27,18 +27,18 @@ class NuvoleAutogeneranti {
             max: -600
         };
         this._speedRange = speedRange;
-        
-        const nuvoleSprites = [
+
+        const nuvoleTextures = [
             assets.textures.nuvola1,
             assets.textures.nuvola2,
             assets.textures.nuvola3,
         ];
 
         this._nuvole = [];
-        for (let i = 0; i < this._nuvoleCount; i++) {
+        for (let i = 0; i < count; i++) {
             const nuvola = new Nuvola(
                 world,
-                nuvoleSprites[i % nuvoleSprites.length],
+                nuvoleTextures[i % nuvoleTextures.length],
                 startingScale,
                 tint,
                 shouldAnimateScale);
@@ -46,35 +46,24 @@ class NuvoleAutogeneranti {
             this._nuvole.push(nuvola);
         }
     }
-    
-    isOutOfScreen(nuvola: Nuvola) {
-        const outOfScreenMargin = nuvola.width * 2;
-        const globalX = this._world.worldToScreenX(nuvola.x);
-        return globalX + nuvola.width <= -outOfScreenMargin
-            || globalX - nuvola.width >= this._world.viewPortWidth + outOfScreenMargin;
-    }
 
     repositionNuvola(nuvola: Nuvola) {
         const y = Numbers.randomBetween(
             this._ySpawnRange.min,
             this._ySpawnRange.max);
 
-        const outOfScreenDistance = 0;//200;
-        const randomDistance = 0;//Numbers.randomBetween(1, 20);
-        let direction: number;
-        let x: number;
+        // Per non farle spawnare tutte sullo stesso asse
+        const randomDistance = Numbers.randomBetween(0, 200);
 
-        if (Numbers.headOrTail()) {
-            x = this._world.x - outOfScreenDistance - randomDistance;
-            direction = 1;
-        } else {
-            x = this._world.x + this._world.viewPortWidth + outOfScreenDistance + randomDistance;
-            direction = -1;
-        }
+        // Lo spawn a sinistra per questo gioco non ha senso, perché la telecamera si muove sempre a destra
+        const direction = -1;
+        const x = this._world.cameraX
+            + this._world.viewPortWidth
+            + randomDistance;
 
         const speed = Numbers.randomBetween(
-            this._speedRange.min,
-            this._speedRange.max)
+                this._speedRange.min,
+                this._speedRange.max)
             * direction;
 
         nuvola.x = x;
@@ -84,9 +73,11 @@ class NuvoleAutogeneranti {
 
     update(time: Ticker) {
         this._nuvole.forEach(nuvola => {
-            if (this.isOutOfScreen(nuvola)) {
+            if (this._world.isOutOfScreenLeft(nuvola)) {
+                console.info("Is out of screen");
                 this.repositionNuvola(nuvola);
-            } else {
+            }
+            else {
                 nuvola.update(time);
             }
         });

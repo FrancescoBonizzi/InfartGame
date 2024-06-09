@@ -39,7 +39,10 @@ class Game {
         if (this._controller.Keys.down.pressed) {
             this._world.y -= 20;
         }
+
         if (this._controller.Keys.right.pressed) {
+            // Muovo il mondo a sinistra,
+            // quindi sposto la telecamera a destra
             this._world.x -= 20;
         }
         if (this._controller.Keys.left.pressed) {

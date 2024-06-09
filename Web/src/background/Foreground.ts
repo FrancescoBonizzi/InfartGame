@@ -22,10 +22,11 @@ class Foreground {
             0.6,
             "#ffffff",
             {
-                min: 20 / 100,
+                min: 22 / 100,
                 max: 25 / 100
             },
-            true);
+            true,
+            1);
     }
 
     update(time: Ticker) {
