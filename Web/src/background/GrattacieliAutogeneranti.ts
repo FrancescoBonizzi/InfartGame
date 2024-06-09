@@ -1,28 +1,28 @@
 import {Sprite, Texture, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
-import World from "../world/World.ts";
+import Camera from "../world/Camera.ts";
 
 class GrattacieliAutogeneranti {
     private _maxGrattacieloPositionOffset = 20;
     private _grattacieli: Sprite[];
     private _lastGrattacieloX = 0;
     private _lastGrattacieloWidth = 0;
-    private _world: World;
+    private _camera: Camera;
     private readonly _parallaxSpeed: number | null;
 
     constructor(
-        world: World,
+        camera: Camera,
         grattacieli: Texture[],
         parallaxSpeed: number | null) {
 
-        this._world = world;
+        this._camera = camera;
         this._grattacieli = grattacieli.map(texture => new Sprite(texture));
         this._lastGrattacieloX = 0;
         this._parallaxSpeed = parallaxSpeed;
 
         this._lastGrattacieloWidth = this._grattacieli[0].width;
         this._grattacieli.forEach(grattacielo => {
-            world.addChild(grattacielo);
+            camera.addToWorld(grattacielo);
             grattacielo.anchor.set(0, 1);
             grattacielo.y = 0;
             this.repositionGrattacielo(grattacielo);
@@ -40,7 +40,7 @@ class GrattacieliAutogeneranti {
 
     update(time: Ticker) {
         this._grattacieli.forEach(grattacielo => {
-            if (this._world.isOutOfScreenLeft(grattacielo)) {
+            if (this._camera.isOutOfCameraLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
             }
             else if (this._parallaxSpeed !== null) {

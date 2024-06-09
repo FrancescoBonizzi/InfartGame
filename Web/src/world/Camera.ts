@@ -1,16 +1,17 @@
 import {Application, Container, Renderer} from "pixi.js";
 
-class World {
+class Camera {
+
+    private readonly _worldHeight = 1500;
 
     private readonly _world: Container;
-    private readonly _viewPortWidth: number;
+    private readonly _width: number;
 
     constructor(app: Application<Renderer>) {
         this._world = new Container();
-        this._world.height = 1500;
-        this._world.width = 4000;
+        this._world.height = this._worldHeight;
 
-        this._viewPortWidth = app.screen.width;
+        this._width = app.screen.width;
 
         this._world.x = 0;
         this._world.y = app.screen.height;
@@ -20,20 +21,12 @@ class World {
         app.stage.addChild(this._world);
     }
 
-    get viewPortWidth() {
-        return this._viewPortWidth;
-    }
-
-    get cameraX() {
-        return -this._world.x;
-    }
-
-    get cameraWidth() {
-        return this._viewPortWidth;
+    get width() {
+        return this._width;
     }
 
     get x() {
-        return this._world.x;
+        return -this._world.x;
     }
 
     get y() {
@@ -41,14 +34,14 @@ class World {
     }
 
     set x(x: number) {
-        this._world.x = x;
+        this._world.x = -x;
     }
 
     set y(y: number) {
         this._world.y = y;
     }
 
-    addChild(child: Container) {
+    addToWorld(child: Container) {
         this._world.addChild(child);
     }
 
@@ -63,27 +56,15 @@ class World {
       Quindi, this._world.x rappresenta la posizione orizzontale
       di World, worldX è la coordinata x nel mondo di gioco.
    */
-    worldToScreenX(worldX: number) {
-        return worldX - this.cameraX;
+    private worldToScreenX(worldX: number) {
+        return worldX - this.x;
     }
 
     /* Si basa sul fatto che l'Anchor sia a sinistra */
-    isOutOfScreenLeft(sprite: { x: number, width: number }) {
+    isOutOfCameraLeft(sprite: { x: number, width: number }) {
         const globalX = this.worldToScreenX(sprite.x);
         return globalX + sprite.width <= 0;
     }
-
-    /* Si basa sul fatto che l'Anchor sia a sinistra */
-    isOutOfScreenRight(sprite: { x: number }) {
-        const globalX = this.worldToScreenX(sprite.x);
-        return globalX >= this._viewPortWidth;
-    }
-
-    isOutOfScreenHorizontal(sprite: { x: number, width: number }) {
-        return this.isOutOfScreenLeft(sprite)
-            || this.isOutOfScreenRight(sprite);
-    }
-
 }
 
-export default World;
+export default Camera;

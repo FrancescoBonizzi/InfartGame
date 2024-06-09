@@ -1,7 +1,7 @@
 import {Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import GrattacieliAutogeneranti from "./GrattacieliAutogeneranti.ts";
-import World from "../world/World.ts";
+import Camera from "../world/Camera.ts";
 import BackgroundSky from "./BackgroundSky.ts";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 
@@ -16,7 +16,7 @@ class BackgroundLandscape {
     private _nuvolificioMid: NuvoleAutogeneranti;
 
     constructor(
-        world: World,
+        world: Camera,
         infartAssets: InfartAssets) {
 
         this._backgroundSky = new BackgroundSky(

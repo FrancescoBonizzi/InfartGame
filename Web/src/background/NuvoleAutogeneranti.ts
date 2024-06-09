@@ -1,6 +1,6 @@
 import Nuvola from "./Nuvola.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
-import World from "../world/World.ts";
+import Camera from "../world/Camera.ts";
 import {ColorSource, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 import Interval from "../primitives/Interval.ts";
@@ -8,12 +8,12 @@ import Interval from "../primitives/Interval.ts";
 class NuvoleAutogeneranti {
 
     private _nuvole: Nuvola[];
-    private readonly _world: World;
+    private readonly _camera: Camera;
     private readonly _ySpawnRange: Interval;
     private readonly _speedRange: Interval;
 
     constructor(
-        world: World,
+        camera: Camera,
         assets: InfartAssets,
         startingScale: number,
         tint: ColorSource,
@@ -21,7 +21,7 @@ class NuvoleAutogeneranti {
         shouldAnimateScale: boolean,
         count: number) {
 
-        this._world = world;
+        this._camera = camera;
         this._ySpawnRange = {
             min: -300,
             max: -600
@@ -37,7 +37,7 @@ class NuvoleAutogeneranti {
         this._nuvole = [];
         for (let i = 0; i < count; i++) {
             const nuvola = new Nuvola(
-                world,
+                camera,
                 nuvoleTextures[i % nuvoleTextures.length],
                 startingScale,
                 tint,
@@ -56,8 +56,8 @@ class NuvoleAutogeneranti {
         const randomDistance = Numbers.randomBetween(0, 250);
 
         const direction = Numbers.headOrTail() ? 1 : -1;
-        const x = this._world.cameraX
-            + this._world.viewPortWidth
+        const x = this._camera.x
+            + this._camera.width
             + nuvola.width
             + randomDistance;
 
@@ -73,7 +73,7 @@ class NuvoleAutogeneranti {
 
     update(time: Ticker) {
         this._nuvole.forEach(nuvola => {
-            if (this._world.isOutOfScreenLeft(nuvola)) {
+            if (this._camera.isOutOfCameraLeft(nuvola)) {
                 this.repositionNuvola(nuvola);
             }
             else {

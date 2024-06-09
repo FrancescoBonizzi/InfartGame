@@ -1,5 +1,5 @@
 import GrattacieliAutogeneranti from "./GrattacieliAutogeneranti.ts";
-import World from "../world/World.ts";
+import Camera from "../world/Camera.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
 import {Ticker} from "pixi.js";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
@@ -9,7 +9,7 @@ class Foreground {
     private _nuvolificioGround: NuvoleAutogeneranti;
 
     constructor(
-        world: World,
+        world: Camera,
         infartAssets: InfartAssets) {
 
         this._grattacieliGround = new GrattacieliAutogeneranti(

@@ -1,4 +1,4 @@
-import World from "../world/World.ts";
+import Camera from "../world/Camera.ts";
 import {ColorSource, Sprite, Texture, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 
@@ -14,14 +14,14 @@ class Nuvola {
     private _elapsed: number;
 
     constructor(
-        world: World,
+        world: Camera,
         texture: Texture,
         startingScale: number,
         tint: ColorSource,
         shouldAnimateScale: boolean
     ) {
         const sprite = new Sprite(texture);
-        world.addChild(sprite);
+        world.addToWorld(sprite);
         sprite.tint = tint;
 
         this._sprite = sprite;

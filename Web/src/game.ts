@@ -1,13 +1,13 @@
 import InfartAssets from "./assets/InfartAssets.ts";
 import {Application, Ticker} from "pixi.js";
-import World from "./world/World.ts";
+import Camera from "./world/Camera.ts";
 import BackgroundLandscape from "./background/BackgroundLandscape.ts";
 import Controller from "./interaction/Controller.ts";
 import Foreground from "./background/Foreground.ts";
 
 class Game {
     
-    private readonly _world: World;
+    private readonly _camera: Camera;
     private _backgroundLandscape: BackgroundLandscape;
     private _controller: Controller;
     private _foreground: Foreground;
@@ -16,14 +16,14 @@ class Game {
         assets: InfartAssets,
         app: Application) {
 
-        this._world = new World(app);
+        this._camera = new Camera(app);
         this._controller = new Controller();
 
         this._backgroundLandscape = new BackgroundLandscape(
-            this._world,
+            this._camera,
             assets);
         this._foreground = new Foreground(
-            this._world,
+            this._camera,
             assets);
     }
 
@@ -34,19 +34,19 @@ class Game {
 
         // TODO TMP -> per i salti del player
         if (this._controller.Keys.up.pressed) {
-            this._world.y += 20;
+            this._camera.y += 20;
         }
         if (this._controller.Keys.down.pressed) {
-            this._world.y -= 20;
+            this._camera.y -= 20;
         }
 
         if (this._controller.Keys.right.pressed) {
             // Muovo il mondo a sinistra,
             // quindi sposto la telecamera a destra
-            this._world.x -= 20;
+            this._camera.x += 20;
         }
         if (this._controller.Keys.left.pressed) {
-            this._world.x += 20;
+            this._camera.x -= 20;
         }
     }
 
