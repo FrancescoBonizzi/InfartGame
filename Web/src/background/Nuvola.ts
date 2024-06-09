@@ -6,7 +6,9 @@ class Nuvola {
 
     private readonly _sprite: Sprite;
     private readonly _scaleFactor: number;
+    private readonly _randomOffset: number;
     private readonly _startingScale: number;
+    private readonly _shouldAnimateScale: boolean;
 
     private _speed: number;
     private _elapsed: number;
@@ -15,7 +17,8 @@ class Nuvola {
         world: World,
         texture: Texture,
         startingScale: number,
-        tint: ColorSource
+        tint: ColorSource,
+        shouldAnimateScale: boolean
     ) {
         const sprite = new Sprite(texture);
         world.addChild(sprite);
@@ -24,8 +27,14 @@ class Nuvola {
         this._sprite = sprite;
         this._speed = 0;
         this._elapsed = 0;
-        this._scaleFactor = Numbers.randomBetween(0.02, 0.1);
+
+        this._shouldAnimateScale = shouldAnimateScale;
+
+        // The same cloud can be scaled differently
+        this._scaleFactor = Numbers.randomBetween(0, 0.1);
+        this._randomOffset = Numbers.randomBetween(0, 50);
         this._startingScale = startingScale;
+        this._sprite.scale.set(startingScale);
     }
 
     get x() {
@@ -54,20 +63,15 @@ class Nuvola {
 
     update(time: Ticker) {
         this._sprite.x += time.deltaTime * this._speed;
-
         this._elapsed += time.deltaTime;
-        const scaleVariation = this._startingScale
-            + this._scaleFactor
-            * Math.sin(this._elapsed / 70);
-        this._sprite.scale.set(scaleVariation);
+
+        if (this._shouldAnimateScale) {
+            const scaleVariation = this._startingScale
+                + this._scaleFactor
+                * Math.sin((this._elapsed + this._randomOffset) / 70);
+            this._sprite.scale.set(scaleVariation);
+        }
     }
-
-    // TODO:
-    // -> La varziaione di scala è un po' troppo veloce e bruttina,
-    // in infart originale era molto meno invadente
-    // -> Ancora errori di spawn, sopratutto a destra
-
-
 }
 
 export default Nuvola;

@@ -23,7 +23,6 @@ class BackgroundLandscape {
             infartAssets,
             world);
 
-
         this._nuvolificioBack = new NuvoleAutogeneranti(
             world,
             infartAssets,
@@ -32,7 +31,8 @@ class BackgroundLandscape {
             {
                 min: 5 / 100,
                 max: 8 / 100
-            });
+            },
+            false);
         this._grattacieliBack = new GrattacieliAutogeneranti(
             world,
             infartAssets.textures.buildings.back,
@@ -46,7 +46,8 @@ class BackgroundLandscape {
             {
                 min: 10 / 100,
                 max: 15 / 100
-            });
+            },
+            false);
         this._grattacieliMid = new GrattacieliAutogeneranti(
             world,
             infartAssets.textures.buildings.mid,

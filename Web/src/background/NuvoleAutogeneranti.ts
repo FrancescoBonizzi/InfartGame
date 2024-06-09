@@ -18,7 +18,8 @@ class NuvoleAutogeneranti {
         assets: InfartAssets,
         startingScale: number,
         tint: ColorSource,
-        speedRange: Interval) {
+        speedRange: Interval,
+        shouldAnimateScale: boolean) {
 
         this._world = world;
         this._ySpawnRange = {
@@ -39,7 +40,8 @@ class NuvoleAutogeneranti {
                 world,
                 nuvoleSprites[i % nuvoleSprites.length],
                 startingScale,
-                tint);
+                tint,
+                shouldAnimateScale);
             this.repositionNuvola(nuvola);
             this._nuvole.push(nuvola);
         }
