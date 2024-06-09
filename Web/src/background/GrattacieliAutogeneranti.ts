@@ -38,14 +38,9 @@ class GrattacieliAutogeneranti {
         this._lastGrattacieloWidth = grattacielo.width;
     }
 
-    isOutOfScreenLeft(grattacielo: Sprite) {
-        const globalX = this._world.worldToScreenX(grattacielo.x);
-        return globalX + grattacielo.width <= 0;
-    }
-
     update(time: Ticker) {
         this._grattacieli.forEach(grattacielo => {
-            if (this.isOutOfScreenLeft(grattacielo)) {
+            if (this._world.isOutOfScreenLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
             }
             else if (this._parallaxSpeed !== null) {

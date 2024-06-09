@@ -55,10 +55,10 @@ class NuvoleAutogeneranti {
         // Per non farle spawnare tutte sullo stesso asse
         const randomDistance = Numbers.randomBetween(0, 250);
 
-        // Lo spawn a sinistra per questo gioco non ha senso, perché la telecamera si muove sempre a destra
-        const direction = -1;
+        const direction = Numbers.headOrTail() ? 1 : -1;
         const x = this._world.cameraX
             + this._world.viewPortWidth
+            + nuvola.width
             + randomDistance;
 
         const speed = Numbers.randomBetween(
@@ -74,7 +74,6 @@ class NuvoleAutogeneranti {
     update(time: Ticker) {
         this._nuvole.forEach(nuvola => {
             if (this._world.isOutOfScreenLeft(nuvola)) {
-                console.info("Is out of screen");
                 this.repositionNuvola(nuvola);
             }
             else {

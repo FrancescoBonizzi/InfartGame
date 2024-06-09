@@ -26,7 +26,7 @@ class Foreground {
                 max: 25 / 100
             },
             true,
-            1);
+            6);
     }
 
     update(time: Ticker) {
