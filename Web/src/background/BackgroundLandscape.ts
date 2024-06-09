@@ -33,7 +33,7 @@ class BackgroundLandscape {
                 max: 5 / 100
             },
             false,
-            10);
+            8);
         this._grattacieliBack = new GrattacieliAutogeneranti(
             world,
             infartAssets.textures.buildings.back,
@@ -49,7 +49,7 @@ class BackgroundLandscape {
                 max: 15 / 100
             },
             false,
-            7);
+            8);
         this._grattacieliMid = new GrattacieliAutogeneranti(
             world,
             infartAssets.textures.buildings.mid,

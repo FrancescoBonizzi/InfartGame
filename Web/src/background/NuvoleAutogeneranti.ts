@@ -53,7 +53,7 @@ class NuvoleAutogeneranti {
             this._ySpawnRange.max);
 
         // Per non farle spawnare tutte sullo stesso asse
-        const randomDistance = Numbers.randomBetween(0, 200);
+        const randomDistance = Numbers.randomBetween(0, 250);
 
         // Lo spawn a sinistra per questo gioco non ha senso, perché la telecamera si muove sempre a destra
         const direction = -1;
