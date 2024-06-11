@@ -34,19 +34,23 @@ export const loadAssets = async (): Promise<InfartAssets> => {
                 mid: loadAllTexturesFromSpriteSheet(buildingsMidSpriteSheet),
                 ground: loadAllTexturesFromSpriteSheet(buildingsGroundSpriteSheet)
             },
+            particles: {
+                broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
+                jalapenoParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenoParticle"),
+                scoreggiaParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "scoreggiaParticle"),
+
+                starParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "stella"),
+            },
             bang: loadSpriteFromSpriteSheet(playerSpriteSheet, "bang"),
-            broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
+
             bean: loadSpriteFromSpriteSheet(playerSpriteSheet, "bean"),
             burger: loadSpriteFromSpriteSheet(playerSpriteSheet, "burger"),
             gameOver: loadSpriteFromSpriteSheet(playerSpriteSheet, "gameOver"),
-            jalapenoParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenoParticle"),
             jalapenos: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenos"),
             merda: loadSpriteFromSpriteSheet(playerSpriteSheet, "merda"),
             pause: loadSpriteFromSpriteSheet(playerSpriteSheet, "pause"),
             play: loadSpriteFromSpriteSheet(playerSpriteSheet, "play"),
             record: loadSpriteFromSpriteSheet(playerSpriteSheet, "record"),
-            scoreggiaParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "scoreggiaParticle"),
-            stella: loadSpriteFromSpriteSheet(playerSpriteSheet, "stella"),
             verdura: loadSpriteFromSpriteSheet(playerSpriteSheet, "verdura"),
             background: loadSpriteFromSpriteSheet(playerSpriteSheet, "background"),
             deathScreen: loadSpriteFromSpriteSheet(playerSpriteSheet, "deathScreen"),
@@ -87,7 +91,6 @@ export const loadAssets = async (): Promise<InfartAssets> => {
         }
     }
 };
-
 
 const loadTextureFromFile = async (name: string): Promise<Texture> => {
     return await Assets.load(`${_imagesAssetsRoot}/${name}`);

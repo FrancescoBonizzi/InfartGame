@@ -21,19 +21,21 @@ interface InfartAssets {
             mid: Texture[];
             ground: Texture[];
         },
+        particles: {
+            broccoloParticle: Texture;
+            jalapenoParticle: Texture;
+            scoreggiaParticle: Texture;
+            starParticle: Texture;
+        }
         bang: Texture;
-        broccoloParticle: Texture;
         bean: Texture;
         burger: Texture;
         gameOver: Texture;
-        jalapenoParticle: Texture;
         jalapenos: Texture;
         merda: Texture,
         pause: Texture;
         play: Texture;
         record: Texture;
-        scoreggiaParticle: Texture;
-        stella: Texture;
         verdura: Texture;
         background: Texture;
         deathScreen: Texture;
