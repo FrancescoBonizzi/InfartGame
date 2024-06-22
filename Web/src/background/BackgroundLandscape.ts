@@ -93,7 +93,6 @@ class BackgroundLandscape {
         //     console.log("Camera out of range");
         //
         //     return;
-        //
         // }
 
         this._timeTillNewStar -= time.deltaTime;

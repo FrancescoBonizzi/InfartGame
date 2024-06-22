@@ -37,11 +37,11 @@ abstract class ParticleSystem {
         this._scale = scale;
         this._spawnAngleDegrees = spawnAngleInDegrees;
 
-        this._freeParticles = new Array(density * numParticles.max)
+        this._activeParticles = new Array(density * numParticles.max)
             .fill(null)
             .map(() => new Particle(texture, camera));
 
-        this._activeParticles = [...this._freeParticles];
+        this._freeParticles = [...this._activeParticles];
     }
 
     public update(time: Ticker) {
@@ -59,7 +59,7 @@ abstract class ParticleSystem {
     public addParticles(position: Point) {
         const numParticles = Numbers.randomBetweenInterval(this._numParticles);
         for (let i = 0; i < numParticles && this._freeParticles.length > 0; i++) {
-            const p = this._freeParticles.pop();
+            const p = this._freeParticles.shift();
             if (p) {
                 this.initializeParticle(p, position);
             }
