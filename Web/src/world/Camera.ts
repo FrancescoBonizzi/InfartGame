@@ -6,12 +6,14 @@ class Camera {
 
     private readonly _world: Container;
     private readonly _width: number;
+    private readonly _height: number;
 
     constructor(app: Application<Renderer>) {
         this._world = new Container();
         this._world.height = this._worldHeight;
 
         this._width = app.screen.width;
+        this._height = app.screen.height;
 
         this._world.x = 0;
         this._world.y = app.screen.height;
@@ -25,12 +27,16 @@ class Camera {
         return this._width;
     }
 
+    get height() {
+        return this._height;
+    }
+
     get x() {
         return -this._world.x;
     }
 
     get y() {
-        return this._world.y;
+        return -this._world.y;
     }
 
     set x(x: number) {
@@ -38,7 +44,7 @@ class Camera {
     }
 
     set y(y: number) {
-        this._world.y = y;
+        this._world.y = -y;
     }
 
     addToWorld(child: Container) {

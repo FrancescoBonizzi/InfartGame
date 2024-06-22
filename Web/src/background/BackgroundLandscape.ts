@@ -85,15 +85,16 @@ class BackgroundLandscape {
         this._nuvolificioMid.update(time);
     }
 
+    private isCameraInStarfieldSpawnRange() {
+        return this._camera.y + this._camera.height >= this._starfieldSpawnRange.min
+            && this._camera.y + this._camera.height <= this._starfieldSpawnRange.max;
+    }
+
     private evaluateStarsGeneration(time: Ticker) {
 
-        // if (this._camera.y < this._starfieldSpawnRange.min
-        //     || this._camera.y > this._starfieldSpawnRange.max) {
-        //
-        //     console.log("Camera out of range");
-        //
-        //     return;
-        // }
+        if (!this.isCameraInStarfieldSpawnRange()) {
+            return;
+        }
 
         this._timeTillNewStar -= time.deltaTime;
         if (this._timeTillNewStar < 0) {

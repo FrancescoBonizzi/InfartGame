@@ -34,10 +34,10 @@ class Game {
 
         // TODO TMP -> per i salti del player
         if (this._controller.Keys.up.pressed) {
-            this._camera.y += 20;
+            this._camera.y -= 20;
         }
         if (this._controller.Keys.down.pressed) {
-            this._camera.y -= 20;
+            this._camera.y += 20;
         }
 
         if (this._controller.Keys.right.pressed) {

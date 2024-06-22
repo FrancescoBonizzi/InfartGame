@@ -48,17 +48,12 @@ class Particle {
     }
 
     public get isActive(): boolean {
-        return this._timeSinceStartSeconds < this._lifeTimeSeconds
-            || this._sprite.alpha < 0;
+        return this._timeSinceStartSeconds < this._lifeTimeSeconds;
     }
 
     public update(time: Ticker) {
 
         let elapsedSeconds = time.elapsedMS / 1000;
-
-        if (!this.isActive) {
-            return;
-        }
 
         this._speed.x += this._acceleration.x * elapsedSeconds;
         this._speed.y += this._acceleration.y * elapsedSeconds;
@@ -74,6 +69,10 @@ class Particle {
         this._sprite.scale.set(scale);
 
         this._timeSinceStartSeconds += elapsedSeconds;
+
+        if (!this.isActive) {
+            this._sprite.alpha = 0;
+        }
     }
 }
 
