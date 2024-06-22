@@ -7,17 +7,19 @@ class Particle {
 
     private _speed: Point;
     private _acceleration: Point;
-    private _timeSinceStart: number;
-    private _lifeTime: number;
+    private _timeSinceStartSeconds: number;
+    private _lifeTimeSeconds: number;
     private _rotationSpeed: number;
+    private _initialScaleScalar: number;
 
     constructor(texture: Texture, camera: Camera) {
         this._sprite = new Sprite(texture);
         this._rotationSpeed = 0;
         this._speed = new Point(0, 0);
         this._acceleration = new Point(0, 0);
-        this._timeSinceStart = 0;
-        this._lifeTime = 0;
+        this._timeSinceStartSeconds = 0;
+        this._lifeTimeSeconds = 0;
+        this._initialScaleScalar = this._sprite.scale.x;
 
         camera.addToWorld(this._sprite);
     }
@@ -29,29 +31,34 @@ class Particle {
         rotationSpeed: number,
         color: ColorSource,
         scale: number,
-        lifetime: number
+        lifetimeSeconds: number
     ) {
 
         this._speed = speed;
         this._acceleration = acceleration;
         this._rotationSpeed = rotationSpeed;
-        this._lifeTime = lifetime;
-        this._timeSinceStart = 0.0;
+        this._lifeTimeSeconds = lifetimeSeconds;
+        this._timeSinceStartSeconds = 0.0;
+        this._initialScaleScalar = scale;
 
         this._sprite.position = position;
         this._sprite.rotation = Math.random() * Math.PI * 2;
         this._sprite.tint = color;
-        this._sprite.scale.set(scale);
+        this._sprite.scale.set(this._initialScaleScalar);
     }
 
     public get isActive(): boolean {
-        return this._timeSinceStart < this._lifeTime
+        return this._timeSinceStartSeconds < this._lifeTimeSeconds
             || this._sprite.alpha < 0;
     }
 
     public update(time: Ticker) {
 
-        const elapsedSeconds = time.elapsedMS / 1000;
+        let elapsedSeconds = time.elapsedMS / 1000;
+
+        if (!this.isActive) {
+            return;
+        }
 
         this._speed.x += this._acceleration.x * elapsedSeconds;
         this._speed.y += this._acceleration.y * elapsedSeconds;
@@ -60,13 +67,13 @@ class Particle {
         this._sprite.position.y += this._speed.y * elapsedSeconds
         this._sprite.rotation += this._rotationSpeed * elapsedSeconds;
 
-        const normalizedLifeTime = this._timeSinceStart / this._lifeTime;
-  //      this._sprite.alpha = 4 * normalizedLifeTime * (1 - normalizedLifeTime);
+        const normalizedLifeTime = this._timeSinceStartSeconds / this._lifeTimeSeconds;
+        this._sprite.alpha = 4 * normalizedLifeTime * (1 - normalizedLifeTime);
 
-        const scale = this._sprite.scale.x * (.75 + .25 * normalizedLifeTime);
+        const scale = this._initialScaleScalar * (.75 + .25 * normalizedLifeTime);
         this._sprite.scale.set(scale);
 
-        this._timeSinceStart += elapsedSeconds;
+        this._timeSinceStartSeconds += elapsedSeconds;
     }
 }
 

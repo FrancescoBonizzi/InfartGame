@@ -13,9 +13,9 @@ abstract class ParticleSystem {
     private readonly _speed: Interval;
     private readonly _acceleration: Interval;
     private readonly _rotationSpeed: Interval;
-    private readonly _lifetime: Interval;
+    private readonly _lifetimeSeconds: Interval;
     private readonly _scale: Interval;
-    private readonly _spawnAngle: Interval;
+    private readonly _spawnAngleDegrees: Interval;
 
     protected constructor(
         texture: Texture,
@@ -25,17 +25,17 @@ abstract class ParticleSystem {
         speed: Interval,
         acceleration: Interval,
         rotationSpeed: Interval,
-        lifetime: Interval,
+        lifetimeSeconds: Interval,
         scale: Interval,
-        spawnAngle: Interval) {
+        spawnAngleInDegrees: Interval) {
 
         this._numParticles = numParticles;
         this._speed = speed;
         this._acceleration = acceleration;
         this._rotationSpeed = rotationSpeed;
-        this._lifetime = lifetime;
+        this._lifetimeSeconds = lifetimeSeconds;
         this._scale = scale;
-        this._spawnAngle = spawnAngle;
+        this._spawnAngleDegrees = spawnAngleInDegrees;
 
         this._freeParticles = new Array(density * numParticles.max)
             .fill(null)
@@ -89,14 +89,18 @@ abstract class ParticleSystem {
             Numbers.randomBetweenInterval(this._rotationSpeed),
             "#FFFFFF",
             Numbers.randomBetweenInterval(this._scale),
-            Numbers.randomBetweenInterval(this._lifetime)
+            Numbers.randomBetweenInterval(this._lifetimeSeconds)
         );
     }
 
     private pickRandomDirection(): Point {
+
+        const randomAngle = Numbers.randomBetweenInterval(this._spawnAngleDegrees);
+        const randomAngleInRadians = Numbers.toRadians(randomAngle);
+
         return new Point(
-            Math.cos(Numbers.randomBetweenInterval(this._spawnAngle)),
-            -Math.sin(Numbers.randomBetweenInterval(this._spawnAngle)));
+            Math.cos(randomAngleInRadians),
+            -Math.sin(randomAngleInRadians));
     }
 }
 

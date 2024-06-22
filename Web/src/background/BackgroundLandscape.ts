@@ -18,7 +18,10 @@ class BackgroundLandscape {
     private readonly _grattacieliMid: GrattacieliAutogeneranti;
     private readonly _nuvolificioMid: NuvoleAutogeneranti;
 
-    private readonly _starfieldSpawnRange  = {min: -960, max: -300};
+    private readonly _starfieldSpawnRange  = {
+        min: -960,
+        max: -300
+    };
     private readonly _camera: Camera;
     private _timeTillNewStar = 0;
     private readonly _timeBetweenNewStart = 20;

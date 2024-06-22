@@ -14,5 +14,9 @@ export default {
 
     headOrTail: () => {
         return Math.random() > 0.5;
+    },
+
+    toRadians: (degrees: number) => {
+        return degrees * Math.PI / 180;
     }
 }

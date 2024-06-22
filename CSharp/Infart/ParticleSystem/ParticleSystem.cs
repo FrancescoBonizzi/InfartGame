@@ -113,7 +113,8 @@ namespace Infart.ParticleSystem
                 MathHelper.ToRadians(_minSpawnAngle), MathHelper.ToRadians(_maxSpawnAngle));
 
             Vector2 direction = new Vector2(
-                direction.X = (float)Math.Cos(radians), direction.Y = -(float)Math.Sin(radians));
+                direction.X = (float)Math.Cos(radians), 
+                direction.Y = -(float)Math.Sin(radians));
 
             return direction;
         }
