@@ -36,7 +36,7 @@ class Camera {
     }
 
     get y() {
-        return -this._world.y;
+        return -this._world.y + this._height; // Aggiunto il + this._height per avere punto di riferimento in basso
     }
 
     set x(x: number) {
@@ -44,7 +44,7 @@ class Camera {
     }
 
     set y(y: number) {
-        this._world.y = -y;
+        this._world.y = -y + this._height; // Aggiunto il + this._height per avere punto di riferimento in basso
     }
 
     addToWorld(child: Container) {

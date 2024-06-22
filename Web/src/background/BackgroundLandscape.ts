@@ -19,8 +19,8 @@ class BackgroundLandscape {
     private readonly _nuvolificioMid: NuvoleAutogeneranti;
 
     private readonly _starfieldSpawnRange  = {
-        min: -960,
-        max: -300
+        min: -1200,
+        max: -400
     };
     private readonly _camera: Camera;
     private _timeTillNewStar = 0;
@@ -86,8 +86,8 @@ class BackgroundLandscape {
     }
 
     private isCameraInStarfieldSpawnRange() {
-        return this._camera.y + this._camera.height >= this._starfieldSpawnRange.min
-            && this._camera.y + this._camera.height <= this._starfieldSpawnRange.max;
+        return this._camera.y >= this._starfieldSpawnRange.min
+            && this._camera.y <= this._starfieldSpawnRange.max;
     }
 
     private evaluateStarsGeneration(time: Ticker) {
@@ -96,15 +96,13 @@ class BackgroundLandscape {
             return;
         }
 
-        console.log("generate stars");
-
         this._timeTillNewStar -= time.deltaTime;
         if (this._timeTillNewStar < 0) {
             const where = new Point(
                 Numbers.randomBetween(this._camera.x, this._camera.x + this._camera.width),
                 Numbers.randomBetween(
-                    this._starfieldSpawnRange.min - this._camera.height,
-                    this._starfieldSpawnRange.max - this._camera.height),
+                    this._starfieldSpawnRange.min,
+                    this._starfieldSpawnRange.max),
             );
             this._starfield.addParticles(where);
             this._timeTillNewStar = this._timeBetweenNewStart;
