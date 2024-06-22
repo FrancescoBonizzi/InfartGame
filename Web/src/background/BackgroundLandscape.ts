@@ -96,11 +96,15 @@ class BackgroundLandscape {
             return;
         }
 
+        console.log("generate stars");
+
         this._timeTillNewStar -= time.deltaTime;
         if (this._timeTillNewStar < 0) {
             const where = new Point(
                 Numbers.randomBetween(this._camera.x, this._camera.x + this._camera.width),
-                Numbers.randomBetween(this._starfieldSpawnRange.min, this._starfieldSpawnRange.max),
+                Numbers.randomBetween(
+                    this._starfieldSpawnRange.min - this._camera.height,
+                    this._starfieldSpawnRange.max - this._camera.height),
             );
             this._starfield.addParticles(where);
             this._timeTillNewStar = this._timeBetweenNewStart;
