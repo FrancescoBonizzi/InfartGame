@@ -1,7 +1,7 @@
 import {Application} from "pixi.js";
 import {loadAssets} from "./assets/AssetsLoader";
 import LoadingThing from "./uiKit/LoadingThing.ts";
-import Game from "./game.ts";
+import Game from "./Game.ts";
 
 (async () => {
     // Create a PixiJS application.
