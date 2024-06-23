@@ -51,6 +51,10 @@ class Camera {
         this._world.addChild(child);
     }
 
+    removeFromWorld(child: Container) {
+        this._world.removeChild(child);
+    }
+
     /*
       Quando hai un Sprite (come il grattacielo) all'interno di un Container (come World),
       le coordinate del Sprite sono relative al suo Container.

@@ -1,4 +1,4 @@
-import {AnimatedSprite, Point, Rectangle, Ticker} from "pixi.js";
+import {AnimatedSprite, ColorSource, Point, Rectangle, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import PlayerAnimations from "./PlayerAnimations.ts";
 import CollisionSolver from "../services/CollisionSolver.ts";
@@ -11,13 +11,14 @@ class Player {
     private _position: Point;
     private _speed: Point;
     private readonly _fallSpeed = 20;
-    // private _overlayColor: ColorSource;
+    private _overlayColor: ColorSource;
     private _horizontalSpeed = 300;
 
     private _currentAnimation: AnimatedSprite;
     private _animations: PlayerAnimations;
     private _isOnGround: boolean = false;
     private _walkArea: Foreground;
+    private readonly _camera: Camera;
 
     constructor(
         staringPosition: Point,
@@ -25,18 +26,17 @@ class Player {
         camera: Camera,
         walkArea: Foreground) {
 
+        this._camera = camera;
         this._animations = assets.player;
         this._position = staringPosition;
         this._speed = new Point(
             this._horizontalSpeed,
             this._fallSpeed);
-        //    this._overlayColor = '#ffffff';
+        this._overlayColor = '#ffffff';
 
         this._currentAnimation = this._animations.fall;
-        this._currentAnimation.play();
+        this.setNewAnimation(this._animations.fall);
         this._walkArea = walkArea;
-
-        camera.addToWorld(this._currentAnimation);
     }
 
     jump(amount: number) {
@@ -152,6 +152,22 @@ class Player {
             return;
         }
 
+        let newAnimation = this._animations.run;
+
+        if (!this.isOnGround) {
+            if (this._speed.y < 0) {
+                newAnimation = this._animations.fart;
+            }
+            else if (this._currentAnimation === this._animations.fart
+                || this._currentAnimation === this._animations.fall) {
+                newAnimation = this._animations.fall;
+            }
+        }
+
+        if (newAnimation !== this._currentAnimation) {
+            this.setNewAnimation(newAnimation);
+        }
+
         const elaspedSeconds = time.elapsedMS / 1000;
         let moveAmount = new Point(
             this._speed.x * elaspedSeconds,
@@ -166,6 +182,18 @@ class Player {
         this._position.x += moveAmount.x;
         this._position.y += moveAmount.y;
 
+        this._currentAnimation.x = this._position.x;
+        this._currentAnimation.y = this._position.y;
+    }
+
+    private setNewAnimation(newAnimation: AnimatedSprite) {
+        this._camera.removeFromWorld(this._currentAnimation);
+
+        this._currentAnimation.stop();
+        this._currentAnimation = newAnimation;
+        this._currentAnimation.play();
+        this._currentAnimation.tint = this._overlayColor;
+        this._camera.addToWorld(this._currentAnimation);
         this._currentAnimation.x = this._position.x;
         this._currentAnimation.y = this._position.y;
     }
