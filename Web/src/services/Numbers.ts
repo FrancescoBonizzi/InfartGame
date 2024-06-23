@@ -18,5 +18,16 @@ export default {
 
     toRadians: (degrees: number) => {
         return degrees * Math.PI / 180;
+    },
+
+    /**
+     * Linear Interpolation between two values.
+     * @param start The start value.
+     * @param end The end value.
+     * @param t The interpolation factor, typically between 0 and 1.
+     * @returns The interpolated value.
+     */
+    lerp: (start: number, end: number, t: number): number => {
+        return start + t * (end - start);
     }
 }

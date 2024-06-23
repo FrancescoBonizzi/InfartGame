@@ -56,14 +56,14 @@ export const loadAssets = async (): Promise<InfartAssets> => {
             deathScreen: loadSpriteFromSpriteSheet(playerSpriteSheet, "deathScreen"),
             nuvola1: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola1"),
             nuvola2: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola2"),
-            nuvola3: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola3"),
-            player: {
-                run: new AnimatedSprite(playerSpriteSheet.animations.playerRun),
-                idle: new AnimatedSprite(playerSpriteSheet.animations.playerIdle),
-                fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart),
-                fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall),
-                merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda),
-            }
+            nuvola3: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola3")
+        },
+        player: {
+            run: new AnimatedSprite(playerSpriteSheet.animations.playerRun),
+            idle: new AnimatedSprite(playerSpriteSheet.animations.playerIdle),
+            fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart),
+            fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall),
+            merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda),
         },
         sounds: {
             music: {

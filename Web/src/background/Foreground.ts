@@ -34,6 +34,10 @@ class Foreground {
         this._nuvolificioGround.update(time);
     }
 
+    get drawnGrattacieli() {
+        return this._grattacieliGround.drawnGrattacieli();
+    }
+
 }
 
 export default Foreground;

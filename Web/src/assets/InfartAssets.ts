@@ -1,5 +1,6 @@
-import {AnimatedSprite, Texture} from "pixi.js";
+import {Texture} from "pixi.js";
 import {Sound} from "@pixi/sound";
+import PlayerAnimations from "../player/PlayerAnimations.ts";
 
 interface InfartAssets {
     textures: {
@@ -8,13 +9,6 @@ interface InfartAssets {
             gameTitle: Texture;
             scoreBackground: Texture;
             gameOverBackground: Texture;
-        },
-        player: {
-            run: AnimatedSprite;
-            idle: AnimatedSprite;
-            fart: AnimatedSprite;
-            fall: AnimatedSprite;
-            merda: AnimatedSprite;
         },
         buildings: {
             back: Texture[];
@@ -43,6 +37,7 @@ interface InfartAssets {
         nuvola2: Texture;
         nuvola3: Texture;
     }
+    player: PlayerAnimations,
     sounds: {
         music: {
             game: Sound,
