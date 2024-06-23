@@ -64,7 +64,6 @@ class Game {
 
         if (this._controller.Keys.KeyP.pressed) {
             this._isPaused = !this._isPaused;
-            console.log('Game paused:', this._isPaused);
         }
 
         if (this._isPaused) {
