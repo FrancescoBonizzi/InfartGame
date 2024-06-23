@@ -29,12 +29,11 @@ class Grattacielo {
     }
 
     get collisionRectangle() {
-        const bounds = this._sprite.getBounds();
         return new Rectangle(
-            bounds.x,
-            bounds.y,
-            bounds.width,
-            bounds.height);
+            this._sprite.x,
+            this._sprite.y - this._sprite.height,
+            this._sprite.width,
+            this._sprite.height);
     }
 
 }
