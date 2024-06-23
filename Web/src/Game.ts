@@ -62,6 +62,11 @@ class Game {
 
     update(time: Ticker) {
 
+        if (this._controller.Keys.KeyP.pressed) {
+            this._isPaused = !this._isPaused;
+            console.log('Game paused:', this._isPaused);
+        }
+
         if (this._isPaused) {
             return;
         }
@@ -71,22 +76,8 @@ class Game {
         this._backgroundLandscape.update(time);
         this._foreground.update(time);
 
-        // TODO TMP -> per i salti del player
-        if (this._controller.Keys.up.pressed) {
-            this._camera.y -= 20;
-        }
-        if (this._controller.Keys.down.pressed) {
-            this._camera.y += 20;
-        }
-
-        if (this._controller.Keys.right.pressed) {
-            // Muovo il mondo a sinistra,
-            // quindi sposto la telecamera a destra
-            this._camera.x += 20;
-        }
-
-        if (this._controller.Keys.left.pressed) {
-            this._camera.x -= 20;
+        if (this._controller.Keys.space.pressed) {
+            this._player.jump(650);
         }
 
         this._player.update(time);

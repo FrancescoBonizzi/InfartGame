@@ -1,9 +1,6 @@
 const keyMap: Record<string, string> = {
     Space: 'space',
-    ArrowUp: 'up',
-    ArrowDown: 'down',
-    ArrowRight: 'right',
-    ArrowLeft: 'left'
+    KeyP: 'KeyP',
 };
 
 interface KeyState {
@@ -12,10 +9,7 @@ interface KeyState {
 
 interface Keys {
     space: KeyState;
-    up: KeyState;
-    down: KeyState;
-    right: KeyState;
-    left: KeyState;
+    KeyP: KeyState;
 }
 
 class Controller {
@@ -25,10 +19,7 @@ class Controller {
     constructor() {
         this._keys = {
             space: {pressed: false},
-            up: {pressed: false},
-            down: {pressed: false},
-            right: {pressed: false},
-            left: {pressed: false}
+            KeyP: {pressed: false},
         };
 
         window.addEventListener('keydown', this.keydownHandler.bind(this));
@@ -45,17 +36,8 @@ class Controller {
         if (key === 'space') {
             this._keys.space.pressed = true;
         }
-        else if (key === 'up') {
-            this._keys.up.pressed = true;
-        }
-        else if (key === 'down') {
-            this._keys.down.pressed = true;
-        }
-        else if (key === 'right') {
-            this._keys.right.pressed = true;
-        }
-        else if (key === 'left') {
-            this._keys.left.pressed = true;
+        else if (key === 'KeyP') {
+            this._keys.KeyP.pressed = true;
         }
     }
 
@@ -69,17 +51,8 @@ class Controller {
         if (key === 'space') {
             this._keys.space.pressed = false;
         }
-        else if (key === 'up') {
-            this._keys.up.pressed = false;
-        }
-        else if (key === 'down') {
-            this._keys.down.pressed = false;
-        }
-        else if (key === 'right') {
-            this._keys.right.pressed = false;
-        }
-        else if (key === 'left') {
-            this._keys.left.pressed = false;
+        else if (key === 'KeyP') {
+            this._keys.KeyP.pressed = false;
         }
     }
 
