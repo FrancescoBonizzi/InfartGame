@@ -35,7 +35,7 @@ class Foreground {
     }
 
     get drawnGrattacieli() {
-        return this._grattacieliGround.drawnGrattacieli();
+        return this._grattacieliGround.grattacieli();
     }
 
 }

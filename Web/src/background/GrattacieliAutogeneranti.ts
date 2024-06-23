@@ -40,8 +40,7 @@ class GrattacieliAutogeneranti {
         this._lastGrattacieloWidth = grattacielo.width;
     }
 
-    drawnGrattacieli() {
-        // TODO: dev'essere più furbo, vedi come ho fatto nel vecchio infart
+    grattacieli() {
         return this._grattacieli;
     }
 
