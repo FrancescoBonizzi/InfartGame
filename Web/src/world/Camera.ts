@@ -23,6 +23,10 @@ class Camera {
         app.stage.addChild(this._world);
     }
 
+    get worldHeight() {
+        return this._worldHeight;
+    }
+
     get width() {
         return this._width;
     }

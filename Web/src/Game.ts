@@ -5,15 +5,17 @@ import BackgroundLandscape from "./background/BackgroundLandscape.ts";
 import Controller from "./interaction/Controller.ts";
 import Foreground from "./background/Foreground.ts";
 import Player from "./player/Player.ts";
+import Numbers from "./services/Numbers.ts";
 
 class Game {
-    
+
     private readonly _camera: Camera;
-    private _backgroundLandscape: BackgroundLandscape;
-    private _controller: Controller;
-    private _foreground: Foreground;
-    private _player: Player;
-    
+    private readonly _backgroundLandscape: BackgroundLandscape;
+    private readonly _controller: Controller;
+    private readonly _foreground: Foreground;
+    private readonly _player: Player;
+    private _isPaused: boolean = false;
+
     constructor(
         assets: InfartAssets,
         app: Application) {
@@ -34,7 +36,37 @@ class Game {
             this._foreground);
     }
 
+    set isPaused(value: boolean) {
+        this._isPaused = value;
+    }
+
+    get isPaused(): boolean {
+        return this._isPaused;
+    }
+
+    private repositionCamera() {
+        let newCameraX = this._player.position.x - 150;
+        let newCameraY = this._player.position.y + 200;
+        const heightLimit = -this._camera.worldHeight - this._camera.height;
+
+        if (newCameraY < heightLimit) {
+            newCameraY = heightLimit;
+        }
+        else if (newCameraY > 0) {
+            newCameraY = 0;
+        }
+
+        this._camera.x = Numbers.lerp(this._camera.x, newCameraX, 0.08);
+        this._camera.y = Numbers.lerp(this._camera.y, newCameraY, 0.08);
+    }
+
     update(time: Ticker) {
+
+        if (this._isPaused) {
+            return;
+        }
+
+        this.repositionCamera();
 
         this._backgroundLandscape.update(time);
         this._foreground.update(time);

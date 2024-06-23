@@ -198,6 +198,10 @@ class Player {
         this._currentAnimation.y = this._position.y;
     }
 
+    get position() {
+        return this._position;
+    }
+
 
 }
 
