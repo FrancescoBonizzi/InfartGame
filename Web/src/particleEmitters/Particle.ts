@@ -1,4 +1,4 @@
-import {ColorSource, Point, Sprite, Texture, Ticker} from "pixi.js";
+import {BLEND_MODES, ColorSource, Point, Sprite, Texture, Ticker} from "pixi.js";
 import Camera from "../world/Camera.ts";
 
 class Particle {
@@ -12,8 +12,11 @@ class Particle {
     private _rotationSpeed: number;
     private _initialScaleScalar: number;
 
-    constructor(texture: Texture, camera: Camera) {
-        this._sprite = new Sprite(texture);
+    constructor(texture: Texture, camera: Camera, blendMode?: BLEND_MODES | undefined) {
+        this._sprite = new Sprite({
+            texture,
+            blendMode: blendMode
+        });
         this._rotationSpeed = 0;
         this._speed = new Point(0, 0);
         this._acceleration = new Point(0, 0);

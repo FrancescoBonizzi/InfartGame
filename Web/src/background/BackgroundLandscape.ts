@@ -24,7 +24,7 @@ class BackgroundLandscape {
     };
     private readonly _camera: Camera;
     private _timeTillNewStar = 0;
-    private readonly _timeBetweenNewStart = 20;
+    private readonly _timeBetweenNewStar = 20;
 
     constructor(
         camera: Camera,
@@ -105,7 +105,7 @@ class BackgroundLandscape {
                     this._starfieldSpawnRange.max),
             );
             this._starfield.addParticles(where);
-            this._timeTillNewStar = this._timeBetweenNewStart;
+            this._timeTillNewStar = this._timeBetweenNewStar;
         }
 
     }

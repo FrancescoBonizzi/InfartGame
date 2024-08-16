@@ -5,13 +5,15 @@ import CollisionSolver from "../services/CollisionSolver.ts";
 import Numbers from "../services/Numbers.ts";
 import Camera from "../world/Camera.ts";
 import Foreground from "../background/Foreground.ts";
+import ScoreggiaParticleSystem from "../particleEmitters/ScoreggiaParticleSystem.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 class Player {
 
     private _position: Point;
     private _speed: Point;
     private readonly _fallSpeed = 20;
-    private _overlayColor: ColorSource;
+    private readonly _overlayColor: ColorSource;
     private _horizontalSpeed = 300;
 
     private _currentAnimation: AnimatedSprite;
@@ -19,12 +21,15 @@ class Player {
     private _isOnGround: boolean = false;
     private _walkArea: Foreground;
     private readonly _camera: Camera;
+    private readonly _scoreggiaParticleSystem: ScoreggiaParticleSystem;
+    private readonly _soundManager: SoundManager;
 
     constructor(
         staringPosition: Point,
         assets: InfartAssets,
         camera: Camera,
-        walkArea: Foreground) {
+        walkArea: Foreground,
+        soundManager: SoundManager) {
 
         this._camera = camera;
         this._animations = assets.player;
@@ -33,14 +38,20 @@ class Player {
             this._horizontalSpeed,
             this._fallSpeed);
         this._overlayColor = '#ffffff';
+        this._soundManager = soundManager;
 
         this._currentAnimation = this._animations.fall;
         this.setNewAnimation(this._animations.fall);
         this._walkArea = walkArea;
+
+        this._scoreggiaParticleSystem = new ScoreggiaParticleSystem(
+            assets,
+            this._camera);
     }
 
     jump(amount: number) {
         this._speed.y = -amount;
+        this._soundManager.playFart();
     }
 
     get isOnGround() {
@@ -184,6 +195,21 @@ class Player {
 
         this._currentAnimation.x = this._position.x;
         this._currentAnimation.y = this._position.y;
+
+        this._scoreggiaParticleSystem.update(time);
+        this.evaluateScoreggiaGeneration();
+    }
+
+    private evaluateScoreggiaGeneration() {
+        if (this._speed.y >= 0) {
+            this._soundManager.stopFart();
+        } else {
+            const where = new Point(
+                this._position.x + this._currentAnimation.width / 3,
+                this._position.y + this._currentAnimation.height / 2 + 30
+            );
+            this._scoreggiaParticleSystem.addParticles(where);
+        }
     }
 
     private setNewAnimation(newAnimation: AnimatedSprite) {

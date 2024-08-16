@@ -1,4 +1,4 @@
-import {Point, Texture, Ticker} from "pixi.js";
+import {BLEND_MODES, Point, Texture, Ticker} from "pixi.js";
 import Particle from "./Particle.ts";
 import Numbers from "../services/Numbers.ts";
 import Interval from "../primitives/Interval.ts";
@@ -17,6 +17,9 @@ abstract class ParticleSystem {
     private readonly _scale: Interval;
     private readonly _spawnAngleDegrees: Interval;
 
+    private _nextParticlesGenerationTimerMilliseconds: number | null;
+    private readonly _particlesGenerationInterval: number | null;
+
     protected constructor(
         texture: Texture,
         camera: Camera,
@@ -27,7 +30,9 @@ abstract class ParticleSystem {
         rotationSpeed: Interval,
         lifetimeSeconds: Interval,
         scale: Interval,
-        spawnAngleInDegrees: Interval) {
+        spawnAngleInDegrees: Interval,
+        particlesGenerationIntervalMilliseconds: number | null = null,
+        textureBlendMode: BLEND_MODES | undefined = undefined) {
 
         this._numParticles = numParticles;
         this._speed = speed;
@@ -39,9 +44,16 @@ abstract class ParticleSystem {
 
         this._activeParticles = new Array(density * numParticles.max)
             .fill(null)
-            .map(() => new Particle(texture, camera));
+            .map(() => new Particle(
+                texture,
+                camera,
+                textureBlendMode));
 
         this._freeParticles = [...this._activeParticles];
+        this._particlesGenerationInterval = particlesGenerationIntervalMilliseconds;
+        this._nextParticlesGenerationTimerMilliseconds = particlesGenerationIntervalMilliseconds !== null
+            ? particlesGenerationIntervalMilliseconds
+            : null;
     }
 
     public update(time: Ticker) {
@@ -49,19 +61,32 @@ abstract class ParticleSystem {
             if (particle.isActive) {
                 particle.update(time);
 
-                if(!particle.isActive) {
+                if (!particle.isActive) {
                     this._freeParticles.push(particle);
                 }
             }
         });
+
+        if (this._nextParticlesGenerationTimerMilliseconds !== null) {
+            this._nextParticlesGenerationTimerMilliseconds -= time.deltaMS;
+        }
     }
 
     public addParticles(position: Point) {
-        const numParticles = Numbers.randomBetweenInterval(this._numParticles);
-        for (let i = 0; i < numParticles && this._freeParticles.length > 0; i++) {
-            const p = this._freeParticles.shift();
-            if (p) {
-                this.initializeParticle(p, position);
+
+        if (this._nextParticlesGenerationTimerMilliseconds === null
+            || this._nextParticlesGenerationTimerMilliseconds <= 0) {
+
+            const numParticles = Numbers.randomBetweenInterval(this._numParticles);
+            for (let i = 0; i < numParticles && this._freeParticles.length > 0; i++) {
+                const p = this._freeParticles.shift();
+                if (p) {
+                    this.initializeParticle(p, position);
+                }
+            }
+
+            if (this._particlesGenerationInterval !== null) {
+                this._nextParticlesGenerationTimerMilliseconds = this._particlesGenerationInterval;
             }
         }
     }

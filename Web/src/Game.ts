@@ -6,6 +6,7 @@ import Controller from "./interaction/Controller.ts";
 import Foreground from "./background/Foreground.ts";
 import Player from "./player/Player.ts";
 import Numbers from "./services/Numbers.ts";
+import SoundManager from "./services/SoundManager.ts";
 
 class Game {
 
@@ -14,6 +15,7 @@ class Game {
     private readonly _controller: Controller;
     private readonly _foreground: Foreground;
     private readonly _player: Player;
+    private readonly _soundManager: SoundManager;
     private _isPaused: boolean = false;
 
     constructor(
@@ -22,6 +24,7 @@ class Game {
 
         this._camera = new Camera(app);
         this._controller = new Controller();
+        this._soundManager = new SoundManager();
 
         this._backgroundLandscape = new BackgroundLandscape(
             this._camera,
@@ -33,7 +36,8 @@ class Game {
             new Point(240, -600),
             assets,
             this._camera,
-            this._foreground);
+            this._foreground,
+            this._soundManager);
     }
 
     set isPaused(value: boolean) {
