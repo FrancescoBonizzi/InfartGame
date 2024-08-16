@@ -18,13 +18,11 @@ class BackgroundLandscape {
     private readonly _grattacieliMid: GrattacieliAutogeneranti;
     private readonly _nuvolificioMid: NuvoleAutogeneranti;
 
-    private readonly _starfieldSpawnRange  = {
+    private readonly _starfieldSpawnRange = {
         min: -1200,
         max: -400
     };
     private readonly _camera: Camera;
-    private _timeTillNewStar = 0;
-    private readonly _timeBetweenNewStar = 20;
 
     constructor(
         camera: Camera,
@@ -75,7 +73,7 @@ class BackgroundLandscape {
 
     update(time: Ticker) {
 
-        this.evaluateStarsGeneration(time);
+        this.evaluateStarsGeneration();
 
         this._starfield.update(time);
         this._backgroundSky.update();
@@ -90,24 +88,19 @@ class BackgroundLandscape {
             && this._camera.y <= this._starfieldSpawnRange.max;
     }
 
-    private evaluateStarsGeneration(time: Ticker) {
+    private evaluateStarsGeneration() {
 
         if (!this.isCameraInStarfieldSpawnRange()) {
             return;
         }
 
-        this._timeTillNewStar -= time.deltaTime;
-        if (this._timeTillNewStar < 0) {
-            const where = new Point(
-                Numbers.randomBetween(this._camera.x, this._camera.x + this._camera.width),
-                Numbers.randomBetween(
-                    this._starfieldSpawnRange.min,
-                    this._starfieldSpawnRange.max),
-            );
-            this._starfield.addParticles(where);
-            this._timeTillNewStar = this._timeBetweenNewStar;
-        }
-
+        const where = new Point(
+            Numbers.randomBetween(this._camera.x, this._camera.x + this._camera.width),
+            Numbers.randomBetween(
+                this._starfieldSpawnRange.min,
+                this._starfieldSpawnRange.max),
+        );
+        this._starfield.addParticles(where);
     }
 }
 

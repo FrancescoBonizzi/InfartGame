@@ -18,7 +18,8 @@ class StarField extends ParticleSystem {
             {min: -Math.PI / 2, max: Math.PI / 2},
             {min: 1.5, max: 3.0},
             {min: 0.2, max: 1.0},
-            {min: 0, max: 360}
+            {min: 0, max: 360},
+            20
         );
     }
 }
