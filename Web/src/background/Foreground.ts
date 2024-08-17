@@ -3,14 +3,18 @@ import Camera from "../world/Camera.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
 import {Ticker} from "pixi.js";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
+import DynamicGameParameters from "../services/DynamicGameParameters.ts";
+import Numbers from "../services/Numbers.ts";
 
 class Foreground {
-    private _grattacieliGround: GrattacieliAutogeneranti;
-    private _nuvolificioGround: NuvoleAutogeneranti;
+    private readonly _grattacieliGround: GrattacieliAutogeneranti;
+    private readonly _nuvolificioGround: NuvoleAutogeneranti;
+    private readonly _dynamicGameParameters: DynamicGameParameters;
 
     constructor(
         world: Camera,
-        infartAssets: InfartAssets) {
+        infartAssets: InfartAssets,
+        dynamicGameParameters: DynamicGameParameters) {
 
         this._grattacieliGround = new GrattacieliAutogeneranti(
             world,
@@ -27,6 +31,13 @@ class Foreground {
             },
             true,
             6);
+        this._dynamicGameParameters = dynamicGameParameters;
+    }
+
+    generateBuco() {
+        const startingX = this._grattacieliGround.lastGrattacieloX;
+        const space = Numbers.randomBetweenInterval(this._dynamicGameParameters.larghezzaBuchi);
+        this._grattacieliGround.lastGrattacieloX = startingX + space;
     }
 
     update(time: Ticker) {

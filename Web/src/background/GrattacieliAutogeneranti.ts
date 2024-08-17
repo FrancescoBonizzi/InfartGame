@@ -54,6 +54,14 @@ class GrattacieliAutogeneranti {
             }
         });
     }
+
+    set lastGrattacieloX(value: number) {
+        this._lastGrattacieloX = value;
+    }
+
+    get lastGrattacieloX() {
+        return this._lastGrattacieloX;
+    }
 }
 
 export default GrattacieliAutogeneranti;

@@ -66,10 +66,6 @@ class Player {
         return false;
     }
 
-    isFalling() {
-        return this._currentAnimation === this._animations.fall;
-    }
-
     private evaluatePotentialCollisions(moveAmount: Point) {
 
         const possibleCollidingObjects = this._walkArea.drawnGrattacieli

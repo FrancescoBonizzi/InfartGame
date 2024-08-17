@@ -7,6 +7,7 @@ import Foreground from "./background/Foreground.ts";
 import Player from "./player/Player.ts";
 import Numbers from "./services/Numbers.ts";
 import SoundManager from "./services/SoundManager.ts";
+import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 
 class Game {
 
@@ -16,6 +17,8 @@ class Game {
     private readonly _foreground: Foreground;
     private readonly _player: Player;
     private readonly _soundManager: SoundManager;
+    private readonly _dynamicGameParameters: DynamicGameParameters;
+
     private _isPaused: boolean = false;
 
     constructor(
@@ -25,13 +28,15 @@ class Game {
         this._camera = new Camera(app);
         this._controller = new Controller();
         this._soundManager = new SoundManager();
+        this._dynamicGameParameters = new DynamicGameParameters();
 
         this._backgroundLandscape = new BackgroundLandscape(
             this._camera,
             assets);
         this._foreground = new Foreground(
             this._camera,
-            assets);
+            assets,
+            this._dynamicGameParameters);
         this._player = new Player(
             new Point(240, -600),
             assets,
