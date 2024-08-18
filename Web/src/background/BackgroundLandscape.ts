@@ -57,7 +57,7 @@ class BackgroundLandscape {
         this._grattacieliBack = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.back,
-            this._dynamicGameParameters.playerHorizontalSpeed * 0.005);
+            this._dynamicGameParameters.playerHorizontalSpeed * 0.00001);
 
         // TODO anche nuvole devono avere una velocità di parallasse
 
@@ -75,7 +75,7 @@ class BackgroundLandscape {
         this._grattacieliMid = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.mid,
-            this._dynamicGameParameters.playerHorizontalSpeed * 0.007);
+            this._dynamicGameParameters.playerHorizontalSpeed * 0.0003);
     }
 
     update(time: Ticker) {
