@@ -18,6 +18,7 @@ class Game {
     private readonly _player: Player;
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
+    private _score: number = 0;
 
     private _isPaused: boolean = false;
 
@@ -30,9 +31,6 @@ class Game {
         this._soundManager = new SoundManager();
         this._dynamicGameParameters = new DynamicGameParameters();
 
-        this._backgroundLandscape = new BackgroundLandscape(
-            this._camera,
-            assets);
         this._foreground = new Foreground(
             this._camera,
             assets,
@@ -43,6 +41,10 @@ class Game {
             this._camera,
             this._foreground,
             this._soundManager);
+        this._backgroundLandscape = new BackgroundLandscape(
+            this._camera,
+            assets,
+            this._player);
     }
 
     set isPaused(value: boolean) {
@@ -89,6 +91,28 @@ class Game {
         }
 
         this._player.update(time);
+        this.updateScore();
+    }
+
+    updateScore() {
+
+        const currentScore = this._score;
+
+        if (!this._player.isDead) {
+            this._score = this._player.position.x / 100;
+        }
+
+        if (currentScore === this._score)
+            return;
+
+        if (this._score % 50 === 0)
+        {
+            this._player.increaseSpeed();
+            if (this._dynamicGameParameters.larghezzaBuchi.max < 1000) {
+                this._dynamicGameParameters.larghezzaBuchi.min += 80;
+                this._dynamicGameParameters.larghezzaBuchi.max += 80;
+            }
+        }
     }
 
 }

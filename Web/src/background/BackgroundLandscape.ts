@@ -6,6 +6,7 @@ import BackgroundSky from "./BackgroundSky.ts";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 import StarField from "../particleEmitters/StarField.ts";
 import Numbers from "../services/Numbers.ts";
+import Player from "../player/Player.ts";
 
 class BackgroundLandscape {
 
@@ -22,13 +23,17 @@ class BackgroundLandscape {
         min: -1200,
         max: -400
     };
+
     private readonly _camera: Camera;
+    private readonly _player: Player;
 
     constructor(
         camera: Camera,
-        infartAssets: InfartAssets) {
+        infartAssets: InfartAssets,
+        player: Player) {
 
         this._camera = camera;
+        this._player = player;
 
         this._backgroundSky = new BackgroundSky(
             infartAssets,
@@ -52,7 +57,9 @@ class BackgroundLandscape {
         this._grattacieliBack = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.back,
-            0.01);
+            this._player.horizontalSpeed * 0.5);
+
+        // TODO anche nuvole devono avere una velocità di parallasse
 
         this._nuvolificioMid = new NuvoleAutogeneranti(
             camera,
@@ -68,7 +75,7 @@ class BackgroundLandscape {
         this._grattacieliMid = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.mid,
-            0.18);
+            this._player.horizontalSpeed * 0.7);
     }
 
     update(time: Ticker) {

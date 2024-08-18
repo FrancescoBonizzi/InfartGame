@@ -14,20 +14,7 @@ class PixiJsTimer {
         this._callback = callback;
     }
 
-    private _isEnabled: boolean = false;
-
-    get isEnabled(): boolean {
-        return this._isEnabled;
-    }
-
-    set isEnabled(isEnabled) {
-        this._isEnabled = isEnabled;
-    }
-
     update(time: Ticker) {
-
-        if (!this._isEnabled)
-            return;
 
         this._timePassedMilliseconds += time.deltaMS;
 

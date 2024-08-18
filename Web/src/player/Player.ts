@@ -54,6 +54,10 @@ class Player {
         this._soundManager.playFart();
     }
 
+    get horizontalSpeed() {
+        return this._horizontalSpeed;
+    }
+
     get isOnGround() {
         return this._isOnGround;
     }
@@ -224,6 +228,9 @@ class Player {
         return this._position;
     }
 
+    increaseSpeed() {
+        this._horizontalSpeed += 40;
+    }
 
 }
 
