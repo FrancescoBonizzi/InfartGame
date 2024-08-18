@@ -7,6 +7,7 @@ import Camera from "../world/Camera.ts";
 import Foreground from "../background/Foreground.ts";
 import ScoreggiaParticleSystem from "../particleEmitters/ScoreggiaParticleSystem.ts";
 import SoundManager from "../services/SoundManager.ts";
+import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 
 class Player {
 
@@ -14,7 +15,6 @@ class Player {
     private _speed: Point;
     private readonly _fallSpeed = 20;
     private readonly _overlayColor: ColorSource;
-    private _horizontalSpeed = 300;
 
     private _currentAnimation: AnimatedSprite;
     private _animations: PlayerAnimations;
@@ -23,19 +23,22 @@ class Player {
     private readonly _camera: Camera;
     private readonly _scoreggiaParticleSystem: ScoreggiaParticleSystem;
     private readonly _soundManager: SoundManager;
+    private readonly _dynamicGameParameters: DynamicGameParameters;
 
     constructor(
         staringPosition: Point,
         assets: InfartAssets,
         camera: Camera,
         walkArea: Foreground,
-        soundManager: SoundManager) {
+        soundManager: SoundManager,
+        dynamicGameParameters: DynamicGameParameters) {
 
+        this._dynamicGameParameters = dynamicGameParameters;
         this._camera = camera;
         this._animations = assets.player;
         this._position = staringPosition;
         this._speed = new Point(
-            this._horizontalSpeed,
+            this._dynamicGameParameters.playerHorizontalSpeed,
             this._fallSpeed);
         this._overlayColor = '#ffffff';
         this._soundManager = soundManager;
@@ -52,10 +55,6 @@ class Player {
     jump(amount: number) {
         this._speed.y = -amount;
         this._soundManager.playFart();
-    }
-
-    get horizontalSpeed() {
-        return this._horizontalSpeed;
     }
 
     get isOnGround() {
@@ -227,11 +226,6 @@ class Player {
     get position() {
         return this._position;
     }
-
-    increaseSpeed() {
-        this._horizontalSpeed += 40;
-    }
-
 }
 
 export default Player;

@@ -31,6 +31,10 @@ class Game {
         this._soundManager = new SoundManager();
         this._dynamicGameParameters = new DynamicGameParameters();
 
+        this._backgroundLandscape = new BackgroundLandscape(
+            this._camera,
+            assets,
+            this._dynamicGameParameters);
         this._foreground = new Foreground(
             this._camera,
             assets,
@@ -40,11 +44,8 @@ class Game {
             assets,
             this._camera,
             this._foreground,
-            this._soundManager);
-        this._backgroundLandscape = new BackgroundLandscape(
-            this._camera,
-            assets,
-            this._player);
+            this._soundManager,
+            this._dynamicGameParameters);
     }
 
     set isPaused(value: boolean) {
@@ -107,7 +108,7 @@ class Game {
 
         if (this._score % 50 === 0)
         {
-            this._player.increaseSpeed();
+            this._dynamicGameParameters.playerHorizontalSpeed += 40;
             if (this._dynamicGameParameters.larghezzaBuchi.max < 1000) {
                 this._dynamicGameParameters.larghezzaBuchi.min += 80;
                 this._dynamicGameParameters.larghezzaBuchi.max += 80;

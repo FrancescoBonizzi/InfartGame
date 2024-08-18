@@ -6,7 +6,7 @@ import BackgroundSky from "./BackgroundSky.ts";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 import StarField from "../particleEmitters/StarField.ts";
 import Numbers from "../services/Numbers.ts";
-import Player from "../player/Player.ts";
+import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 
 class BackgroundLandscape {
 
@@ -25,15 +25,15 @@ class BackgroundLandscape {
     };
 
     private readonly _camera: Camera;
-    private readonly _player: Player;
+    private readonly _dynamicGameParameters: DynamicGameParameters;
 
     constructor(
         camera: Camera,
         infartAssets: InfartAssets,
-        player: Player) {
+        dynamicGameParameters: DynamicGameParameters) {
 
         this._camera = camera;
-        this._player = player;
+        this._dynamicGameParameters = dynamicGameParameters;
 
         this._backgroundSky = new BackgroundSky(
             infartAssets,
@@ -57,7 +57,7 @@ class BackgroundLandscape {
         this._grattacieliBack = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.back,
-            this._player.horizontalSpeed * 0.5);
+            this._dynamicGameParameters.playerHorizontalSpeed * 0.005);
 
         // TODO anche nuvole devono avere una velocità di parallasse
 
@@ -75,7 +75,7 @@ class BackgroundLandscape {
         this._grattacieliMid = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.mid,
-            this._player.horizontalSpeed * 0.7);
+            this._dynamicGameParameters.playerHorizontalSpeed * 0.007);
     }
 
     update(time: Ticker) {
