@@ -100,13 +100,13 @@ class Game {
         const currentScore = this._score;
 
         if (!this._player.isDead) {
-            this._score = this._player.position.x / 100;
+            this._score = Math.floor(this._player.position.x / 100);
         }
 
         if (currentScore === this._score)
             return;
 
-        if (this._score % 50 === 0)
+        if (this._score % 10 === 0)
         {
             this._dynamicGameParameters.playerHorizontalSpeed += 40;
             if (this._dynamicGameParameters.larghezzaBuchi.max < 1000) {
