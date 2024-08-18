@@ -22,7 +22,8 @@ class Foreground {
         this._grattacieliGround = new GrattacieliAutogeneranti(
             world,
             infartAssets.textures.buildings.ground,
-            null);
+            dynamicGameParameters,
+            1 / dynamicGameParameters.playerHorizontalSpeed);
         this._nuvolificioGround = new NuvoleAutogeneranti(
             world,
             infartAssets,

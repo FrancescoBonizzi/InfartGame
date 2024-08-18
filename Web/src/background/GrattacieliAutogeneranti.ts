@@ -2,6 +2,7 @@ import {Texture, Ticker} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 import Camera from "../world/Camera.ts";
 import Grattacielo from "./Grattacielo.ts";
+import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 
 class GrattacieliAutogeneranti {
 
@@ -11,24 +12,28 @@ class GrattacieliAutogeneranti {
 
     private readonly _camera: Camera;
     private readonly _grattacieli: Grattacielo[];
-    private readonly _parallaxSpeed: number | null;
+    private readonly _parallaxFactor: number;
+    private readonly _dynamicGameParameters: DynamicGameParameters;
 
     constructor(
         camera: Camera,
         grattacieli: Texture[],
-        parallaxSpeed: number | null) {
+        dynamicGameParameters: DynamicGameParameters,
+        parallaxFactor: number) {
 
         this._camera = camera;
         this._grattacieli = grattacieli.map(texture => new Grattacielo(
             texture,
             camera));
         this._lastGrattacieloX = 0;
-        this._parallaxSpeed = parallaxSpeed;
+        this._dynamicGameParameters = dynamicGameParameters;
 
         this._lastGrattacieloWidth = this._grattacieli[0].width;
         this._grattacieli.forEach(grattacielo => {
             this.repositionGrattacielo(grattacielo);
         });
+
+        this._parallaxFactor = parallaxFactor;
     }
 
     repositionGrattacielo(grattacielo: Grattacielo) {
@@ -49,8 +54,10 @@ class GrattacieliAutogeneranti {
             if (this._camera.isOutOfCameraLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
             }
-            else if (this._parallaxSpeed !== null) {
-                grattacielo.x -= time.deltaTime * this._parallaxSpeed;
+            else {
+                grattacielo.x -= time.deltaTime
+                    * this._dynamicGameParameters.playerHorizontalSpeed
+                    * this._parallaxFactor;
             }
         });
     }
