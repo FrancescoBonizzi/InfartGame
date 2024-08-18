@@ -51,16 +51,23 @@ class GrattacieliAutogeneranti {
     }
 
     update(time: Ticker) {
+
+        const moveX = this.getMoveX(time);
+        this._lastGrattacieloX -= moveX;
+
         this._grattacieli.forEach(grattacielo => {
+            grattacielo.x -= moveX;
+
             if (this._camera.isOutOfCameraLeft(grattacielo)) {
                 this.repositionGrattacielo(grattacielo);
             }
-            else {
-                grattacielo.x -= time.deltaTime
-                    * (this._dynamicGameParameters.playerHorizontalSpeed / 1000)
-                    * this._parallaxFactor;
-            }
         });
+    }
+
+    private getMoveX(time: Ticker) {
+        return time.deltaTime
+            * (this._dynamicGameParameters.playerHorizontalSpeed / 1000)
+            * this._parallaxFactor;
     }
 
     set lastGrattacieloX(value: number) {
