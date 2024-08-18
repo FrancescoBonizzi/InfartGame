@@ -60,7 +60,3 @@ class PixiJsTimer {
 }
 
 export default PixiJsTimer;
-
-// TODO: farlo uguale a come ho fatto per i particle system e ficcarlo lì
-// TODO: usarlo per il generate buco
-// TODO: Guarda ogni quanto allarga nei dynamic game parameters

@@ -5,11 +5,14 @@ import {Ticker} from "pixi.js";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 import Numbers from "../services/Numbers.ts";
+import PixiJsTimer from "../primitives/PixiJsTimer.ts";
 
 class Foreground {
     private readonly _grattacieliGround: GrattacieliAutogeneranti;
     private readonly _nuvolificioGround: NuvoleAutogeneranti;
     private readonly _dynamicGameParameters: DynamicGameParameters;
+    private readonly _bucoTimer: PixiJsTimer;
+    private readonly _bucoProbability = 0.005;
 
     constructor(
         world: Camera,
@@ -32,9 +35,16 @@ class Foreground {
             true,
             6);
         this._dynamicGameParameters = dynamicGameParameters;
+        this._bucoTimer = new PixiJsTimer(
+            2000,
+            () => this.generateBuco());
     }
 
     generateBuco() {
+
+        if (Numbers.randomBetween(0, 1) >= this._bucoProbability)
+            return;
+
         const startingX = this._grattacieliGround.lastGrattacieloX;
         const space = Numbers.randomBetweenInterval(this._dynamicGameParameters.larghezzaBuchi);
         this._grattacieliGround.lastGrattacieloX = startingX + space;
@@ -43,6 +53,7 @@ class Foreground {
     update(time: Ticker) {
         this._grattacieliGround.update(time);
         this._nuvolificioGround.update(time);
+        this._bucoTimer.update(time);
     }
 
     get drawnGrattacieli() {
