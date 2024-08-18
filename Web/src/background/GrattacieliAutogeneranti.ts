@@ -56,7 +56,7 @@ class GrattacieliAutogeneranti {
             }
             else {
                 grattacielo.x -= time.deltaTime
-                    * this._dynamicGameParameters.playerHorizontalSpeed
+                    * (this._dynamicGameParameters.playerHorizontalSpeed / 1000)
                     * this._parallaxFactor;
             }
         });

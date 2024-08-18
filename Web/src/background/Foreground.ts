@@ -23,7 +23,7 @@ class Foreground {
             world,
             infartAssets.textures.buildings.ground,
             dynamicGameParameters,
-            1 / dynamicGameParameters.playerHorizontalSpeed);
+            3);
         this._nuvolificioGround = new NuvoleAutogeneranti(
             world,
             infartAssets,

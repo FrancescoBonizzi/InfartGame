@@ -58,7 +58,7 @@ class BackgroundLandscape {
             camera,
             infartAssets.textures.buildings.back,
             this._dynamicGameParameters,
-            0.00001);
+            0.01);
 
         // TODO anche nuvole devono avere una velocità di parallasse
 
@@ -77,7 +77,7 @@ class BackgroundLandscape {
             camera,
             infartAssets.textures.buildings.mid,
             this._dynamicGameParameters,
-            0.0009);
+            0.9);
     }
 
     update(time: Ticker) {
