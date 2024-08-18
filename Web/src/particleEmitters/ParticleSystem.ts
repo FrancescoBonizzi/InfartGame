@@ -3,6 +3,7 @@ import Particle from "./Particle.ts";
 import Numbers from "../services/Numbers.ts";
 import Interval from "../primitives/Interval.ts";
 import Camera from "../world/Camera.ts";
+import PixiJsTimer from "../primitives/PixiJsTimer.ts";
 
 abstract class ParticleSystem {
 
@@ -17,8 +18,7 @@ abstract class ParticleSystem {
     private readonly _scale: Interval;
     private readonly _spawnAngleDegrees: Interval;
 
-    private _nextParticlesGenerationTimerMilliseconds: number | null;
-    private readonly _particlesGenerationInterval: number | null;
+    private readonly _particlesGenerationTimer: PixiJsTimer | null;
 
     protected constructor(
         texture: Texture,
@@ -50,9 +50,9 @@ abstract class ParticleSystem {
                 textureBlendMode));
 
         this._freeParticles = [...this._activeParticles];
-        this._particlesGenerationInterval = particlesGenerationIntervalMilliseconds;
-        this._nextParticlesGenerationTimerMilliseconds = particlesGenerationIntervalMilliseconds !== null
-            ? particlesGenerationIntervalMilliseconds
+
+        this._particlesGenerationTimer = particlesGenerationIntervalMilliseconds !== null
+            ? new PixiJsTimer(particlesGenerationIntervalMilliseconds)
             : null;
     }
 
@@ -67,15 +67,13 @@ abstract class ParticleSystem {
             }
         });
 
-        if (this._nextParticlesGenerationTimerMilliseconds !== null) {
-            this._nextParticlesGenerationTimerMilliseconds -= time.deltaMS;
-        }
+        this._particlesGenerationTimer?.update(time);
     }
 
     public addParticles(position: Point) {
 
-        if (this._nextParticlesGenerationTimerMilliseconds === null
-            || this._nextParticlesGenerationTimerMilliseconds <= 0) {
+        if (!this._particlesGenerationTimer
+            || this._particlesGenerationTimer.canRunManualCallback()) {
 
             const numParticles = Numbers.randomBetweenInterval(this._numParticles);
             for (let i = 0; i < numParticles && this._freeParticles.length > 0; i++) {
@@ -85,10 +83,8 @@ abstract class ParticleSystem {
                 }
             }
 
-            if (this._particlesGenerationInterval !== null) {
-                this._nextParticlesGenerationTimerMilliseconds = this._particlesGenerationInterval;
-            }
         }
+
     }
 
     private initializeParticle(
