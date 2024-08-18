@@ -24,6 +24,7 @@ class Player {
     private readonly _scoreggiaParticleSystem: ScoreggiaParticleSystem;
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
+    private _hasAlreadyGeneratedScoreggiaForThisJump: boolean = false;
 
     constructor(
         staringPosition: Point,
@@ -55,6 +56,7 @@ class Player {
     jump(amount: number) {
         this._speed.y = -amount;
         this._soundManager.playFart();
+        this._hasAlreadyGeneratedScoreggiaForThisJump = false;
     }
 
     get isOnGround() {
@@ -202,12 +204,16 @@ class Player {
     private evaluateScoreggiaGeneration() {
         if (this._speed.y >= 0) {
             this._soundManager.stopFart();
-        } else {
-            const where = new Point(
-                this._position.x + this._currentAnimation.width / 3,
-                this._position.y + this._currentAnimation.height / 2 + 30
-            );
-            this._scoreggiaParticleSystem.addParticles(where);
+        }
+        else {
+            if (!this._hasAlreadyGeneratedScoreggiaForThisJump) {
+                const where = new Point(
+                    this._position.x + this._currentAnimation.width / 3,
+                    this._position.y + this._currentAnimation.height / 2 + 30
+                );
+                this._scoreggiaParticleSystem.addParticles(where);
+                this._hasAlreadyGeneratedScoreggiaForThisJump = true;
+            }
         }
     }
 

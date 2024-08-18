@@ -11,15 +11,15 @@ class ScoreggiaParticleSystem extends ParticleSystem {
         super(
             infartAssets.textures.particles.scoreggiaParticle,
             camera,
-            10,
+            5,
             {min: 4, max: 8},
             {min: 50, max: 80},
             {min: 30, max: 50},
             {min: -Math.PI / 4 / 2, max: Math.PI / 4 / 2},
             {min: 0.5, max: 0.7},
             {min: 0.5, max: 1.0},
-            {min: 195, max: 280},
-            30,
+            {min: 210, max: 215},
+            null,
             'screen'
         );
     }
