@@ -37,10 +37,20 @@ class GrattacieliAutogeneranti {
     }
 
     repositionGrattacielo(grattacielo: Grattacielo) {
-        grattacielo.x =
-            this._lastGrattacieloX
+
+        const newX = this._lastGrattacieloX
             + this._lastGrattacieloWidth
             + Numbers.randomBetween(1, this._maxGrattacieloPositionOffset);
+        const distance = newX - (this._lastGrattacieloX + this._lastGrattacieloWidth);
+
+        if (distance > this._maxGrattacieloPositionOffset) {
+            grattacielo.x = this._lastGrattacieloX
+                + this._lastGrattacieloWidth
+                + this._maxGrattacieloPositionOffset;
+        }
+        else {
+            grattacielo.x = newX;
+        }
 
         this._lastGrattacieloX = grattacielo.x;
         this._lastGrattacieloWidth = grattacielo.width;
