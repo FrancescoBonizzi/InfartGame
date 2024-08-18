@@ -41,6 +41,7 @@ class GrattacieliAutogeneranti {
             this._lastGrattacieloX
             + this._lastGrattacieloWidth
             + Numbers.randomBetween(1, this._maxGrattacieloPositionOffset);
+
         this._lastGrattacieloX = grattacielo.x;
         this._lastGrattacieloWidth = grattacielo.width;
     }

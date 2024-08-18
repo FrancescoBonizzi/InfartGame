@@ -60,7 +60,7 @@ class BackgroundLandscape {
             this._dynamicGameParameters,
             0.01);
 
-        // TODO anche nuvole devono avere una velocità di parallasse
+        // TODO anche nuvole devono avere una velocità di parallasse?
 
         this._nuvolificioMid = new NuvoleAutogeneranti(
             camera,

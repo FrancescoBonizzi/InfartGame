@@ -42,7 +42,6 @@ class Foreground {
     }
 
     generateBuco() {
-
         if (Numbers.randomBetween(0, 1) >= this._bucoProbability)
             return;
 
