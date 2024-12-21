@@ -36,6 +36,11 @@ class GrattacieliAutogeneranti {
         this._parallaxFactor = parallaxFactor;
     }
 
+    private _onGrattacieloGeneratoHandler?: (grattacielo: Grattacielo) => void;
+    public set onGrattacieloGeneratoHandler(handler: (grattacielo: Grattacielo) => void) {
+        this._onGrattacieloGeneratoHandler = handler;
+    }
+
     repositionGrattacielo(grattacielo: Grattacielo) {
 
         const newX = this._lastGrattacieloX
@@ -47,13 +52,13 @@ class GrattacieliAutogeneranti {
             grattacielo.x = this._lastGrattacieloX
                 + this._lastGrattacieloWidth
                 + this._maxGrattacieloPositionOffset;
-        }
-        else {
+        } else {
             grattacielo.x = newX;
         }
 
         this._lastGrattacieloX = grattacielo.x;
         this._lastGrattacieloWidth = grattacielo.width;
+        this._onGrattacieloGeneratoHandler?.(grattacielo);
     }
 
     grattacieli() {

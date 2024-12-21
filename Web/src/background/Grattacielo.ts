@@ -20,12 +20,24 @@ class Grattacielo {
         return this._sprite.width;
     }
 
+    get height() {
+        return this._sprite.height;
+    }
+
     get x() {
         return this._sprite.x;
     }
 
     set x(x: number) {
         this._sprite.x = x;
+    }
+
+    get y() {
+        return this._sprite.y;
+    }
+
+    set y(y: number) {
+        this._sprite.y = y;
     }
 
     get collisionRectangle() {

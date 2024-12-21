@@ -8,11 +8,13 @@ import Player from "./player/Player.ts";
 import Numbers from "./services/Numbers.ts";
 import SoundManager from "./services/SoundManager.ts";
 import DynamicGameParameters from "./services/DynamicGameParameters.ts";
+import GemmeManager from "./gemme/GemmeManager.ts";
 
 class Game {
 
     private readonly _camera: Camera;
     private readonly _backgroundLandscape: BackgroundLandscape;
+    private readonly _gemmeManager: GemmeManager;
     private readonly _controller: Controller;
     private readonly _foreground: Foreground;
     private readonly _player: Player;
@@ -46,6 +48,11 @@ class Game {
             this._foreground,
             this._soundManager,
             this._dynamicGameParameters);
+        this._gemmeManager = new GemmeManager(
+            assets,
+            this._camera,
+            this._player,
+            this._foreground);
     }
 
     set isPaused(value: boolean) {
@@ -93,6 +100,8 @@ class Game {
 
         this._player.update(time);
         this.updateScore();
+
+        this._gemmeManager.update(time);
     }
 
     updateScore() {

@@ -6,6 +6,7 @@ import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 import Numbers from "../services/Numbers.ts";
 import PixiJsTimer from "../primitives/PixiJsTimer.ts";
+import Grattacielo from "./Grattacielo.ts";
 
 class Foreground {
     private readonly _grattacieliGround: GrattacieliAutogeneranti;
@@ -39,6 +40,13 @@ class Foreground {
         this._bucoTimer = new PixiJsTimer(
             2000,
             () => this.generateBuco());
+        this._grattacieliGround.onGrattacieloGeneratoHandler = (grattacielo) =>
+            this._onGrattacieloGeneratoHandler?.(grattacielo);
+    }
+
+    private _onGrattacieloGeneratoHandler?: (grattacielo: Grattacielo) => void;
+    public set onGrattacieloGeneratoHandler(handler: (grattacielo: Grattacielo) => void) {
+        this._onGrattacieloGeneratoHandler = handler;
     }
 
     generateBuco() {

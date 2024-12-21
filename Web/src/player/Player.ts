@@ -8,8 +8,9 @@ import Foreground from "../background/Foreground.ts";
 import ScoreggiaParticleSystem from "../particleEmitters/ScoreggiaParticleSystem.ts";
 import SoundManager from "../services/SoundManager.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
+import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
 
-class Player {
+class Player implements IHasCollisionRectangle {
 
     private _position: Point;
     private _speed: Point;
@@ -148,7 +149,7 @@ class Player {
         return moveAmount;
     }
 
-    private get collisionRectangle() {
+    get collisionRectangle() {
         return new Rectangle(
             this._position.x,
             this._position.y,
