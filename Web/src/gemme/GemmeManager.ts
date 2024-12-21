@@ -6,7 +6,6 @@ import Hamburger from "./Hamburger.ts";
 import Player from "../player/Player.ts";
 import CollisionSolver from "../services/CollisionSolver.ts";
 import PowerUpTypes from "./PowerUpTypes.ts";
-import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
 import Grattacielo from "../background/Grattacielo.ts";
 import Numbers from "../services/Numbers.ts";
 import Foreground from "../background/Foreground.ts";
@@ -14,11 +13,11 @@ import Foreground from "../background/Foreground.ts";
 class GemmeManager {
 
     private readonly _camera: Camera;
-    private readonly _maxActiveHamburgers = 20;
+    private readonly _maxActiveHamburgers = 30;
     private readonly _powerUpsTextures: Record<PowerUpTypes, Texture>;
     private readonly _hamburgerTexture: Texture;
     private readonly _hamburgerProbability = 0.4;
-    private readonly _powerUpProbability = 0.005;
+    private readonly _powerUpProbability = 0.008;
 
     private _hambugers: Hamburger[];
     private _activePowerup: PowerUp | null;
@@ -82,6 +81,7 @@ class GemmeManager {
 
         if (this._activePowerup) {
             if (this._camera.isOutOfCameraLeft(this._activePowerup)) {
+                this._camera.removeFromWorld(this._activePowerup.sprite);
                 this._activePowerup = null;
             } else {
                 this._activePowerup.update(ticker);
@@ -92,6 +92,7 @@ class GemmeManager {
         this._hambugers.forEach(hamburger => {
             if (this._camera.isOutOfCameraLeft(hamburger)) {
                 hamburgersToRemove.push(hamburger);
+                this._camera.removeFromWorld(hamburger.sprite);
             } else {
                 hamburger.update(ticker);
             }
@@ -122,6 +123,7 @@ class GemmeManager {
             return false;
 
         this._hambugers = this._hambugers.filter(hamburger => hamburger !== collidedWith);
+        this._camera.removeFromWorld(collidedWith.sprite);
         return true;
     }
 
@@ -132,11 +134,12 @@ class GemmeManager {
 
         const collidedWith = CollisionSolver.checkCollisionsReturnCollidingObjectSpecific(
             player,
-            [this._activePowerup as IHasCollisionRectangle]);
+            [this._activePowerup]);
         if (!collidedWith)
             return null;
 
         const activePowerupType = this._activePowerup.powerUpType;
+        this._camera.removeFromWorld(collidedWith.sprite);
         this._activePowerup = null;
         return activePowerupType;
     }

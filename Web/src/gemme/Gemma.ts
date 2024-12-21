@@ -1,12 +1,18 @@
 import {Point, Rectangle, Sprite, Texture, Ticker} from "pixi.js";
 import Camera from "../world/Camera.ts";
 import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
+import Numbers from "../services/Numbers.ts";
 
 class Gemma implements IHasCollisionRectangle {
 
     private readonly _sprite: Sprite;
     private readonly _collisionRectangleOffsetFactor = 40;
     private readonly _startingPosition: Point;
+    private _elapsed: number;
+
+    private readonly _amplitude: number = 12;
+    private readonly _angularSpeed: number = 0.05;
+    private readonly _randomOffset: number;
 
     constructor(
         world: Camera,
@@ -15,11 +21,18 @@ class Gemma implements IHasCollisionRectangle {
 
         const sprite = new Sprite(texture);
         world.addToWorld(sprite);
-        this._sprite = sprite;
         this._startingPosition = position;
+        this._elapsed = 0;
+        this._randomOffset = Numbers.randomBetween(0, 50);
+
+        this._sprite = sprite;
         this._sprite.x = position.x;
         this._sprite.y = position.y;
         this._sprite.anchor.set(0.5, 0);
+    }
+
+    get sprite() {
+        return this._sprite;
     }
 
     get x() {
@@ -39,8 +52,10 @@ class Gemma implements IHasCollisionRectangle {
     }
 
     update(time: Ticker) {
-        // TODO: farli oscillare verticalmente
-        //this._sprite.y = this._startingPosition.y * Math.sin(10 * time.deltaTime);
+        this._elapsed += time.deltaTime;
+        this._sprite.y = this._startingPosition.y
+            + Math.sin((this._elapsed + this._randomOffset) * this._angularSpeed)
+            * this._amplitude;
     }
 }
 

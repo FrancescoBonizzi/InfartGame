@@ -39,15 +39,15 @@ export default {
         return false;
     },
 
-    checkCollisionsReturnCollidingObjectSpecific: (
-        who: IHasCollisionRectangle,
-        withRectangles: IHasCollisionRectangle[]) =>
-    {
+    checkCollisionsReturnCollidingObjectSpecific: <TWho extends IHasCollisionRectangle, TWith extends IHasCollisionRectangle>(
+        who: TWho,
+        withRectangles: TWith[]
+    ): TWith | null => {
         for (const element of withRectangles) {
-            if (who.collisionRectangle.intersects(element.collisionRectangle))
+            if (who.collisionRectangle.intersects(element.collisionRectangle)) {
                 return element;
+            }
         }
-
         return null;
     }
 
