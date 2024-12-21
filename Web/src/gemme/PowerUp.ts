@@ -1,7 +1,7 @@
 import Gemma from "./Gemma.ts";
 import PowerUpTypes from "./PowerUpTypes.ts";
 import Camera from "../world/Camera.ts";
-import {Texture} from "pixi.js";
+import {Point, Texture} from "pixi.js";
 
 class PowerUp extends Gemma {
 
@@ -10,9 +10,10 @@ class PowerUp extends Gemma {
     constructor(
         world: Camera,
         texture: Texture,
-        powerUpType: PowerUpTypes) {
+        powerUpType: PowerUpTypes,
+        position: Point) {
 
-        super(world, texture);
+        super(world, texture, position);
         this._powerUpType = powerUpType;
 
     }

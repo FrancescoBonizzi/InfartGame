@@ -8,11 +8,11 @@ class Hamburger extends Gemma {
      world: Camera,
      texture: Texture,
      position: Point) {
-     super(world, texture);
+     super(world, texture, position);
 
-     this.x = position.x;
-     this.y = position.y;
  }
+
+
 
 }
 

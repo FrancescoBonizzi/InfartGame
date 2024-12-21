@@ -24,7 +24,7 @@ class Foreground {
             world,
             infartAssets.textures.buildings.ground,
             dynamicGameParameters,
-            3);
+            0); // Attenzione! Se cambiamo questo, si rompono le posizioni delle gemme
         this._nuvolificioGround = new NuvoleAutogeneranti(
             world,
             infartAssets,

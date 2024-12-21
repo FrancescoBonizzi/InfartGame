@@ -17,7 +17,7 @@ class GemmeManager {
     private readonly _maxActiveHamburgers = 20;
     private readonly _powerUpsTextures: Record<PowerUpTypes, Texture>;
     private readonly _hamburgerTexture: Texture;
-    private readonly _hamburgerProbability = 0.005;
+    private readonly _hamburgerProbability = 0.4;
     private readonly _powerUpProbability = 0.005;
 
     private _hambugers: Hamburger[];
@@ -54,11 +54,9 @@ class GemmeManager {
         this._activePowerup = new PowerUp(
             this._camera,
             this._powerUpsTextures[randomPowerUpType],
-            randomPowerUpType
-        )
-        this._activePowerup.x = where.x;
-        this._activePowerup.y = where.y;
-
+            randomPowerUpType,
+            where
+        );
     }
 
     private getRandomPowerUp() : PowerUpTypes {
@@ -90,25 +88,28 @@ class GemmeManager {
             }
         }
 
+        const hamburgersToRemove: Hamburger[] = [];
         this._hambugers.forEach(hamburger => {
             if (this._camera.isOutOfCameraLeft(hamburger)) {
-
+                hamburgersToRemove.push(hamburger);
             } else {
                 hamburger.update(ticker);
             }
         })
 
+        this._hambugers = this._hambugers.filter(hamburger =>
+            !hamburgersToRemove.includes(hamburger));
         this.checkPlayerCollisionWithGemme();
     }
     
     checkPlayerCollisionWithGemme() {
         if (this.playerCollidedWithHamburger(this._player)) {
-
+            // TODO
         }
 
         const powerUpType = this.playerCollidedWithPowerUp(this._player);
         if (powerUpType) {
-
+            // TODO
         }
     }
 
@@ -144,8 +145,8 @@ class GemmeManager {
 
         if (Numbers.randomBetween(0, 1) < this._hamburgerProbability) {
             this.addHamburger(new Point(
-                grattacielo.x + 15,
-                grattacielo.y - (grattacielo.height - 70)
+                grattacielo.x + (grattacielo.width / 2),
+                grattacielo.y - grattacielo.height - 70
             ));
         }
 
