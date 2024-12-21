@@ -120,7 +120,7 @@ class Player implements IHasCollisionRectangle {
                 afterMove.x + afterMove.width - 20,
                 afterMove.y + afterMove.height - 2);
 
-            const collidingObject = CollisionSolver.checkCollisionsReturnCollidingObject(
+            const collidingObject = CollisionSolver.checkCollisionsReturnCollidingRectangle(
                 new Rectangle(
                     corner1.x,
                     corner1.y + 10,

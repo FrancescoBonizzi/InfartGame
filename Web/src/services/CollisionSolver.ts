@@ -15,7 +15,7 @@ export default {
         return false;
     },
 
-    checkCollisionsReturnCollidingObject: (
+    checkCollisionsReturnCollidingRectangle: (
         who: Rectangle,
         withRectangles: Rectangle[]) =>
     {
@@ -25,18 +25,6 @@ export default {
         }
 
         return null;
-    },
-
-    checkCollisionsSpecific: (
-        who: IHasCollisionRectangle,
-        withRectangles: IHasCollisionRectangle[]) =>
-    {
-        for (const element of withRectangles) {
-           if (who.collisionRectangle.intersects(element.collisionRectangle))
-               return true;
-        }
-
-        return false;
     },
 
     checkCollisionsReturnCollidingObjectSpecific: <TWho extends IHasCollisionRectangle, TWith extends IHasCollisionRectangle>(
