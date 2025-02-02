@@ -1,6 +1,7 @@
 # TODO
 - [x] Aggiungere la parte "gemme"
 - [x] Bloccare il doppio salto
+- [x] Pressione del pulsante pausa
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] HUD!
 - [ ] Gestione della conta degli hamburger nella status bar e i salti
