@@ -94,8 +94,8 @@ class Game {
         this._backgroundLandscape.update(time);
         this._foreground.update(time);
 
-        if (this._controller.Keys.space.pressed) {
-            this._player.jump(650);
+        if (this._controller.consumeKeyPress('space')) {
+            this._player.jump();
         }
 
         this._player.update(time);

@@ -1,8 +1,8 @@
 # TODO
 - [x] Aggiungere la parte "gemme"
+- [x] Bloccare il doppio salto
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] HUD!
-- [ ] Bloccare il doppio salto
 - [ ] Gestione della conta degli hamburger nella status bar e i salti
 - [ ] Suoni
 - [ ] Parte della morte esplosione

@@ -27,6 +27,8 @@ class Player implements IHasCollisionRectangle {
     private readonly _dynamicGameParameters: DynamicGameParameters;
     private _hasAlreadyGeneratedScoreggiaForThisJump: boolean = false;
 
+    private _currentJumpCount: number = 0;
+
     constructor(
         staringPosition: Point,
         assets: InfartAssets,
@@ -54,7 +56,16 @@ class Player implements IHasCollisionRectangle {
             this._camera);
     }
 
-    jump(amount: number) {
+    jump() {
+
+        // TODO: ci sarà lo switch sulla base del powerup corrente
+        if (this._currentJumpCount >= 1) {
+            return;
+        }
+
+        const amount = 650;
+        this._currentJumpCount++;
+
         this._speed.y = -amount;
         this._soundManager.playFart();
         this._hasAlreadyGeneratedScoreggiaForThisJump = false;
@@ -175,6 +186,9 @@ class Player implements IHasCollisionRectangle {
                 || this._currentAnimation === this._animations.fall) {
                 newAnimation = this._animations.fall;
             }
+        }
+        else {
+            this._currentJumpCount = 0;
         }
 
         if (newAnimation !== this._currentAnimation) {

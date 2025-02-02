@@ -13,13 +13,12 @@ interface Keys {
 }
 
 class Controller {
-
     private readonly _keys: Keys;
 
     constructor() {
         this._keys = {
-            space: {pressed: false},
-            KeyP: {pressed: false},
+            space: { pressed: false },
+            KeyP: { pressed: false },
         };
 
         window.addEventListener('keydown', this.keydownHandler.bind(this));
@@ -33,10 +32,10 @@ class Controller {
             return;
         }
 
-        if (key === 'space') {
+        if (key === 'space' && !this._keys.space.pressed) {
             this._keys.space.pressed = true;
         }
-        else if (key === 'KeyP') {
+        else if (key === 'KeyP' && !this._keys.KeyP.pressed) {
             this._keys.KeyP.pressed = true;
         }
     }
@@ -56,10 +55,17 @@ class Controller {
         }
     }
 
+    public consumeKeyPress(key: keyof Keys): boolean {
+        if (this._keys[key].pressed) {
+            this._keys[key].pressed = false;
+            return true;
+        }
+        return false;
+    }
+
     get Keys(): Keys {
         return this._keys;
     }
-
 }
 
 export default Controller;
