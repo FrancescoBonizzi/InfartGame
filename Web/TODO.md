@@ -2,8 +2,9 @@
 - [x] Aggiungere la parte "gemme"
 - [x] Bloccare il doppio salto
 - [x] Pressione del pulsante pausa
+- [ ] Reazione alla presa dell'hamburger, esplosione e morte
 - [ ] Gemme: reazioni alla presa dei powerup
-- [ ] HUD!
+- [ ] HUD / StatusBar!
 - [ ] Gestione della conta degli hamburger nella status bar e i salti
 - [ ] Suoni
 - [ ] Parte della morte esplosione

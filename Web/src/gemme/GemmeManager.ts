@@ -106,7 +106,8 @@ class GemmeManager {
     
     checkPlayerCollisionWithGemme() {
         if (this.playerCollidedWithHamburger(this._player)) {
-            // TODO
+            this._player.hamburgerEaten();
+            return;
         }
 
         const powerUpType = this.playerCollidedWithPowerUp(this._player);

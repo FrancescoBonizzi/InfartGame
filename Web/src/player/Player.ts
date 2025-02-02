@@ -28,6 +28,9 @@ class Player implements IHasCollisionRectangle {
     private _hasAlreadyGeneratedScoreggiaForThisJump: boolean = false;
 
     private _currentJumpCount: number = 0;
+    private _currentEatenHambugers: number = 0;
+    private readonly _maxEatenHamburgers = 3;
+    private _isDead: boolean = false;
 
     constructor(
         staringPosition: Point,
@@ -58,6 +61,13 @@ class Player implements IHasCollisionRectangle {
 
     jump() {
 
+        if (this._isDead)
+            return;
+
+        if (this._currentEatenHambugers > 0) {
+            this._currentEatenHambugers--;
+        }
+
         // TODO: ci sarà lo switch sulla base del powerup corrente
         if (this._currentJumpCount >= 1) {
             return;
@@ -80,7 +90,7 @@ class Player implements IHasCollisionRectangle {
     }
 
     get isDead() {
-        return false;
+        return this._isDead;
     }
 
     private evaluatePotentialCollisions(moveAmount: Point) {
@@ -246,6 +256,18 @@ class Player implements IHasCollisionRectangle {
 
     get position() {
         return this._position;
+    }
+
+    hamburgerEaten() {
+        if (this._currentEatenHambugers > this._maxEatenHamburgers)
+        {
+            // DIE e esplodi
+            this._isDead = true;
+            return;
+        }
+
+        this._soundManager.playBite();
+        ++this._currentEatenHambugers;
     }
 }
 

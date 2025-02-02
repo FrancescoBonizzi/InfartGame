@@ -12,6 +12,9 @@ class SoundManager {
         // TODO
     }
 
+    playBite() {
+        // TODO
+    }
 }
 
 export default SoundManager;
