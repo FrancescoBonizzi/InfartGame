@@ -45,6 +45,7 @@ class GemmeManager {
     private addPowerUp(
         where: Point) {
 
+        // Only one active powerup at a time
         if (this._activePowerup) {
             return;
         }
@@ -146,20 +147,15 @@ class GemmeManager {
 
     private onGrattacieloGeneratoHandler(grattacielo : Grattacielo) {
 
-        if (Numbers.randomBetween(0, 1) < this._hamburgerProbability) {
-            this.addHamburger(new Point(
-                grattacielo.x + (grattacielo.width / 2),
-                grattacielo.y - grattacielo.height - 70
-            ));
-        }
+        const where = new Point(
+            grattacielo.x + (grattacielo.width / 2),
+            grattacielo.y - grattacielo.height - 70);
 
-        if (Numbers.randomBetween(0, 1) < this._powerUpProbability) {
-            this.addPowerUp(
-                new Point(
-                    grattacielo.x,
-                    grattacielo.y - (grattacielo.height - 180)
-                )
-            );
+        if (Numbers.randomBetween(0, 1) < this._hamburgerProbability) {
+            this.addHamburger(where);
+        }
+        else if (Numbers.randomBetween(0, 1) < this._powerUpProbability) {
+            this.addPowerUp(where);
         }
 
     }
