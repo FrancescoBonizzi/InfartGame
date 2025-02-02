@@ -9,6 +9,7 @@ import ScoreggiaParticleSystem from "../particleEmitters/ScoreggiaParticleSystem
 import SoundManager from "../services/SoundManager.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
+import InfartExplosion from "../particleEmitters/infartExplosion.ts";
 
 class Player implements IHasCollisionRectangle {
 
@@ -31,6 +32,7 @@ class Player implements IHasCollisionRectangle {
     private _currentEatenHambugers: number = 0;
     private readonly _maxEatenHamburgers = 3;
     private _isDead: boolean = false;
+    private _infartExplosion: InfartExplosion;
 
     constructor(
         staringPosition: Point,
@@ -38,7 +40,8 @@ class Player implements IHasCollisionRectangle {
         camera: Camera,
         walkArea: Foreground,
         soundManager: SoundManager,
-        dynamicGameParameters: DynamicGameParameters) {
+        dynamicGameParameters: DynamicGameParameters,
+        infartExplosion: InfartExplosion) {
 
         this._dynamicGameParameters = dynamicGameParameters;
         this._camera = camera;
@@ -53,6 +56,7 @@ class Player implements IHasCollisionRectangle {
         this._currentAnimation = this._animations.fall;
         this.setNewAnimation(this._animations.fall);
         this._walkArea = walkArea;
+        this._infartExplosion = infartExplosion;
 
         this._scoreggiaParticleSystem = new ScoreggiaParticleSystem(
             assets,
@@ -258,11 +262,16 @@ class Player implements IHasCollisionRectangle {
         return this._position;
     }
 
+    die(isWithText: boolean) {
+        this._isDead = true;
+        this._infartExplosion.explode(this._position, isWithText);
+        this._camera.removeFromWorld(this._currentAnimation);
+    }
+
     hamburgerEaten() {
         if (this._currentEatenHambugers > this._maxEatenHamburgers)
         {
-            // DIE e esplodi
-            this._isDead = true;
+            this.die(true);
             return;
         }
 

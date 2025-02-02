@@ -9,6 +9,7 @@ import Numbers from "./services/Numbers.ts";
 import SoundManager from "./services/SoundManager.ts";
 import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 import GemmeManager from "./gemme/GemmeManager.ts";
+import InfartExplosion from "./particleEmitters/infartExplosion.ts";
 
 class Game {
 
@@ -20,8 +21,9 @@ class Game {
     private readonly _player: Player;
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
-    private _score: number = 0;
+    private readonly _infartExplosion: InfartExplosion;
 
+    private _score: number = 0;
     private _isPaused: boolean = false;
 
     constructor(
@@ -32,7 +34,6 @@ class Game {
         this._controller = new Controller();
         this._soundManager = new SoundManager();
         this._dynamicGameParameters = new DynamicGameParameters();
-
         this._backgroundLandscape = new BackgroundLandscape(
             this._camera,
             assets,
@@ -41,13 +42,18 @@ class Game {
             this._camera,
             assets,
             this._dynamicGameParameters);
+        this._infartExplosion = new InfartExplosion(
+            assets,
+            this._camera,
+            this._soundManager);
         this._player = new Player(
             new Point(240, -600),
             assets,
             this._camera,
             this._foreground,
             this._soundManager,
-            this._dynamicGameParameters);
+            this._dynamicGameParameters,
+            this._infartExplosion);
         this._gemmeManager = new GemmeManager(
             assets,
             this._camera,
@@ -99,6 +105,7 @@ class Game {
         this.updateScore();
 
         this._gemmeManager.update(time);
+        this._infartExplosion.update(time);
     }
 
     updateScore() {

@@ -15,6 +15,10 @@ class SoundManager {
     playBite() {
         // TODO
     }
+
+    playExplosion() {
+
+    }
 }
 
 export default SoundManager;
