@@ -81,7 +81,9 @@ class Game {
 
     update(time: Ticker) {
 
-        if (this._controller.Keys.KeyP.pressed) {
+        if (this._controller.consumeKeyPress('space')) {
+            this._player.jump();
+        } else if (this._controller.consumeKeyPress('KeyP')) {
             this._isPaused = !this._isPaused;
         }
 
@@ -90,13 +92,8 @@ class Game {
         }
 
         this.repositionCamera();
-
         this._backgroundLandscape.update(time);
         this._foreground.update(time);
-
-        if (this._controller.consumeKeyPress('space')) {
-            this._player.jump();
-        }
 
         this._player.update(time);
         this.updateScore();
