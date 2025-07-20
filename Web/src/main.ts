@@ -12,7 +12,9 @@ import Game from "./Game.ts";
         background: "#ff0000",
         width: 800,
         height: 480,
-        premultipliedAlpha: false
+        premultipliedAlpha: false,
+        antialias: true,
+        autoDensity: true,
     });
 
     // Then adding the application's canvas to the DOM body.

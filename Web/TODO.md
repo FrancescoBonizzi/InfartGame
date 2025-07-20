@@ -14,3 +14,4 @@
       dato che non salvo un bel niente. Oppure lo salvo nello storage del browser o cookie (specificalo)
 - [ ] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone]
 - [ ] Menù semplificato
+- [ ] Font più divertente
