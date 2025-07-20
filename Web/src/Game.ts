@@ -10,6 +10,7 @@ import SoundManager from "./services/SoundManager.ts";
 import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 import GemmeManager from "./gemme/GemmeManager.ts";
 import InfartExplosion from "./particleEmitters/infartExplosion.ts";
+import Hud from "./hud/Hud.ts";
 
 class Game {
 
@@ -22,6 +23,7 @@ class Game {
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
     private readonly _infartExplosion: InfartExplosion;
+    private readonly _hud: Hud;
 
     private _score: number = 0;
     private _isPaused: boolean = false;
@@ -59,6 +61,7 @@ class Game {
             this._camera,
             this._player,
             this._foreground);
+        this._hud = new Hud(app);
     }
 
     set isPaused(value: boolean) {
@@ -118,6 +121,8 @@ class Game {
 
         if (currentScore === this._score)
             return;
+
+        this._hud.updateScore(currentScore);
 
         if (this._score % 50 === 0)
         {
