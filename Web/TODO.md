@@ -6,7 +6,7 @@
 - [ ] SISTEMARE animazione esplosione
 - [x] Incremento velocità relativo al punteggio
 - [ ] HUD / StatusBar!
-- [ ] Punteggio
+- [x] Punteggio
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] Gestione della conta degli hamburger nella status bar e i salti
 - [ ] Suoni

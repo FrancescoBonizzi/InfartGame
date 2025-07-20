@@ -10,7 +10,7 @@ class ScoreText {
 
         this._text = new Text({
             style: {
-                fontSize: 40,
+                fontSize: 20,
                 fontWeight: 'bold',
                 fill: {color: '#ffffff'},
             }
@@ -22,11 +22,11 @@ class ScoreText {
         this._container.addChild(this._rectangle);
         this._container.addChild(this._text);
 
-        this._container.x = app.screen.width - 16;
+        this._container.x = app.screen.width - 20;
         this._container.y = app.screen.height - 10;
         this._container.pivot.set(
-            this._text.width,
-            this._text.height);
+            1,
+            1);
 
         app.stage.addChild(this._container);
 
