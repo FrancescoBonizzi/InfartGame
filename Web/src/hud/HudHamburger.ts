@@ -1,4 +1,4 @@
-import {Application, ColorMatrixFilter, Point, Renderer, Sprite, Ticker} from "pixi.js";
+import {Application, Point, Renderer, Sprite, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import Numbers from "../services/Numbers.ts";
 
@@ -17,8 +17,7 @@ interface Animation {
 
 class HudHamburger {
     private _app: Application<Renderer>;
-    private _sprite: Sprite;
-    private _colorMatrixFilter: ColorMatrixFilter;
+    private readonly _sprite: Sprite;
 
     private readonly _animationDurationMs = 180;
 
@@ -38,9 +37,6 @@ class HudHamburger {
         this._sprite = new Sprite(assets.textures.burger);
         this._sprite.anchor.set(0.5, 1);
         this._sprite.position.copyFrom(position);
-
-        this._colorMatrixFilter = new ColorMatrixFilter();
-        this._sprite.filters = [this._colorMatrixFilter];
 
         this._currentAnimation = null;
         this._sprite.scale.set(this._currentScale);
