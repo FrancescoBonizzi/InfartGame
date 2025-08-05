@@ -1,6 +1,7 @@
 import ScoreText from "./ScoreText.ts";
 import {Application, Container, Graphics, Point, Renderer, Ticker} from "pixi.js";
 import HamburgerStatusBar from "./HamburgerStatusBar.ts";
+import InfartAssets from "../assets/InfartAssets.ts";
 
 class Hud {
 
@@ -13,7 +14,7 @@ class Hud {
 
     constructor(
         app: Application<Renderer>,
-        hamburgerStatusBar: HamburgerStatusBar
+        assets: InfartAssets
     ) {
         // Ancoro il container al bordo basso e lo posizioni UNA volta
         this._container = new Container();
@@ -39,7 +40,11 @@ class Hud {
                 this._background.width - 20,
                 this._statusBarHeight / 2
             ));
-        this._hamburgerStatusBar = hamburgerStatusBar;
+        this._hamburgerStatusBar = new HamburgerStatusBar(
+            this._container,
+            new Point(0, this._statusBarHeight / 2),
+            assets
+        );
     }
 
     updateScore(score: number) {
@@ -49,6 +54,8 @@ class Hud {
     update(time: Ticker) {
         this._hamburgerStatusBar.update(time);
     }
+
+    getHamburgerStatusBar = () => this._hamburgerStatusBar;
 }
 
 export default Hud;

@@ -11,7 +11,6 @@ import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 import GemmeManager from "./gemme/GemmeManager.ts";
 import InfartExplosion from "./particleEmitters/infartExplosion.ts";
 import Hud from "./hud/Hud.ts";
-import HamburgerStatusBar from "./hud/HamburgerStatusBar.ts";
 
 class Game {
 
@@ -49,10 +48,9 @@ class Game {
             assets,
             this._camera,
             this._soundManager);
-        const hamburgerStatusBar = new HamburgerStatusBar(
+        this._hud = new Hud(
             app,
-            assets
-        );
+            assets);
         this._player = new Player(
             new Point(240, -600),
             assets,
@@ -61,15 +59,12 @@ class Game {
             this._soundManager,
             this._dynamicGameParameters,
             this._infartExplosion,
-            hamburgerStatusBar);
+            this._hud.getHamburgerStatusBar());
         this._gemmeManager = new GemmeManager(
             assets,
             this._camera,
             this._player,
             this._foreground);
-        this._hud = new Hud(
-            app,
-            hamburgerStatusBar);
     }
 
     set isPaused(value: boolean) {

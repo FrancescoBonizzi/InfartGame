@@ -1,4 +1,4 @@
-import {Application, Point, Renderer, Sprite, Ticker} from "pixi.js";
+import {Container, Point, Sprite, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import Numbers from "../services/Numbers.ts";
 
@@ -16,7 +16,7 @@ interface Animation {
 }
 
 class HudHamburger {
-    private readonly _app: Application<Renderer>;
+    private readonly _container: Container;
     private readonly _sprite: Sprite;
 
     private readonly _animationDurationMs = 180;
@@ -31,18 +31,22 @@ class HudHamburger {
 
     private _currentAnimation: Animation | null;
 
-    constructor(app: Application<Renderer>, position: Point, assets: InfartAssets) {
-        this._app = app;
+    constructor(
+        container: Container,
+        position: Point,
+        assets: InfartAssets) {
+
+        this._container = container;
 
         this._sprite = new Sprite(assets.textures.burger);
-        this._sprite.anchor.set(0.5, 1);
+        this._sprite.anchor.set(0.5, 0.5);
         this._sprite.position.copyFrom(position);
 
         this._currentAnimation = null;
         this._sprite.scale.set(this._currentScale);
         this._sprite.alpha = this._currencyOpacity;
 
-        this._app.stage.addChild(this._sprite);
+        this._container.addChild(this._sprite);
     }
 
     update(time: Ticker) {

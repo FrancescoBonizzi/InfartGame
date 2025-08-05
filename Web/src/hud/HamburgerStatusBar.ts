@@ -1,6 +1,6 @@
 import HudHamburger from "./HudHamburger.ts";
 import FixedGameParamters from "../services/FixedGameParamters.ts";
-import {Application, Point, Renderer, Ticker} from "pixi.js";
+import {Container, Point, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 
 class HamburgerStatusBar {
@@ -9,19 +9,20 @@ class HamburgerStatusBar {
     private _currentActiveHamburgerIndex: number | null;
 
     constructor(
-        app: Application<Renderer>,
+        container: Container,
+        startingPosition: Point,
         assets: InfartAssets) {
 
         this._hudHamburgers = [];
         this._currentActiveHamburgerIndex = null;
         const hamburgerSpriteWidth = assets.textures.burger.width;
 
-        for(let h = 0; h <= FixedGameParamters.MaxEatenHamburgers; h++) {
+        for (let h = 0; h <= FixedGameParamters.MaxEatenHamburgers; h++) {
             this._hudHamburgers.push(new HudHamburger(
-                app,
+                container,
                 new Point(
                     hamburgerSpriteWidth + h * hamburgerSpriteWidth,
-                    app.screen.height - 10
+                    startingPosition.y
                 ),
                 assets
             ))
@@ -33,8 +34,7 @@ class HamburgerStatusBar {
         if (this._currentActiveHamburgerIndex !== null) {
             if (this._currentActiveHamburgerIndex < FixedGameParamters.MaxEatenHamburgers)
                 this._currentActiveHamburgerIndex++;
-        }
-        else {
+        } else {
             this._currentActiveHamburgerIndex = 0;
         }
 
