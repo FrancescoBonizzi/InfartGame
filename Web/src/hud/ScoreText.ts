@@ -1,10 +1,11 @@
-import {Container, Text} from "pixi.js";
+import {Container, Text, Point} from "pixi.js";
 
 class ScoreText {
     private readonly _text: Text;
 
     constructor(
-        container: Container) {
+        container: Container,
+        position: Point) {
 
         this._text = new Text({
             style: {
@@ -13,12 +14,11 @@ class ScoreText {
                 fill: {color: '#ffffff'},
             }
         });
-        this._text.anchor.set(1, 1);
-        this._text.x = container.width - 20;
-        this._text.y = container.height / 2;
+        this._text.anchor.set(1, 0.5);
+        this._text.x = position.x;
+        this._text.y = position.y;
 
         container.addChild(this._text);
-
         this.updateScore(0);
     }
 

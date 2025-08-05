@@ -1,5 +1,5 @@
 import ScoreText from "./ScoreText.ts";
-import {Application, Container, Graphics, Renderer, Ticker} from "pixi.js";
+import {Application, Container, Graphics, Point, Renderer, Ticker} from "pixi.js";
 import HamburgerStatusBar from "./HamburgerStatusBar.ts";
 
 class Hud {
@@ -8,6 +8,7 @@ class Hud {
     private readonly _background: Graphics;
     private readonly _scoreText: ScoreText;
     private readonly _hamburgerStatusBar: HamburgerStatusBar;
+
     private readonly _statusBarHeight = 50;
 
     constructor(
@@ -15,13 +16,6 @@ class Hud {
         hamburgerStatusBar: HamburgerStatusBar
     ) {
         this._container = new Container();
-        this._container.width = app.screen.width;
-        this._container.height = this._statusBarHeight;
-        this._container.pivot.x = 0;
-        this._container.pivot.y = app.screen.height;
-        this._container.x = 0;
-        this._container.y = app.screen.height;
-
         app.stage.addChild(this._container);
 
         this._background = new Graphics();
@@ -34,7 +28,12 @@ class Hud {
         this._background.fill({color: 0x000000, alpha: 0.6});
         this._container.addChild(this._background);
 
-        this._scoreText = new ScoreText(this._container);
+        this._scoreText = new ScoreText(
+            this._container,
+            new Point(
+                this._background.width - 20,
+                app.screen.height - (this._statusBarHeight / 2)
+            ));
         this._hamburgerStatusBar = hamburgerStatusBar;
     }
 
