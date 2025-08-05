@@ -14,7 +14,7 @@
 - [ ] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone]
 - [ ] Menù semplificato
 - [ ] Font più divertente
-- [ ] Gestione della conta degli hamburger nella status bar e i salti
+- [x] Gestione della conta degli hamburger nella status bar e i salti
 - [ ] posso tranquillamente fare la barra sotto nera o di un colore fisso, come nei giochi retró tipo il virtual boy 
 - [ ] A sx metterei delle frasi brevi tipo “il prossimo è un mc-Infart e frasi del genere, aiuto con ai
 - [ ] Hearthbeat quando ti manca un hamburger per esplodere

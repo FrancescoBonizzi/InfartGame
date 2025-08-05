@@ -24,7 +24,6 @@ class Game {
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
     private readonly _infartExplosion: InfartExplosion;
-    private _hamburgerStatusBar: HamburgerStatusBar;
     private readonly _hud: Hud;
 
     private _score: number = 0;
@@ -50,7 +49,7 @@ class Game {
             assets,
             this._camera,
             this._soundManager);
-        this._hamburgerStatusBar = new HamburgerStatusBar(
+        const hamburgerStatusBar = new HamburgerStatusBar(
             app,
             assets
         );
@@ -62,13 +61,15 @@ class Game {
             this._soundManager,
             this._dynamicGameParameters,
             this._infartExplosion,
-            this._hamburgerStatusBar);
+            hamburgerStatusBar);
         this._gemmeManager = new GemmeManager(
             assets,
             this._camera,
             this._player,
             this._foreground);
-        this._hud = new Hud(app);
+        this._hud = new Hud(
+            app,
+            hamburgerStatusBar);
     }
 
     set isPaused(value: boolean) {
@@ -112,7 +113,7 @@ class Game {
         this._foreground.update(time);
 
         this._player.update(time);
-        this._hamburgerStatusBar.update(time);
+        this._hud.update(time);
         this.updateScore();
 
         this._gemmeManager.update(time);
