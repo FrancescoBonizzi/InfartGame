@@ -2,9 +2,8 @@
 - [ ] SISTEMARE animazione esplosione
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] Suoni
-- [ ] Aggiungere la parte record (più bello, dai!) -> Si può anche eliminare totalmente, 
-      dato che non salvo un bel niente. Oppure lo salvo nello storage del browser o cookie (specificalo)
-- [ ] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone]
+- [ ] Aggiungere la parte record (più bello, dai!) Lo salvo in un cookie del browser
+- [ ] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone dei salti
 - [ ] Menù semplificato
 - [ ] Font più divertente
 - [x] Gestione della conta degli hamburger nella status bar e i salti
