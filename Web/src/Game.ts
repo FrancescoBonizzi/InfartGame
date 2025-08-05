@@ -112,6 +112,7 @@ class Game {
         this._foreground.update(time);
 
         this._player.update(time);
+        this._hamburgerStatusBar.update(time);
         this.updateScore();
 
         this._gemmeManager.update(time);

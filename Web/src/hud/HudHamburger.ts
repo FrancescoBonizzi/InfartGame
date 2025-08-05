@@ -1,44 +1,106 @@
-import {Application, ColorMatrixFilter, Point, Renderer, Sprite} from "pixi.js";
+import {Application, ColorMatrixFilter, Point, Renderer, Sprite, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
+import Numbers from "../services/Numbers.ts";
 
 enum HamburgerState {
     Active,
     Idle,
 }
 
+interface Animation {
+    elapsedMs: number;
+    fromOpacity: number;
+    toOpacity: number;
+    fromScale: number;
+    toScale: number;
+}
+
 class HudHamburger {
-
-    private _state: HamburgerState;
+    private _app: Application<Renderer>;
     private _sprite: Sprite;
+    private _colorMatrixFilter: ColorMatrixFilter;
 
-    constructor(
-        app: Application<Renderer>,
-        position: Point,
-        assets: InfartAssets) {
+    private readonly _animationDurationMs = 180;
+
+    private readonly _scaleIdle = 0.92;
+    private readonly _scaleActive = 1.0;
+    private _currentScale = this._scaleIdle;
+
+    private readonly _opacityIdle = 0.5;
+    private readonly _opacityActive = 1;
+    private readonly _currencyOpacity = this._opacityIdle;
+
+    private _currentAnimation: Animation | null;
+
+    constructor(app: Application<Renderer>, position: Point, assets: InfartAssets) {
+        this._app = app;
 
         this._sprite = new Sprite(assets.textures.burger);
         this._sprite.anchor.set(0.5, 1);
-        this._sprite.x = position.x;
-        this._sprite.y = position.y;
-        app.stage.addChild(this._sprite);
-        this.deactivate();
+        this._sprite.position.copyFrom(position);
 
-        this._state = HamburgerState.Idle;
+        this._colorMatrixFilter = new ColorMatrixFilter();
+        this._sprite.filters = [this._colorMatrixFilter];
+
+        this._currentAnimation = null;
+        this._sprite.scale.set(this._currentScale);
+        this._sprite.alpha = this._currencyOpacity;
+
+        this._app.stage.addChild(this._sprite);
+    }
+
+    update(time: Ticker) {
+
+        if (this._currentAnimation) {
+            this._currentAnimation.elapsedMs = Math.min(
+                this._currentAnimation.elapsedMs + time.deltaMS,
+                this._animationDurationMs);
+            const animationCompletion = this._currentAnimation.elapsedMs / this._animationDurationMs;
+            const e = Numbers.easeOutCubic(animationCompletion);
+            this._currentScale = Numbers.lerp(
+                this._currentAnimation.fromScale,
+                this._currentAnimation.toScale,
+                e);
+
+            this._sprite.scale.set(this._currentScale);
+            this._sprite.alpha = Numbers.lerp(0.5, 1, e);
+
+            if (animationCompletion >= 1)
+                this._currentAnimation = null;
+        }
     }
 
     activate() {
-        this._state = HamburgerState.Active;
-        this._sprite.filters = [];
+        this.setState(HamburgerState.Active);
     }
 
     deactivate() {
-        this._state = HamburgerState.Idle;
-        const colorMatrix = new ColorMatrixFilter();
-        colorMatrix.desaturate();
-        this._sprite.filters = [colorMatrix];
+        this.setState(HamburgerState.Idle);
     }
 
-    // TODO: update per animazione activate in e out
+    private setState(next: HamburgerState) {
+
+        const fromScale = next === HamburgerState.Active
+            ? this._scaleIdle
+            : this._scaleActive;
+        const toScale = next === HamburgerState.Active
+            ? this._scaleActive
+            : this._scaleIdle;
+        const fromOpacity = next === HamburgerState.Active
+            ? this._opacityActive
+            : this._opacityIdle;
+        const toOpacity = next === HamburgerState.Active
+            ? this._opacityIdle
+            : this._opacityActive;
+
+        this._currentAnimation = {
+            elapsedMs: 0,
+            fromScale: fromScale,
+            toScale: toScale,
+            fromOpacity: fromOpacity,
+            toOpacity: toOpacity
+        };
+    }
 }
 
 export default HudHamburger;

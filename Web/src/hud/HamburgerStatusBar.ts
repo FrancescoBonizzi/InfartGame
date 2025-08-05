@@ -1,6 +1,6 @@
 import HudHamburger from "./HudHamburger.ts";
 import FixedGameParamters from "../services/FixedGameParamters.ts";
-import {Application, Point, Renderer} from "pixi.js";
+import {Application, Point, Renderer, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 
 class HamburgerStatusBar {
@@ -46,6 +46,10 @@ class HamburgerStatusBar {
             this._hudHamburgers[this._currentActiveHamburgerIndex].deactivate();
             this._currentActiveHamburgerIndex--;
         }
+    }
+
+    update(time: Ticker) {
+        this._hudHamburgers.forEach(h => h.update(time));
     }
 
 }
