@@ -16,5 +16,4 @@
   3: "Pressione all’erta. Impronta idrica alta.",
   4: "Evento avverso imminente. Impatto climatico critico.",
   };`
-
-- [ ] Hearthbeat quando ti manca un hamburger per esplodere
+- [ ] Hearthbeat quando ti manca un hamburger per esplodere (predisponi già i suoni)
