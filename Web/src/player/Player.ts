@@ -10,6 +10,8 @@ import SoundManager from "../services/SoundManager.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
 import InfartExplosion from "../particleEmitters/infartExplosion.ts";
+import FixedGameParamters from "../services/FixedGameParamters.ts";
+import HamburgerStatusBar from "../hud/HamburgerStatusBar.ts";
 
 class Player implements IHasCollisionRectangle {
 
@@ -30,9 +32,9 @@ class Player implements IHasCollisionRectangle {
 
     private _currentJumpCount: number = 0;
     private _currentEatenHambugers: number = 0;
-    private readonly _maxEatenHamburgers = 3;
     private _isDead: boolean = false;
     private _infartExplosion: InfartExplosion;
+    private _hamburgerStatusBar: HamburgerStatusBar;
 
     constructor(
         staringPosition: Point,
@@ -41,7 +43,8 @@ class Player implements IHasCollisionRectangle {
         walkArea: Foreground,
         soundManager: SoundManager,
         dynamicGameParameters: DynamicGameParameters,
-        infartExplosion: InfartExplosion) {
+        infartExplosion: InfartExplosion,
+        hamburgerStatusBar: HamburgerStatusBar) {
 
         this._dynamicGameParameters = dynamicGameParameters;
         this._camera = camera;
@@ -57,6 +60,7 @@ class Player implements IHasCollisionRectangle {
         this.setNewAnimation(this._animations.fall);
         this._walkArea = walkArea;
         this._infartExplosion = infartExplosion;
+        this._hamburgerStatusBar = hamburgerStatusBar;
 
         this._scoreggiaParticleSystem = new ScoreggiaParticleSystem(
             assets,
@@ -70,6 +74,7 @@ class Player implements IHasCollisionRectangle {
 
         if (this._currentEatenHambugers > 0) {
             this._currentEatenHambugers--;
+            this._hamburgerStatusBar.farted();
         }
 
         // TODO: ci sarà lo switch sulla base del powerup corrente
@@ -269,7 +274,7 @@ class Player implements IHasCollisionRectangle {
     }
 
     hamburgerEaten() {
-        if (this._currentEatenHambugers > this._maxEatenHamburgers)
+        if (this._currentEatenHambugers > FixedGameParamters.MaxEatenHamburgers)
         {
             this.die(true);
             return;
@@ -277,6 +282,7 @@ class Player implements IHasCollisionRectangle {
 
         this._soundManager.playBite();
         ++this._currentEatenHambugers;
+        this._hamburgerStatusBar.hamburgerEaten();
     }
 }
 

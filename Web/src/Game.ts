@@ -11,6 +11,7 @@ import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 import GemmeManager from "./gemme/GemmeManager.ts";
 import InfartExplosion from "./particleEmitters/infartExplosion.ts";
 import Hud from "./hud/Hud.ts";
+import HamburgerStatusBar from "./hud/HamburgerStatusBar.ts";
 
 class Game {
 
@@ -23,6 +24,7 @@ class Game {
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
     private readonly _infartExplosion: InfartExplosion;
+    private _hamburgerStatusBar: HamburgerStatusBar;
     private readonly _hud: Hud;
 
     private _score: number = 0;
@@ -48,6 +50,10 @@ class Game {
             assets,
             this._camera,
             this._soundManager);
+        this._hamburgerStatusBar = new HamburgerStatusBar(
+            app,
+            assets
+        );
         this._player = new Player(
             new Point(240, -600),
             assets,
@@ -55,7 +61,8 @@ class Game {
             this._foreground,
             this._soundManager,
             this._dynamicGameParameters,
-            this._infartExplosion);
+            this._infartExplosion,
+            this._hamburgerStatusBar);
         this._gemmeManager = new GemmeManager(
             assets,
             this._camera,
