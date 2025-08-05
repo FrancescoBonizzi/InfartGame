@@ -15,13 +15,18 @@ class Hud {
         app: Application<Renderer>,
         hamburgerStatusBar: HamburgerStatusBar
     ) {
+        // Ancoro il container al bordo basso e lo posizioni UNA volta
         this._container = new Container();
+        this._container.pivot.set(0, this._statusBarHeight);
+        this._container.position.set(0, app.screen.height);
+
         app.stage.addChild(this._container);
 
+        // Tutto il resto in coordinate LOCALI al container
         this._background = new Graphics();
         this._background.rect(
             0,
-            app.screen.height - this._statusBarHeight,
+            0,
             app.screen.width,
             this._statusBarHeight
         );
@@ -32,7 +37,7 @@ class Hud {
             this._container,
             new Point(
                 this._background.width - 20,
-                app.screen.height - (this._statusBarHeight / 2)
+                this._statusBarHeight / 2
             ));
         this._hamburgerStatusBar = hamburgerStatusBar;
     }
