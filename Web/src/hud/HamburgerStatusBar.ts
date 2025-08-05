@@ -14,12 +14,13 @@ class HamburgerStatusBar {
 
         this._hudHamburgers = [];
         this._currentActiveHamburgerIndex = null;
+        const hamburgerSpriteWidth = assets.textures.burger.width;
 
-        for(let h = 0; h < FixedGameParamters.MaxEatenHamburgers; h++) {
+        for(let h = 0; h <= FixedGameParamters.MaxEatenHamburgers; h++) {
             this._hudHamburgers.push(new HudHamburger(
                 app,
                 new Point(
-                    100 + h * 100,
+                    hamburgerSpriteWidth + h * hamburgerSpriteWidth,
                     app.screen.height - 10
                 ),
                 assets
@@ -30,7 +31,7 @@ class HamburgerStatusBar {
 
     hamburgerEaten() {
         if (this._currentActiveHamburgerIndex !== null) {
-            if (this._currentActiveHamburgerIndex < FixedGameParamters.MaxEatenHamburgers - 1)
+            if (this._currentActiveHamburgerIndex < FixedGameParamters.MaxEatenHamburgers)
                 this._currentActiveHamburgerIndex++;
         }
         else {
