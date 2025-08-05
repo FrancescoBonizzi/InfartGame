@@ -1,12 +1,5 @@
 # TODO
-- [x] Aggiungere la parte "gemme"
-- [x] Bloccare il doppio salto
-- [x] Pressione del pulsante pausa
-- [x] Reazione alla presa dell'hamburger, esplosione e morte
 - [ ] SISTEMARE animazione esplosione
-- [x] Incremento velocità relativo al punteggio
-- [x] HUD / StatusBar!
-- [x] Punteggio
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] Suoni
 - [ ] Aggiungere la parte record (più bello, dai!) -> Si può anche eliminare totalmente, 
