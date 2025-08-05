@@ -21,8 +21,8 @@ class HudHamburger {
 
     private readonly _animationDurationMs = 180;
 
-    private readonly _scaleIdle = 0.92;
-    private readonly _scaleActive = 1.0;
+    private readonly _scaleIdle = 0.7;
+    private readonly _scaleActive = 0.8;
     private _currentScale = this._scaleIdle;
 
     private readonly _opacityIdle = 0.5;
