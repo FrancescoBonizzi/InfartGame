@@ -29,5 +29,15 @@ export default {
      */
     lerp: (start: number, end: number, t: number): number => {
         return start + t * (end - start);
+    },
+
+    
+    /**
+     * Cubic easing out function that decelerates towards the end.
+     * @param t The input parameter, typically between 0 and 1.
+     * @returns The eased value, starting fast and slowing down.
+     */
+    easeOutCubic: (t: number) => {
+        return 1 - Math.pow(1 - t, 3);
     }
 }
