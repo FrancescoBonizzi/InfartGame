@@ -63,7 +63,10 @@ class HudHamburger {
                 e);
 
             this._sprite.scale.set(this._currentScale);
-            this._sprite.alpha = Numbers.lerp(0.5, 1, e);
+            this._sprite.alpha = Numbers.lerp(
+                this._currentAnimation.fromOpacity,
+                this._currentAnimation.toOpacity,
+                e);
 
             if (animationCompletion >= 1)
                 this._currentAnimation = null;
@@ -87,11 +90,11 @@ class HudHamburger {
             ? this._scaleActive
             : this._scaleIdle;
         const fromOpacity = next === HamburgerState.Active
-            ? this._opacityActive
-            : this._opacityIdle;
-        const toOpacity = next === HamburgerState.Active
             ? this._opacityIdle
             : this._opacityActive;
+        const toOpacity = next === HamburgerState.Active
+            ? this._opacityActive
+            : this._opacityIdle;
 
         this._currentAnimation = {
             elapsedMs: 0,
