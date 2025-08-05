@@ -55,20 +55,20 @@ class HudHamburger {
             this._currentAnimation.elapsedMs = Math.min(
                 this._currentAnimation.elapsedMs + time.deltaMS,
                 this._animationDurationMs);
-            const animationCompletion = this._currentAnimation.elapsedMs / this._animationDurationMs;
-            const e = Numbers.easeOutCubic(animationCompletion);
+            const animationProgress = this._currentAnimation.elapsedMs / this._animationDurationMs;
+            const animationProgressEased = Numbers.easeOutCubic(animationProgress);
             this._currentScale = Numbers.lerp(
                 this._currentAnimation.fromScale,
                 this._currentAnimation.toScale,
-                e);
+                animationProgressEased);
 
             this._sprite.scale.set(this._currentScale);
             this._sprite.alpha = Numbers.lerp(
                 this._currentAnimation.fromOpacity,
                 this._currentAnimation.toOpacity,
-                e);
+                animationProgressEased);
 
-            if (animationCompletion >= 1)
+            if (animationProgress >= 1)
                 this._currentAnimation = null;
         }
     }
