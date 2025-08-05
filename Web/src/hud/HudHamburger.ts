@@ -16,7 +16,7 @@ interface Animation {
 }
 
 class HudHamburger {
-    private _app: Application<Renderer>;
+    private readonly _app: Application<Renderer>;
     private readonly _sprite: Sprite;
 
     private readonly _animationDurationMs = 180;
