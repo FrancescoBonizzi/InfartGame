@@ -19,16 +19,16 @@ class InfartExplosion {
 
         this._soundManager = soundManager;
 
-        this._scrittaExplosion = new InfartTextParticleSystem(
-            assets,
-            camera);
-
         this._hamburgerExplosion = new ExplosionParticleSystem(
             assets.textures.burger,
             camera);
 
         this._merdaExplosion = new ExplosionParticleSystem(
             assets.textures.merda,
+            camera);
+
+        this._scrittaExplosion = new InfartTextParticleSystem(
+            assets,
             camera);
     }
 
