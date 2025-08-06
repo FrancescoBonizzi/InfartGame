@@ -12,13 +12,13 @@ class ExplosionParticleSystem extends ParticleSystem {
             texture,
             camera,
             20,
-            {min: 10, max: 20},
-            {min: 100, max: 200},
-            {min: 50, max: 100},
-            {min: 0, max: 2 * Math.PI},
-            {min: 0.8, max: 1.0},
-            {min: 0.3, max: 0.5},
-            {min: 255, max: 255},
+            { min: 12, max: 24 },
+            { min: 20, max: 120 },
+            { min: 100, max: 200 },
+            { min: 0, max: 360 },      
+            { min: 1.4, max: 2.0 },
+            { min: 0.3, max: 0.5 },
+            { min: 0, max: 360 },
             null
         );
     }
