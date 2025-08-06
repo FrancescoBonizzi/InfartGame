@@ -6,9 +6,9 @@ import SoundManager from "../services/SoundManager.ts";
 
 class InfartExplosion {
 
-    private readonly _scrittaExplosion : ExplosionParticleSystem;
-    private readonly _hamburgerExplosion : ExplosionParticleSystem;
-    private readonly _merdaExplosion : ExplosionParticleSystem;
+    private readonly _scrittaExplosion: ExplosionParticleSystem;
+    private readonly _hamburgerExplosion: ExplosionParticleSystem;
+    private readonly _merdaExplosion: ExplosionParticleSystem;
     private readonly _soundManager: SoundManager;
 
     constructor(
@@ -20,17 +20,26 @@ class InfartExplosion {
 
         this._scrittaExplosion = new ExplosionParticleSystem(
             assets.textures.bang,
-            camera
+            camera,
+            {min: 0.5, max: 1.0},
+            {min: 1, max: 1},
+            1
         );
 
         this._hamburgerExplosion = new ExplosionParticleSystem(
             assets.textures.burger,
-            camera
+            camera,
+            {min: 10, max: 360},
+            {min: 12, max: 24},
+            20
         );
 
         this._merdaExplosion = new ExplosionParticleSystem(
             assets.textures.merda,
-            camera
+            camera,
+            {min: 10, max: 360},
+            {min: 12, max: 24},
+            20
         );
     }
 
