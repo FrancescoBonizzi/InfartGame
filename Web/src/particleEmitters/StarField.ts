@@ -46,7 +46,7 @@ class StarField extends ParticleSystem {
         }
 
         const rightEdge = this._camera.x + this._camera.width;
-        const x = rightEdge + Numbers.randomBetween(32, 160); // margine + fascia spawn
+        const x = rightEdge + Numbers.randomBetween(0, this._camera.width);
         const y = Numbers.randomBetween(this._spawnYRange.min, this._spawnYRange.max);
 
         this.addParticles(new Point(x, y));
