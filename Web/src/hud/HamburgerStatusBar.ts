@@ -78,7 +78,6 @@ class HamburgerStatusBar {
             this._blinkElapsed += time.deltaMS;
             if (this._blinkElapsed >= this._blinkIntervalMs) {
                 this._blinkElapsed = 0;
-                console.log("BLINK", this._container.visible);
                 this._container.visible = !this._container.visible;
             }
         }
