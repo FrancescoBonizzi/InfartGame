@@ -23,8 +23,8 @@ class NuvoleAutogeneranti {
 
         this._camera = camera;
         this._ySpawnRange = {
-            min: -300,
-            max: -600
+            min: -800,
+            max: -300
         };
         this._speedRange = speedRange;
 
