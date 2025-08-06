@@ -1,11 +1,10 @@
-import {Point, Ticker} from "pixi.js";
+import {Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import GrattacieliAutogeneranti from "./GrattacieliAutogeneranti.ts";
 import Camera from "../world/Camera.ts";
 import BackgroundSky from "./BackgroundSky.ts";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 import StarField from "../particleEmitters/StarField.ts";
-import Numbers from "../services/Numbers.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 
 class BackgroundLandscape {
@@ -19,12 +18,6 @@ class BackgroundLandscape {
     private readonly _grattacieliMid: GrattacieliAutogeneranti;
     private readonly _nuvolificioMid: NuvoleAutogeneranti;
 
-    private readonly _starfieldSpawnRange = {
-        min: -1200,
-        max: -400
-    };
-
-    private readonly _camera: Camera;
     private readonly _dynamicGameParameters: DynamicGameParameters;
 
     constructor(
@@ -32,7 +25,6 @@ class BackgroundLandscape {
         infartAssets: InfartAssets,
         dynamicGameParameters: DynamicGameParameters) {
 
-        this._camera = camera;
         this._dynamicGameParameters = dynamicGameParameters;
 
         this._backgroundSky = new BackgroundSky(
@@ -79,9 +71,6 @@ class BackgroundLandscape {
     }
 
     update(time: Ticker) {
-
-        this.evaluateStarsGeneration();
-
         this._starfield.update(time);
         this._backgroundSky.update();
         this._grattacieliBack.update(time);
@@ -90,25 +79,6 @@ class BackgroundLandscape {
         this._nuvolificioMid.update(time);
     }
 
-    private isCameraInStarfieldSpawnRange() {
-        return this._camera.y >= this._starfieldSpawnRange.min
-            && this._camera.y <= this._starfieldSpawnRange.max;
-    }
-
-    private evaluateStarsGeneration() {
-
-        if (!this.isCameraInStarfieldSpawnRange()) {
-            return;
-        }
-
-        const where = new Point(
-            Numbers.randomBetween(this._camera.x, this._camera.x + this._camera.width),
-            Numbers.randomBetween(
-                this._starfieldSpawnRange.min,
-                this._starfieldSpawnRange.max),
-        );
-        this._starfield.addParticles(where);
-    }
 }
 
 export default BackgroundLandscape;
