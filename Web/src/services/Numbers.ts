@@ -1,4 +1,5 @@
 import Interval from "../primitives/Interval.ts";
+import {Point} from "pixi.js";
 
 const randomBetween = (min: number, max: number) => {
     return min + Math.random() * (max - min);
@@ -39,5 +40,9 @@ export default {
      */
     easeOutCubic: (t: number) => {
         return 1 - Math.pow(1 - t, 3);
+    },
+
+    addPoints(a: Point, b: Point): Point {
+        return new Point(a.x + b.x, a.y + b.y);
     }
 }

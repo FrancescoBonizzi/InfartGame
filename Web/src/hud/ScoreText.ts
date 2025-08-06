@@ -1,29 +1,20 @@
-import {Container, Text, Point} from "pixi.js";
+import {Container, Point} from "pixi.js";
+import HudText from "./HudText.ts";
 
-class ScoreText {
-    private readonly _text: Text;
+class ScoreText extends HudText {
 
     constructor(
         container: Container,
         position: Point) {
 
-        this._text = new Text({
-            style: {
-                fontSize: 20,
-                fontWeight: 'bold',
-                fill: {color: '#ffffff'},
-            }
-        });
-        this._text.anchor.set(1, 0.5);
-        this._text.x = position.x;
-        this._text.y = position.y;
-
-        container.addChild(this._text);
-        this.updateScore(0);
+        super(
+            container,
+            position,
+            new Point(1, 0.5));
     }
 
     updateScore(score: number) {
-        this._text.text = `${score} metri`;
+        this.updateText(`Score: ${score}`);
     }
 }
 
