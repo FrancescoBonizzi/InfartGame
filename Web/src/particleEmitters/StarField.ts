@@ -28,7 +28,8 @@ class StarField extends ParticleSystem {
             {min: 1.5, max: 3.0},
             {min: 0.2, max: 1.0},
             {min: 0, max: 360},
-            20
+            20,
+            'add'
         );
 
         this._camera = camera;
