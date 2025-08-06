@@ -32,7 +32,7 @@ class InfartExplosion {
         this._hamburgerExplosion = new ExplosionParticleSystem(
             assets.textures.burger,
             camera,
-            {min: 1, max: 3},
+            {min: 1, max: 5},
             {min: 12, max: 24},
             1,
             {min: 0.5, max: 1.0},
@@ -43,7 +43,7 @@ class InfartExplosion {
         this._merdaExplosion = new ExplosionParticleSystem(
             assets.textures.merda,
             camera,
-            {min: 10, max: 20},
+            {min: 1, max: 5},
             {min: 12, max: 24},
             1,
             {min: 0.5, max: 1.0},
