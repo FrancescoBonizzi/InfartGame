@@ -48,9 +48,7 @@ class NuvoleAutogeneranti {
     }
 
     repositionNuvola(nuvola: Nuvola) {
-        const y = Numbers.randomBetween(
-            this._ySpawnRange.min,
-            this._ySpawnRange.max);
+        const y = this.generateNuvolaY();
 
         // Per non farle spawnare tutte sullo stesso asse
         const randomDistance = Numbers.randomBetween(0, 250);
@@ -69,6 +67,20 @@ class NuvoleAutogeneranti {
         nuvola.x = x;
         nuvola.y = y;
         nuvola.speed = speed;
+    }
+
+    private generateNuvolaY (minGap = 40): number {
+        // Faccio n tentativi per distribuire meglio verticalmente le nuvole
+        let tries = 6;
+        while (tries-- > 0) {
+            const y = Numbers.randomBetween(this._ySpawnRange.min, this._ySpawnRange.max);
+            const tooClose = this._nuvole.some(n => Math.abs(n.y - y) < minGap);
+            if (!tooClose)
+                return y;
+        }
+
+        // Fallback
+        return Numbers.randomBetween(this._ySpawnRange.min, this._ySpawnRange.max);
     }
 
     update(time: Ticker) {
