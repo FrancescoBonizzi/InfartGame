@@ -9,13 +9,20 @@ class HamburgerStatusBar {
 
     private readonly _hudHamburgers: HudHamburger[];
     private readonly _hamburgersText: HudText;
+    private readonly _container: Container;
+    private readonly _blinkIntervalMs = 300;
 
+    private _isBlinking = false;
+    private _blinkElapsed = 0;
     private _currentActiveHamburgerIndex: number | null;
 
     constructor(
         container: Container,
         startingPosition: Point,
         assets: InfartAssets) {
+
+        this._container = new Container();
+        container.addChild(this._container);
 
         this._hudHamburgers = [];
         this._currentActiveHamburgerIndex = null;
@@ -29,14 +36,14 @@ class HamburgerStatusBar {
                 startingPosition.y
             );
             this._hudHamburgers.push(new HudHamburger(
-                container,
+                this._container,
                 hamburgerPosition,
                 assets
             ))
         }
 
         this._hamburgersText = new HudText(
-            container,
+            this._container,
             Numbers.addPoints(hamburgerPosition!, new Point(hamburgerSpriteWidth, 0)),
                 new Point(0, 0.5)
         );
@@ -66,6 +73,15 @@ class HamburgerStatusBar {
 
     update(time: Ticker) {
         this._hudHamburgers.forEach(h => h.update(time));
+
+        if (this._isBlinking) {
+            this._blinkElapsed += time.deltaMS;
+            if (this._blinkElapsed >= this._blinkIntervalMs) {
+                this._blinkElapsed = 0;
+                console.log("BLINK", this._container.visible);
+                this._container.visible = !this._container.visible;
+            }
+        }
     }
 
     private updateHamburgersText() {
@@ -73,18 +89,24 @@ class HamburgerStatusBar {
             this._currentActiveHamburgerIndex !== null
                 ? HamburgersMessages[this._currentActiveHamburgerIndex]
                 : "",
-
         );
-    }
 
+
+        this._isBlinking = this._currentActiveHamburgerIndex === 3;
+
+        console.log("BLINK", this._currentActiveHamburgerIndex , this._isBlinking);
+        if (!this._isBlinking) {
+            this._container.visible = true;
+            this._blinkElapsed = 0;
+        }
+    }
 }
 
 const HamburgersMessages: Record<number, string> = {
     0: "Parametri ok. CO₂ bassa.",
     1: "Colesterolo in riscaldamento. CO₂ su.",
     2: "Trigliceridi in decollo. Emissioni alte.",
-    3: "Pressione all’erta. Impronta idrica alta.",
-    4: "Evento avverso imminente. Impatto climatico critico.",
+    3: "Evento avverso imminente. Impatto climatico critico.",
 };
 
 export default HamburgerStatusBar;

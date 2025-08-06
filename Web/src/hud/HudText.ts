@@ -1,4 +1,5 @@
 import {Container, Point, Text} from "pixi.js";
+import StringHelper from "../services/StringHelper.ts";
 
 class HudText {
     private readonly _text: Text;
@@ -25,6 +26,10 @@ class HudText {
     }
 
     updateText(text: string) {
+
+        if (StringHelper.isNullOrWhitespace(text))
+            text = '';
+
         this._text.text = text;
     }
 }

@@ -9,4 +9,5 @@
 - [x] Gestione della conta degli hamburger nella status bar e i salti
 - [x] posso tranquillamente fare la barra sotto nera o di un colore fisso, come nei giochi retró tipo il virtual boy 
 - [x] A sx metterei delle frasi brevi tipo “il prossimo è un mc-Infart e frasi del genere, aiuto con ai
+- [x] Lampeggio di tutta la status bar all'ultimo hamburger
 - [ ] Hearthbeat quando ti manca un hamburger per esplodere (predisponi già i suoni)
