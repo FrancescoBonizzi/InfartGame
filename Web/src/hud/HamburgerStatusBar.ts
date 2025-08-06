@@ -102,10 +102,10 @@ class HamburgerStatusBar {
 }
 
 const HamburgersMessages: Record<number, string> = {
-    0: "Parametri ok. CO₂ bassa.",
-    1: "Colesterolo in riscaldamento. CO₂ su.",
-    2: "Trigliceridi in decollo. Emissioni alte.",
-    3: "Evento avverso imminente! Impatto climatico critico.",
+    0: "Parametri in equilibrio",
+    1: "Colesterolo in riscaldamento",
+    2: "Trigliceridi in ondata di calore",
+    3: "Evento estremo imminente!",
 };
 
 export default HamburgerStatusBar;
