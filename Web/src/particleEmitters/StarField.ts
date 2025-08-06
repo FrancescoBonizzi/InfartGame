@@ -45,13 +45,11 @@ class StarField extends ParticleSystem {
             return;
         }
 
-        const where = new Point(
-            Numbers.randomBetween(this._camera.x, this._camera.x + this._camera.width),
-            Numbers.randomBetween(
-                this._spawnYRange.min,
-                this._spawnYRange.max),
-        );
-        this.addParticles(where);
+        const rightEdge = this._camera.x + this._camera.width;
+        const x = rightEdge + Numbers.randomBetween(32, 160); // margine + fascia spawn
+        const y = Numbers.randomBetween(this._spawnYRange.min, this._spawnYRange.max);
+
+        this.addParticles(new Point(x, y));
     }
 
     override update(time: Ticker) {
