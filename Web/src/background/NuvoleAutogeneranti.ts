@@ -9,7 +9,8 @@ class NuvoleAutogeneranti {
 
     private _nuvole: Nuvola[];
     private readonly _camera: Camera;
-    private readonly _ySpawnRange: Interval;
+    private readonly _ySpawnRange: Interval = {min: -800, max: -300};
+    private readonly _spawnHorizontalSpacing: Interval = {min: 200, max: 300};
     private readonly _speedRange: Interval;
 
     constructor(
@@ -22,10 +23,6 @@ class NuvoleAutogeneranti {
         count: number) {
 
         this._camera = camera;
-        this._ySpawnRange = {
-            min: -800,
-            max: -300
-        };
         this._speedRange = speedRange;
 
         const nuvoleTextures = [
@@ -42,12 +39,39 @@ class NuvoleAutogeneranti {
                 startingScale,
                 tint,
                 shouldAnimateScale);
-            this.repositionNuvola(nuvola);
             this._nuvole.push(nuvola);
         }
+
+        this.setNuvoleFirstPositions();
     }
 
-    repositionNuvola(nuvola: Nuvola) {
+    private setNuvoleFirstPositions() {
+
+        let spawnCursorX: number | null = null;
+
+        this._nuvole.forEach(nuvola => {
+            nuvola.y = this.generateNuvolaY();
+            nuvola.x = this.generateFirstSpawnX(
+                nuvola.width,
+                spawnCursorX);
+            spawnCursorX = nuvola.x;
+        })
+    }
+
+
+    private generateFirstSpawnX(nuvolaWidth: number, spawnCursorX: number | null): number {
+        const rightEdge = this._camera.x + this._camera.width;
+        if (spawnCursorX == null || spawnCursorX < rightEdge) {
+            spawnCursorX = rightEdge;
+        }
+        const spacing = Numbers.randomBetween(
+            this._spawnHorizontalSpacing.min,
+            this._spawnHorizontalSpacing.max);
+        spawnCursorX += nuvolaWidth + spacing;
+        return spawnCursorX;
+    }
+
+    private repositionNuvola(nuvola: Nuvola) {
         const y = this.generateNuvolaY();
 
         // Per non farle spawnare tutte sullo stesso asse
@@ -69,7 +93,7 @@ class NuvoleAutogeneranti {
         nuvola.speed = speed;
     }
 
-    private generateNuvolaY (minGap = 40): number {
+    private generateNuvolaY(minGap = 40): number {
         // Faccio n tentativi per distribuire meglio verticalmente le nuvole
         let tries = 6;
         while (tries-- > 0) {
@@ -87,8 +111,7 @@ class NuvoleAutogeneranti {
         this._nuvole.forEach(nuvola => {
             if (this._camera.isOutOfCameraLeft(nuvola)) {
                 this.repositionNuvola(nuvola);
-            }
-            else {
+            } else {
                 nuvola.update(time);
             }
         });
