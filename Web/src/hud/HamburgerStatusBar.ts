@@ -94,7 +94,6 @@ class HamburgerStatusBar {
 
         this._isBlinking = this._currentActiveHamburgerIndex === 3;
 
-        console.log("BLINK", this._currentActiveHamburgerIndex , this._isBlinking);
         if (!this._isBlinking) {
             this._container.visible = true;
             this._blinkElapsed = 0;
@@ -106,7 +105,7 @@ const HamburgersMessages: Record<number, string> = {
     0: "Parametri ok. CO₂ bassa.",
     1: "Colesterolo in riscaldamento. CO₂ su.",
     2: "Trigliceridi in decollo. Emissioni alte.",
-    3: "Evento avverso imminente. Impatto climatico critico.",
+    3: "Evento avverso imminente! Impatto climatico critico.",
 };
 
 export default HamburgerStatusBar;
