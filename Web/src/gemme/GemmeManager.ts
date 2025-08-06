@@ -40,6 +40,11 @@ class GemmeManager {
         this._activePowerup = null;
         this._player = player;
         foreground.onGrattacieloGeneratoHandler = this.onGrattacieloGeneratoHandler.bind(this);
+        foreground.drawnGrattacieli
+            .slice(10)
+            .forEach(grattacielo => {
+                this.onGrattacieloGeneratoHandler(grattacielo);
+            });
     }
 
     private addPowerUp(
