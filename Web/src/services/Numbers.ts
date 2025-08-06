@@ -2,6 +2,10 @@ import Interval from "../primitives/Interval.ts";
 import {Point} from "pixi.js";
 
 const randomBetween = (min: number, max: number) => {
+
+    if (min === max)
+        return min;
+
     if (min > max)
         [min, max] = [max, min];
 
@@ -13,6 +17,12 @@ export default {
     randomBetween: randomBetween,
 
     randomBetweenInterval: (interval: Interval) => {
+
+        if (interval.min === interval.max)
+            return interval.min;
+
+        if (interval.min > interval.max)
+            [interval.min, interval.max] = [interval.max, interval.min];
         return randomBetween(interval.min, interval.max);
     },
 
