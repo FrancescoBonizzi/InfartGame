@@ -50,6 +50,7 @@ class NuvoleAutogeneranti {
         let spawnCursorX: number | null = null;
 
         this._nuvole.forEach(nuvola => {
+            this.repositionNuvola(nuvola);
             nuvola.y = this.generateNuvolaY();
             nuvola.x = this.generateFirstSpawnX(
                 nuvola.width,
@@ -57,7 +58,6 @@ class NuvoleAutogeneranti {
             spawnCursorX = nuvola.x;
         })
     }
-
 
     private generateFirstSpawnX(nuvolaWidth: number, spawnCursorX: number | null): number {
         const rightEdge = this._camera.x + this._camera.width;
@@ -71,26 +71,25 @@ class NuvoleAutogeneranti {
         return spawnCursorX;
     }
 
+    private generateNuvolaSpeed = () => {
+        const direction = Numbers.headOrTail() ? 1 : -1;
+        return  Numbers.randomBetween(
+                this._speedRange.min,
+                this._speedRange.max)
+            * direction;
+    }
+
     private repositionNuvola(nuvola: Nuvola) {
-        const y = this.generateNuvolaY();
 
         // Per non farle spawnare tutte sullo stesso asse
         const randomDistance = Numbers.randomBetween(0, 250);
 
-        const direction = Numbers.headOrTail() ? 1 : -1;
-        const x = this._camera.x
+        nuvola.x = this._camera.x
             + this._camera.width
             + nuvola.width
             + randomDistance;
-
-        const speed = Numbers.randomBetween(
-                this._speedRange.min,
-                this._speedRange.max)
-            * direction;
-
-        nuvola.x = x;
-        nuvola.y = y;
-        nuvola.speed = speed;
+        nuvola.y = this.generateNuvolaY();
+        nuvola.speed = this.generateNuvolaSpeed();
     }
 
     private generateNuvolaY(minGap = 40): number {
