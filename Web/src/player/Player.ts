@@ -9,7 +9,7 @@ import ScoreggiaParticleSystem from "../particleEmitters/ScoreggiaParticleSystem
 import SoundManager from "../services/SoundManager.ts";
 import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
-import InfartExplosion from "../particleEmitters/infartExplosion.ts";
+import InfartExplosion from "../particleEmitters/InfartExplosion.ts";
 import FixedGameParamters from "../services/FixedGameParameters.ts";
 import HamburgerStatusBar from "../hud/HamburgerStatusBar.ts";
 

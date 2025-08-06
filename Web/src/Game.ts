@@ -9,7 +9,7 @@ import Numbers from "./services/Numbers.ts";
 import SoundManager from "./services/SoundManager.ts";
 import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 import GemmeManager from "./gemme/GemmeManager.ts";
-import InfartExplosion from "./particleEmitters/infartExplosion.ts";
+import InfartExplosion from "./particleEmitters/InfartExplosion.ts";
 import Hud from "./hud/Hud.ts";
 
 class Game {

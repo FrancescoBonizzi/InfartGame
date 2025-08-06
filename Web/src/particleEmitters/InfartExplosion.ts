@@ -21,25 +21,34 @@ class InfartExplosion {
         this._scrittaExplosion = new ExplosionParticleSystem(
             assets.textures.bang,
             camera,
-            {min: 0.5, max: 1.0},
+            {min: 0, max: 0},
             {min: 1, max: 1},
-            1
+            1,
+            {min: 1.5, max: 2.0},
+            { min: 0, max: 0 },
+            false
         );
 
         this._hamburgerExplosion = new ExplosionParticleSystem(
             assets.textures.burger,
             camera,
-            {min: 10, max: 360},
+            {min: 1, max: 3},
             {min: 12, max: 24},
-            20
+            1,
+            {min: 0.5, max: 1.0},
+            { min: 20, max: 60 },
+            true
         );
 
         this._merdaExplosion = new ExplosionParticleSystem(
             assets.textures.merda,
             camera,
-            {min: 10, max: 360},
+            {min: 10, max: 20},
             {min: 12, max: 24},
-            20
+            1,
+            {min: 0.5, max: 1.0},
+            { min: 20, max: 60 },
+            true
         );
     }
 

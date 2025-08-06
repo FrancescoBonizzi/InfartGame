@@ -34,7 +34,8 @@ class Particle {
         rotationSpeed: number,
         color: ColorSource,
         scale: number,
-        lifetimeSeconds: number
+        lifetimeSeconds: number,
+        randomizedSpawnAngle: boolean
     ) {
 
         this._speed = speed;
@@ -45,8 +46,11 @@ class Particle {
         this._initialScaleScalar = scale;
 
         this._sprite.position = position;
-        this._sprite.rotation = Math.random() * Math.PI * 2;
+        this._sprite.rotation = randomizedSpawnAngle
+            ? Math.random() * Math.PI * 2
+            : 0;
         this._sprite.tint = color;
+        this._sprite.anchor.set(0.5, 0.5);
         this._sprite.scale.set(this._initialScaleScalar);
     }
 

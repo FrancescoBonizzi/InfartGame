@@ -3,8 +3,6 @@ import Camera from "../world/Camera.ts";
 import {Texture} from "pixi.js";
 import Interval from "../primitives/Interval.ts";
 
-// TODO: la scritta INFART voglio che venga verso di me con scale crescente e minima rotazione
-
 class ExplosionParticleSystem extends ParticleSystem {
 
     constructor(
@@ -12,20 +10,25 @@ class ExplosionParticleSystem extends ParticleSystem {
         camera: Camera,
         rotationSpeed: Interval,
         numParticles: Interval,
-        density: number) {
+        density: number,
+        scale: Interval,
+        speed: Interval,
+        randomizedSpawnAngle: boolean) {
 
         super(
             texture,
             camera,
             density,
             numParticles,
-            { min: 20, max: 120 },
-            { min: 100, max: 200 },
+            speed,
+            { min: 50, max: 100 },
             rotationSpeed,
-            { min: 1.4, max: 2.0 },
-            { min: 0.3, max: 0.5 },
+            { min: 2.0, max: 4.0 },
+            scale,
             { min: 0, max: 360 },
-            null
+            null,
+            undefined,
+            randomizedSpawnAngle
         );
     }
 }

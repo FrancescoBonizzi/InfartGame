@@ -16,8 +16,8 @@ abstract class ParticleSystem {
     private readonly _rotationSpeed: Interval;
     private readonly _lifetimeSeconds: Interval;
     private readonly _scale: Interval;
+    private readonly _randomizedSpawnAngle: boolean;
     private readonly _spawnAngleDegrees: Interval;
-
     private readonly _particlesGenerationTimer: PixiJsTimer | null;
 
     protected constructor(
@@ -32,7 +32,8 @@ abstract class ParticleSystem {
         scale: Interval,
         spawnAngleInDegrees: Interval,
         particlesGenerationIntervalMilliseconds: number | null = null,
-        textureBlendMode: BLEND_MODES | undefined = undefined) {
+        textureBlendMode: BLEND_MODES | undefined = undefined,
+        randomizedSpawnAngle: boolean = false) {
 
         this._numParticles = numParticles;
         this._speed = speed;
@@ -41,6 +42,7 @@ abstract class ParticleSystem {
         this._lifetimeSeconds = lifetimeSeconds;
         this._scale = scale;
         this._spawnAngleDegrees = spawnAngleInDegrees;
+        this._randomizedSpawnAngle = randomizedSpawnAngle;
 
         this._activeParticles = new Array(density * numParticles.max)
             .fill(null)
@@ -110,7 +112,8 @@ abstract class ParticleSystem {
             Numbers.randomBetweenInterval(this._rotationSpeed),
             "#FFFFFF",
             Numbers.randomBetweenInterval(this._scale),
-            Numbers.randomBetweenInterval(this._lifetimeSeconds)
+            Numbers.randomBetweenInterval(this._lifetimeSeconds),
+            this._randomizedSpawnAngle
         );
     }
 
