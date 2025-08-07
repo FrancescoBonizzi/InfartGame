@@ -13,7 +13,7 @@ class Foreground {
     private readonly _nuvolificioGround: NuvoleAutogeneranti;
     private readonly _dynamicGameParameters: DynamicGameParameters;
     private readonly _bucoTimer: PixiJsTimer;
-    private readonly _bucoProbability = 0.005;
+    private readonly _bucoProbability = 0.5;
 
     constructor(
         world: Camera,
@@ -52,9 +52,8 @@ class Foreground {
         if (Numbers.randomBetween(0, 1) >= this._bucoProbability)
             return;
 
-        const startingX = this._grattacieliGround.lastGrattacieloX;
         const space = Numbers.randomBetweenInterval(this._dynamicGameParameters.larghezzaBuchi);
-        this._grattacieliGround.lastGrattacieloX = startingX + space;
+        this._grattacieliGround.addExtraGap(space);
     }
 
     update(time: Ticker) {

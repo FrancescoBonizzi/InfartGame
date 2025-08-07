@@ -89,7 +89,6 @@ class Player implements IHasCollisionRectangle {
             this._assets,
             this._camera
         ))
-        console.log('scoreggia', this._scoreggeParticleSystems.length);
     }
 
     get isOnGround() {

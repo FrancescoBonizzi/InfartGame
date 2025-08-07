@@ -6,6 +6,7 @@
 - [ ] Menù
 - [ ] Font più divertente
 - [ ] Hearthbeat quando ti manca un hamburger per esplodere (predisponi già i suoni)
+- [ ] Quando sei morto cambia qualcosa nella barra in basso
 
 # Fix
 - [x] La scoreggia falla più "Lunga" come il vecchio infart -> dipende se l'addParticle è continuo o spot
@@ -16,6 +17,7 @@
 - [ ] Morte quando cadi
 
 # Post
+- [ ] Scrivere da qualche parte il framerate
 - [ ] Ottimizzare tutto. Come si fa? C'è un profiler?
 - [ ] Responsive
 - [ ] Full screen
