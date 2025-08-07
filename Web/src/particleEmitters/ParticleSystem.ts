@@ -126,6 +126,10 @@ abstract class ParticleSystem {
             Math.cos(randomAngleInRadians),
             -Math.sin(randomAngleInRadians));
     }
+
+    isActive() {
+        return this._freeParticles.length != this._activeParticles.length;
+    }
 }
 
 export default ParticleSystem;

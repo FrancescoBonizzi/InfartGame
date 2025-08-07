@@ -24,17 +24,17 @@ class Player implements IHasCollisionRectangle {
     private _animations: PlayerAnimations;
     private _isOnGround: boolean = false;
     private _walkArea: Foreground;
+    private _scoreggeParticleSystems: ScoreggiaParticleSystem[];
     private readonly _camera: Camera;
-    private readonly _scoreggiaParticleSystem: ScoreggiaParticleSystem;
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
-    private _hasAlreadyGeneratedScoreggiaForThisJump: boolean = false;
 
     private _currentJumpCount: number = 0;
     private _currentEatenHambugers: number = 0;
     private _isDead: boolean = false;
     private _infartExplosion: InfartExplosion;
     private _hamburgerStatusBar: HamburgerStatusBar;
+    private _assets: InfartAssets;
 
     constructor(
         staringPosition: Point,
@@ -49,6 +49,7 @@ class Player implements IHasCollisionRectangle {
         this._dynamicGameParameters = dynamicGameParameters;
         this._camera = camera;
         this._animations = assets.player;
+        this._assets = assets;
         this._position = staringPosition;
         this._speed = new Point(
             this._dynamicGameParameters.playerHorizontalSpeed,
@@ -61,10 +62,7 @@ class Player implements IHasCollisionRectangle {
         this._walkArea = walkArea;
         this._infartExplosion = infartExplosion;
         this._hamburgerStatusBar = hamburgerStatusBar;
-
-        this._scoreggiaParticleSystem = new ScoreggiaParticleSystem(
-            assets,
-            this._camera);
+        this._scoreggeParticleSystems = [];
     }
 
     jump() {
@@ -87,7 +85,11 @@ class Player implements IHasCollisionRectangle {
 
         this._speed.y = -amount;
         this._soundManager.playFart();
-        this._hasAlreadyGeneratedScoreggiaForThisJump = false;
+        this._scoreggeParticleSystems.push(new ScoreggiaParticleSystem(
+            this._assets,
+            this._camera
+        ))
+        console.log('scoreggia', this._scoreggeParticleSystems.length);
     }
 
     get isOnGround() {
@@ -200,13 +202,11 @@ class Player implements IHasCollisionRectangle {
         if (!this.isOnGround) {
             if (this._speed.y < 0) {
                 newAnimation = this._animations.fart;
-            }
-            else if (this._currentAnimation === this._animations.fart
+            } else if (this._currentAnimation === this._animations.fart
                 || this._currentAnimation === this._animations.fall) {
                 newAnimation = this._animations.fall;
             }
-        }
-        else {
+        } else {
             this._currentJumpCount = 0;
         }
 
@@ -231,22 +231,22 @@ class Player implements IHasCollisionRectangle {
         this._currentAnimation.x = this._position.x;
         this._currentAnimation.y = this._position.y;
 
-        this._scoreggiaParticleSystem.update(time);
+        this._scoreggeParticleSystems.forEach((p) => p.update(time));
         this.evaluateScoreggiaGeneration();
+        this._scoreggeParticleSystems = this._scoreggeParticleSystems.filter(p => p.isActive());
     }
 
     private evaluateScoreggiaGeneration() {
         if (this._speed.y >= 0) {
             this._soundManager.stopFart();
-        }
-        else {
-            if (!this._hasAlreadyGeneratedScoreggiaForThisJump) {
+        } else if (this._speed.y < 0) {
+            if (this._scoreggeParticleSystems.length > 0) {
+                const currentJumpParticleSystem = this._scoreggeParticleSystems[this._scoreggeParticleSystems.length - 1];
                 const where = new Point(
                     this._position.x + this._currentAnimation.width / 3,
                     this._position.y + this._currentAnimation.height / 2 + 30
                 );
-                this._scoreggiaParticleSystem.addParticles(where);
-                this._hasAlreadyGeneratedScoreggiaForThisJump = true;
+                currentJumpParticleSystem.addParticles(where);
             }
         }
     }
@@ -274,8 +274,7 @@ class Player implements IHasCollisionRectangle {
     }
 
     hamburgerEaten() {
-        if (this._currentEatenHambugers > FixedGameParamters.MaxEatenHamburgers)
-        {
+        if (this._currentEatenHambugers > FixedGameParamters.MaxEatenHamburgers) {
             this.die(true);
             return;
         }
