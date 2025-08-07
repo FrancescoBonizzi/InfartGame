@@ -1,32 +1,30 @@
-import {Texture, Ticker} from "pixi.js";
+import {Texture} from "pixi.js";
 import Numbers from "../services/Numbers.ts";
 import Camera from "../world/Camera.ts";
 import Grattacielo from "./Grattacielo.ts";
-import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 
 class GrattacieliAutogeneranti {
 
     private _maxGrattacieloPositionOffset = 20;
     private _lastGrattacieloX = 0;
     private _lastGrattacieloWidth = 0;
+    private _previousCamX = 0;
 
     private readonly _camera: Camera;
     private readonly _grattacieli: Grattacielo[];
     private readonly _parallaxFactor: number;
-    private readonly _dynamicGameParameters: DynamicGameParameters;
 
     constructor(
         camera: Camera,
         grattacieli: Texture[],
-        dynamicGameParameters: DynamicGameParameters,
         parallaxFactor: number) {
 
         this._camera = camera;
+        this._previousCamX = this._camera.x;
         this._grattacieli = grattacieli.map(texture => new Grattacielo(
             texture,
             camera));
         this._lastGrattacieloX = 0;
-        this._dynamicGameParameters = dynamicGameParameters;
 
         this._lastGrattacieloWidth = this._grattacieli[0].width;
         this._grattacieli.forEach(grattacielo => {
@@ -65,24 +63,23 @@ class GrattacieliAutogeneranti {
         return this._grattacieli;
     }
 
-    update(time: Ticker) {
 
-        const moveX = this.getMoveX(time);
-        this._lastGrattacieloX -= moveX;
+    update() {
 
-        this._grattacieli.forEach(grattacielo => {
-            grattacielo.x -= moveX;
+        const dx = this._camera.x - this._previousCamX;        // >0 se la camera va a destra
+        if (dx === 0) {                                     // camera ferma => non muovere
+            return;
+        }
+        const moveX = dx * this._parallaxFactor;
 
-            if (this._camera.isOutOfCameraLeft(grattacielo)) {
-                this.repositionGrattacielo(grattacielo);
+        this._grattacieli.forEach(g => {
+            g.x -= moveX;                                     // parallax contro-movimento
+            if (this._camera.isOutOfCameraLeft(g)) {
+                this.repositionGrattacielo(g);
             }
         });
-    }
 
-    private getMoveX(time: Ticker) {
-        return time.deltaTime
-            * (this._dynamicGameParameters.playerHorizontalSpeed / 1000)
-            * this._parallaxFactor;
+        this._previousCamX = this._camera.x;
     }
 
     set lastGrattacieloX(value: number) {

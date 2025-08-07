@@ -23,7 +23,6 @@ class Foreground {
         this._grattacieliGround = new GrattacieliAutogeneranti(
             world,
             infartAssets.textures.buildings.ground,
-            dynamicGameParameters,
             0); // Attenzione! Se cambiamo questo, si rompono le posizioni delle gemme
         this._nuvolificioGround = new NuvoleAutogeneranti(
             world,
@@ -59,7 +58,7 @@ class Foreground {
     }
 
     update(time: Ticker) {
-        this._grattacieliGround.update(time);
+        this._grattacieliGround.update();
         this._nuvolificioGround.update(time);
         this._bucoTimer.update(time);
     }

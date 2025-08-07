@@ -38,8 +38,7 @@ class Game {
         this._dynamicGameParameters = new DynamicGameParameters();
         this._backgroundLandscape = new BackgroundLandscape(
             this._camera,
-            assets,
-            this._dynamicGameParameters);
+            assets);
         this._foreground = new Foreground(
             this._camera,
             assets,
