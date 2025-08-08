@@ -10,7 +10,7 @@ class StarField extends ParticleSystem {
 
     private readonly _spawnYRange = {
         min: -1200,
-        max: -400
+        max: -700
     };
 
     constructor(

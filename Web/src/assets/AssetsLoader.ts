@@ -30,9 +30,9 @@ export const loadAssets = async (): Promise<InfartAssets> => {
                 gameOverBackground: gameOverBackground
             },
             buildings: {
-                back: loadAllTexturesFromSpriteSheet(buildingsBackSpriteSheet),
-                mid: loadAllTexturesFromSpriteSheet(buildingsMidSpriteSheet),
-                ground: loadAllTexturesFromSpriteSheet(buildingsGroundSpriteSheet)
+                back: loadGrattacieliFromSpriteSheet(buildingsBackSpriteSheet, "back"),
+                mid: loadGrattacieliFromSpriteSheet(buildingsMidSpriteSheet, "mid"),
+                ground: loadGrattacieliFromSpriteSheet(buildingsGroundSpriteSheet, "ground")
             },
             particles: {
                 broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
@@ -109,10 +109,16 @@ const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
     return spriteSheet as Spritesheet;
 }
 
-const loadAllTexturesFromSpriteSheet = (spriteSheet: Spritesheet): Texture[] => {
-    return Object.keys(spriteSheet.textures).map((key) => {
-        return spriteSheet.textures[key];
-    });
+const loadGrattacieliFromSpriteSheet = (
+    spriteSheet: Spritesheet,
+    keyName: string): Texture[] => {
+
+    const textures : Texture[] = [];
+    for (let i = 0; i < 69; i++) {
+        textures.push(spriteSheet.textures[`${keyName}${i}`]);
+    }
+
+    return textures;
 }
 
 const loadSound = (folder: string, name: string): Sound => {
