@@ -37,7 +37,7 @@ class Foreground {
             6);
         this._dynamicGameParameters = dynamicGameParameters;
         this._bucoTimer = new PixiJsTimer(
-            2000,
+            1000,
             () => this.generateBuco());
         this._grattacieliGround.onGrattacieloGeneratoHandler = (grattacielo) =>
             this._onGrattacieloGeneratoHandler?.(grattacielo);

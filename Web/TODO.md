@@ -9,12 +9,6 @@
 - [ ] Quando sei morto cambia qualcosa nella barra in basso
 
 # Fix
-- [x] La scoreggia falla più "Lunga" come il vecchio infart -> dipende se l'addParticle è continuo o spot
-- [x] Ci vuole un particle system per salto. Se sei al secondo salto, ne serve uno nuovo, altrimenti si bloccano le particelle.
-- [x] Il parallax dovrebbe essere legato al movimento della telecamera e non fisso
-- [ ] Non si allargano correttamente i grattacieli
-- [ ] Non si sa perché ma non si cade mai!
-- [ ] Morte quando cadi
 
 # Post
 - [ ] Scrivere da qualche parte il framerate

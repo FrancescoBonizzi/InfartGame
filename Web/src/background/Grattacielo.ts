@@ -13,7 +13,6 @@ class Grattacielo {
         camera.addToWorld(this._sprite);
         this._sprite.anchor.set(0, 1);
         this._sprite.y = 0;
-
     }
 
     get width() {
