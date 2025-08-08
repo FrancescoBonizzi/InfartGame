@@ -113,8 +113,11 @@ const loadGrattacieliFromSpriteSheet = (
     spriteSheet: Spritesheet,
     keyName: string): Texture[] => {
 
+    const count = Object.keys(spriteSheet.textures)
+        .filter(k => k.startsWith(keyName))
+        .length;
     const textures : Texture[] = [];
-    for (let i = 0; i < 69; i++) {
+    for (let i = 0; i < count; i++) {
         textures.push(spriteSheet.textures[`${keyName}${i}`]);
     }
 
