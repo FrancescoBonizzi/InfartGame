@@ -25,6 +25,7 @@ class GrattacieliAutogeneranti {
         this._grattacieli = grattacieli.map(texture => new Grattacielo(
             texture,
             camera));
+        this._grattacieli.sort((a, b) => a.height - b.height);
         this._lastGrattacieloX = 0;
         this._lastGrattacieloWidth = 0;
         this._grattacieli.forEach(grattacielo => {
@@ -40,7 +41,6 @@ class GrattacieliAutogeneranti {
     }
 
     repositionGrattacielo(grattacielo: Grattacielo) {
-
         const baseDistance = this._lastGrattacieloX + this._lastGrattacieloWidth;
         const randomDistance = Numbers.randomBetween(0, this._maxGrattacieloPositionOffset);
         grattacielo.x = baseDistance + randomDistance + this._pendingExtraGap;
