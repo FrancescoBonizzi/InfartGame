@@ -226,7 +226,7 @@ class Player implements IHasCollisionRectangle {
 
         if (this._position.y > 0) {
             // TODO: Suono fall
-            this.die(true);
+            this.die(false);
         }
 
         this._position.x += moveAmount.x;

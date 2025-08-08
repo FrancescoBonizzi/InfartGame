@@ -5,6 +5,7 @@ import Camera from "../world/Camera.ts";
 import BackgroundSky from "./BackgroundSky.ts";
 import NuvoleAutogeneranti from "./NuvoleAutogeneranti.ts";
 import StarField from "../particleEmitters/StarField.ts";
+import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 
 class BackgroundLandscape {
 
@@ -19,7 +20,8 @@ class BackgroundLandscape {
 
     constructor(
         camera: Camera,
-        infartAssets: InfartAssets) {
+        infartAssets: InfartAssets,
+        dynamicGameParameters: DynamicGameParameters) {
 
         this._backgroundSky = new BackgroundSky(
             infartAssets,
@@ -43,7 +45,9 @@ class BackgroundLandscape {
         this._grattacieliBack = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.back,
-            0.05);
+            0.05,
+            false,
+            dynamicGameParameters);
 
         this._nuvolificioMid = new NuvoleAutogeneranti(
             camera,
@@ -59,7 +63,9 @@ class BackgroundLandscape {
         this._grattacieliMid = new GrattacieliAutogeneranti(
             camera,
             infartAssets.textures.buildings.mid,
-            0.1);
+            0.1,
+            false,
+            dynamicGameParameters);
     }
 
     update(time: Ticker) {
