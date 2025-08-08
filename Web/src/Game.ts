@@ -51,7 +51,7 @@ class Game {
             app,
             assets);
         this._player = new Player(
-            new Point(240, -600),
+            new Point(0, -600),
             assets,
             this._camera,
             this._foreground,
