@@ -49,7 +49,7 @@ class Foreground {
     }
 
     generateBuco() {
-        if (Numbers.randomBetween(0, 1) >= this._bucoProbability)
+        if (Numbers.randomBetween(0, 1) > this._bucoProbability)
             return;
 
         const space = Numbers.randomBetweenInterval(this._dynamicGameParameters.larghezzaBuchi);
