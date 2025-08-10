@@ -29,11 +29,11 @@ class Camera {
     }
 
     get width() {
-        return this._width / this.getZoom().x;
+        return this._width / this._world.scale.x;
     }
 
     get height() {
-        return this._height / this.getZoom().y;
+        return this._height / this._world.scale.y;
     }
 
     get x() {
@@ -83,7 +83,7 @@ class Camera {
     }
 
     getZoom() {
-        return this._world.scale;
+        return this._world.scale.x;
     }
 
     setZoom(zoom: number) {

@@ -75,45 +75,48 @@ class Game {
         return this._isPaused;
     }
 
+    private _heightK = 0;
+
     private repositionCamera() {
 
-        const REF_Y  = 1000;   // altezza a cui arrivi allo zoom-out massimo
-        const MIN_Z  = 0.5;    // zoom-out max
-        const MAX_Z  = 1.0;    // zoom normale
-        const Z_SMOOTH = 0.04; // morbidezza zoom
+        const REF_Y     = 1000;
+        const MIN_Z     = 0.5;
+        const MAX_Z     = 1.0;
+        const Z_SMOOTH  = 0.04;
         const FALL_BIAS_MAX = 240;
+        const DEADZONE_K = 0.02; // deadzone vicino al suolo
 
         let newCameraX = this._player.position.x - 150;
         let newCameraY = this._player.position.y + 200;
 
-        // --- Zoom proporzionale all'altezza SOLO in caduta ---
-        const isFalling = this._player.speed.y > 0;
-        const playerHeightAboveGround = Math.max(0, -this._player.position.y);
-        const t = Numbers.clamp01(playerHeightAboveGround / REF_Y);
+        // altezza sopra il suolo -> 0..1
+        const heightAbove = Math.max(0, -this._player.position.y);
+        const t = Numbers.clamp01(heightAbove / REF_Y);
 
-        const targetZoom = isFalling
-            ? MAX_Z - (MAX_Z - MIN_Z) * t                           // più in alto ⇒ più zoom-out
-            : MAX_Z;                                                // non cade ⇒ torna a 1
+        // smoothing di t per evitare jitter
+        this._heightK = Numbers.lerp(this._heightK, t, 0.06);
 
-        // smoothing morbido + niente drift: zoom attorno al player
-        const nextZoom = Numbers.lerp(this._camera.getZoom().x, targetZoom, Z_SMOOTH);
+        // deadzone: se molto basso, azzera
+        const k0 = (this._heightK < DEADZONE_K) ? 0 : this._heightK;
+
+        // easing (smoothstep)
+        const k = k0 * k0 * (3 - 2 * k0);
+
+        // zoom proporzionale all'altezza
+        const targetZoom = MAX_Z - (MAX_Z - MIN_Z) * k;
+        const nextZoom   = Numbers.lerp(this._camera.getZoom(), targetZoom, Z_SMOOTH);
         this._camera.setZoomAround(nextZoom, this._player.position.x, this._player.position.y);
 
-        // ---- Bias verticale: abbassa la camera in caduta (mostra più suolo)
-        // proporzionale sia alla caduta (isFalling) sia a quanto sei alto (t)
-        const fallBiasY = isFalling ? FALL_BIAS_MAX * t : 0;
-        newCameraY += fallBiasY;
+        // bias verticale verso il basso
+        newCameraY += FALL_BIAS_MAX * k;
 
+        // clamp verticale (usa camera.height in unità mondo)
+        const minY = -(this._camera.worldHeight - this._camera.height); // top
+        const maxY = 0;                                                 // ground
+        if (newCameraY < minY) newCameraY = minY;
+        if (newCameraY > maxY) newCameraY = maxY;
 
-        // clamp verticale che tiene conto dello zoom (camera.height è in unità mondo)
-        const minY = -(this._camera.worldHeight - this._camera.height);
-        const maxY = 0;
-        if (newCameraY < minY)
-            newCameraY = minY;
-        if (newCameraY > maxY)
-            newCameraY = maxY;
-
-        // posizione
+        // applica posizione
         this._camera.x = Numbers.lerp(this._camera.x, newCameraX, 0.08);
         this._camera.y = Numbers.lerp(this._camera.y, newCameraY, 0.08);
     }
