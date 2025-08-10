@@ -6,6 +6,7 @@ const _assetsRoot: string = '/assets';
 const _imagesAssetsRoot: string = `${_assetsRoot}/images`;
 const _spriteSheetsAssetsRoot: string = `${_imagesAssetsRoot}/spriteSheets`;
 const _soundsAssetsRoot: string = `${_assetsRoot}/sounds`;
+const _fontsAssetsRoot: string = `${_assetsRoot}/fonts`;
 
 export const loadAssets = async (): Promise<InfartAssets> => {
 
@@ -20,8 +21,10 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     const buildingsBackSpriteSheet = await loadSpriteSheet("buildingsBack");
     const buildingsMidSpriteSheet = await loadSpriteSheet("buildingsMid");
     const buildingsGroundSpriteSheet = await loadSpriteSheet("buildingsGround");
+    const fontName = await loadFont();
 
     return {
+        fontName: fontName,
         textures: {
             menu: {
                 background: menuBackground,
@@ -91,6 +94,19 @@ export const loadAssets = async (): Promise<InfartAssets> => {
         }
     }
 };
+
+const loadFont = async () => {
+
+    const bundleName = 'fonts';
+    const fontName = 'BaksoSapi';
+
+    Assets.addBundle(bundleName, [
+        { alias: fontName, src: `${_fontsAssetsRoot}/BaksoSapi.otf` }
+    ]);
+
+    await Assets.loadBundle(bundleName);
+    return fontName;
+}
 
 const loadTextureFromFile = async (name: string): Promise<Texture> => {
     return await Assets.load(`${_imagesAssetsRoot}/${name}`);

@@ -36,6 +36,7 @@ class Hud {
 
         this._scoreText = new ScoreText(
             this._container,
+            assets,
             new Point(
                 this._background.width - 20,
                 this._statusBarHeight / 2

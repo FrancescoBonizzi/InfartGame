@@ -3,6 +3,7 @@ import {Sound} from "@pixi/sound";
 import PlayerAnimations from "../player/PlayerAnimations.ts";
 
 interface InfartAssets {
+    fontName: string;
     textures: {
         menu: {
             background: Texture;

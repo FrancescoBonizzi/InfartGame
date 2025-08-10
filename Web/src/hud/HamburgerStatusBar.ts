@@ -44,6 +44,7 @@ class HamburgerStatusBar {
 
         this._hamburgersText = new HudText(
             this._container,
+            assets,
             Numbers.addPoints(hamburgerPosition!, new Point(hamburgerSpriteWidth, 0)),
                 new Point(0, 0.5)
         );
