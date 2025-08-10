@@ -76,17 +76,44 @@ class Game {
     }
 
     private repositionCamera() {
+
+        const REF_Y  = 1000;   // altezza a cui arrivi allo zoom-out massimo
+        const MIN_Z  = 0.5;    // zoom-out max
+        const MAX_Z  = 1.0;    // zoom normale
+        const Z_SMOOTH = 0.04; // morbidezza zoom
+        const FALL_BIAS_MAX = 240;
+
         let newCameraX = this._player.position.x - 150;
         let newCameraY = this._player.position.y + 200;
-        const heightLimit = -this._camera.worldHeight - this._camera.height;
 
-        if (newCameraY < heightLimit) {
-            newCameraY = heightLimit;
-        }
-        else if (newCameraY > 0) {
-            newCameraY = 0;
-        }
+        // --- Zoom proporzionale all'altezza SOLO in caduta ---
+        const isFalling = this._player.speed.y > 0;
+        const playerHeightAboveGround = Math.max(0, -this._player.position.y);
+        const t = Numbers.clamp01(playerHeightAboveGround / REF_Y);
 
+        const targetZoom = isFalling
+            ? MAX_Z - (MAX_Z - MIN_Z) * t                           // più in alto ⇒ più zoom-out
+            : MAX_Z;                                                // non cade ⇒ torna a 1
+
+        // smoothing morbido + niente drift: zoom attorno al player
+        const nextZoom = Numbers.lerp(this._camera.getZoom().x, targetZoom, Z_SMOOTH);
+        this._camera.setZoomAround(nextZoom, this._player.position.x, this._player.position.y);
+
+        // ---- Bias verticale: abbassa la camera in caduta (mostra più suolo)
+        // proporzionale sia alla caduta (isFalling) sia a quanto sei alto (t)
+        const fallBiasY = isFalling ? FALL_BIAS_MAX * t : 0;
+        newCameraY += fallBiasY;
+
+
+        // clamp verticale che tiene conto dello zoom (camera.height è in unità mondo)
+        const minY = -(this._camera.worldHeight - this._camera.height);
+        const maxY = 0;
+        if (newCameraY < minY)
+            newCameraY = minY;
+        if (newCameraY > maxY)
+            newCameraY = maxY;
+
+        // posizione
         this._camera.x = Numbers.lerp(this._camera.x, newCameraX, 0.08);
         this._camera.y = Numbers.lerp(this._camera.y, newCameraY, 0.08);
     }
@@ -128,8 +155,7 @@ class Game {
 
         this._hud.updateScore(currentScore);
 
-        if (this._score % 30 === 0)
-        {
+        if (this._score % 30 === 0) {
             this._dynamicGameParameters.playerHorizontalSpeed += 50;
             if (this._dynamicGameParameters.larghezzaBuchi.max < 1000) {
                 this._dynamicGameParameters.larghezzaBuchi.min += 80;

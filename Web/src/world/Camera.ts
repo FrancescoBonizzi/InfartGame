@@ -19,6 +19,7 @@ class Camera {
         this._world.y = app.screen.height;
         this._world.pivot.x = 0;
         this._world.pivot.y = this._world.height;
+        this.setZoom(0.9);
 
         app.stage.addChild(this._world);
     }
@@ -28,27 +29,28 @@ class Camera {
     }
 
     get width() {
-        return this._width;
+        return this._width / this.getZoom().x;
     }
 
     get height() {
-        return this._height;
+        return this._height / this.getZoom().y;
     }
 
     get x() {
-        return -this._world.x;
+        return -this._world.x / this._world.scale.x;
     }
 
     get y() {
-        return -this._world.y + this._height; // Aggiunto il + this._height per avere punto di riferimento in basso
+        // riferimento in basso, come avevi, ma diviso per lo scale
+        return (-this._world.y + this._height) / this._world.scale.y;
     }
 
     set x(x: number) {
-        this._world.x = -x;
+        this._world.x = -x * this._world.scale.x;
     }
 
     set y(y: number) {
-        this._world.y = -y + this._height; // Aggiunto il + this._height per avere punto di riferimento in basso
+        this._world.y = -y * this._world.scale.y + this._height;
     }
 
     addToWorld(child: Container) {
@@ -71,13 +73,30 @@ class Camera {
       di World, worldX è la coordinata x nel mondo di gioco.
    */
     private worldToScreenX(worldX: number) {
-        return worldX - this.x;
+        return (worldX - this.x) * this._world.scale.x;
     }
 
     /* Si basa sul fatto che l'Anchor sia a sinistra */
     isOutOfCameraLeft(sprite: { x: number, width: number }) {
         const globalX = this.worldToScreenX(sprite.x);
         return globalX + sprite.width <= 0;
+    }
+
+    getZoom() {
+        return this._world.scale;
+    }
+
+    setZoom(zoom: number) {
+        this._world.scale.set(zoom);
+    }
+
+    setZoomAround(z: number, focusX: number, focusY: number) {
+        const s0 = this._world.scale.x, s1 = z;
+        if (s0 === s1) return;
+        const dx = (focusX - this._world.pivot.x) * (s0 - s1);
+        const dy = (focusY - this._world.pivot.y) * (s0 - s1);
+        this._world.scale.set(s1);
+        this._world.position.set(this._world.position.x + dx, this._world.position.y + dy);
     }
 }
 

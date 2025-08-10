@@ -277,6 +277,10 @@ class Player implements IHasCollisionRectangle {
         this._camera.removeFromWorld(this._currentAnimation);
     }
 
+    get speed() {
+        return this._speed;
+    }
+
     hamburgerEaten() {
         if (this._currentEatenHambugers > FixedGameParamters.MaxEatenHamburgers) {
             this.die(true);

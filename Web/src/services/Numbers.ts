@@ -45,7 +45,8 @@ export default {
         return start + t * (end - start);
     },
 
-    
+    clamp01: (n: number) => Math.max(0, Math.min(1, n)),
+
     /**
      * Cubic easing out function that decelerates towards the end.
      * @param t The input parameter, typically between 0 and 1.
