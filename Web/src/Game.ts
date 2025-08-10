@@ -83,7 +83,6 @@ class Game {
         const MIN_Z     = 0.5;
         const MAX_Z     = 1.0;
         const Z_SMOOTH  = 0.04;
-        const FALL_BIAS_MAX = 240;
         const DEADZONE_K = 0.02; // deadzone vicino al suolo
 
         let newCameraX = this._player.position.x - 150;
@@ -102,7 +101,7 @@ class Game {
         // easing (smoothstep)
         const k = k0 * k0 * (3 - 2 * k0);
 
-        const HARD_MIN_Z = 0.7;  // regola in base allo sfondo
+        const HARD_MIN_Z = 0.7;
         const HARD_MAX_Z = 1.0;
 
         const unclamped = MAX_Z - (MAX_Z - MIN_Z) * k;
@@ -112,8 +111,11 @@ class Game {
         const nextZoom   = Numbers.lerp(this._camera.getZoom(), targetZoom, Z_SMOOTH);
         this._camera.setZoomAround(nextZoom, this._player.position.x, this._player.position.y);
 
+        const FALL_BIAS_FRAC = 0.45; // 45% dell’altezza visibile
+        newCameraY += this._camera.height * FALL_BIAS_FRAC * k;
+
         // bias verticale verso il basso
-        newCameraY += FALL_BIAS_MAX * k;
+        //newCameraY += FALL_BIAS_MAX * k;
 
         // clamp verticale (usa camera.height in unità mondo)
         const minY = -(this._camera.worldHeight - this._camera.height); // top
