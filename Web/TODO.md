@@ -8,7 +8,7 @@
 - [ ] Quando sei morto cambia qualcosa nella barra in basso
 
 # Fix
-- [ ] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone dei salti
+- [x] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone dei salti
 - [ ] È troppo sensibile la cosa di farti risalire sul grattacielo
 - [ ] I vari TODO sparsi
 
