@@ -118,10 +118,12 @@ class Game {
         //newCameraY += FALL_BIAS_MAX * k;
 
         // clamp verticale (usa camera.height in unità mondo)
-        const minY = -(this._camera.worldHeight - this._camera.height); // top
-        const maxY = 0;                                                 // ground
-        if (newCameraY < minY) newCameraY = minY;
-        if (newCameraY > maxY) newCameraY = maxY;
+        const minY = -(this._camera.worldHeight - this._camera.height);
+        const maxY = 0;
+        if (newCameraY < minY)
+            newCameraY = minY;
+        if (newCameraY > maxY)
+            newCameraY = maxY;
 
         // applica posizione
         this._camera.x = Numbers.lerp(this._camera.x, newCameraX, 0.08);

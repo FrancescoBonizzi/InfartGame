@@ -68,6 +68,7 @@ class BackgroundLandscape {
             dynamicGameParameters);
     }
 
+
     update(time: Ticker) {
         this._starfield.update(time);
         this._backgroundSky.update();
