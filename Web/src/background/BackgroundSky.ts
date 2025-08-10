@@ -24,10 +24,12 @@ class BackgroundSky {
 
     update() {
         this._sprite.x = this._camera.x;
-        this._sprite.y = this._camera.y;
+        //this._sprite.y = this._camera.y;
 
-       // const currentZoom = this._camera.getZoom();
-       // this._sprite.scale.set(this._zoom1Scale / currentZoom);
+        const currentZoom = this._camera.getZoom();
+        this._sprite.scale.set(
+            this._zoom1Scale / currentZoom,
+            this._zoom1Scale);
     }
 }
 
