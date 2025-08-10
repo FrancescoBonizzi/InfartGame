@@ -5,19 +5,20 @@ export default {
 
     checkCollisions: (
         who: Rectangle,
-        withRectangles: Rectangle[]) =>
+        withRectangles: Rectangle[]) : boolean =>
     {
-        withRectangles.forEach((element) => {
-            if (who.intersects(element))
-                return ;
-        });
+        for (const element of withRectangles) {
+            if (who.intersects(element)) {
+                return true;
+            }
+        }
 
         return false;
     },
 
     checkCollisionsReturnCollidingRectangle: (
         who: Rectangle,
-        withRectangles: Rectangle[]) =>
+        withRectangles: Rectangle[]) : Rectangle | null =>
     {
         for (const element of withRectangles) {
             if (who.intersects(element))
