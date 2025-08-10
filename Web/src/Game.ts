@@ -102,8 +102,13 @@ class Game {
         // easing (smoothstep)
         const k = k0 * k0 * (3 - 2 * k0);
 
+        const HARD_MIN_Z = 0.7;  // regola in base allo sfondo
+        const HARD_MAX_Z = 1.0;
+
+        const unclamped = MAX_Z - (MAX_Z - MIN_Z) * k;
+        const targetZoom = Numbers.clamp(unclamped, HARD_MIN_Z, HARD_MAX_Z);
+
         // zoom proporzionale all'altezza
-        const targetZoom = MAX_Z - (MAX_Z - MIN_Z) * k;
         const nextZoom   = Numbers.lerp(this._camera.getZoom(), targetZoom, Z_SMOOTH);
         this._camera.setZoomAround(nextZoom, this._player.position.x, this._player.position.y);
 
