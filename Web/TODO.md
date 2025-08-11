@@ -1,9 +1,9 @@
 # Feature
+- [ ] Hearthbeat quando ti manca un hamburger per esplodere (predisponi già i suoni)
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] Aggiungere la parte record (più bello, dai!) Lo salvo in un cookie del browser
 - [ ] Suoni
 - [ ] Menù
-- [ ] Hearthbeat quando ti manca un hamburger per esplodere (predisponi già i suoni)
 - [ ] Quando sei morto cambia qualcosa nella barra in basso
 
 # Fix
