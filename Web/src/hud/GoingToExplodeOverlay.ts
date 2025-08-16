@@ -5,47 +5,62 @@ import Numbers from "../services/Numbers.ts";
 class GoingToExplodeOverlay {
 
     private readonly _sprite: Sprite;
-    private readonly _fadeDurationSeconds = 0.5;
 
-    private _targetOpacity: number | null;
-    private _elapsed: number;
+    private _animation: {
+        elapsedMs: number;
+        durationMs: number;
+        easing: (t: number) => number;
+        from: number;
+        to: number
+    } | null = null;
 
-    constructor(
-        assets: InfartAssets,
-        app: Application<Renderer>
-    ) {
+    constructor(assets: InfartAssets, app: Application<Renderer>) {
         this._sprite = new Sprite(assets.textures.deathScreen);
-        this._sprite.scale.set(
-            1,
-            app.screen.height / this._sprite.height);
+        this._sprite.scale.set(1, app.screen.height / this._sprite.height);
+        this._sprite.position.set(0, 0);
         this._sprite.zIndex = 10000;
-        this._sprite.position.set(0, 0)
         this._sprite.alpha = 0;
-
         app.stage.addChild(this._sprite);
-        this._elapsed = 0;
-        this._targetOpacity = null;
     }
 
     update(ticker: Ticker) {
-        if (this._targetOpacity === null)
+        if (!this._animation)
             return;
 
-        this._elapsed += ticker.deltaMS;
-        const t = Math.min(this._elapsed / this._fadeDurationSeconds, 1);
-        this._sprite.alpha = Numbers.easeInCubic(t) * this._targetOpacity;
+        const a = this._animation;
+        a.elapsedMs = Math.min(a.elapsedMs + ticker.deltaMS, a.durationMs);
+
+        const animationProgress = a.elapsedMs / a.durationMs;
+        const animationProgressEased = a.easing(animationProgress);
+        this._sprite.alpha = Numbers.lerp(a.from, a.to, animationProgressEased);
+
+        if (animationProgress >= 1)
+            this._animation = null;
     }
 
     show() {
-        this._targetOpacity = 1;
-        this._elapsed = 0;
+        this.startTween(0, 1, 300, Numbers.easeInCubic);
     }
 
     hide() {
-        this._targetOpacity = 0;
-        this._elapsed = 0;
+        this.startTween(1, 0, 500, Numbers.easeOutCubic);
     }
 
+    private startTween(
+        from: number,
+        to: number,
+        durationMs: number,
+        easing: (t: number) => number) {
+
+        this._animation = {
+            elapsedMs: 0,
+            durationMs,
+            easing,
+            from,
+            to
+        };
+
+    }
 }
 
 export default GoingToExplodeOverlay;
