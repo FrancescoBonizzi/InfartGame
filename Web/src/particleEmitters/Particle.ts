@@ -12,6 +12,11 @@ class Particle {
     private _rotationSpeed: number;
     private _initialScaleScalar: number;
 
+    private _usePerspective = false;
+    private _z = 0;
+    private _vz = 0;
+    private _focalLen = 600;
+
     constructor(texture: Texture, camera: Camera, blendMode?: BLEND_MODES | undefined) {
         this._sprite = new Sprite({
             texture,
@@ -27,6 +32,23 @@ class Particle {
         camera.addToWorld(this._sprite);
     }
 
+    /**
+     * Initializes the object with the given parameters.
+     *
+     * @param {Point} position - Initial position of the object in 2D space.
+     * @param {Point} speed - Initial velocity vector.
+     * @param {Point} acceleration - Acceleration vector applied to the object.
+     * @param {number} rotationSpeed - Speed of rotation in radians per unit time.
+     * @param {ColorSource} color - Color applied to the object.
+     * @param {number} scale - Initial scaling factor.
+     * @param {number} lifetimeSeconds - Lifetime of the object in seconds.
+     * @param {boolean} randomizedSpawnAngle - Defines if the initial rotation angle should be randomized.
+     * @param {boolean} [usePerspective=false] - Determines whether perspective effects are applied.
+     * @param {number} [z0=0] - Initial z-coordinate for perspective effect.
+     * @param {number} [vz=0] - Initial velocity along the z-axis.
+     * @param {number} [focalLen=600] - Focal length for perspective projection.
+     * @return {void} No value is returned.
+     */
     public initialize(
         position: Point,
         speed: Point,
@@ -35,8 +57,13 @@ class Particle {
         color: ColorSource,
         scale: number,
         lifetimeSeconds: number,
-        randomizedSpawnAngle: boolean
-    ) {
+        randomizedSpawnAngle: boolean,
+        // parametri opzionali
+        usePerspective: boolean = false,
+        z0: number = 0,
+        vz: number = 0,
+        focalLen: number = 600
+    ): void {
 
         this._speed = speed;
         this._acceleration = acceleration;
@@ -45,13 +72,21 @@ class Particle {
         this._timeSinceStartSeconds = 0.0;
         this._initialScaleScalar = scale;
 
-        this._sprite.position = position;
+        this._sprite.position.copyFrom(position);
         this._sprite.rotation = randomizedSpawnAngle
             ? Math.random() * Math.PI * 2
             : 0;
         this._sprite.tint = color;
         this._sprite.anchor.set(0.5, 0.5);
-        this._sprite.scale.set(this._initialScaleScalar);
+
+        // set prospettiva
+        this._usePerspective = usePerspective;
+        this._z = z0;
+        this._vz = vz;
+        this._focalLen = focalLen;
+
+        // scala iniziale
+        this._sprite.scale.set(scale);
     }
 
     public get isActive(): boolean {
@@ -59,27 +94,34 @@ class Particle {
     }
 
     public update(time: Ticker) {
+        const dt = time.deltaMS / 1000;
 
-        let elapsedSeconds = time.elapsedMS / 1000;
+        this._speed.x += this._acceleration.x * dt;
+        this._speed.y += this._acceleration.y * dt;
+        this._sprite.position.x += this._speed.x * dt;
+        this._sprite.position.y += this._speed.y * dt;
+        this._sprite.rotation += this._rotationSpeed * dt;
 
-        this._speed.x += this._acceleration.x * elapsedSeconds;
-        this._speed.y += this._acceleration.y * elapsedSeconds;
+        this._timeSinceStartSeconds += dt;
+        const t = this._lifeTimeSeconds > 0 ? (this._timeSinceStartSeconds / this._lifeTimeSeconds) : 1;
+        const tn = t < 0 ? 0 : t > 1 ? 1 : t;
+        this._sprite.alpha = 4 * tn * (1 - tn);
 
-        this._sprite.position.x += this._speed.x * elapsedSeconds;
-        this._sprite.position.y += this._speed.y * elapsedSeconds
-        this._sprite.rotation += this._rotationSpeed * elapsedSeconds;
+        let scale = this._initialScaleScalar * (0.75 + 0.25 * tn);
 
-        const normalizedLifeTime = this._timeSinceStartSeconds / this._lifeTimeSeconds;
-        this._sprite.alpha = 4 * normalizedLifeTime * (1 - normalizedLifeTime);
+        // prospettiva (opzionale)
+        if (this._usePerspective) {
+            this._z += this._vz * dt;                       // vz < 0 = verso camera
+            const zClamped = Math.max(-this._focalLen * 0.8, Math.min(this._z, 5000));
+            const persp = this._focalLen / (this._focalLen + zClamped);
+            scale *= persp;
+            this._sprite.zIndex = (this._focalLen - zClamped) | 0;
+        }
 
-        const scale = this._initialScaleScalar * (.75 + .25 * normalizedLifeTime);
         this._sprite.scale.set(scale);
 
-        this._timeSinceStartSeconds += elapsedSeconds;
-
-        if (!this.isActive) {
+        if (!this.isActive)
             this._sprite.alpha = 0;
-        }
     }
 }
 

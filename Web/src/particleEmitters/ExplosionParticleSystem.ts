@@ -11,7 +11,7 @@ class ExplosionParticleSystem extends ParticleSystem {
         super(
             texture,
             camera,
-            1,
+            2,
             {min: 12, max: 24},
             { min: 20, max: 60 },
             { min: 50, max: 100 },
@@ -21,6 +21,7 @@ class ExplosionParticleSystem extends ParticleSystem {
             { min: 0, max: 360 },
             null,
             undefined,
+            true,
             true
         );
     }
