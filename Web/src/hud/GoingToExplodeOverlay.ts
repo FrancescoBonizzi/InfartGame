@@ -39,11 +39,11 @@ class GoingToExplodeOverlay {
     }
 
     show() {
-        this.startTween(0, 1, 300, Numbers.easeInCubic);
+        this.startTween(0, 1, 500, t => t);
     }
 
     hide() {
-        this.startTween(1, 0, 500, Numbers.easeOutCubic);
+        this.startTween(1, 0, 500, t => t);
     }
 
     private startTween(
