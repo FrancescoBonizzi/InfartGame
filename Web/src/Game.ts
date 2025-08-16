@@ -167,6 +167,9 @@ class Game {
             return;
 
         this._hud.updateScore(currentScore);
+        if (this._player.isDead) {
+            this._hud.playerDead();
+        }
 
         if (this._score % 30 === 0) {
             this._dynamicGameParameters.playerHorizontalSpeed += 50;
