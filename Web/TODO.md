@@ -9,6 +9,7 @@
 # Fix
 - [x] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone dei salti
 - [x] È troppo sensibile la cosa di farti risalire sul grattacielo
+- [x] arial rounded black di sistema apple per infart
 - [ ] I vari TODO sparsi
 
 # Post
