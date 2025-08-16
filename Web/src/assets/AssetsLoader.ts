@@ -56,7 +56,7 @@ export const loadAssets = async (): Promise<InfartAssets> => {
             record: loadSpriteFromSpriteSheet(playerSpriteSheet, "record"),
             verdura: loadSpriteFromSpriteSheet(playerSpriteSheet, "verdura"),
             background: loadSpriteFromSpriteSheet(playerSpriteSheet, "background"),
-            deathScreen: loadSpriteFromSpriteSheet(playerSpriteSheet, "deathScreen"),
+            deathScreen: loadSpriteFromSpriteSheet(playerSpriteSheet, "death_screen"),
             nuvola1: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola1"),
             nuvola2: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola2"),
             nuvola3: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola3")

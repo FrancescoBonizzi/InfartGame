@@ -5,6 +5,7 @@
 - [ ] Suoni
 - [ ] Menù
 - [ ] Quando sei morto cambia qualcosa nella barra in basso
+- [ ] Esplosione fai che alcuni vengono verso di me e vanno verso l'interno per dare effetto 3D
 
 # Fix
 - [x] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone dei salti

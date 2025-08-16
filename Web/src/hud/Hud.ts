@@ -2,6 +2,7 @@ import ScoreText from "./ScoreText.ts";
 import {Application, Container, Graphics, Point, Renderer, Ticker} from "pixi.js";
 import HamburgerStatusBar from "./HamburgerStatusBar.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
+import GoingToExplodeOverlay from "./GoingToExplodeOverlay.ts";
 
 class Hud {
 
@@ -9,7 +10,6 @@ class Hud {
     private readonly _background: Graphics;
     private readonly _scoreText: ScoreText;
     private readonly _hamburgerStatusBar: HamburgerStatusBar;
-
     private readonly _statusBarHeight = 50;
 
     constructor(
@@ -45,6 +45,11 @@ class Hud {
             this._container,
             new Point(0, this._statusBarHeight / 2),
             assets
+        );
+
+        new GoingToExplodeOverlay(
+            assets,
+            app
         );
     }
 
