@@ -5,6 +5,13 @@ import Interval from "../primitives/Interval.ts";
 import Camera from "../world/Camera.ts";
 import PixiJsTimer from "../primitives/PixiJsTimer.ts";
 
+export interface PerspectiveEffect {
+    z0: number;
+    vz: number;
+    focalLen: number;
+    towardsCamera: boolean | null;
+}
+
 abstract class ParticleSystem {
 
     private readonly _activeParticles: Particle[];
@@ -19,7 +26,7 @@ abstract class ParticleSystem {
     private readonly _randomizedSpawnAngle: boolean;
     private readonly _spawnAngleDegrees: Interval;
     private readonly _particlesGenerationTimer: PixiJsTimer | null;
-    private readonly _usePerspective: boolean;
+    private readonly _perspectiveEffect: PerspectiveEffect | null;
 
     protected constructor(
         texture: Texture,
@@ -35,7 +42,7 @@ abstract class ParticleSystem {
         particlesGenerationIntervalMilliseconds: number | null = null,
         textureBlendMode: BLEND_MODES | undefined = undefined,
         randomizedSpawnAngle: boolean = false,
-        usePerspective = false) {
+        perspectiveEffect: PerspectiveEffect | null = null) {
 
         this._numParticles = numParticles;
         this._speed = speed;
@@ -45,7 +52,7 @@ abstract class ParticleSystem {
         this._scale = scale;
         this._spawnAngleDegrees = spawnAngleInDegrees;
         this._randomizedSpawnAngle = randomizedSpawnAngle;
-        this._usePerspective = usePerspective;
+        this._perspectiveEffect = perspectiveEffect;
 
         this._activeParticles = new Array(density * numParticles.max)
             .fill(null)
@@ -108,9 +115,20 @@ abstract class ParticleSystem {
             direction.x * accelerationScalar,
             direction.y * accelerationScalar);
 
-        const towardsCamera = this._usePerspective && Math.random() < 0.5;
-        const z0 = towardsCamera ? 200 : 0;
-        const vz = towardsCamera ? -200 : +200; // NEGATIVO = verso camera
+        const usePerspective = this._perspectiveEffect !== null;
+        const towardsCamera = usePerspective
+            ? this._perspectiveEffect.towardsCamera !== null
+                ? this._perspectiveEffect.towardsCamera
+                : Math.random() < 0.5
+            : false;
+        const z0 = usePerspective && towardsCamera
+            ? this._perspectiveEffect!.z0
+            : 0;
+        const vz = !usePerspective
+            ? 0
+            : towardsCamera
+                ? -this._perspectiveEffect!.vz // NEGATIVO = verso camera
+                : this._perspectiveEffect!.vz;
 
         particle.initialize(
             position,
@@ -121,7 +139,7 @@ abstract class ParticleSystem {
             Numbers.randomBetweenInterval(this._scale),
             Numbers.randomBetweenInterval(this._lifetimeSeconds),
             this._randomizedSpawnAngle,
-            this._usePerspective,
+            this._perspectiveEffect !== null,
             z0,
             vz,
         );

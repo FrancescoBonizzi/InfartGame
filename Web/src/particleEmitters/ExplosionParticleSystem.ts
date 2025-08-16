@@ -22,7 +22,12 @@ class ExplosionParticleSystem extends ParticleSystem {
             null,
             undefined,
             true,
-            true
+            {
+                z0: 200,
+                vz: 200,
+                focalLen: 600,
+                towardsCamera: null
+            }
         );
     }
 }

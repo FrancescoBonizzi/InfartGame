@@ -21,7 +21,13 @@ class InfartTextParticleSystem extends ParticleSystem {
             { min: 0, max: 0 },
             null,
             undefined,
-            false
+            false,
+            {
+                z0: 200,
+                vz: 140,
+                focalLen: 600,
+                towardsCamera: true
+            }
         );
     }
 }

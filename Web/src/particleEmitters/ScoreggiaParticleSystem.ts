@@ -21,7 +21,6 @@ class ScoreggiaParticleSystem extends ParticleSystem {
             {min: 210, max: 215},
             null,
             'screen',
-            true,
             true
         );
     }
