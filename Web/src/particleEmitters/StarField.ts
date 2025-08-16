@@ -20,7 +20,7 @@ class StarField extends ParticleSystem {
         super(
             infartAssets.textures.particles.starParticle,
             camera,
-            16,
+            8,
             {min: 4, max: 8},
             {min: 10, max: 15},
             {min: 30, max: 40},
@@ -54,7 +54,7 @@ class StarField extends ParticleSystem {
         }
 
         const rightEdge = this._camera.x + this._camera.width;
-        const x = rightEdge + Numbers.randomBetween(0, this._camera.width);
+        const x = rightEdge + Numbers.randomBetween(0, this._camera.width / 2);
         const y = Numbers.randomBetween(this._spawnYRange.min, this._spawnYRange.max);
 
         this.addParticles(new Point(x, y));
