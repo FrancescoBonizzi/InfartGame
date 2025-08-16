@@ -1,11 +1,11 @@
 # Feature
 - [ ] Hearthbeat quando ti manca un hamburger per esplodere (predisponi già i suoni)
+- [ ] Esplosione fai che alcuni vengono verso di me e vanno verso l'interno per dare effetto 3D
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] Aggiungere la parte record (più bello, dai!) Lo salvo in un cookie del browser
 - [ ] Suoni
 - [ ] Menù
 - [ ] Quando sei morto cambia qualcosa nella barra in basso
-- [ ] Esplosione fai che alcuni vengono verso di me e vanno verso l'interno per dare effetto 3D
 
 # Fix
 - [x] Quando vai molto in alto bisogna zoomare indietro come il gioco iphone dei salti

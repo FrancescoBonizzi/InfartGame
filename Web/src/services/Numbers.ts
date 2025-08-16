@@ -58,6 +58,15 @@ export default {
         return 1 - Math.pow(1 - t, 3);
     },
 
+    /**
+     * Cubic easing in function that accelerates from the start.
+     * @param t
+     * @returns The eased value, starting slow and accelerating.
+     */
+    easeInCubic: (t: number) => {
+        return t * t * t;
+    },
+
     addPoints(a: Point, b: Point): Point {
         return new Point(a.x + b.x, a.y + b.y);
     }

@@ -4,6 +4,7 @@ import {Container, Point, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import HudText from "./HudText.ts";
 import Numbers from "../services/Numbers.ts";
+import GoingToExplodeOverlay from "./GoingToExplodeOverlay.ts";
 
 class HamburgerStatusBar {
 
@@ -11,6 +12,7 @@ class HamburgerStatusBar {
     private readonly _hamburgersText: HudText;
     private readonly _container: Container;
     private readonly _blinkIntervalMs = 300;
+    private readonly _goingToExplodeOverlay: GoingToExplodeOverlay;
 
     private _isBlinking = false;
     private _blinkElapsed = 0;
@@ -19,7 +21,8 @@ class HamburgerStatusBar {
     constructor(
         container: Container,
         startingPosition: Point,
-        assets: InfartAssets) {
+        assets: InfartAssets,
+        goingToExplodeOverlay: GoingToExplodeOverlay) {
 
         this._container = new Container();
         container.addChild(this._container);
@@ -49,6 +52,7 @@ class HamburgerStatusBar {
                 new Point(0, 0.5)
         );
 
+        this._goingToExplodeOverlay = goingToExplodeOverlay;
         this.updateHamburgersText();
     }
 
@@ -91,8 +95,14 @@ class HamburgerStatusBar {
                 : "",
         );
 
-
-        this._isBlinking = this._currentActiveHamburgerIndex === 3;
+        const shouldBlink = this._currentActiveHamburgerIndex === 3;
+        if (shouldBlink && !this._isBlinking) {
+            this._goingToExplodeOverlay.show();
+            this._isBlinking = true;
+        } else if (!shouldBlink && this._isBlinking) {
+            this._goingToExplodeOverlay.hide();
+            this._isBlinking = false;
+        }
 
         if (!this._isBlinking) {
             this._container.visible = true;

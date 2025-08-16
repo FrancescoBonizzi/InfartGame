@@ -10,6 +10,8 @@ class Hud {
     private readonly _background: Graphics;
     private readonly _scoreText: ScoreText;
     private readonly _hamburgerStatusBar: HamburgerStatusBar;
+    private readonly _goingToExplodeOverlay: GoingToExplodeOverlay;
+
     private readonly _statusBarHeight = 50;
 
     constructor(
@@ -41,15 +43,15 @@ class Hud {
                 this._background.width - 20,
                 this._statusBarHeight / 2
             ));
+        this._goingToExplodeOverlay = new GoingToExplodeOverlay(
+            assets,
+            app
+        );
         this._hamburgerStatusBar = new HamburgerStatusBar(
             this._container,
             new Point(0, this._statusBarHeight / 2),
-            assets
-        );
-
-        new GoingToExplodeOverlay(
             assets,
-            app
+            this._goingToExplodeOverlay
         );
     }
 
@@ -59,6 +61,7 @@ class Hud {
 
     update(time: Ticker) {
         this._hamburgerStatusBar.update(time);
+        this._goingToExplodeOverlay.update(time);
     }
 
     getHamburgerStatusBar = () => this._hamburgerStatusBar;
