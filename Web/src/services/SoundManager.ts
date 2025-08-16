@@ -16,6 +16,14 @@ class SoundManager {
         // TODO
     }
 
+    playHeartBeat() {
+// TODO
+    }
+
+    stopHeartBeat() {
+// TODO
+    }
+
     playExplosion() {
 
     }
