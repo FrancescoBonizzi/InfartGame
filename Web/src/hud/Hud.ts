@@ -67,6 +67,11 @@ class Hud {
         this._goingToExplodeOverlay.update(time);
     }
 
+    playerDead() {
+        this._hamburgerStatusBar.playerDead();
+        this._goingToExplodeOverlay.hide();
+    }
+
     getHamburgerStatusBar = () => this._hamburgerStatusBar;
 }
 
