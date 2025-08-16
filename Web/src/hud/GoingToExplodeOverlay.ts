@@ -46,12 +46,12 @@ class GoingToExplodeOverlay {
     }
 
     show() {
-        this.startTween(0, 1, 500, t => t);
+        this.startTween(0, 0.5, 500, t => t);
         this._soundManager.playHeartBeat();
     }
 
     hide() {
-        this.startTween(1, 0, 500, t => t);
+        this.startTween(0.5, 0, 500, t => t);
         this._soundManager.stopHeartBeat();
     }
 
