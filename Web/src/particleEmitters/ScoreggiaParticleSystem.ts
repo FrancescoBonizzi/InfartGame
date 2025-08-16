@@ -21,7 +21,13 @@ class ScoreggiaParticleSystem extends ParticleSystem {
             {min: 210, max: 215},
             null,
             'screen',
-            true
+            true,
+            {
+                z0: 200,
+                vz: 300,
+                focalLen: 600,
+                towardsCamera: null
+            }
         );
     }
 
