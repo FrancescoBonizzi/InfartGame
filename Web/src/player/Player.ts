@@ -280,10 +280,6 @@ class Player implements IHasCollisionRectangle {
         this._hud.playerDead();
     }
 
-    get speed() {
-        return this._speed;
-    }
-
     hamburgerEaten() {
         if (this._currentEatenHambugers > FixedGameParamters.MaxEatenHamburgers) {
             this.die(true);
