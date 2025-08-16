@@ -1,10 +1,9 @@
 # Feature
 - [ ] Esplosione fai che alcuni vengono verso di me e vanno verso l'interno per dare effetto 3D
+- [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Gemme: reazioni alla presa dei powerup
-- [ ] Aggiungere la parte record (più bello, dai!) Lo salvo in un cookie del browser
 - [ ] Suoni
 - [ ] Menù
-- [ ] Quando sei morto cambia qualcosa nella barra in basso
 
 # Fix
 - [ ] Quando sei morto nel testo in basso scrivi GameOver

@@ -275,6 +275,7 @@ class Player implements IHasCollisionRectangle {
         this._isDead = true;
         this._infartExplosion.explode(this._position, isWithText);
         this._camera.removeFromWorld(this._currentAnimation);
+        this._hamburgerStatusBar.playerDead();
     }
 
     get speed() {

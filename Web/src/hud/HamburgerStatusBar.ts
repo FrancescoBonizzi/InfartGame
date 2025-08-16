@@ -56,6 +56,10 @@ class HamburgerStatusBar {
         this.updateHamburgersText();
     }
 
+    playerDead() {
+        this._hamburgersText.updateText("INFART");
+    }
+
     hamburgerEaten() {
         if (this._currentActiveHamburgerIndex !== null) {
             if (this._currentActiveHamburgerIndex < FixedGameParamters.MaxEatenHamburgers)

@@ -3,6 +3,7 @@ import {Application, Container, Graphics, Point, Renderer, Ticker} from "pixi.js
 import HamburgerStatusBar from "./HamburgerStatusBar.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
 import GoingToExplodeOverlay from "./GoingToExplodeOverlay.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 class Hud {
 
@@ -16,7 +17,8 @@ class Hud {
 
     constructor(
         app: Application<Renderer>,
-        assets: InfartAssets
+        assets: InfartAssets,
+        soundManager: SoundManager
     ) {
         // Ancoro il container al bordo basso e lo posizioni UNA volta
         this._container = new Container();
@@ -45,7 +47,8 @@ class Hud {
             ));
         this._goingToExplodeOverlay = new GoingToExplodeOverlay(
             assets,
-            app
+            app,
+            soundManager,
         );
         this._hamburgerStatusBar = new HamburgerStatusBar(
             this._container,

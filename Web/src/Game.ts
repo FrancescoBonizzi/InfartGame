@@ -50,7 +50,8 @@ class Game {
             this._soundManager);
         this._hud = new Hud(
             app,
-            assets);
+            assets,
+            this._soundManager);
         this._player = new Player(
             new Point(600, -500),
             assets,
