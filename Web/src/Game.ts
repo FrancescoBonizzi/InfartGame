@@ -60,7 +60,7 @@ class Game {
             this._soundManager,
             this._dynamicGameParameters,
             this._infartExplosion,
-            this._hud.getHamburgerStatusBar());
+            this._hud);
         this._gemmeManager = new GemmeManager(
             assets,
             this._camera,
@@ -167,9 +167,6 @@ class Game {
             return;
 
         this._hud.updateScore(currentScore);
-        if (this._player.isDead) {
-            this._hud.playerDead();
-        }
 
         if (this._score % 30 === 0) {
             this._dynamicGameParameters.playerHorizontalSpeed += 50;

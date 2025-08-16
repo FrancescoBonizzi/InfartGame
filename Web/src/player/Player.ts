@@ -11,7 +11,7 @@ import DynamicGameParameters from "../services/DynamicGameParameters.ts";
 import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
 import InfartExplosion from "../particleEmitters/InfartExplosion.ts";
 import FixedGameParamters from "../services/FixedGameParameters.ts";
-import HamburgerStatusBar from "../hud/HamburgerStatusBar.ts";
+import Hud from "../hud/Hud.ts";
 
 class Player implements IHasCollisionRectangle {
 
@@ -25,16 +25,17 @@ class Player implements IHasCollisionRectangle {
     private _isOnGround: boolean = false;
     private _walkArea: Foreground;
     private _scoreggeParticleSystems: ScoreggiaParticleSystem[];
+
     private readonly _camera: Camera;
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
+    private readonly _assets: InfartAssets;
+    private readonly _hud: Hud;
 
     private _currentJumpCount: number = 0;
     private _currentEatenHambugers: number = 0;
     private _isDead: boolean = false;
     private _infartExplosion: InfartExplosion;
-    private _hamburgerStatusBar: HamburgerStatusBar;
-    private _assets: InfartAssets;
 
     constructor(
         staringPosition: Point,
@@ -44,7 +45,7 @@ class Player implements IHasCollisionRectangle {
         soundManager: SoundManager,
         dynamicGameParameters: DynamicGameParameters,
         infartExplosion: InfartExplosion,
-        hamburgerStatusBar: HamburgerStatusBar) {
+        hud: Hud) {
 
         this._dynamicGameParameters = dynamicGameParameters;
         this._camera = camera;
@@ -61,8 +62,8 @@ class Player implements IHasCollisionRectangle {
         this.setNewAnimation(this._animations.fall);
         this._walkArea = walkArea;
         this._infartExplosion = infartExplosion;
-        this._hamburgerStatusBar = hamburgerStatusBar;
         this._scoreggeParticleSystems = [];
+        this._hud = hud;
     }
 
     jump() {
@@ -72,7 +73,7 @@ class Player implements IHasCollisionRectangle {
 
         if (this._currentEatenHambugers > 0) {
             this._currentEatenHambugers--;
-            this._hamburgerStatusBar.farted();
+            this._hud.getHamburgerStatusBar().farted();
         }
 
         // TODO: ci sarà lo switch sulla base del powerup corrente
@@ -275,7 +276,8 @@ class Player implements IHasCollisionRectangle {
         this._isDead = true;
         this._infartExplosion.explode(this._position, isWithText);
         this._camera.removeFromWorld(this._currentAnimation);
-        this._hamburgerStatusBar.playerDead();
+        this._hud.getHamburgerStatusBar().playerDead();
+        this._hud.playerDead();
     }
 
     get speed() {
@@ -290,7 +292,7 @@ class Player implements IHasCollisionRectangle {
 
         this._soundManager.playBite();
         ++this._currentEatenHambugers;
-        this._hamburgerStatusBar.hamburgerEaten();
+        this._hud.getHamburgerStatusBar().hamburgerEaten();
     }
 }
 
