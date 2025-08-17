@@ -128,6 +128,7 @@ abstract class ParticleSystem {
             this._perspectiveEffect !== null,
             z0,
             vz,
+            600
         );
     }
 

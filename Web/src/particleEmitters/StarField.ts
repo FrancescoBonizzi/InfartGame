@@ -8,7 +8,7 @@ class StarField extends ParticleSystem {
 
     private readonly _camera: Camera;
     private readonly _timeBetweenNewStarGenerationMs = 20.0;
-    private _timeTillNewStarMs = 0.0;
+    private _timeTillNewStarMs;
 
     private readonly _spawnYRange = {
         min: -1200,
@@ -34,7 +34,7 @@ class StarField extends ParticleSystem {
             true
         );
 
-        this._timeTillNewStarMs = 0;
+        this._timeTillNewStarMs = this._timeBetweenNewStarGenerationMs;
         this._camera = camera;
     }
 

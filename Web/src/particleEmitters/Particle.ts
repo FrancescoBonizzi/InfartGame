@@ -58,11 +58,10 @@ class Particle {
         scale: number,
         lifetimeSeconds: number,
         randomizedSpawnAngle: boolean,
-        // parametri opzionali
-        usePerspective: boolean = false,
-        z0: number = 0,
-        vz: number = 0,
-        focalLen: number = 600
+        usePerspective: boolean,
+        z0: number,
+        vz: number,
+        focalLen: number
     ): void {
 
         this._speed = speed;
