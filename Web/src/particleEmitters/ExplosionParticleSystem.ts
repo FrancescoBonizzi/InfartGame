@@ -19,7 +19,6 @@ class ExplosionParticleSystem extends ParticleSystem {
             { min: 2.0, max: 4.0 },
             {min: 0.5, max: 1.0},
             { min: 0, max: 360 },
-            null,
             undefined,
             true,
             {

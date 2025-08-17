@@ -3,7 +3,6 @@ import Particle from "./Particle.ts";
 import Numbers from "../services/Numbers.ts";
 import Interval from "../primitives/Interval.ts";
 import Camera from "../world/Camera.ts";
-import PixiJsTimer from "../primitives/PixiJsTimer.ts";
 
 export interface PerspectiveEffect {
     z0: number;
@@ -25,7 +24,6 @@ abstract class ParticleSystem {
     private readonly _scale: Interval;
     private readonly _randomizedSpawnAngle: boolean;
     private readonly _spawnAngleDegrees: Interval;
-    private readonly _particlesGenerationTimer: PixiJsTimer | null;
     private readonly _perspectiveEffect: PerspectiveEffect | null;
 
     protected constructor(
@@ -39,7 +37,6 @@ abstract class ParticleSystem {
         lifetimeSeconds: Interval,
         scale: Interval,
         spawnAngleInDegrees: Interval,
-        particlesGenerationIntervalMilliseconds: number | null = null,
         textureBlendMode: BLEND_MODES | undefined = undefined,
         randomizedSpawnAngle: boolean = false,
         perspectiveEffect: PerspectiveEffect | null = null) {
@@ -62,10 +59,6 @@ abstract class ParticleSystem {
                 textureBlendMode));
 
         this._freeParticles = [...this._activeParticles];
-
-        this._particlesGenerationTimer = particlesGenerationIntervalMilliseconds !== null
-            ? new PixiJsTimer(particlesGenerationIntervalMilliseconds)
-            : null;
     }
 
     public update(time: Ticker) {
@@ -78,23 +71,16 @@ abstract class ParticleSystem {
                 }
             }
         });
-
-        this._particlesGenerationTimer?.update(time);
     }
 
     public addParticles(position: Point) {
 
-        if (!this._particlesGenerationTimer
-            || this._particlesGenerationTimer.canRunManualCallback()) {
-
-            const numParticles = Numbers.randomBetweenInterval(this._numParticles);
-            for (let i = 0; i < numParticles && this._freeParticles.length > 0; i++) {
-                const p = this._freeParticles.shift();
-                if (p) {
-                    this.initializeParticle(p, position);
-                }
+        const numParticles = Numbers.randomBetweenInterval(this._numParticles);
+        for (let i = 0; i < numParticles && this._freeParticles.length > 0; i++) {
+            const p = this._freeParticles.shift();
+            if (p) {
+                this.initializeParticle(p, position);
             }
-
         }
 
     }

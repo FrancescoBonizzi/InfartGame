@@ -19,7 +19,6 @@ class InfartTextParticleSystem extends ParticleSystem {
             { min: 6.0, max: 6.0 },
             {min: 1, max: 2},
             { min: 0, max: 0 },
-            null,
             undefined,
             false,
             {
