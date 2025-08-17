@@ -5,7 +5,6 @@
 - [ ] Menù
 
 # Fix
-- [ ] C'è qualcosa che non va nello StarField... Ne genera poche e scompaiono alla svelta, quando sono nel range
 - [ ] I vari TODO sparsi
 
 # Post

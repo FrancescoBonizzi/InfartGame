@@ -32,13 +32,7 @@ class StarField extends ParticleSystem {
             {min: 0, max: 360},
             20,
             'add',
-            true,
-            {
-                z0: 200,
-                vz: 150,
-                focalLen: 600,
-                towardsCamera: null
-            }
+            true
         );
 
         this._timeTillNewStarMs = 0;
