@@ -1,12 +1,11 @@
 # Feature
-- [ ] Esplosione fai che alcuni vengono verso di me e vanno verso l'interno per dare effetto 3D
 - [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Gemme: reazioni alla presa dei powerup
 - [ ] Suoni
 - [ ] Menù
 
 # Fix
-- [ ] Quando sei morto nel testo in basso scrivi GameOver
+- [ ] C'è qualcosa che non va nello StarField... Ne genera poche e scompaiono alla svelta, quando sono nel range
 - [ ] I vari TODO sparsi
 
 # Post

@@ -7,10 +7,12 @@ import Numbers from "../services/Numbers.ts";
 class StarField extends ParticleSystem {
 
     private readonly _camera: Camera;
+    private readonly _timeBetweenNewStarGenerationMs = 20.0;
+    private _timeTillNewStarMs = 0.0;
 
     private readonly _spawnYRange = {
-        min: -1200,
-        max: -700
+        min: -960,
+        max: -300
     };
 
     constructor(
@@ -39,6 +41,7 @@ class StarField extends ParticleSystem {
             }
         );
 
+        this._timeTillNewStarMs = 0;
         this._camera = camera;
     }
 
@@ -47,22 +50,30 @@ class StarField extends ParticleSystem {
             && this._camera.y <= this._spawnYRange.max;
     }
 
-    private evaluateStarsGeneration() {
+    private evaluateStarsGeneration(ticker: Ticker) {
 
         if (!this.isCameraInStarfieldSpawnRange()) {
             return;
         }
 
-        const rightEdge = this._camera.x + this._camera.width;
-        const x = rightEdge + Numbers.randomBetween(0, this._camera.width / 2);
-        const y = Numbers.randomBetween(this._spawnYRange.min, this._spawnYRange.max);
+        this._timeTillNewStarMs -= ticker.elapsedMS;
+        if (this._timeTillNewStarMs < 0) {
 
-        this.addParticles(new Point(x, y));
+            const x = Numbers.randomBetweenInterval({
+                min: this._camera.x,
+                max: this._camera.x + this._camera.width
+            });
+            const y = Numbers.randomBetweenInterval(this._spawnYRange);
+
+            this.addParticles(new Point(x, y));
+            this._timeTillNewStarMs = this._timeBetweenNewStarGenerationMs;
+        }
+
     }
 
     override update(time: Ticker) {
         super.update(time);
-        this.evaluateStarsGeneration();
+        this.evaluateStarsGeneration(time);
     }
 }
 
