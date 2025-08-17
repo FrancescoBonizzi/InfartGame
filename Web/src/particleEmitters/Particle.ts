@@ -101,10 +101,10 @@ class Particle {
         this._sprite.position.y += this._speed.y * dt;
         this._sprite.rotation += this._rotationSpeed * dt;
 
-        this._timeSinceStartSeconds += dt;
         const t = this._lifeTimeSeconds > 0 ? (this._timeSinceStartSeconds / this._lifeTimeSeconds) : 1;
         const tn = t < 0 ? 0 : t > 1 ? 1 : t;
         this._sprite.alpha = 4 * tn * (1 - tn);
+        this._timeSinceStartSeconds += dt;
 
         let scale = this._initialScaleScalar * (0.75 + 0.25 * tn);
 

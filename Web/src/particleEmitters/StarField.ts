@@ -22,7 +22,7 @@ class StarField extends ParticleSystem {
         super(
             infartAssets.textures.particles.starParticle,
             camera,
-            8,
+            4,
             {min: 4, max: 8},
             {min: 10, max: 15},
             {min: 30, max: 40},
