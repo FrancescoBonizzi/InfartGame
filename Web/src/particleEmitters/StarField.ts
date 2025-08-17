@@ -65,8 +65,8 @@ class StarField extends ParticleSystem {
     }
 
     override update(time: Ticker) {
-        super.update(time);
         this.evaluateStarsGeneration(time);
+        super.update(time);
     }
 }
 
