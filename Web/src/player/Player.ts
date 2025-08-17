@@ -191,6 +191,7 @@ class Player implements IHasCollisionRectangle {
     }
 
     update(time: Ticker) {
+        this._speed.x = this._dynamicGameParameters.playerHorizontalSpeed;
         this._speed.y += this._fallSpeed;
 
         if (this.isDead) {
