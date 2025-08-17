@@ -11,7 +11,7 @@ class StarField extends ParticleSystem {
     private _timeTillNewStarMs = 0.0;
 
     private readonly _spawnYRange = {
-        min: -960,
+        min: -1200,
         max: -300
     };
 
@@ -30,7 +30,7 @@ class StarField extends ParticleSystem {
             {min: 1.5, max: 3.0},
             {min: 0.2, max: 1.0},
             {min: 0, max: 360},
-            20,
+            null,
             'add',
             true
         );
