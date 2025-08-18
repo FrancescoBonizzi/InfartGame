@@ -39,6 +39,7 @@ class GemmeManager {
         this._hamburgerTexture = assets.textures.burger;
         this._activePowerup = null;
         this._player = player;
+
         foreground.onGrattacieloGeneratoHandler = this.onGrattacieloGeneratoHandler.bind(this);
         foreground.drawnGrattacieli
             .slice(10)
@@ -47,7 +48,7 @@ class GemmeManager {
             });
     }
 
-    private addPowerUp(
+    private spawnPowerUp(
         where: Point) {
 
         // Only one active powerup at a time
@@ -65,12 +66,14 @@ class GemmeManager {
     }
 
     private getRandomPowerUp() : PowerUpTypes {
-        const values = Object.values(PowerUpTypes).filter(value => typeof value === 'number');
+        const values = Object
+            .values(PowerUpTypes)
+            .filter(value => typeof value === 'number');
         const randomIndex = Math.floor(Math.random() * values.length);
         return values[randomIndex] as PowerUpTypes;
     }
 
-    private addHamburger(where: Point) {
+    private spawnHamburger(where: Point) {
         if (this._hambugers.length >= this._maxActiveHamburgers)
             return;
 
@@ -94,19 +97,11 @@ class GemmeManager {
             }
         }
 
-        const hamburgersToRemove: Hamburger[] = [];
-        this._hambugers.forEach(hamburger => {
-            if (this._camera.isOutOfCameraLeft(hamburger)) {
-                hamburgersToRemove.push(hamburger);
-                this._camera.removeFromWorld(hamburger.sprite);
-            } else {
-                hamburger.update(ticker);
-            }
-        })
-
         this._hambugers = this._hambugers.filter(hamburger =>
-            !hamburgersToRemove.includes(hamburger));
+            !this._camera.isOutOfCameraLeft(hamburger));
         this.checkPlayerCollisionWithGemme();
+
+        this._hambugers.forEach(hamburger => hamburger.update(ticker));
     }
     
     checkPlayerCollisionWithGemme() {
@@ -158,10 +153,10 @@ class GemmeManager {
             grattacielo.y - grattacielo.height - 70);
 
         if (Numbers.randomBetween(0, 1) < this._hamburgerProbability) {
-            this.addHamburger(where);
+            this.spawnHamburger(where);
         }
         else if (Numbers.randomBetween(0, 1) < this._powerUpProbability) {
-            this.addPowerUp(where);
+            this.spawnPowerUp(where);
         }
 
     }

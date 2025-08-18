@@ -1,6 +1,6 @@
 # Feature
-- [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Gemme: reazioni alla presa dei powerup
+- [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Suoni
 - [ ] Menù
 
