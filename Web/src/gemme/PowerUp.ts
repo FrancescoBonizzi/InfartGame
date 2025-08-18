@@ -3,11 +3,11 @@ import PowerUpTypes from "./PowerUpTypes.ts";
 import Camera from "../world/Camera.ts";
 import {Point, Texture} from "pixi.js";
 
-class PowerUp extends Gemma {
+abstract class PowerUp extends Gemma {
 
     private readonly _powerUpType: PowerUpTypes;
 
-    constructor(
+    protected constructor(
         world: Camera,
         texture: Texture,
         powerUpType: PowerUpTypes,

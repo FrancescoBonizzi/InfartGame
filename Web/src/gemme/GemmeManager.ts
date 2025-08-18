@@ -9,19 +9,22 @@ import PowerUpTypes from "./PowerUpTypes.ts";
 import Grattacielo from "../background/Grattacielo.ts";
 import Numbers from "../services/Numbers.ts";
 import Foreground from "../background/Foreground.ts";
+import PowerUpJalapeno from "./PowerUpJalapeno.ts";
+import PowerUpBean from "./PowerUpBean.ts";
+import PowerUpBroccolo from "./PowerUpBroccolo.ts";
 
 class GemmeManager {
 
     private readonly _camera: Camera;
     private readonly _maxActiveHamburgers = 30;
-    private readonly _powerUpsTextures: Record<PowerUpTypes, Texture>;
     private readonly _hamburgerTexture: Texture;
     private readonly _hamburgerProbability = 0.4;
     private readonly _powerUpProbability = 0.008;
+    private readonly _assets: InfartAssets;
+    private readonly _player: Player;
 
     private _hambugers: Hamburger[];
     private _activePowerup: PowerUp | null;
-    private readonly _player: Player;
 
     constructor(
         assets: InfartAssets,
@@ -31,11 +34,7 @@ class GemmeManager {
 
         this._camera = camera;
         this._hambugers = [];
-        this._powerUpsTextures = {
-            [PowerUpTypes.Bean]: assets.textures.bean,
-            [PowerUpTypes.Broccolo]: assets.textures.verdura,
-            [PowerUpTypes.Jalapeno]: assets.textures.jalapenos
-        };
+        this._assets = assets;
         this._hamburgerTexture = assets.textures.burger;
         this._activePowerup = null;
         this._player = player;
@@ -57,12 +56,34 @@ class GemmeManager {
         }
 
         const randomPowerUpType = this.getRandomPowerUp();
-        this._activePowerup = new PowerUp(
-            this._camera,
-            this._powerUpsTextures[randomPowerUpType],
-            randomPowerUpType,
-            where
-        );
+        this._activePowerup = this.powerUpFactory(randomPowerUpType, where);
+    }
+
+    private powerUpFactory(
+        powerUpType: PowerUpTypes,
+        where: Point) : PowerUp {
+
+        switch (powerUpType) {
+            case PowerUpTypes.Jalapeno:
+                return new PowerUpJalapeno(
+                    this._camera,
+                    this._assets,
+                    where
+                );
+            case PowerUpTypes.Bean:
+                return new PowerUpBean(
+                    this._camera,
+                    this._assets,
+                    where
+                );
+            case PowerUpTypes.Broccolo:
+                return new PowerUpBroccolo(
+                    this._camera,
+                    this._assets,
+                    where
+                );
+        }
+
     }
 
     private getRandomPowerUp() : PowerUpTypes {
@@ -105,6 +126,7 @@ class GemmeManager {
     }
     
     checkPlayerCollisionWithGemme() {
+
         if (this.playerCollidedWithHamburger(this._player)) {
             this._player.hamburgerEaten();
             return;
