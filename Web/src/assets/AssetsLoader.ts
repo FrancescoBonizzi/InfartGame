@@ -41,7 +41,7 @@ export const loadAssets = async (): Promise<InfartAssets> => {
                 broccoloParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "broccoloParticle"),
                 jalapenoParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "jalapenoParticle"),
                 scoreggiaParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "scoreggiaParticle"),
-
+                caccaParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "merda"),
                 starParticle: loadSpriteFromSpriteSheet(playerSpriteSheet, "stella"),
             },
             bang: loadSpriteFromSpriteSheet(playerSpriteSheet, "bang"),

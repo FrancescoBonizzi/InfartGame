@@ -6,6 +6,7 @@ import JalapenoParticleSystem from "../particleEmitters/JalapenoParticleSystem.t
 
 class PowerUpJalapeno extends PowerUp {
 
+    // TODO: Forse anche qui dovrei fare un particle system array come per la scoreggia del player
     private readonly _particleSystem: JalapenoParticleSystem;
 
     constructor(
@@ -44,6 +45,10 @@ class PowerUpJalapeno extends PowerUp {
 
     override getMaxConsecutiveJumps(): number {
         return 3;
+    }
+
+    override addParticles(where: Point): void {
+        this._particleSystem.addParticles(where);
     }
 
 }

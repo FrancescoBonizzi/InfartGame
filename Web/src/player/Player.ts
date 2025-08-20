@@ -275,13 +275,19 @@ class Player implements IHasCollisionRectangle {
         if (this._speed.y >= 0) {
             this._soundManager.stopFart();
         } else if (this._speed.y < 0) {
-            if (this._scoreggeParticleSystems.length > 0) {
-                const currentJumpParticleSystem = this._scoreggeParticleSystems[this._scoreggeParticleSystems.length - 1];
+
+            if (this._scoreggeParticleSystems.length > 0 || this._activePowerUp) {
                 const where = new Point(
                     this._position.x + this._currentAnimation.width / 3,
                     this._position.y + this._currentAnimation.height / 2 + 30
                 );
-                currentJumpParticleSystem.addParticles(where);
+
+                if (!this._activePowerUp) {
+                    const currentJumpParticleSystem = this._scoreggeParticleSystems[this._scoreggeParticleSystems.length - 1];
+                    currentJumpParticleSystem.addParticles(where);
+                } else {
+                    this._activePowerUp.addParticles(where);
+                }
             }
         }
     }

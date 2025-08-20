@@ -1,5 +1,10 @@
 # Feature
-- [ ] Gemme: reazioni alla presa dei powerup
+- [x] Gemme: reazioni alla presa dei powerup
+  - [ ] Il bean non collide 
+  - [ ] Non si resettano gli hamburger quando li prendo
+  - [ ] Animazione merda in mano
+  - [ ] Fare che ogni salto li resetta tutti?
+  - [ ] PopupText con il nome del potere
 - [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Suoni
 - [ ] Menù

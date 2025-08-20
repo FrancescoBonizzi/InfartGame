@@ -2,16 +2,16 @@ import ParticleSystem from "./ParticleSystem.ts";
 import Camera from "../world/Camera.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
 
-class JalapenoParticleSystem extends ParticleSystem {
+class BroccoloParticleSystem extends ParticleSystem {
 
     constructor(
         assets: InfartAssets,
         camera: Camera) {
 
         super(
-            assets.textures.particles.jalapenoParticle,
+            assets.textures.particles.broccoloParticle,
             camera,
-            10,
+            8,
             {min: 4, max: 8},
             {min: 50, max: 80},
             {min: 30, max: 50},
@@ -32,4 +32,4 @@ class JalapenoParticleSystem extends ParticleSystem {
     }
 }
 
-export default JalapenoParticleSystem;
+export default BroccoloParticleSystem;

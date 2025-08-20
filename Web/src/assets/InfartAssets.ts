@@ -21,6 +21,7 @@ interface InfartAssets {
             jalapenoParticle: Texture;
             scoreggiaParticle: Texture;
             starParticle: Texture;
+            caccaParticle: Texture;
         }
         bang: Texture;
         bean: Texture;

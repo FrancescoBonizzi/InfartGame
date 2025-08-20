@@ -38,6 +38,8 @@ abstract class PowerUp extends Gemma {
     abstract getFillColor(): ColorSource;
     abstract getDurationMilliseconds(): number;
     abstract getMaxConsecutiveJumps(): number;
+
+    abstract addParticles(where: Point): void;
 }
 
 export default PowerUp;

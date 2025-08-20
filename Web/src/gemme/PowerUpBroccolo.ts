@@ -1,9 +1,13 @@
 import PowerUp from "./PowerUp.ts";
 import Camera from "../world/Camera.ts";
-import {Point} from "pixi.js";
+import {Point, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
+import BroccoloParticleSystem from "../particleEmitters/BroccoloParticleSystem.ts";
 
 class PowerUpBroccolo extends PowerUp {
+
+    private readonly _particleSystem: BroccoloParticleSystem;
+
     constructor(
         world: Camera,
         assets: InfartAssets,
@@ -14,6 +18,12 @@ class PowerUpBroccolo extends PowerUp {
             assets.textures.verdura,
             position);
 
+        this._particleSystem = new BroccoloParticleSystem(assets, world);
+    }
+
+    override update(time: Ticker) {
+        super.update(time);
+        this._particleSystem.update(time);
     }
 
     override getJumpForce(): number {
@@ -34,6 +44,10 @@ class PowerUpBroccolo extends PowerUp {
 
     override getMaxConsecutiveJumps(): number {
         return 3;
+    }
+
+    override addParticles(where: Point): void {
+        this._particleSystem.addParticles(where);
     }
 }
 
