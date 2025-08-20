@@ -4,6 +4,8 @@ import {ColorSource, Point, Texture} from "pixi.js";
 
 abstract class PowerUp extends Gemma {
 
+    private _hasBeenActivatedByPlayer: boolean = false;
+
     protected constructor(
         world: Camera,
         texture: Texture,
@@ -11,6 +13,20 @@ abstract class PowerUp extends Gemma {
 
         super(world, texture, position);
 
+    }
+
+    public isExpired(): boolean {
+
+        if (!this._hasBeenActivatedByPlayer) {
+            return false;
+        }
+
+        return this._elapsedMilliseconds > this.getDurationMilliseconds();
+    }
+
+    public activate() {
+        this._elapsedMilliseconds = 0;
+        this._hasBeenActivatedByPlayer = true;
     }
 
     abstract getJumpForce() : number;

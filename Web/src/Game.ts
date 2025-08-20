@@ -169,7 +169,9 @@ class Game {
         this._hud.updateScore(currentScore);
 
         if (this._score % 30 === 0) {
-            this._dynamicGameParameters.playerHorizontalSpeed += 50;
+
+            if (this._dynamicGameParameters.playerHorizontalSpeed < 600)
+                this._dynamicGameParameters.playerHorizontalSpeed += 50;
             if (this._dynamicGameParameters.larghezzaBuchi.max < 1000) {
                 this._dynamicGameParameters.larghezzaBuchi.min += 80;
                 this._dynamicGameParameters.larghezzaBuchi.max += 80;

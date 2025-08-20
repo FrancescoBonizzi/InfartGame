@@ -8,10 +8,10 @@ class Gemma implements IHasCollisionRectangle {
     private readonly _sprite: Sprite;
     private readonly _collisionRectangleOffsetFactor = 40;
     private readonly _startingPosition: Point;
-    private _elapsed: number;
+    protected _elapsedMilliseconds: number;
 
-    private readonly _amplitude: number = 12;
-    private readonly _angularSpeed: number = 0.05;
+    private readonly _amplitude: number;
+    private readonly _angularSpeed: number = 0.004;
     private readonly _randomOffset: number;
 
     constructor(
@@ -22,13 +22,15 @@ class Gemma implements IHasCollisionRectangle {
         const sprite = new Sprite(texture);
         world.addToWorld(sprite);
         this._startingPosition = position;
-        this._elapsed = 0;
+        this._elapsedMilliseconds = 0;
         this._randomOffset = Numbers.randomBetween(0, 50);
 
         this._sprite = sprite;
         this._sprite.x = position.x;
         this._sprite.y = position.y;
         this._sprite.anchor.set(0.5, 0);
+
+        this._amplitude = Numbers.randomBetween(1, 12);
     }
 
     get sprite() {
@@ -52,9 +54,9 @@ class Gemma implements IHasCollisionRectangle {
     }
 
     update(time: Ticker) {
-        this._elapsed += time.deltaTime;
+        this._elapsedMilliseconds += time.deltaMS;
         this._sprite.y = this._startingPosition.y
-            + Math.sin((this._elapsed + this._randomOffset) * this._angularSpeed)
+            + Math.sin((this._elapsedMilliseconds + this._randomOffset) * this._angularSpeed)
             * this._amplitude;
     }
 }

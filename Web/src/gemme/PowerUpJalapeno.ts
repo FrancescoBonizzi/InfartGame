@@ -39,7 +39,7 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getDurationMilliseconds(): number {
-        return 6000;
+        return 1000;
     }
 
     override getMaxConsecutiveJumps(): number {

@@ -29,7 +29,7 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getDurationMilliseconds(): number {
-        return 3500;
+        return 2000;
     }
 
     override getMaxConsecutiveJumps(): number {

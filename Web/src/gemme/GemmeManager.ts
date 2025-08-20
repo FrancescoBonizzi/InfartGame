@@ -116,6 +116,10 @@ class GemmeManager {
                 this._activePowerup = null;
             } else {
                 this._activePowerup.update(ticker);
+                if (this._activePowerup.isExpired()) {
+                    this._player.deactivatePowerUp();
+                    this._activePowerup = null;
+                }
             }
         }
 
@@ -135,6 +139,7 @@ class GemmeManager {
 
         if (this.playerCollidedWithPowerUp(this._player) && this._activePowerup) {
             this._player.activatePowerUp(this._activePowerup);
+            this._activePowerup.activate();
         }
     }
 

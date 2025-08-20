@@ -89,9 +89,6 @@ class Player implements IHasCollisionRectangle {
             return;
         }
 
-        console.log("CurrentJumpCount", this._currentJumpCount);
-        console.log("MaxConsecutiveJump", maxConsecutiveJump);
-
         const jumpForce = this._activePowerUp
             ? this._activePowerUp.getJumpForce()
             : force;
@@ -119,6 +116,8 @@ class Player implements IHasCollisionRectangle {
     }
 
     activatePowerUp(powerUp: PowerUp) {
+        this._activePowerUp = powerUp;
+
         this._currentJumpCount = 0;
         this._currentEatenHambugers = 0;
 
@@ -130,6 +129,7 @@ class Player implements IHasCollisionRectangle {
     deactivatePowerUp() {
         this._dynamicGameParameters.playerHorizontalSpeed -= this._activePowerUp!.getHorizontalMoveSpeedIncrease();
         this._overlayColor = this._defaultOverlayColor;
+        this._activePowerUp = null;
     }
 
     private evaluatePotentialCollisions(moveAmount: Point) {
