@@ -9,7 +9,7 @@ import Game from "./Game.ts";
 
     // Intialize the application.
     await app.init({
-        background: "#ff0000",
+        background: '#1CB3DE',
         width: 800,
         height: 480,
         premultipliedAlpha: false,
@@ -23,7 +23,7 @@ import Game from "./Game.ts";
     try {
         const loadingThing = new LoadingThing(
             app,
-            "Farting...");
+            "Farting..."); // TODO: aggiungerci il logo come splashscreen
         loadingThing.show();
         const infartAssets = await loadAssets();
         loadingThing.hide();

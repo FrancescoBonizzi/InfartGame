@@ -5,6 +5,8 @@
 - [ ] Menù
 
 # Fix
+- [ ] Non mi fa impazzire il bounding box di hamburger e powerup, a volte non li prende, a volte li prende troppo presto
+- [ ] Lagga (mettere anche un FPS counter da qualche parte nella pagina magari)
 - [ ] I vari TODO sparsi
 
 # Post

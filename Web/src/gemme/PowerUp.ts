@@ -1,7 +1,7 @@
 import Gemma from "./Gemma.ts";
 import PowerUpTypes from "./PowerUpTypes.ts";
 import Camera from "../world/Camera.ts";
-import {Point, Texture} from "pixi.js";
+import {ColorSource, Point, Texture} from "pixi.js";
 
 abstract class PowerUp extends Gemma {
 
@@ -22,6 +22,10 @@ abstract class PowerUp extends Gemma {
         return this._powerUpType;
     }
 
+    abstract getJumpForce() : number;
+    abstract getHorizontalMoveSpeedIncrease(): number;
+    abstract getFillColor(): ColorSource;
+    abstract getDurationMilliseconds(): number;
 }
 
 export default PowerUp;

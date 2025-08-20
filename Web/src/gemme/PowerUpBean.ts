@@ -17,6 +17,22 @@ class PowerUpBean extends PowerUp {
             position);
 
     }
+
+    override getJumpForce(): number {
+        return 300;
+    }
+
+    override getHorizontalMoveSpeedIncrease(): number {
+        return 0;
+    }
+
+    override getFillColor(): string {
+        return '#D2691E';
+    }
+
+    override getDurationMilliseconds(): number {
+        return 3500;
+    }
 }
 
 export default PowerUpBean;

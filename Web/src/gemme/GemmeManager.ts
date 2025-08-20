@@ -19,7 +19,8 @@ class GemmeManager {
     private readonly _maxActiveHamburgers = 30;
     private readonly _hamburgerTexture: Texture;
     private readonly _hamburgerProbability = 0.4;
-    private readonly _powerUpProbability = 0.008;
+
+    private readonly _powerUpProbability = 0.8;
     private readonly _assets: InfartAssets;
     private readonly _player: Player;
 
@@ -61,7 +62,7 @@ class GemmeManager {
 
     private powerUpFactory(
         powerUpType: PowerUpTypes,
-        where: Point) : PowerUp {
+        where: Point): PowerUp {
 
         switch (powerUpType) {
             case PowerUpTypes.Jalapeno:
@@ -86,7 +87,7 @@ class GemmeManager {
 
     }
 
-    private getRandomPowerUp() : PowerUpTypes {
+    private getRandomPowerUp(): PowerUpTypes {
         const values = Object
             .values(PowerUpTypes)
             .filter(value => typeof value === 'number');
@@ -124,7 +125,7 @@ class GemmeManager {
 
         this._hambugers.forEach(hamburger => hamburger.update(ticker));
     }
-    
+
     checkPlayerCollisionWithGemme() {
 
         if (this.playerCollidedWithHamburger(this._player)) {
@@ -132,9 +133,8 @@ class GemmeManager {
             return;
         }
 
-        const powerUpType = this.playerCollidedWithPowerUp(this._player);
-        if (powerUpType) {
-            // TODO
+        if (this.playerCollidedWithPowerUp(this._player)) {
+
         }
     }
 
@@ -151,24 +151,22 @@ class GemmeManager {
         return true;
     }
 
-    private playerCollidedWithPowerUp(player: Player): PowerUpTypes | null {
+    private playerCollidedWithPowerUp(player: Player): boolean {
 
         if (!this._activePowerup)
-            return null;
+            return false;
 
         const collidedWith = CollisionSolver.checkCollisionsReturnCollidingObjectSpecific(
             player,
             [this._activePowerup]);
         if (!collidedWith)
-            return null;
+            return false;
 
-        const activePowerupType = this._activePowerup.powerUpType;
         this._camera.removeFromWorld(collidedWith.sprite);
-        this._activePowerup = null;
-        return activePowerupType;
+        return true;
     }
 
-    private onGrattacieloGeneratoHandler(grattacielo : Grattacielo) {
+    private onGrattacieloGeneratoHandler(grattacielo: Grattacielo) {
 
         const where = new Point(
             grattacielo.x + (grattacielo.width / 2),
@@ -176,8 +174,7 @@ class GemmeManager {
 
         if (Numbers.randomBetween(0, 1) < this._hamburgerProbability) {
             this.spawnHamburger(where);
-        }
-        else if (Numbers.randomBetween(0, 1) < this._powerUpProbability) {
+        } else if (Numbers.randomBetween(0, 1) < this._powerUpProbability) {
             this.spawnPowerUp(where);
         }
 
