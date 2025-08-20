@@ -1,6 +1,7 @@
 # Feature
 - [x] Gemme: reazioni alla presa dei powerup
   - [ ] Il bean non collide 
+  - [ ] Non mi convince l'animazione del broccolo... Vai a guardarlo su Winzoz e vedi com'era
   - [ ] Non si resettano gli hamburger quando li prendo
   - [ ] Animazione merda in mano
   - [ ] Fare che ogni salto li resetta tutti?
