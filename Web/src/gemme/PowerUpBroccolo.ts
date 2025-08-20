@@ -17,7 +17,7 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getJumpForce(): number {
-        return 500;
+        return 600;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
@@ -29,11 +29,11 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getDurationMilliseconds(): number {
-        return 2000;
+        return 1000;
     }
 
     override getMaxConsecutiveJumps(): number {
-        return 2;
+        return 3;
     }
 }
 

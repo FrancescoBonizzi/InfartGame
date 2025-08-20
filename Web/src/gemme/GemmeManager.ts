@@ -109,24 +109,35 @@ class GemmeManager {
     }
 
     update(ticker: Ticker) {
+        this.updateHamburgers(ticker);
+        this.updatePowerUp(ticker);
+    }
 
-        if (this._activePowerup) {
+    private updatePowerUp(ticker: Ticker) {
+
+        if (!this._activePowerup)
+            return;
+
+        if (!this._activePowerup.hasBeenActivatedByPlayer) {
             if (this._camera.isOutOfCameraLeft(this._activePowerup)) {
                 this._camera.removeFromWorld(this._activePowerup.sprite);
                 this._activePowerup = null;
-            } else {
-                this._activePowerup.update(ticker);
-                if (this._activePowerup.isExpired()) {
-                    this._player.deactivatePowerUp();
-                    this._activePowerup = null;
-                }
             }
+
+            return;
         }
 
+        this._activePowerup.update(ticker);
+        if (this._activePowerup.isExpired()) {
+            this._player.deactivatePowerUp();
+            this._activePowerup = null;
+        }
+    }
+
+    private updateHamburgers(ticker: Ticker) {
         this._hambugers = this._hambugers.filter(hamburger =>
             !this._camera.isOutOfCameraLeft(hamburger));
         this.checkPlayerCollisionWithGemme();
-
         this._hambugers.forEach(hamburger => hamburger.update(ticker));
     }
 

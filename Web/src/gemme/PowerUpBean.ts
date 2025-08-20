@@ -17,7 +17,7 @@ class PowerUpBean extends PowerUp {
     }
 
     override getJumpForce(): number {
-        return 500;
+        return 300;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {

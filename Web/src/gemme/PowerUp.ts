@@ -29,6 +29,10 @@ abstract class PowerUp extends Gemma {
         this._hasBeenActivatedByPlayer = true;
     }
 
+    public get hasBeenActivatedByPlayer() {
+        return this._hasBeenActivatedByPlayer;
+    }
+
     abstract getJumpForce() : number;
     abstract getHorizontalMoveSpeedIncrease(): number;
     abstract getFillColor(): ColorSource;
