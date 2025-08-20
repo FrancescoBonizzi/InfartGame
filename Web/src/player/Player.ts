@@ -12,13 +12,13 @@ import IHasCollisionRectangle from "../IHasCollisionRectangle.ts";
 import InfartExplosion from "../particleEmitters/InfartExplosion.ts";
 import FixedGameParamters from "../services/FixedGameParameters.ts";
 import Hud from "../hud/Hud.ts";
+import PowerUp from "../gemme/PowerUp.ts";
 
 class Player implements IHasCollisionRectangle {
 
     private _position: Point;
     private _speed: Point;
-    private readonly _fallSpeed = 20;
-    private readonly _overlayColor: ColorSource;
+    private _overlayColor: ColorSource;
 
     private _currentAnimation: AnimatedSprite;
     private _animations: PlayerAnimations;
@@ -26,16 +26,22 @@ class Player implements IHasCollisionRectangle {
     private _walkArea: Foreground;
     private _scoreggeParticleSystems: ScoreggiaParticleSystem[];
 
+    private readonly _defaultOverlayColor = '#ffffff';
+    private readonly _fallSpeed = 20;
     private readonly _camera: Camera;
     private readonly _soundManager: SoundManager;
     private readonly _dynamicGameParameters: DynamicGameParameters;
     private readonly _assets: InfartAssets;
     private readonly _hud: Hud;
+    private readonly _defaultJumpAmount = 550;
+    private readonly _defaultMaxConsecutiveJumps = 2;
 
     private _currentJumpCount: number = 0;
     private _currentEatenHambugers: number = 0;
     private _isDead: boolean = false;
     private _infartExplosion: InfartExplosion;
+
+    private _activePowerUp: PowerUp | null = null;
 
     constructor(
         staringPosition: Point,
@@ -55,7 +61,7 @@ class Player implements IHasCollisionRectangle {
         this._speed = new Point(
             this._dynamicGameParameters.playerHorizontalSpeed,
             this._fallSpeed);
-        this._overlayColor = '#ffffff';
+        this._overlayColor = this._defaultOverlayColor;
         this._soundManager = soundManager;
 
         this._currentAnimation = this._animations.fall;
@@ -66,7 +72,7 @@ class Player implements IHasCollisionRectangle {
         this._hud = hud;
     }
 
-    jump() {
+    jump(force: number = this._defaultJumpAmount) {
 
         if (this._isDead)
             return;
@@ -76,20 +82,28 @@ class Player implements IHasCollisionRectangle {
             this._hud.getHamburgerStatusBar().farted();
         }
 
-        // TODO: ci sarà lo switch sulla base del powerup corrente
-        if (this._currentJumpCount >= 1) {
+        const maxConsecutiveJump = this._activePowerUp
+            ? this._activePowerUp.getMaxConsecutiveJumps()
+            : this._defaultMaxConsecutiveJumps;
+        if (this._currentJumpCount >= maxConsecutiveJump - 1) {
             return;
         }
 
-        const amount = 650;
+        console.log("CurrentJumpCount", this._currentJumpCount);
+        console.log("MaxConsecutiveJump", maxConsecutiveJump);
+
+        const jumpForce = this._activePowerUp
+            ? this._activePowerUp.getJumpForce()
+            : force;
+
         this._currentJumpCount++;
 
-        this._speed.y = -amount;
+        this._speed.y = -jumpForce;
         this._soundManager.playFart();
         this._scoreggeParticleSystems.push(new ScoreggiaParticleSystem(
             this._assets,
             this._camera
-        ))
+        ));
     }
 
     get isOnGround() {
@@ -102,6 +116,20 @@ class Player implements IHasCollisionRectangle {
 
     get isDead() {
         return this._isDead;
+    }
+
+    activatePowerUp(powerUp: PowerUp) {
+        this._currentJumpCount = 0;
+        this._currentEatenHambugers = 0;
+
+        this.jump(powerUp.getJumpForce());
+        this._dynamicGameParameters.playerHorizontalSpeed += powerUp.getHorizontalMoveSpeedIncrease();
+        this._overlayColor = powerUp.getFillColor();
+    }
+
+    deactivatePowerUp() {
+        this._dynamicGameParameters.playerHorizontalSpeed -= this._activePowerUp!.getHorizontalMoveSpeedIncrease();
+        this._overlayColor = this._defaultOverlayColor;
     }
 
     private evaluatePotentialCollisions(moveAmount: Point) {

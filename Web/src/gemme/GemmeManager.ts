@@ -133,8 +133,8 @@ class GemmeManager {
             return;
         }
 
-        if (this.playerCollidedWithPowerUp(this._player)) {
-
+        if (this.playerCollidedWithPowerUp(this._player) && this._activePowerup) {
+            this._player.activatePowerUp(this._activePowerup);
         }
     }
 

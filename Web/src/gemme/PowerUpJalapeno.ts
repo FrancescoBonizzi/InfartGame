@@ -1,5 +1,4 @@
 import PowerUp from "./PowerUp.ts";
-import PowerUpTypes from "./PowerUpTypes.ts";
 import Camera from "../world/Camera.ts";
 import {Point, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
@@ -17,7 +16,6 @@ class PowerUpJalapeno extends PowerUp {
         super(
             world,
             assets.textures.jalapenos,
-            PowerUpTypes.Jalapeno,
             position);
 
         this._particleSystem = new JalapenoParticleSystem(assets, world);
@@ -29,11 +27,11 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getJumpForce(): number {
-        return 500;
+        return 800;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 200;
+        return 100;
     }
 
     override getFillColor(): string {
@@ -42,6 +40,10 @@ class PowerUpJalapeno extends PowerUp {
 
     override getDurationMilliseconds(): number {
         return 6000;
+    }
+
+    override getMaxConsecutiveJumps(): number {
+        return 3;
     }
 
 }

@@ -1,5 +1,4 @@
 import PowerUp from "./PowerUp.ts";
-import PowerUpTypes from "./PowerUpTypes.ts";
 import Camera from "../world/Camera.ts";
 import {Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
@@ -13,17 +12,16 @@ class PowerUpBroccolo extends PowerUp {
         super(
             world,
             assets.textures.verdura,
-            PowerUpTypes.Broccolo,
             position);
 
     }
 
     override getJumpForce(): number {
-        return 200;
+        return 500;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 400;
+        return 50;
     }
 
     override getFillColor(): string {
@@ -32,6 +30,10 @@ class PowerUpBroccolo extends PowerUp {
 
     override getDurationMilliseconds(): number {
         return 3500;
+    }
+
+    override getMaxConsecutiveJumps(): number {
+        return 2;
     }
 }
 
