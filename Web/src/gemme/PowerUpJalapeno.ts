@@ -31,15 +31,15 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 60;
+        return 80;
     }
 
     override getFillColor(): string {
-        return '#8B0000';
+        return '#C41E3A';
     }
 
     override getDurationMilliseconds(): number {
-        return 1000;
+        return 6000;
     }
 
     override getMaxConsecutiveJumps(): number {

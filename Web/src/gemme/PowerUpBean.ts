@@ -21,7 +21,7 @@ class PowerUpBean extends PowerUp {
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 0;
+        return 100;
     }
 
     override getFillColor(): string {

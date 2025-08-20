@@ -25,11 +25,11 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getFillColor(): string {
-        return '#00FF00';
+        return '#6B8E23';
     }
 
     override getDurationMilliseconds(): number {
-        return 1000;
+        return 3500;
     }
 
     override getMaxConsecutiveJumps(): number {

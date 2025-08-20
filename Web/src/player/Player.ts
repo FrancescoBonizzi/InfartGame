@@ -122,6 +122,7 @@ class Player implements IHasCollisionRectangle {
         this._currentEatenHambugers = 0;
 
         this.jump(powerUp.getJumpForce());
+
         this._dynamicGameParameters.playerHorizontalSpeed += powerUp.getHorizontalMoveSpeedIncrease();
         this._overlayColor = powerUp.getFillColor();
     }
