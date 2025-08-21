@@ -72,12 +72,27 @@ class HamburgerStatusBar {
         this.updateHamburgersText();
     }
 
+    resetAllHamburgers() {
+        this._currentActiveHamburgerIndex = null;
+        this._hudHamburgers.forEach(h => h.deactivate());
+    }
+
     farted() {
         if (this._currentActiveHamburgerIndex !== null) {
             this._hudHamburgers[this._currentActiveHamburgerIndex].deactivate();
-            this._currentActiveHamburgerIndex--;
+
+            if (this._currentActiveHamburgerIndex > 0)
+                this._currentActiveHamburgerIndex--;
+            else
+                this._currentActiveHamburgerIndex = null;
         }
         this.updateHamburgersText();
+    }
+
+    getCurrentEatenHamburgers() {
+        return this._currentActiveHamburgerIndex !== null && this._currentActiveHamburgerIndex > 0
+            ? this._currentActiveHamburgerIndex! + 1
+            : 0;
     }
 
     update(time: Ticker) {

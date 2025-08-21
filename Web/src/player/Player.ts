@@ -37,7 +37,6 @@ class Player implements IHasCollisionRectangle {
     private readonly _defaultMaxConsecutiveJumps = 2;
 
     private _currentJumpCount: number = 0;
-    private _currentEatenHambugers: number = 0;
     private _isDead: boolean = false;
     private _infartExplosion: InfartExplosion;
 
@@ -77,17 +76,14 @@ class Player implements IHasCollisionRectangle {
         if (this._isDead)
             return;
 
-        if (this._currentEatenHambugers > 0) {
-            this._currentEatenHambugers--;
-            this._hud.getHamburgerStatusBar().farted();
-        }
-
         const maxConsecutiveJump = this._activePowerUp
             ? this._activePowerUp.getMaxConsecutiveJumps()
             : this._defaultMaxConsecutiveJumps;
         if (this._currentJumpCount >= maxConsecutiveJump - 1) {
             return;
         }
+
+        this._hud.getHamburgerStatusBar().farted();
 
         const jumpForce = this._activePowerUp
             ? this._activePowerUp.getJumpForce()
@@ -119,7 +115,7 @@ class Player implements IHasCollisionRectangle {
         this._activePowerUp = powerUp;
 
         this._currentJumpCount = 0;
-        this._currentEatenHambugers = 0;
+        this._hud.getHamburgerStatusBar().resetAllHamburgers();
 
         this.jump(powerUp.getJumpForce());
 
@@ -317,13 +313,12 @@ class Player implements IHasCollisionRectangle {
     }
 
     hamburgerEaten() {
-        if (this._currentEatenHambugers > FixedGameParamters.MaxEatenHamburgers) {
+        if (this._hud.getHamburgerStatusBar().getCurrentEatenHamburgers() > FixedGameParamters.MaxEatenHamburgers) {
             this.die(true);
             return;
         }
 
         this._soundManager.playBite();
-        ++this._currentEatenHambugers;
         this._hud.getHamburgerStatusBar().hamburgerEaten();
     }
 }

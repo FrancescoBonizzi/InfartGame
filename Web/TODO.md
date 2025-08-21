@@ -1,8 +1,9 @@
 # Feature
 - [x] Gemme: reazioni alla presa dei powerup
-  - [ ] Il bean non collide 
+  - [x] Il bean non collide 
+  - [x] Non si resettano gli hamburger quando li prendo
+  - [ ] Quando termina il powerup si blocca il particle emitter
   - [ ] Non mi convince l'animazione del broccolo... Vai a guardarlo su Winzoz e vedi com'era
-  - [ ] Non si resettano gli hamburger quando li prendo
   - [ ] Animazione merda in mano
   - [ ] Fare che ogni salto li resetta tutti?
   - [ ] PopupText con il nome del potere

@@ -6,7 +6,6 @@ import Numbers from "../services/Numbers.ts";
 class Gemma implements IHasCollisionRectangle {
 
     private readonly _sprite: Sprite;
-    private readonly _collisionRectangleOffsetFactor = 40;
     private readonly _startingPosition: Point;
     protected _elapsedMilliseconds: number;
 
@@ -47,10 +46,11 @@ class Gemma implements IHasCollisionRectangle {
 
     get collisionRectangle() {
         return new Rectangle(
-            this._sprite.x + 15,
+            this._sprite.x - this._sprite.width / 2,
             this._sprite.y,
-            this._sprite.width - this._collisionRectangleOffsetFactor,
-            this._sprite.height - this._collisionRectangleOffsetFactor);
+            this._sprite.width,
+            this._sprite.height
+        );
     }
 
     update(time: Ticker) {
