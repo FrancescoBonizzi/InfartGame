@@ -23,7 +23,7 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 100;
+        return 250;
     }
 
     override getFillColor(): string {
@@ -35,7 +35,7 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getMaxConsecutiveJumps(): number {
-        return 3;
+        return 4;
     }
 
     override getParticleGenerationIntervalMilliseconds(): number {
