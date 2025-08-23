@@ -24,13 +24,20 @@ abstract class PowerUp extends Gemma {
         this._particleSystem.update(time);
     }
 
+    private isPowerUpTimeExpired(): boolean {
+        return this._elapsedMilliseconds > this.getDurationMilliseconds();
+    }
+
     public isExpired(): boolean {
 
         if (!this._hasBeenActivatedByPlayer) {
             return false;
         }
 
-        return this._elapsedMilliseconds > this.getDurationMilliseconds();
+        if (this._particleSystem.isActive())
+            return false;
+
+        return this.isPowerUpTimeExpired();
     }
 
     public activate() {
@@ -49,6 +56,9 @@ abstract class PowerUp extends Gemma {
     abstract getMaxConsecutiveJumps(): number;
 
     public addParticles(where: Point) {
+        if (this.isPowerUpTimeExpired())
+            return;
+
         this._particleSystem.addParticles(where);
     }
 }
