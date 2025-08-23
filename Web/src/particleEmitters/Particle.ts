@@ -32,6 +32,10 @@ class Particle {
         camera.addToWorld(this._sprite);
     }
 
+    public get sprite() {
+        return this._sprite;
+    }
+
     /**
      * Initializes the object with the given parameters.
      *

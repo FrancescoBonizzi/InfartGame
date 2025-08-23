@@ -13,9 +13,11 @@ export interface PerspectiveEffect {
 
 abstract class ParticleSystem {
 
-    private readonly _activeParticles: Particle[];
+    private readonly _camera: Camera;
 
+    private _activeParticles: Particle[];
     protected _freeParticles: Particle[];
+
     private readonly _numParticles: Interval;
     private readonly _speed: Interval;
     private readonly _acceleration: Interval;
@@ -59,6 +61,7 @@ abstract class ParticleSystem {
                 textureBlendMode));
 
         this._freeParticles = [...this._activeParticles];
+        this._camera = camera;
     }
 
     public update(time: Ticker) {
@@ -144,6 +147,13 @@ abstract class ParticleSystem {
 
     isActive() {
         return this._freeParticles.length != this._activeParticles.length;
+    }
+
+    dispose() {
+        this._freeParticles.forEach(p => this._camera.removeFromWorld(p.sprite));
+        this._activeParticles.forEach(p => this._camera.removeFromWorld(p.sprite));
+        this._freeParticles = [];
+        this._activeParticles = [];
     }
 }
 

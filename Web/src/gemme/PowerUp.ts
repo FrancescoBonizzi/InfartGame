@@ -26,7 +26,12 @@ abstract class PowerUp extends Gemma {
         super.update(time);
 
         this._particleSystems.forEach(ps => ps.update(time));
-        this._particleSystems = this._particleSystems.filter(ps => ps.isActive());
+        this._particleSystems = this._particleSystems.filter(ps => {
+            const isActive = ps.isActive();
+            if (!isActive)
+                ps.dispose();
+            return isActive;
+        });
     }
 
     private isPowerUpTimeExpired(): boolean {
