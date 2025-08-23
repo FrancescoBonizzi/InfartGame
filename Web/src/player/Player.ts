@@ -236,6 +236,12 @@ class Player implements IHasCollisionRectangle {
             this._currentJumpCount = 0;
         }
 
+        if (this._activePowerUp) {
+            if (this._activePowerUp.getPlayerAnimation()) {
+                newAnimation = this._activePowerUp.getPlayerAnimation()!;
+            }
+        }
+
         if (newAnimation !== this._currentAnimation) {
             this.setNewAnimation(newAnimation);
         }

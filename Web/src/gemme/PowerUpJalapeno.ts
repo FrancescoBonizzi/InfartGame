@@ -1,6 +1,6 @@
 import PowerUp from "./PowerUp.ts";
 import Camera from "../world/Camera.ts";
-import {Point} from "pixi.js";
+import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import JalapenoParticleSystem from "../particleEmitters/JalapenoParticleSystem.ts";
 
@@ -40,6 +40,10 @@ class PowerUpJalapeno extends PowerUp {
 
     override getParticleGenerationIntervalMilliseconds(): number {
         return 20;
+    }
+
+    override getPlayerAnimation(): AnimatedSprite | null {
+        return null;
     }
 }
 

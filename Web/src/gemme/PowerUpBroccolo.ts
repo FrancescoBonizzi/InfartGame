@@ -1,12 +1,12 @@
 import PowerUp from "./PowerUp.ts";
 import Camera from "../world/Camera.ts";
-import {Point} from "pixi.js";
+import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BroccoloParticleSystem from "../particleEmitters/BroccoloParticleSystem.ts";
 
 class PowerUpBroccolo extends PowerUp {
 
-    // TODO: cambio aniamzione player
+    private readonly _playerAnimation: AnimatedSprite;
 
     constructor(
         world: Camera,
@@ -18,6 +18,12 @@ class PowerUpBroccolo extends PowerUp {
             assets.textures.verdura,
             position,
             new BroccoloParticleSystem(assets, world));
+
+        this._playerAnimation = assets.player.merda;
+    }
+
+    override getPlayerAnimation(): AnimatedSprite | null {
+        return this._playerAnimation;
     }
 
     override getJumpForce(): number {

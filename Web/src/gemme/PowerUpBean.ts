@@ -1,6 +1,6 @@
 import PowerUp from "./PowerUp.ts";
 import Camera from "../world/Camera.ts";
-import {Point} from "pixi.js";
+import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BeanParticleSystem from "../particleEmitters/BeanParticleSystem.ts";
 
@@ -42,6 +42,11 @@ class PowerUpBean extends PowerUp {
     override getParticleGenerationIntervalMilliseconds(): number {
         return 0;
     }
+
+    override getPlayerAnimation(): AnimatedSprite | null {
+        return null;
+    }
+
 }
 
 export default PowerUpBean;
