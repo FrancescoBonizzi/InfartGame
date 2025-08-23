@@ -1,11 +1,9 @@
 # Feature
 - [x] Gemme: reazioni alla presa dei powerup
-  - [ ] Non mi convince l'animazione del broccolo... Vai a guardarlo su Winzoz e vedi com'era
-  - [ ] Animazione merda in mano
-  - [ ] PopupText con il nome del potere
+  - [ ] PopupText con il nome del potere -> meglio sul gioco o in basso? fa più ridere in gioco, però è poco coerente col testo della status bar
 - [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Suoni
-- [ ] Menù
+- [ ] Menù -> fatto con le route di vite
 
 # Fix
 - [ ] Non mi fa impazzire il bounding box di hamburger e powerup, a volte non li prende, a volte li prende troppo presto
