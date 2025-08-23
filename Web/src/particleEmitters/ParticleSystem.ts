@@ -13,7 +13,7 @@ export interface PerspectiveEffect {
 
 abstract class ParticleSystem {
 
-    private readonly _camera: Camera;
+    protected readonly _camera: Camera;
 
     private _activeParticles: Particle[];
     protected _freeParticles: Particle[];

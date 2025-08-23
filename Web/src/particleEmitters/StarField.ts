@@ -6,7 +6,6 @@ import Numbers from "../services/Numbers.ts";
 
 class StarField extends ParticleSystem {
 
-    private readonly _camera: Camera;
     private readonly _timeBetweenNewStarGenerationMs = 20.0;
     private _timeTillNewStarMs;
 
@@ -35,7 +34,6 @@ class StarField extends ParticleSystem {
         );
 
         this._timeTillNewStarMs = this._timeBetweenNewStarGenerationMs;
-        this._camera = camera;
     }
 
     private isCameraInStarfieldSpawnRange() {
