@@ -18,8 +18,9 @@ class PowerUpBean extends PowerUp {
             new BeanParticleSystem(assets, world));
     }
 
+
     override getJumpForce(): number {
-        return 300;
+        return 500;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
@@ -36,6 +37,10 @@ class PowerUpBean extends PowerUp {
 
     override getMaxConsecutiveJumps(): number {
         return 1000;
+    }
+
+    override getParticleGenerationIntervalMilliseconds(): number {
+        return 0;
     }
 }
 

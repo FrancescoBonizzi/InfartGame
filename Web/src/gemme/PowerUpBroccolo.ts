@@ -6,6 +6,8 @@ import BroccoloParticleSystem from "../particleEmitters/BroccoloParticleSystem.t
 
 class PowerUpBroccolo extends PowerUp {
 
+    // TODO: cambio aniamzione player
+
     constructor(
         world: Camera,
         assets: InfartAssets,
@@ -19,11 +21,11 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getJumpForce(): number {
-        return 600;
+        return 500;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 500;
+        return 400;
     }
 
     override getFillColor(): string {
@@ -36,6 +38,10 @@ class PowerUpBroccolo extends PowerUp {
 
     override getMaxConsecutiveJumps(): number {
         return 1000;
+    }
+
+    override getParticleGenerationIntervalMilliseconds(): number {
+        return 80;
     }
 }
 

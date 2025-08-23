@@ -5,8 +5,9 @@ import ParticleSystem from "../particleEmitters/ParticleSystem.ts";
 
 abstract class PowerUp extends Gemma {
 
-    private _hasBeenActivatedByPlayer: boolean = false;
     private readonly _particleSystem: ParticleSystem;
+    private _hasBeenActivatedByPlayer: boolean = false;
+    private _lastParticleEmissionTime: number = 0;
 
     protected constructor(
         world: Camera,
@@ -49,6 +50,7 @@ abstract class PowerUp extends Gemma {
         return this._hasBeenActivatedByPlayer;
     }
 
+    abstract getParticleGenerationIntervalMilliseconds(): number;
     abstract getJumpForce() : number;
     abstract getHorizontalMoveSpeedIncrease(): number;
     abstract getFillColor(): ColorSource;
@@ -56,10 +58,15 @@ abstract class PowerUp extends Gemma {
     abstract getMaxConsecutiveJumps(): number;
 
     public addParticles(where: Point) {
+
         if (this.isPowerUpTimeExpired())
             return;
 
-        this._particleSystem.addParticles(where);
+        const intervalMilliseconds = this.getParticleGenerationIntervalMilliseconds();
+        if (this._elapsedMilliseconds - this._lastParticleEmissionTime >= intervalMilliseconds) {
+            this._lastParticleEmissionTime = this._elapsedMilliseconds;
+            this._particleSystem.addParticles(where);
+        }
     }
 }
 

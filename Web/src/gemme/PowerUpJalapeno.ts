@@ -37,6 +37,10 @@ class PowerUpJalapeno extends PowerUp {
     override getMaxConsecutiveJumps(): number {
         return 3;
     }
+
+    override getParticleGenerationIntervalMilliseconds(): number {
+        return 20;
+    }
 }
 
 export default PowerUpJalapeno;
