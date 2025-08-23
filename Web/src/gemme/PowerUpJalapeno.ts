@@ -23,7 +23,7 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 80;
+        return 100;
     }
 
     override getFillColor(): string {
