@@ -13,6 +13,7 @@ import InfartExplosion from "../particleEmitters/InfartExplosion.ts";
 import FixedGameParamters from "../services/FixedGameParameters.ts";
 import Hud from "../hud/Hud.ts";
 import PowerUp from "../gemme/PowerUp.ts";
+import {deallocateEmptyParticleSystems} from "../particleEmitters/ParticleSystem.ts";
 
 class Player implements IHasCollisionRectangle {
 
@@ -270,7 +271,7 @@ class Player implements IHasCollisionRectangle {
 
         this._scoreggeParticleSystems.forEach((p) => p.update(time));
         this.evaluateScoreggiaGeneration();
-        this._scoreggeParticleSystems = this._scoreggeParticleSystems.filter(p => p.isActive());
+        this._scoreggeParticleSystems = deallocateEmptyParticleSystems(this._scoreggeParticleSystems);
     }
 
     private evaluateScoreggiaGeneration() {

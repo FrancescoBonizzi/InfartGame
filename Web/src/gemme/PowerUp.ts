@@ -1,7 +1,7 @@
 import Gemma from "./Gemma.ts";
 import Camera from "../world/Camera.ts";
 import {AnimatedSprite, ColorSource, Point, Texture, Ticker} from "pixi.js";
-import ParticleSystem from "../particleEmitters/ParticleSystem.ts";
+import ParticleSystem, {deallocateEmptyParticleSystems} from "../particleEmitters/ParticleSystem.ts";
 
 abstract class PowerUp extends Gemma {
 
@@ -26,12 +26,7 @@ abstract class PowerUp extends Gemma {
         super.update(time);
 
         this._particleSystems.forEach(ps => ps.update(time));
-        this._particleSystems = this._particleSystems.filter(ps => {
-            const isActive = ps.isActive();
-            if (!isActive)
-                ps.dispose();
-            return isActive;
-        });
+        this._particleSystems = deallocateEmptyParticleSystems(this._particleSystems);
     }
 
     private isPowerUpTimeExpired(): boolean {

@@ -158,3 +158,12 @@ abstract class ParticleSystem {
 }
 
 export default ParticleSystem;
+
+export const deallocateEmptyParticleSystems = (particleSystems: ParticleSystem[]) => {
+    return particleSystems.filter(particleSystem => {
+        const isActive = particleSystem.isActive();
+        if (!isActive)
+            particleSystem.dispose();
+        return isActive;
+    });
+}
