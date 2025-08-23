@@ -19,7 +19,7 @@ class BeanParticleSystem extends ParticleSystem {
             {min: 0.5, max: 0.8},
             {min: 0.5, max: 1.0},
             {min: 270, max: 320},
-            'screen',
+            undefined,
             true,
             {
                 z0: 200,
