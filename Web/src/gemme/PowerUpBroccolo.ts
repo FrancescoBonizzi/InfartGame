@@ -23,11 +23,11 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
-        return 50;
+        return 500;
     }
 
     override getFillColor(): string {
-        return '#6B8E23';
+        return '#a7ef17';
     }
 
     override getDurationMilliseconds(): number {
@@ -35,7 +35,7 @@ class PowerUpBroccolo extends PowerUp {
     }
 
     override getMaxConsecutiveJumps(): number {
-        return 3;
+        return 1000;
     }
 }
 
