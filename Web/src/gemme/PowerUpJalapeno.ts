@@ -15,7 +15,7 @@ class PowerUpJalapeno extends PowerUp {
             world,
             assets.textures.jalapenos,
             position,
-            new JalapenoParticleSystem(assets, world));
+            () => new JalapenoParticleSystem(assets, world));
     }
 
     override getJumpForce(): number {

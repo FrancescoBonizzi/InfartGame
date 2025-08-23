@@ -17,7 +17,7 @@ class PowerUpBroccolo extends PowerUp {
             world,
             assets.textures.verdura,
             position,
-            new BroccoloParticleSystem(assets, world));
+            () => new BroccoloParticleSystem(assets, world));
 
         this._playerAnimation = assets.player.merda;
     }

@@ -5,7 +5,9 @@ import ParticleSystem from "../particleEmitters/ParticleSystem.ts";
 
 abstract class PowerUp extends Gemma {
 
-    private readonly _particleSystem: ParticleSystem;
+    private readonly _particleSystemFactory: () => ParticleSystem;
+
+    private _particleSystems: ParticleSystem[];
     private _hasBeenActivatedByPlayer: boolean = false;
     private _lastParticleEmissionTime: number = 0;
 
@@ -13,16 +15,18 @@ abstract class PowerUp extends Gemma {
         world: Camera,
         texture: Texture,
         position: Point,
-        particleSystem: ParticleSystem) {
+        particleSystemFactory: () => ParticleSystem) {
 
         super(world, texture, position);
-        this._particleSystem = particleSystem;
-
+        this._particleSystems = [];
+        this._particleSystemFactory = particleSystemFactory;
     }
 
     override update(time: Ticker) {
         super.update(time);
-        this._particleSystem.update(time);
+
+        this._particleSystems.forEach(ps => ps.update(time));
+        this._particleSystems = this._particleSystems.filter(ps => ps.isActive());
     }
 
     private isPowerUpTimeExpired(): boolean {
@@ -35,8 +39,9 @@ abstract class PowerUp extends Gemma {
             return false;
         }
 
-        if (this._particleSystem.isActive())
+        if (this._particleSystems.length > 0) {
             return false;
+        }
 
         return this.isPowerUpTimeExpired();
     }
@@ -66,7 +71,9 @@ abstract class PowerUp extends Gemma {
         const intervalMilliseconds = this.getParticleGenerationIntervalMilliseconds();
         if (this._elapsedMilliseconds - this._lastParticleEmissionTime >= intervalMilliseconds) {
             this._lastParticleEmissionTime = this._elapsedMilliseconds;
-            this._particleSystem.addParticles(where);
+            const particleSystem = this._particleSystemFactory();
+            particleSystem.addParticles(where);
+            this._particleSystems.push(particleSystem);
         }
     }
 }
