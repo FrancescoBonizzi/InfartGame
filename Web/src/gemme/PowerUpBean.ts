@@ -1,12 +1,10 @@
 import PowerUp from "./PowerUp.ts";
 import Camera from "../world/Camera.ts";
-import {Point, Ticker} from "pixi.js";
+import {Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BeanParticleSystem from "../particleEmitters/BeanParticleSystem.ts";
 
 class PowerUpBean extends PowerUp {
-
-    private readonly _particleSystem: BeanParticleSystem;
 
     constructor(
         world: Camera,
@@ -16,14 +14,8 @@ class PowerUpBean extends PowerUp {
         super(
             world,
             assets.textures.bean,
-            position);
-
-        this._particleSystem = new BeanParticleSystem(assets, world);
-    }
-
-    override update(time: Ticker) {
-        super.update(time);
-        this._particleSystem.update(time);
+            position,
+            new BeanParticleSystem(assets, world));
     }
 
     override getJumpForce(): number {
@@ -44,10 +36,6 @@ class PowerUpBean extends PowerUp {
 
     override getMaxConsecutiveJumps(): number {
         return 1000;
-    }
-
-    override addParticles(where: Point): void {
-        this._particleSystem.addParticles(where);
     }
 }
 

@@ -1,18 +1,27 @@
 import Gemma from "./Gemma.ts";
 import Camera from "../world/Camera.ts";
-import {ColorSource, Point, Texture} from "pixi.js";
+import {ColorSource, Point, Texture, Ticker} from "pixi.js";
+import ParticleSystem from "../particleEmitters/ParticleSystem.ts";
 
 abstract class PowerUp extends Gemma {
 
     private _hasBeenActivatedByPlayer: boolean = false;
+    private readonly _particleSystem: ParticleSystem;
 
     protected constructor(
         world: Camera,
         texture: Texture,
-        position: Point) {
+        position: Point,
+        particleSystem: ParticleSystem) {
 
         super(world, texture, position);
+        this._particleSystem = particleSystem;
 
+    }
+
+    override update(time: Ticker) {
+        super.update(time);
+        this._particleSystem.update(time);
     }
 
     public isExpired(): boolean {
@@ -39,7 +48,9 @@ abstract class PowerUp extends Gemma {
     abstract getDurationMilliseconds(): number;
     abstract getMaxConsecutiveJumps(): number;
 
-    abstract addParticles(where: Point): void;
+    public addParticles(where: Point) {
+        this._particleSystem.addParticles(where);
+    }
 }
 
 export default PowerUp;

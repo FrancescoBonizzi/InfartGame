@@ -5,7 +5,6 @@
   - [ ] Quando termina il powerup si blocca il particle emitter
   - [ ] Non mi convince l'animazione del broccolo... Vai a guardarlo su Winzoz e vedi com'era
   - [ ] Animazione merda in mano
-  - [ ] Fare che ogni salto li resetta tutti?
   - [ ] PopupText con il nome del potere
 - [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
 - [ ] Suoni
