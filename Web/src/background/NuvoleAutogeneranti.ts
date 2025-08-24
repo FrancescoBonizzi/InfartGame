@@ -35,7 +35,7 @@ class NuvoleAutogeneranti {
         for (let i = 0; i < count; i++) {
             const nuvola = new Nuvola(
                 camera,
-                nuvoleTextures[i % nuvoleTextures.length],
+                nuvoleTextures[i % nuvoleTextures.length]!,
                 startingScale,
                 tint,
                 shouldAnimateScale);

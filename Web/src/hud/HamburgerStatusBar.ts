@@ -78,7 +78,7 @@ class HamburgerStatusBar {
             this._currentActiveHamburgerIndex = 0;
         }
 
-        this._hudHamburgers[this._currentActiveHamburgerIndex].activate();
+        this._hudHamburgers[this._currentActiveHamburgerIndex]?.activate();
 
         this.updateHamburgersText();
     }
@@ -90,7 +90,7 @@ class HamburgerStatusBar {
 
     farted() {
         if (this._currentActiveHamburgerIndex !== null) {
-            this._hudHamburgers[this._currentActiveHamburgerIndex].deactivate();
+            this._hudHamburgers[this._currentActiveHamburgerIndex]?.deactivate();
 
             if (this._currentActiveHamburgerIndex > 0)
                 this._currentActiveHamburgerIndex--;
@@ -133,7 +133,7 @@ class HamburgerStatusBar {
 
         this._hamburgersText.updateText(
             this._currentActiveHamburgerIndex !== null
-                ? HamburgersMessages[this._currentActiveHamburgerIndex]
+                ? HamburgersMessages[this._currentActiveHamburgerIndex] ?? ""
                 : "",
         );
 

@@ -17,10 +17,10 @@ class Particle {
     private _vz = 0;
     private _focalLen = 600;
 
-    constructor(texture: Texture, camera: Camera, blendMode?: BLEND_MODES | undefined) {
+    constructor(texture: Texture, camera: Camera, blendMode?: BLEND_MODES) {
         this._sprite = new Sprite({
             texture,
-            blendMode: blendMode
+            blendMode: blendMode ?? 'normal'
         });
         this._rotationSpeed = 0;
         this._speed = new Point(0, 0);

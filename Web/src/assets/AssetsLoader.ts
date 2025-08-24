@@ -62,11 +62,11 @@ export const loadAssets = async (): Promise<InfartAssets> => {
             nuvola3: loadSpriteFromSpriteSheet(playerSpriteSheet, "nuvola3")
         },
         player: {
-            run: new AnimatedSprite(playerSpriteSheet.animations.playerRun),
-            idle: new AnimatedSprite(playerSpriteSheet.animations.playerIdle),
-            fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart),
-            fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall),
-            merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda),
+            run: new AnimatedSprite(playerSpriteSheet.animations.playerRun!),
+            idle: new AnimatedSprite(playerSpriteSheet.animations.playerIdle!),
+            fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart!),
+            fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall!),
+            merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda!),
         },
         sounds: {
             music: {
@@ -113,7 +113,7 @@ const loadTextureFromFile = async (name: string): Promise<Texture> => {
 }
 
 const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Texture => {
-    return spriteSheet.textures[`${name}`];
+    return spriteSheet.textures[`${name}`]!;
 }
 
 const loadMenuTexture = async (name: string): Promise<Texture> => {
@@ -134,7 +134,7 @@ const loadGrattacieliFromSpriteSheet = (
         .length;
     const textures : Texture[] = [];
     for (let i = 0; i < count; i++) {
-        textures.push(spriteSheet.textures[`${keyName}${i}`]);
+        textures.push(spriteSheet.textures[`${keyName}${i}`]!);
     }
 
     return textures;

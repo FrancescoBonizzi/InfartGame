@@ -291,7 +291,7 @@ class Player implements IHasCollisionRectangle {
 
                 if (!this._activePowerUp) {
                     const currentJumpParticleSystem = this._scoreggeParticleSystems[this._scoreggeParticleSystems.length - 1];
-                    currentJumpParticleSystem.addParticles(where);
+                    currentJumpParticleSystem?.addParticles(where);
                 } else {
                     this._activePowerUp.addParticles(where);
                 }
