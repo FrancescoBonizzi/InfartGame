@@ -3,6 +3,7 @@ import Camera from "../world/Camera.ts";
 import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BeanParticleSystem from "../particleEmitters/BeanParticleSystem.ts";
+import PowerUpTypes from "./PowerUpTypes.ts";
 
 class PowerUpBean extends PowerUp {
 
@@ -18,6 +19,9 @@ class PowerUpBean extends PowerUp {
             () => new BeanParticleSystem(assets, world));
     }
 
+    override getPowerUpType(): PowerUpTypes {
+        return PowerUpTypes.Bean;
+    }
 
     override getJumpForce(): number {
         return 500;

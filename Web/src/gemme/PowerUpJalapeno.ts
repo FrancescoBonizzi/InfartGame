@@ -3,6 +3,7 @@ import Camera from "../world/Camera.ts";
 import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import JalapenoParticleSystem from "../particleEmitters/JalapenoParticleSystem.ts";
+import PowerUpTypes from "./PowerUpTypes.ts";
 
 class PowerUpJalapeno extends PowerUp {
 
@@ -16,6 +17,10 @@ class PowerUpJalapeno extends PowerUp {
             assets.textures.jalapenos,
             position,
             () => new JalapenoParticleSystem(assets, world));
+    }
+
+    override getPowerUpType(): PowerUpTypes {
+        return PowerUpTypes.Jalapeno;
     }
 
     override getJumpForce(): number {

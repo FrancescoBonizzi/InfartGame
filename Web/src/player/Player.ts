@@ -216,6 +216,10 @@ class Player implements IHasCollisionRectangle {
         );
     }
 
+    get activePowerUp() {
+        return this._activePowerUp;
+    }
+
     update(time: Ticker) {
         this._speed.x = this._dynamicGameParameters.playerHorizontalSpeed;
         this._speed.y += this._fallSpeed;

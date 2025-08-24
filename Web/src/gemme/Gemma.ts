@@ -44,7 +44,7 @@ class Gemma implements IHasCollisionRectangle {
         return this._sprite.width;
     }
 
-    get collisionRectangle() {
+    public get collisionRectangle() {
         return new Rectangle(
             this._sprite.x - this._sprite.width / 2,
             this._sprite.y,

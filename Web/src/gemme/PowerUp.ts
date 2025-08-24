@@ -2,6 +2,7 @@ import Gemma from "./Gemma.ts";
 import Camera from "../world/Camera.ts";
 import {AnimatedSprite, ColorSource, Point, Texture, Ticker} from "pixi.js";
 import ParticleSystem, {deallocateEmptyParticleSystems} from "../particleEmitters/ParticleSystem.ts";
+import PowerUpTypes from "./PowerUpTypes.ts";
 
 abstract class PowerUp extends Gemma {
 
@@ -62,6 +63,7 @@ abstract class PowerUp extends Gemma {
     abstract getDurationMilliseconds(): number;
     abstract getMaxConsecutiveJumps(): number;
     abstract getPlayerAnimation(): AnimatedSprite | null;
+    abstract getPowerUpType(): PowerUpTypes;
 
     public addParticles(where: Point) {
 

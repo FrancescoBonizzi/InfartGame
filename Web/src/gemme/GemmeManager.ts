@@ -136,16 +136,25 @@ class GemmeManager {
 
     private updateHamburgers(ticker: Ticker) {
         this._hambugers = this._hambugers.filter(hamburger =>
-            !this._camera.isOutOfCameraLeft(hamburger));
+            !this._camera.isOutOfCameraLeft(hamburger) && !hamburger.isGone);
         this.checkPlayerCollisionWithGemme();
         this._hambugers.forEach(hamburger => hamburger.update(ticker));
     }
 
     checkPlayerCollisionWithGemme() {
 
-        if (this.playerCollidedWithHamburger(this._player)) {
-            this._player.hamburgerEaten();
-            return;
+        const collidedHamburger = this.playerCollidedWithHamburger(this._player);
+        if (collidedHamburger) {
+            if(this._player.activePowerUp === null || this._player.activePowerUp.getPowerUpType() !== PowerUpTypes.Broccolo) {
+                this._player.hamburgerEaten();
+                this._hambugers = this._hambugers.filter(hamburger => hamburger !== collidedHamburger);
+                this._camera.removeFromWorld(collidedHamburger.sprite);
+                return;
+            }
+
+            if(this._player.activePowerUp.getPowerUpType() === PowerUpTypes.Broccolo) {
+                collidedHamburger.throwAway();
+            }
         }
 
         if (this.playerCollidedWithPowerUp(this._player)
@@ -156,17 +165,15 @@ class GemmeManager {
         }
     }
 
-    private playerCollidedWithHamburger(player: Player): boolean {
+    private playerCollidedWithHamburger(player: Player): Hamburger | null {
         const collidedWith = CollisionSolver.checkCollisionsReturnCollidingObjectSpecific(
             player,
             this._hambugers);
 
         if (!collidedWith)
-            return false;
+            return null;
 
-        this._hambugers = this._hambugers.filter(hamburger => hamburger !== collidedWith);
-        this._camera.removeFromWorld(collidedWith.sprite);
-        return true;
+        return collidedWith;
     }
 
     private playerCollidedWithPowerUp(player: Player): boolean {

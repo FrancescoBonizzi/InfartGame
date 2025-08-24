@@ -3,6 +3,7 @@ import Camera from "../world/Camera.ts";
 import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BroccoloParticleSystem from "../particleEmitters/BroccoloParticleSystem.ts";
+import PowerUpTypes from "./PowerUpTypes.ts";
 
 class PowerUpBroccolo extends PowerUp {
 
@@ -20,6 +21,10 @@ class PowerUpBroccolo extends PowerUp {
             () => new BroccoloParticleSystem(assets, world));
 
         this._playerAnimation = assets.player.merda;
+    }
+
+    override getPowerUpType(): PowerUpTypes {
+        return PowerUpTypes.Broccolo;
     }
 
     override getPlayerAnimation(): AnimatedSprite | null {
