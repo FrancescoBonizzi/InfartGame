@@ -1,6 +1,6 @@
 # Feature
-- [ ] Suoni
 - [ ] Menù -> fatto con le route di vite e in html, con record a fine gioco (record scoregge, record hamburger mangiati ecc)
+- [ ] Suoni
 
 # Fix
 - [ ] Non mi fa impazzire il bounding box di hamburger e powerup, a volte non li prende, a volte li prende troppo presto
