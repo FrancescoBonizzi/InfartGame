@@ -17,7 +17,7 @@ class ScoreText extends HudText {
     }
 
     updateScore(score: number) {
-        this.updateText(`Score: ${score}`);
+        this.updateText(`Punteggio: ${score}`);
     }
 }
 
