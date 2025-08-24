@@ -6,9 +6,12 @@ class PopupText {
     private readonly _text: Text;
     private readonly _camera: Camera;
 
-    private _elapsedMs: number = 0;
-    private readonly _durationMs: number = 1000;
-    private readonly _riseSpeed: number = -0.05;
+    private _elapsedMilliseconds = 0;
+    private readonly _durationMilliseconds = 2000;
+    private readonly _riseSpeed = -0.2;
+    private readonly _driftSpeed = 0.6;
+    private readonly _scaleFrom = 0.9;
+    private readonly _scaleTo = 1.4;
 
     constructor(
         camera: Camera,
@@ -23,7 +26,7 @@ class PopupText {
             text: message,
             style: {
                 fontFamily: assets.fontName,
-                fontSize: 32,
+                fontSize: 40,
                 fill: { color: color },
                 stroke: { color: "#000000", width: 3 },
                 align: "center",
@@ -38,11 +41,30 @@ class PopupText {
     }
 
     update(ticker: Ticker) {
-        this._elapsedMs += ticker.deltaMS;
 
-        this._text.y += this._riseSpeed * ticker.deltaMS;
-        const progress = this._elapsedMs / this._durationMs;
-        this._text.alpha = 1 - progress;
+        const deltaMilliseconds = ticker.deltaMS;
+        this._elapsedMilliseconds += ticker.deltaMS;
+
+        // Calcola quanto tempo è passato in percentuale (0 = appena nato, 1 = finito)
+        const lifetimeProgress = Math.min(1, this._elapsedMilliseconds / this._durationMilliseconds);
+
+        if (lifetimeProgress >= 1) {
+            return;
+        }
+
+        // Easing per rendere più fluido lo scaling
+        const easedProgress = 1 - Math.pow(1 - lifetimeProgress, 3);
+
+        // Movimento: verso l’alto e leggermente a destra
+        this._text.y += this._riseSpeed * deltaMilliseconds;
+        this._text.x += this._driftSpeed * deltaMilliseconds;
+
+        // Scaling progressivo
+        const currentScale = this._scaleFrom + (this._scaleTo - this._scaleFrom) * easedProgress;
+        this._text.scale.set(currentScale);
+
+        // Dissolvenza progressiva
+        this._text.alpha = 1 - lifetimeProgress;
     }
 
     destroy() {
