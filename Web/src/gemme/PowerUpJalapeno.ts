@@ -24,7 +24,7 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getJumpForce(): number {
-        return 800;
+        return 1000;
     }
 
     override getHorizontalMoveSpeedIncrease(): number {
