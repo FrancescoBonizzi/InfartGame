@@ -15,6 +15,7 @@ class PowerUpBean extends PowerUp {
         super(
             world,
             assets.textures.bean,
+            assets,
             position,
             () => new BeanParticleSystem(assets, world));
     }

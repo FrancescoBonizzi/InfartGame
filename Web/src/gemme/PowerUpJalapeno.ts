@@ -15,6 +15,7 @@ class PowerUpJalapeno extends PowerUp {
         super(
             world,
             assets.textures.jalapenos,
+            assets,
             position,
             () => new JalapenoParticleSystem(assets, world));
     }

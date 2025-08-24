@@ -17,6 +17,7 @@ class PowerUpBroccolo extends PowerUp {
         super(
             world,
             assets.textures.verdura,
+            assets,
             position,
             () => new BroccoloParticleSystem(assets, world));
 

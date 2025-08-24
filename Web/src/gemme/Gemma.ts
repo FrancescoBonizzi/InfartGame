@@ -12,14 +12,16 @@ class Gemma implements IHasCollisionRectangle {
     private readonly _amplitude: number;
     private readonly _angularSpeed: number = 0.004;
     private readonly _randomOffset: number;
+    protected readonly _camera: Camera;
 
     constructor(
-        world: Camera,
+        camera: Camera,
         texture: Texture,
         position: Point) {
 
         const sprite = new Sprite(texture);
-        world.addToWorld(sprite);
+        camera.addToWorld(sprite);
+        this._camera = camera;
         this._startingPosition = position;
         this._elapsedMilliseconds = 0;
         this._randomOffset = Numbers.randomBetween(0, 50);

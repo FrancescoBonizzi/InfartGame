@@ -8,7 +8,7 @@
 
 # Post
 - [ ] Scrivere da qualche parte il framerate
-- [ ] Ottimizzare tutto. Come si fa? C'è un profiler?
+- [ ] Ottimizzare tutto. Come si fa? C'è un profiler? -> molte classi di PixiJs hanno il metodo .destroy()! Usalo!
 - [ ] Responsive
 - [ ] Full screen
 - [ ] Build per il mio sito
