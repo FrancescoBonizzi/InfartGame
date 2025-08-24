@@ -67,7 +67,8 @@ abstract class PowerUp extends Gemma {
             this._camera,
             this._assets,
             this.sprite.position,
-            this.getPopupText()
+            this.getPopupText(),
+            this.getFillColor()
         )
     }
 

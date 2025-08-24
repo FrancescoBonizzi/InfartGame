@@ -1,4 +1,4 @@
-import {Point, Text, Ticker} from "pixi.js";
+import {ColorSource, Point, Text, Ticker} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import Camera from "../world/Camera.ts";
 
@@ -14,7 +14,8 @@ class PopupText {
         camera: Camera,
         assets: InfartAssets,
         position: Point,
-        message: string
+        message: string,
+        color: ColorSource,
     ) {
         this._camera = camera;
 
@@ -22,8 +23,8 @@ class PopupText {
             text: message,
             style: {
                 fontFamily: assets.fontName,
-                fontSize: 24,
-                fill: { color: "#ffcc00" },
+                fontSize: 32,
+                fill: { color: color },
                 stroke: { color: "#000000", width: 3 },
                 align: "center",
             },
