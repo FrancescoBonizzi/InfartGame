@@ -1,8 +1,8 @@
 # Feature
+- [ ] Suoni
 - [x] Gemme: reazioni alla presa dei powerup
   - [ ] PopupText con il nome del potere -> meglio sul gioco o in basso? fa più ridere in gioco, però è poco coerente col testo della status bar
 - [ ] Aggiungere la parte record -> Lo salvo in un cookie del browser
-- [ ] Suoni
 - [ ] Menù -> fatto con le route di vite e in html
 
 # Fix
