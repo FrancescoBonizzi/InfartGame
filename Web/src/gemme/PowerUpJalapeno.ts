@@ -19,6 +19,10 @@ class PowerUpJalapeno extends PowerUp {
             () => new JalapenoParticleSystem(assets, world));
     }
 
+    override getPopupText(): string {
+        return "Fiammata rettale!";
+    }
+
     override getPowerUpType(): PowerUpTypes {
         return PowerUpTypes.Jalapeno;
     }

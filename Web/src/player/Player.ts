@@ -116,7 +116,7 @@ class Player implements IHasCollisionRectangle {
         this._activePowerUp = powerUp;
 
         this._currentJumpCount = 0;
-        this._hud.getHamburgerStatusBar().resetAllHamburgers();
+        this._hud.getHamburgerStatusBar().activatePowerUp(powerUp);
 
         this.jump(powerUp.getJumpForce());
 

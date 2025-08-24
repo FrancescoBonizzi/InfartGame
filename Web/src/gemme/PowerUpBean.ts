@@ -19,6 +19,10 @@ class PowerUpBean extends PowerUp {
             () => new BeanParticleSystem(assets, world));
     }
 
+    override getPopupText(): string {
+        return "Tornado intestinale!";
+    }
+
     override getPowerUpType(): PowerUpTypes {
         return PowerUpTypes.Bean;
     }

@@ -23,6 +23,10 @@ class PowerUpBroccolo extends PowerUp {
         this._playerAnimation = assets.player.merda;
     }
 
+    override getPopupText(): string {
+        return "Propulsione clorofilliana!";
+    }
+
     override getPowerUpType(): PowerUpTypes {
         return PowerUpTypes.Broccolo;
     }

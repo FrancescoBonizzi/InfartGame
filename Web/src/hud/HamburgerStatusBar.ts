@@ -5,6 +5,7 @@ import InfartAssets from "../assets/InfartAssets.ts";
 import HudText from "./HudText.ts";
 import Numbers from "../services/Numbers.ts";
 import GoingToExplodeOverlay from "./GoingToExplodeOverlay.ts";
+import PowerUp from "../gemme/PowerUp.ts";
 
 class HamburgerStatusBar {
 
@@ -17,6 +18,7 @@ class HamburgerStatusBar {
     private _isBlinking = false;
     private _blinkElapsed = 0;
     private _currentActiveHamburgerIndex: number | null;
+    private _activePowerUp: PowerUp | null = null;
 
     constructor(
         container: Container,
@@ -60,6 +62,13 @@ class HamburgerStatusBar {
         this._hamburgersText.updateText("INFART");
     }
 
+    activatePowerUp(powerUp: PowerUp) {
+        this._activePowerUp = powerUp;
+        this.resetAllHamburgers();
+        this._isBlinking = true;
+        this._hamburgersText.updateText(powerUp.getPopupText());
+    }
+
     hamburgerEaten() {
         if (this._currentActiveHamburgerIndex !== null) {
             if (this._currentActiveHamburgerIndex < FixedGameParamters.MaxEatenHamburgers)
@@ -69,10 +78,11 @@ class HamburgerStatusBar {
         }
 
         this._hudHamburgers[this._currentActiveHamburgerIndex].activate();
+
         this.updateHamburgersText();
     }
 
-    resetAllHamburgers() {
+   private resetAllHamburgers() {
         this._currentActiveHamburgerIndex = null;
         this._hudHamburgers.forEach(h => h.deactivate());
     }
@@ -105,9 +115,21 @@ class HamburgerStatusBar {
                 this._container.visible = !this._container.visible;
             }
         }
+
+        if (this._activePowerUp && this._activePowerUp.isExpired()) {
+            this._isBlinking = false;
+            this._blinkElapsed = 0;
+            this._activePowerUp = null;
+            this.updateHamburgersText();
+        }
     }
 
     private updateHamburgersText() {
+
+        if (this._activePowerUp) {
+            return;
+        }
+
         this._hamburgersText.updateText(
             this._currentActiveHamburgerIndex !== null
                 ? HamburgersMessages[this._currentActiveHamburgerIndex]

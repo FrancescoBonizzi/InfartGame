@@ -64,6 +64,7 @@ abstract class PowerUp extends Gemma {
     abstract getMaxConsecutiveJumps(): number;
     abstract getPlayerAnimation(): AnimatedSprite | null;
     abstract getPowerUpType(): PowerUpTypes;
+    abstract getPopupText(): string;
 
     public addParticles(where: Point) {
 
