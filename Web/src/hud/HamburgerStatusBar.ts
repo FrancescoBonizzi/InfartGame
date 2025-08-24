@@ -60,6 +60,7 @@ class HamburgerStatusBar {
 
     playerDead() {
         this._hamburgersText.updateText("INFART");
+        this._isBlinking = true;
     }
 
     activatePowerUp(powerUp: PowerUp) {
