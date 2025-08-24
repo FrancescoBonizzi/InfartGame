@@ -24,14 +24,15 @@ class Hamburger extends Gemma {
 
     }
 
-
     get isGone() {
         return this._state === "gone";
     }
 
     // Durante/ dopo il lancio disattivo le collisioni
     override get collisionRectangle() {
-        if (this._state !== "idle") return new Rectangle(0, 0, 0, 0);
+        if (this._state !== "idle")
+            return new Rectangle(0, 0, 0, 0);
+
         return super.collisionRectangle;
     }
 
@@ -44,7 +45,7 @@ class Hamburger extends Gemma {
         }
 
         if (this._state === "throwing") {
-            // Cinematica base
+
             this._vx += this._ax * dt;
             this._vy += this._ay * dt;
 
@@ -56,13 +57,9 @@ class Hamburger extends Gemma {
             if (this._fadePerMs > 0) {
                 this.sprite.alpha = Math.max(0, this.sprite.alpha - this._fadePerMs * dt);
             }
-            // if (this._shrinkPerMs > 0) {
-            //     const s = Math.max(0, this.sprite.scale.x - this._shrinkPerMs * dt);
-            //     this.sprite.scale.set(s, s);
-            // }
 
             const alphaGone = this.sprite.alpha <= 0.001;
-            const farAway = this.sprite.y > 2000; // soglia ampia
+            const farAway = this.sprite.y > 2000;
 
             if (alphaGone || farAway) {
                 this._state = "gone";
@@ -81,9 +78,8 @@ class Hamburger extends Gemma {
         this._vy = Numbers.randomBetween(0.35, 0.85);
         this._ax = Numbers.randomBetween(0.0015, 0.003);
         this._ay = Numbers.randomBetween(0.0008, 0.002);
-        this._spin = Numbers.randomBetween(0.002, 0.008) * (Math.random() < 0.5 ? -1 : 1);
+        this._spin = Numbers.randomBetween(0.01, 0.02) * (Math.random() < 0.5 ? -1 : 1);
         this._fadePerMs = Numbers.randomBetween(0.001, 0.0025);
-      //  this._shrinkPerMs = Numbers.randomBetween(0.0005, 0.001);
 
         this._state = "throwing";
         this.sprite.visible = true;
