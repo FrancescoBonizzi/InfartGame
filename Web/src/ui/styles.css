@@ -154,7 +154,7 @@ canvas {
     border: 1px solid #334155;
     border-radius: 8px;
     background: var(--background);
-    gap: 16px;
+    gap: 32px;
 }
 
 .score-label {
@@ -210,4 +210,11 @@ canvas {
 .menu-actions .button:nth-child(even):hover,
 .menu-actions .button:nth-child(even):focus-visible {
     transform: scale(1.12) rotate(1.5deg);
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 60px;
+        margin-top: 32px;
+    }
 }
