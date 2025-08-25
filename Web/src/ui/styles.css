@@ -52,7 +52,7 @@ html, body {
     font: 500 16px/1.5 "Patrick Hand SC", "Comic Sans MS", cursive, sans-serif;
 }
 
-main, .menu {
+main, .menu, .score {
     min-height: 100vh;
 }
 
@@ -66,6 +66,7 @@ main, .menu {
     text-align: center;
     font-size: 128px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .title .in {
@@ -123,6 +124,49 @@ main, .menu {
 canvas {
     display: block;
     margin: 0 auto
+}
+
+.score {
+    background: url("/assets/images/menu/infart-score-background.png") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.score-content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+}
+
+.score-table {
+    display: grid;
+    gap: 8px;
+    max-width: 600px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+}
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    background: var(--background);
+    gap: 16px;
+}
+
+.score-label {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.score-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
 }
 
 /* --- Animazioni --- */

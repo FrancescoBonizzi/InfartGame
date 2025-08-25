@@ -1,24 +1,45 @@
 import router from './router';
+import ScoreRepository from "../services/ScoreRepository.ts";
 
 export function renderScorePage(container: HTMLElement) {
     container.innerHTML = `
-    <main class="main">
-      <section class="card">
-        <h1 class="title">Punteggi</h1>
-        <p id="last">Ultimo: —</p>
-        <div class="actions">
-          <a href="/game" class="btn primary" data-navigo>Gioca</a>
-          <a href="/" class="btn" data-navigo>Menu</a>
-        </div>
-      </section>
+    <main>
+      <section class="score">
+      
+        <div class="score-content">
+        
+            <h1 class="title">Punteggio</h1>
+            
+            <div>
+                <div class="score-table">
+                    <div class="score-row">
+                        <div class="score-label">Scoregge scoreggiate:</div>
+                        <div class="score-value" id="score-farts">0</div>
+                    </div>
+                    
+                      <div class="score-row">
+                        <div class="score-label">Verdure digerite:</div>
+                        <div class="score-value" id="score-vegetables">0</div>
+                    </div>
+                    
+                    <div class="score-row">
+                        <div class="score-label">Metri percorsi:</div>
+                        <div class="score-value" id="score-meters">0</div>
+                    </div>
+                </div>
+                
+                <nav class="menu-actions">
+                    <a href="/menu" class="button primary" data-navigo>INDIETRO</a>
+                </nav>
+            
+            </div>
+      
     </main>
   `;
 
-    // Carica l'ultimo punteggio dal localStorage se esiste
-    const lastScore = localStorage.getItem('lastScore');
-    if (lastScore) {
-        document.getElementById('last')!.textContent = `Ultimo: ${lastScore}`;
-    }
+    document.getElementById('score-farts')!.textContent = ScoreRepository.getFarts().toString();
+    document.getElementById('score-vegetables')!.textContent = ScoreRepository.getVegetablesEaten().toString();
+    document.getElementById('score-meters')!.textContent = ScoreRepository.getMeters().toString();
 
     router.updatePageLinks();
 }
