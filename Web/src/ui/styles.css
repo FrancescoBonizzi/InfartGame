@@ -8,25 +8,28 @@
 html, body {
     height: 100%;
     margin: 0;
-    background: var(--bg);
     color: var(--ink);
-    font: 500 16px/1.5 system-ui
+    font: 500 16px/1.5 system-ui;
 }
 
-.main {
-    min-height: 100%;
+main {
+    min-height: 100vh;
+    padding: 0;
+}
+
+.menu {
+    min-height: 100vh;
     display: grid;
     place-items: center;
-    padding: 24px
+    padding: 24px;
+
+    background: url("/assets/images/menu/infart-menu-background.png") center/cover no-repeat;
 }
 
-.card {
-    width: min(720px, 92vw);
-    background: color-mix(in srgb, var(--card), transparent 10%);
-    border: 1px solid #263041;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .35)
+.menu-content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 24px;
 }
 
 .title {
