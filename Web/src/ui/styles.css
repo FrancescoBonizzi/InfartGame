@@ -148,7 +148,6 @@ canvas {
     animation: slowPulseBtn 3s ease-in-out infinite;
     transform-origin: center;
     will-change: transform;
-    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, filter 180ms ease;
 }
 
 /* Stagger (sfasamento) sui singoli pulsanti */
@@ -157,12 +156,11 @@ canvas {
 .menu-actions .button:nth-child(3) { animation-delay: .4s; }
 .menu-actions .button:nth-child(4) { animation-delay: .6s; }
 
-/* Hover/focus: pop simpatico */
+/* Hover/focus: effetto secco */
 .menu-actions .button:hover,
 .menu-actions .button:focus-visible {
     animation: none; /* blocca il pulse */
     transform: scale(1.12) rotate(-1.5deg);
-    transition: transform 120ms cubic-bezier(.34,1.56,.64,1);
 }
 
 .menu-actions .button:nth-child(even):hover,
