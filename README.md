@@ -14,13 +14,13 @@ Features:
 
 # Screenshots
 
-<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/1.png" width="500">
+<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/1.png" width="500">
 
-<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/2.png" width="500">
+<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/2.png" width="500">
 
-<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/3.png" width="500">
+<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/3.png" width="500">
 
-<img src="https://github.com/FrancescoBonizzi/InfartGame/raw/master/Infart/Assets/_Other/Screenshots/EN/4.png" width="500">
+<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/4.png" width="500">
 
 ---
 
