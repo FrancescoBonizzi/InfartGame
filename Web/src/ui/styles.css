@@ -1,65 +1,123 @@
 :root {
-    --bg: #0f172a;
-    --card: #111827;
     --ink: #e5e7eb;
     --accent: #22d3ee;
+    --fart: #FF6524;
+    --background: #0b1220;
+}
+
+/* Reset base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea, select {
+    font: inherit;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
 }
 
 html, body {
     height: 100%;
     margin: 0;
     color: var(--ink);
-    font: 500 16px/1.5 system-ui;
+    font: 500 16px/1.5 "Patrick Hand SC", "Comic Sans MS", cursive, sans-serif;
 }
 
-main {
+main, .menu {
     min-height: 100vh;
-    padding: 0;
 }
 
 .menu {
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-
     background: url("/assets/images/menu/infart-menu-background.png") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 128px;
+    font-weight: bold;
+}
+
+.title .in {
+    color: #ffffff;
+}
+
+.title .fart {
+    color: var(--fart);
 }
 
 .menu-content {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 24px;
+    align-items: center;
 }
 
-.title {
-    font: 800 2rem/1.1 system-ui;
-    margin: 0 0 16px
+.menu-content img {
+    width: 100%;
+    max-width: 500px;
 }
 
-.actions {
+.menu-actions {
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap
+    flex-direction: column;
+    justify-self: center;
+    gap: 16px;
 }
 
-.btn {
+.button {
     appearance: none;
     border: 1px solid #334155;
-    background: #0b1220;
+    background: var(--background);
     color: var(--ink);
+    width: 250px;
     padding: 12px 16px;
     border-radius: 12px;
     cursor: pointer;
-    font: 700 1rem system-ui;
     text-decoration: none;
-    display: inline-block
+    font-weight: 700;
+    font-size: 32px;
+    display: inline-block;
+    text-align: center;
 }
 
-.btn.primary {
+.button.primary {
     background: var(--accent);
-    color: #0b1220;
-    border-color: transparent
+    color: var(--background);
+}
+
+.button.fart {
+    background-color: var(--fart);
+    color: var(--background);
 }
 
 canvas {

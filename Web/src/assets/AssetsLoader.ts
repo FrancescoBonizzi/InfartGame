@@ -10,12 +10,6 @@ const _fontsAssetsRoot: string = `${_assetsRoot}/fonts`;
 
 export const loadAssets = async (): Promise<InfartAssets> => {
 
-    // Single image sprites
-    const menuBackground = await loadMenuTexture("menuBackground");
-    const gameTitle = await loadMenuTexture("gameTitle");
-    const scoreBackground = await loadMenuTexture("scoreBackground");
-    const gameOverBackground = await loadMenuTexture("gameOverBackground");
-
     // Sprite sheets
     const playerSpriteSheet = await loadSpriteSheet("player");
     const buildingsBackSpriteSheet = await loadSpriteSheet("buildingsBack");
@@ -26,12 +20,6 @@ export const loadAssets = async (): Promise<InfartAssets> => {
     return {
         fontName: fontName,
         textures: {
-            menu: {
-                background: menuBackground,
-                gameTitle: gameTitle,
-                scoreBackground: scoreBackground,
-                gameOverBackground: gameOverBackground
-            },
             buildings: {
                 back: loadGrattacieliFromSpriteSheet(buildingsBackSpriteSheet, "back"),
                 mid: loadGrattacieliFromSpriteSheet(buildingsMidSpriteSheet, "mid"),
@@ -108,17 +96,10 @@ const loadFont = async () => {
     return fontName;
 }
 
-const loadTextureFromFile = async (name: string): Promise<Texture> => {
-    return await Assets.load(`${_imagesAssetsRoot}/${name}`);
-}
-
 const loadSpriteFromSpriteSheet = (spriteSheet: Spritesheet, name: string): Texture => {
     return spriteSheet.textures[`${name}`]!;
 }
 
-const loadMenuTexture = async (name: string): Promise<Texture> => {
-    return await loadTextureFromFile(`menu/${name}.png`);
-}
 
 const loadSpriteSheet = async (name: string): Promise<Spritesheet> => {
     const spriteSheet = await Assets.load(`${_spriteSheetsAssetsRoot}/${name}.json`);

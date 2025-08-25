@@ -6,12 +6,18 @@ export function renderMenuPage(container: HTMLElement) {
     <section class="menu">
         
         <div class="menu-content">
-            <img src="/public/assets/images/menu/infart-game-title.png" alt="Game menu title" />
             
-            <nav class="actions">
-                <a href="/game" class="btn primary" data-navigo>Gioca</a>
-                <a href="/scores" class="btn" data-navigo>Punteggi</a>
+            <h1 class="title">
+              <span class="in">IN</span><span class="fart">FART</span>
+            </h1>
+            
+            <nav class="menu-actions">
+                <a href="/game" class="button primary" data-navigo>GIOCA</a>
+                <a class="button button fart">SCOREGGIA</a>
+                <a href="/scores" class="button" data-navigo>PUNTEGGIO</a>
+                <a class="button" target="_blank" href="https://imaginesoftware.it/open-source-projects/infart">ABOUT</a>
             </nav>
+            
         </div>
         
     </section>

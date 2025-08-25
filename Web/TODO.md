@@ -1,6 +1,8 @@
 # Feature
 - [ ] Menù -> fatto con le route di vite e in html, con record a fine gioco (record scoregge, record hamburger mangiati ecc)
+- [ ] Usa Patrick Hand SC anche per il gioco
 - [ ] Suoni
+
 
 # Fix
 - [ ] Non mi fa impazzire il bounding box di hamburger e powerup, a volte non li prende, a volte li prende troppo presto

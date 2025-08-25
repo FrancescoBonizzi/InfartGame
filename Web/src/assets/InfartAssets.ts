@@ -5,12 +5,6 @@ import PlayerAnimations from "../player/PlayerAnimations.ts";
 interface InfartAssets {
     fontName: string;
     textures: {
-        menu: {
-            background: Texture;
-            gameTitle: Texture;
-            scoreBackground: Texture;
-            gameOverBackground: Texture;
-        },
         buildings: {
             back: Texture[];
             mid: Texture[];
