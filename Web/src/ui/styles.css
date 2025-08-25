@@ -1,0 +1,65 @@
+:root {
+    --bg: #0f172a;
+    --card: #111827;
+    --ink: #e5e7eb;
+    --accent: #22d3ee;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 500 16px/1.5 system-ui
+}
+
+.main {
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    padding: 24px
+}
+
+.card {
+    width: min(720px, 92vw);
+    background: color-mix(in srgb, var(--card), transparent 10%);
+    border: 1px solid #263041;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35)
+}
+
+.title {
+    font: 800 2rem/1.1 system-ui;
+    margin: 0 0 16px
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap
+}
+
+.btn {
+    appearance: none;
+    border: 1px solid #334155;
+    background: #0b1220;
+    color: var(--ink);
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font: 700 1rem system-ui;
+    text-decoration: none;
+    display: inline-block
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: #0b1220;
+    border-color: transparent
+}
+
+canvas {
+    display: block;
+    margin: 0 auto
+}

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@pixi/sound": "^6.0.1",
+    "navigo": "^8.11.1",
     "pixi.js": "^8.6.2"
   }
 }

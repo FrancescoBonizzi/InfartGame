@@ -1,0 +1,84 @@
+import {Application} from "pixi.js";
+import {loadAssets} from "../assets/AssetsLoader.ts";
+import LoadingThing from "../uiKit/LoadingThing.ts";
+import Game from "../Game.ts";
+
+let app: Application | null = null;
+
+export async function initGame(container: HTMLElement) {
+
+    container.innerHTML = `
+    <div id="game-container"></div>
+  `;
+
+
+    const gameContainer = document.getElementById('game-container');
+
+    if (!gameContainer) {
+        console.error('Game container non trovato!');
+        return;
+    }
+
+    app = new Application();
+
+    await app.init({
+        background: '#1CB3DE',
+        width: 800,
+        height: 480,
+        premultipliedAlpha: false,
+        antialias: true,
+        autoDensity: true,
+    });
+
+    document.body.appendChild(app.canvas);
+
+    try {
+        const loadingThing = new LoadingThing(
+            app,
+            "Farting..."); // TODO: aggiungerci il logo come splashscreen
+        loadingThing.show();
+        const infartAssets = await loadAssets();
+        loadingThing.hide();
+
+        const game = new Game(infartAssets, app);
+
+        app.ticker.add((time) => {
+            game.update(time);
+        });
+    }
+    catch (e) {
+        alert("Ooops! Errore!");
+        console.error(e);
+    }
+};
+
+export function destroyGame() {
+    if (app) {
+        app.destroy(true, { children: true });
+        app = null;
+    }
+}
+
+
+/*
+ // Menu
+        const testSprite = infartAssets.sprites.menu.background;
+        testSprite.x = 0;
+        testSprite.y = 0;
+        app.stage.addChild(testSprite);
+
+        // Spritesheet
+        const playerRun = infartAssets.sprites.player.run;
+        playerRun.anchor.set(0.5);
+        playerRun.x = app.screen.width / 2;
+        playerRun.y = app.screen.height / 2;
+        playerRun.animationSpeed = 0.4;
+        playerRun.play();
+
+        // add it to the stage to render
+        app.stage.addChild(playerRun);
+
+        infartAssets.sounds.music.menu.loop = true;
+        infartAssets.sounds.music.menu.play();
+
+ */
