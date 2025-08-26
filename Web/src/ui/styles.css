@@ -128,6 +128,12 @@ canvas {
     margin: 0 auto
 }
 
+.gameover {
+    background: url("/assets/images/menu/infart-gameover-background.png") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
 .score {
     background: url("/assets/images/menu/infart-score-background.png") center/cover no-repeat;
     display: flex;
