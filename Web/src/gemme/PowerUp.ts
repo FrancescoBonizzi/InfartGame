@@ -63,10 +63,13 @@ abstract class PowerUp extends Gemma {
     public activate() {
         this._elapsedMilliseconds = 0;
         this._hasBeenActivatedByPlayer = true;
+
         this._popupText = new PopupText(
             this._camera,
             this._assets,
-            this.sprite.position,
+            new Point(
+                this.sprite.position.x - 20,
+                this.sprite.position.y - 50),
             this.getPopupText(),
             this.getFillColor()
         )

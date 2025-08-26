@@ -37,7 +37,7 @@ class PowerUpJalapeno extends PowerUp {
     }
 
     override getFillColor(): string {
-        return '#C41E3A';
+        return '#ff0c32';
     }
 
     override getDurationMilliseconds(): number {

@@ -7,9 +7,9 @@ class PopupText {
     private readonly _camera: Camera;
 
     private _elapsedMilliseconds = 0;
-    private readonly _durationMilliseconds = 2000;
+    private readonly _durationMilliseconds = 3000;
     private readonly _riseSpeed = -0.2;
-    private readonly _driftSpeed = 0.6;
+    private readonly _driftSpeed = 0.5;
     private readonly _scaleFrom = 0.9;
     private readonly _scaleTo = 1.4;
 
@@ -26,14 +26,13 @@ class PopupText {
             text: message,
             style: {
                 fontFamily: assets.fontName,
-                fontSize: 44,
+                fontSize: 48,
                 fill: { color: color },
                 stroke: { color: "#000000", width: 3 },
                 align: "center",
             },
         });
 
-        this._text.anchor.set(0.5, 0.5);
         this._text.x = position.x;
         this._text.y = position.y;
 
