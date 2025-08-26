@@ -9,9 +9,9 @@ class LoadingThing {
 
         this._app = app;
         this._loadingText = new Text({
-            text: 'Fermentazione in corso… quasi pronto!',
+            text: 'Fermentazione in corso…!',
             style: {
-                fontSize: 44,
+                fontSize: 32,
                 fontWeight: 'bold',
                 fill: {color: '#ffffff'},
             }
