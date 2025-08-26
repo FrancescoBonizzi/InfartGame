@@ -102,7 +102,7 @@ abstract class PowerUp extends Gemma {
     }
 
     stopSound(soundManager: SoundManager) {
-        soundManager.stopePowerUp();
+        soundManager.stopPowerUp();
     }
 
     public addParticles(where: Point) {

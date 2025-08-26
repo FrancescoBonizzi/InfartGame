@@ -19,7 +19,6 @@ class SoundManager {
     }
 
     private preload() {
-        // carico i suoni principali
         this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true, volume: 0.4});
         this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.4});
         this.sounds["bite"] = new Howl({src: [this.paths.bite]});
@@ -29,7 +28,6 @@ class SoundManager {
         this.sounds["powerup"] = new Howl({src: [this.paths.powerup]});
     }
 
-    // ---------- MUSICHE ----------
     playMenuSoundTrack() {
         if (this.sounds["musicMenu"]!.playing())
             return;
@@ -48,7 +46,6 @@ class SoundManager {
         this.sounds["musicGame"]!.stop();
     }
 
-    // ---------- EFFETTI ----------
     playFall() {
         this.sounds["fall"]!.play();
     }
@@ -75,17 +72,18 @@ class SoundManager {
 
     playExplosion() {
         this.sounds["explosion"]!.play();
+        this.stopHeartBeat();
     }
 
     playPowerUp() {
         this.sounds["powerup"]!.play();
     }
 
-    stopePowerUp() {
+    stopPowerUp() {
         this.sounds["powerup"]!.stop();
     }
 
-    async playHeartBeat() {
+    playHeartBeat() {
         if (!this.sounds["heartbeat"]!.playing()) {
             this.sounds["heartbeat"]!.play();
         }
