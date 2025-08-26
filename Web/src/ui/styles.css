@@ -93,6 +93,7 @@ main, .menu, .score {
     display: flex;
     flex-direction: column;
     justify-self: center;
+    align-self: center;
     gap: 16px;
 }
 
@@ -137,6 +138,11 @@ canvas {
     display: grid;
     grid-template-rows: auto 1fr;
     align-items: center;
+}
+
+.score-second-row {
+    display: flex;
+    flex-direction: column;
 }
 
 .score-table {

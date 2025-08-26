@@ -10,7 +10,7 @@ export function renderScorePage(container: HTMLElement) {
         
             <h1 class="title">Punteggio</h1>
             
-            <div>
+            <div class="score-second-row">
                 <div class="score-table">
                     <div class="score-row">
                         <div class="score-label">Scoregge scoreggiate:</div>
