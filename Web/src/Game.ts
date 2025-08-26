@@ -32,11 +32,12 @@ class Game {
 
     constructor(
         assets: InfartAssets,
-        app: Application) {
+        app: Application,
+        soundManager: SoundManager) {
 
         this._camera = new Camera(app);
         this._controller = new Controller();
-        this._soundManager = new SoundManager();
+        this._soundManager = soundManager;
         this._dynamicGameParameters = new DynamicGameParameters();
         this._backgroundLandscape = new BackgroundLandscape(
             this._camera,

@@ -15,8 +15,8 @@ class SoundManager {
     private heartbeat?: { src: AudioBufferSourceNode; gain: GainNode } | null = null;
 
     private paths = {
-        musicMenu: "/assets/music/menu.mp3",
-        musicGame: "/assets/music/game.mp3",
+        musicMenu: "/assets/sounds/music/menu.mp3",
+        musicGame: "/assets/sounds/music/game.mp3",
         fart: (n: number) => `/assets/sounds/farts/fart${n}.mp3`,
         bite: "/assets/sounds/effects/bite.mp3",
         fall: "/assets/sounds/effects/fall.mp3",
@@ -64,12 +64,12 @@ class SoundManager {
     }
 
     // ---------- MUSICHE ----------
-    async playMenuSoundTrack() {
-        await this.crossfadeTo(this.paths.musicMenu, 1.2, 0.9);
+    playMenuSoundTrack() {
+        void this.crossfadeTo(this.paths.musicMenu, 1.2, 0.9);
     }
 
-    async playGameSoundTrack() {
-        await this.crossfadeTo(this.paths.musicGame, 1.2, 0.9);
+    playGameSoundTrack() {
+        void this.crossfadeTo(this.paths.musicGame, 1.2, 0.9);
     }
 
     private async crossfadeTo(url: string, seconds = 1.2, volume = 1) {
@@ -117,13 +117,13 @@ class SoundManager {
     }
 
     // ---------- EFFETTI (SFX) ----------
-    async playFall() {
-        await this.playOneShot(this.paths.fall, {volume: 1, tag: "fall"});
+    playFall() {
+        void this.playOneShot(this.paths.fall, {volume: 1, tag: "fall"});
     }
 
-    async playFart() {
+    playFart() {
         const n = (Math.floor(Math.random() * 7) + 1);
-        await this.playOneShot(this.paths.fart(n), {volume: 1, tag: "fart"});
+        void this.playOneShot(this.paths.fart(n), {volume: 1, tag: "fart"});
     }
 
     stopFart() {
@@ -131,24 +131,24 @@ class SoundManager {
         this.stopByTag("fart");
     }
 
-    async playBite() {
-        await this.playOneShot(this.paths.bite, {volume: 1, tag: "bite"});
+    playBite() {
+        void this.playOneShot(this.paths.bite, {volume: 1, tag: "bite"});
     }
 
-    async playExplosion() {
-        await this.playOneShot(this.paths.explosion, {volume: 1, tag: "explosion"});
+    playExplosion() {
+        void this.playOneShot(this.paths.explosion, {volume: 1, tag: "explosion"});
     }
 
-    async playBean() {
-        await this.playOneShot(this.paths.thunder, {volume: 0.5, tag: "bean"});
+    playBean() {
+        void this.playOneShot(this.paths.thunder, {volume: 0.5, tag: "bean"});
     }
 
-    async playBroccolo() {
-        await this.playOneShot(this.paths.truck, {volume: 0.5, tag: "truck"});
+    playBroccolo() {
+        void this.playOneShot(this.paths.truck, {volume: 0.5, tag: "truck"});
     }
 
-    async playJalapeno() {
-        await this.playOneShot(this.paths.jalapeno, {volume: 0.5, tag: "jalapeno"});
+    playJalapeno() {
+        void this.playOneShot(this.paths.jalapeno, {volume: 0.5, tag: "jalapeno"});
     }
 
     async playHeartBeat() {

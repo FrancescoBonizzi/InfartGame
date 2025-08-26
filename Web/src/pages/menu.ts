@@ -1,4 +1,5 @@
 import router from './router';
+import {SoundManagerInstance} from "../services/SoundInstance.ts";
 
 export function renderMenuPage(container: HTMLElement) {
     container.innerHTML = `
@@ -29,9 +30,9 @@ export function renderMenuPage(container: HTMLElement) {
     const fartButton = container.querySelector<HTMLAnchorElement>("#fart-button");
     if (fartButton) {
         fartButton.addEventListener("click", () => {
-            const n = Math.floor(Math.random() * 7) + 1;
-            const audio = new Audio(`/assets/sounds/farts/fart${n}.mp3`);
-            void audio.play();
+            SoundManagerInstance.playFart();
         });
     }
+
+    SoundManagerInstance.playMenuSoundTrack();
 }
