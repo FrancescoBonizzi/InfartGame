@@ -1,5 +1,4 @@
 import {Application, Renderer, Text} from "pixi.js";
-import StringHelper from "../services/StringHelper.ts";
 
 class LoadingThing {
     private readonly _loadingText: Text;

@@ -34,9 +34,7 @@ export async function initGame(container: HTMLElement) {
     document.body.appendChild(app.canvas);
 
     try {
-        const loadingThing = new LoadingThing(
-            app,
-            "Farting...");
+        const loadingThing = new LoadingThing(app);
         loadingThing.show();
         const infartAssets = await loadAssets();
         loadingThing.hide();
