@@ -7,7 +7,7 @@ class SoundManager {
     private readonly musicBus: GainNode;
     private readonly sfxBus: GainNode;
 
-    private currentMusic?: { el: HTMLAudioElement; src: MediaElementAudioSourceNode; gain: GainNode; url: string };
+    private loops = new Map<string, { src: AudioBufferSourceNode; gain: GainNode; tag: string | undefined }>();
     private unlocked = false;
 
     private buffers = new Map<string, AudioBuffer>();
@@ -50,71 +50,15 @@ class SoundManager {
         this.unlocked = true;
     }
 
-    // --- Volume globali (opzionali) ---
-    setMasterVolume(v: number) {
-        this.master.gain.value = v;
-    }
-
-    setMusicVolume(v: number) {
-        this.musicBus.gain.value = v;
-    }
-
-    setSfxVolume(v: number) {
-        this.sfxBus.gain.value = v;
-    }
-
     // ---------- MUSICHE ----------
     playMenuSoundTrack() {
-        void this.crossfadeTo(this.paths.musicMenu, 1.2, 0.9);
+        void this.playLoop(this.paths.musicMenu);
     }
 
     playGameSoundTrack() {
-        void this.crossfadeTo(this.paths.musicGame, 1.2, 0.9);
+        void this.playLoop(this.paths.musicGame);
     }
 
-    private async crossfadeTo(url: string, seconds = 1.2, volume = 1) {
-        if (this.currentMusic?.url === url) return;
-
-        const next = this.createMusicNode(url, volume);
-        next.gain.gain.setValueAtTime(0, this.ctx.currentTime);
-        next.el.play().catch(() => { /* ignorare errori di autoplay se non sbloccato */
-        });
-
-        const now = this.ctx.currentTime;
-        const end = now + seconds;
-
-        if (this.currentMusic) {
-            // fade out
-            this.currentMusic.gain.gain.cancelScheduledValues(now);
-            this.currentMusic.gain.gain.setValueAtTime(this.currentMusic.gain.gain.value, now);
-            this.currentMusic.gain.gain.linearRampToValueAtTime(0, end);
-        }
-
-        // fade in
-        next.gain.gain.linearRampToValueAtTime(volume, end);
-
-        // switch e cleanup dopo il fade
-        setTimeout(() => {
-            if (this.currentMusic) {
-                this.currentMusic.el.pause();
-                this.currentMusic.src.disconnect();
-                this.currentMusic.gain.disconnect();
-            }
-            this.currentMusic = next;
-        }, seconds * 1000 + 30);
-    }
-
-    private createMusicNode(url: string, volume: number) {
-        const el = new Audio(url);
-        el.loop = true;
-        el.preload = "auto";
-        const src = this.ctx.createMediaElementSource(el);
-        const gain = this.ctx.createGain();
-        gain.gain.value = volume;
-        src.connect(gain);
-        gain.connect(this.musicBus);
-        return {el, src, gain, url};
-    }
 
     // ---------- EFFETTI (SFX) ----------
     playFall() {
@@ -140,16 +84,17 @@ class SoundManager {
     }
 
     playBean() {
-        void this.playOneShot(this.paths.thunder, {volume: 0.5, tag: "bean"});
+        void this.playLoop(this.paths.thunder, {volume: 0.5, tag: "bean"});
     }
 
     playBroccolo() {
-        void this.playOneShot(this.paths.truck, {volume: 0.5, tag: "truck"});
+        void this.playLoop(this.paths.truck, {volume: 0.5, tag: "truck"});
     }
 
     playJalapeno() {
-        void this.playOneShot(this.paths.jalapeno, {volume: 0.5, tag: "jalapeno"});
+        void this.playLoop(this.paths.jalapeno, {volume: 0.5, tag: "jalapeno"});
     }
+
 
     async playHeartBeat() {
         if (this.heartbeat) return; // già attivo
@@ -214,6 +159,38 @@ class SoundManager {
                 }
             }
         };
+    }
+
+    private async playLoop(url: string, opts: { volume?: number; tag?: string } = {}): Promise<{ stop: () => void }> {
+        const buf = await this.getBuffer(url);
+        const src = this.ctx.createBufferSource();
+        src.buffer = buf;
+        src.loop = true;
+
+        const gain = this.ctx.createGain();
+        gain.gain.value = opts.volume ?? 1;
+
+        src.connect(gain);
+        gain.connect(this.sfxBus);
+        src.start();
+
+        // chiave per identificare univocamente il loop
+        const key = `${opts.tag ?? url}::${performance.now()}`;
+        this.loops.set(key, { src, gain, tag: opts.tag });
+
+        const stop = () => {
+            const entry = this.loops.get(key);
+            if (!entry) return;
+            try { entry.src.stop(); } catch {}
+            entry.src.disconnect();
+            entry.gain.disconnect();
+            this.loops.delete(key);
+        };
+
+        // se il browser dovesse terminare il source (non comune con loop), cleanup
+        src.addEventListener("ended", stop);
+
+        return { stop };
     }
 
     private stopByTag(tag: string) {
