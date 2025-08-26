@@ -22,8 +22,8 @@ class SoundManager {
 
     private preload() {
         // carico i suoni principali
-        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true});
-        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.5});
+        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true, volume: 0.4});
+        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.4});
         this.sounds["bite"] = new Howl({src: [this.paths.bite]});
         this.sounds["fall"] = new Howl({src: [this.paths.fall]});
         this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});

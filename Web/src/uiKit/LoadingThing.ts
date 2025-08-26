@@ -6,16 +6,11 @@ class LoadingThing {
     private _app: Application<Renderer>;
 
     constructor(
-        app: Application<Renderer>,
-        text: string = 'Loading...') {
-
-        if (StringHelper.isNullOrWhitespace(text)) {
-            text = 'Loading...';
-        }
+        app: Application<Renderer>) {
 
         this._app = app;
         this._loadingText = new Text({
-            text: text,
+            text: 'Fermentazione in corso… quasi pronto!',
             style: {
                 fontSize: 44,
                 fontWeight: 'bold',

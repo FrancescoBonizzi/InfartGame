@@ -36,7 +36,7 @@ export async function initGame(container: HTMLElement) {
     try {
         const loadingThing = new LoadingThing(
             app,
-            "Farting..."); // TODO: aggiungerci il logo come splashscreen
+            "Farting...");
         loadingThing.show();
         const infartAssets = await loadAssets();
         loadingThing.hide();
