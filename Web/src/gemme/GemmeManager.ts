@@ -27,6 +27,8 @@ class GemmeManager {
     private _hambugers: Hamburger[];
     private _activePowerup: PowerUp | null;
 
+    private _totalVegetablesEaten: number = 0;
+
     constructor(
         assets: InfartAssets,
         camera: Camera,
@@ -46,6 +48,10 @@ class GemmeManager {
             .forEach(grattacielo => {
                 this.onGrattacieloGeneratoHandler(grattacielo);
             });
+    }
+
+    public get totalVegetablesEaten() {
+        return this._totalVegetablesEaten;
     }
 
     private spawnPowerUp(
@@ -162,6 +168,7 @@ class GemmeManager {
             && !this._activePowerup.hasBeenActivatedByPlayer) {
             this._player.activatePowerUp(this._activePowerup);
             this._activePowerup.activate();
+            ++this._totalVegetablesEaten;
         }
     }
 

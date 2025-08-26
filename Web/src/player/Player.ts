@@ -42,6 +42,7 @@ class Player implements IHasCollisionRectangle {
     private _infartExplosion: InfartExplosion;
 
     private _activePowerUp: PowerUp | null = null;
+    private _totalFarts : number = 0;
 
     constructor(
         staringPosition: Point,
@@ -72,6 +73,10 @@ class Player implements IHasCollisionRectangle {
         this._hud = hud;
     }
 
+    public get totalFarts() {
+        return this._totalFarts;
+    }
+
     jump(force: number = this._defaultJumpAmount) {
 
         if (this._isDead)
@@ -91,6 +96,7 @@ class Player implements IHasCollisionRectangle {
             : force;
 
         this._currentJumpCount++;
+        this._totalFarts++;
 
         this._speed.y = -jumpForce;
         this._soundManager.playFart();

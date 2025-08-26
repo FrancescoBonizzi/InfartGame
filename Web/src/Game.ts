@@ -11,6 +11,7 @@ import DynamicGameParameters from "./services/DynamicGameParameters.ts";
 import GemmeManager from "./gemme/GemmeManager.ts";
 import InfartExplosion from "./particleEmitters/InfartExplosion.ts";
 import Hud from "./hud/Hud.ts";
+import ScoreRepository from "./services/ScoreRepository.ts";
 
 class Game {
 
@@ -153,6 +154,13 @@ class Game {
 
         this._gemmeManager.update(time);
         this._infartExplosion.update(time);
+
+        if (this._player.isDead) {
+            // TODO: andare alla pagina gameover dopo tot secondi
+            ScoreRepository.setMeters(this._score);
+            ScoreRepository.setVegetablesEaten(this._gemmeManager.totalVegetablesEaten);
+            ScoreRepository.setFarts(this._player.totalFarts);
+        }
     }
 
     updateScore() {
