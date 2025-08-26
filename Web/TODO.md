@@ -1,5 +1,4 @@
 # Feature
-- [ ] Usa Patrick Hand SC anche per il gioco
 - [ ] Suoni -> potrei anche farli tutti gestire dall'html, con new Audio ecc!
 - [ ] Musica nel menù!
 
