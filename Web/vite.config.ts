@@ -5,5 +5,6 @@ export default defineConfig({
         rollupOptions: {
             input: "index.html"
         }
-    }
+    },
+    base: './', // genera href/src relativi per comodità col sito in Jekyll
 });

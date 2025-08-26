@@ -9,7 +9,7 @@ class LoadingThing {
 
         this._app = app;
         this._loadingText = new Text({
-            text: 'Fermentazione in corso…!',
+            text: 'Fermentazione in corso…',
             style: {
                 fontSize: 32,
                 fontWeight: 'bold',

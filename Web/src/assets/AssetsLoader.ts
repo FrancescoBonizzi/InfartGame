@@ -2,7 +2,9 @@ import {AnimatedSprite, Assets, Spritesheet, Texture} from "pixi.js";
 import InfartAssets from "./InfartAssets";
 import {Sound, sound} from "@pixi/sound";
 
-const _assetsRoot: string = '/assets';
+/// TODO: MMM non sta funzionando la get del path relativo
+//const VITE_BASE = import.meta.env.BASE_URL;
+const _assetsRoot: string = `./assets`;
 const _imagesAssetsRoot: string = `${_assetsRoot}/images`;
 const _spriteSheetsAssetsRoot: string = `${_imagesAssetsRoot}/spriteSheets`;
 const _soundsAssetsRoot: string = `${_assetsRoot}/sounds`;

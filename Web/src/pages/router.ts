@@ -4,7 +4,9 @@ import { renderScorePage } from './score';
 import { initGame } from './gamebootstrap';
 import {renderGameOverPage} from "./gameover.ts";
 
-const router = new Navigo('/');
+const router = new Navigo('/', {
+    hash: true, // Fondamentale per il funziona su Jeckyll
+});
 
 export function initializeRouter() {
     const appElement = document.getElementById('app');
