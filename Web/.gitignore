@@ -123,3 +123,5 @@ fabric.properties
 
 # Cartella output build per Azure Static Web Apps
 deploy_artifact/
+
+dist/
