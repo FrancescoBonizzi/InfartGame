@@ -1,0 +1,22 @@
+{
+  "name": "-infart",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc && vite",
+    "prod-build": "tsc && vite build",
+    "prod-preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.12",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "@pixi/sound": "^6.0.1",
+    "howler": "^2.2.4",
+    "navigo": "^8.11.1",
+    "pixi.js": "^8.6.2"
+  }
+}

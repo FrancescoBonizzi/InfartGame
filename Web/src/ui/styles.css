@@ -1,0 +1,233 @@
+:root {
+    --ink: #e5e7eb;
+    --accent: #22d3ee;
+    --fart: #FF6524;
+    --background: #0b1220;
+}
+
+/* Reset base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background: var(--background);
+}
+
+body {
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea, select {
+    font: inherit;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    color: var(--ink);
+    font: 500 16px/1.5 "Patrick Hand SC", "Comic Sans MS", cursive, sans-serif;
+}
+
+main, .menu, .score, .gameover {
+    min-height: 100vh;
+}
+
+.menu {
+    background: url("/assets/images/menu/infart-menu-background.png") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 128px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.title .in {
+    color: #ffffff;
+}
+
+.title .fart {
+    color: var(--fart);
+}
+
+.menu-content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+}
+
+.menu-content img {
+    width: 100%;
+    max-width: 500px;
+}
+
+.menu-actions {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    gap: 16px;
+}
+
+.button {
+    appearance: none;
+    border: 1px solid #334155;
+    background: var(--background);
+    color: var(--ink);
+    width: 250px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 32px;
+    display: inline-block;
+    text-align: center;
+}
+
+.button.primary {
+    background: var(--accent);
+    color: var(--background);
+}
+
+.button.fart {
+    background-color: var(--fart);
+    color: var(--background);
+}
+
+canvas {
+    display: block;
+    margin: 0 auto
+}
+
+.gameover {
+    background: url("/assets/images/menu/infart-gameover-background.png") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.score {
+    background: url("/assets/images/menu/infart-score-background.png") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.score-content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+}
+
+.score-second-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.score-table {
+    display: grid;
+    gap: 8px;
+    max-width: 600px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+}
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    background: var(--background);
+    gap: 32px;
+}
+
+.score-label {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.score-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* --- Animazioni --- */
+@keyframes slowPulseTitle {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.1); }
+}
+
+@keyframes slowPulseBtn {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.03); }
+}
+
+/* Titolo: pulse lento continuo */
+.title {
+    animation: slowPulseTitle 3s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform;
+}
+
+/* Pulsanti: pulse lento, con sfasamento */
+.button {
+    animation: slowPulseBtn 3s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform;
+}
+
+/* Stagger (sfasamento) sui singoli pulsanti */
+.menu-actions .button:nth-child(1) { animation-delay: 0s;   }
+.menu-actions .button:nth-child(2) { animation-delay: .2s; }
+.menu-actions .button:nth-child(3) { animation-delay: .4s; }
+.menu-actions .button:nth-child(4) { animation-delay: .6s; }
+
+/* Hover/focus: effetto secco */
+.menu-actions .button:hover,
+.menu-actions .button:focus-visible {
+    animation: none; /* blocca il pulse */
+    transform: scale(1.12) rotate(-1.5deg);
+}
+
+.menu-actions .button:nth-child(even):hover,
+.menu-actions .button:nth-child(even):focus-visible {
+    transform: scale(1.12) rotate(1.5deg);
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 60px;
+        margin-top: 32px;
+    }
+}

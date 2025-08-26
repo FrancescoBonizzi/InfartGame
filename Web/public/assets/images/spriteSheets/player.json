@@ -1,0 +1,987 @@
+{
+  "frames": {
+    "bang": {
+      "frame": {
+        "x": 824,
+        "y": 68,
+        "w": 251,
+        "h": 171
+      }
+    },
+    "broccoloParticle": {
+      "frame": {
+        "x": 1719,
+        "y": 542,
+        "w": 64,
+        "h": 64
+      }
+    },
+    "bean": {
+      "frame": {
+        "x": 2000,
+        "y": 105,
+        "w": 34,
+        "h": 48
+      }
+    },
+    "burger": {
+      "frame": {
+        "x": 1992,
+        "y": 2,
+        "w": 51,
+        "h": 43
+      }
+    },
+    "gameOver": {
+      "frame": {
+        "x": 824,
+        "y": 2,
+        "w": 400,
+        "h": 64
+      }
+    },
+    "jalapenoParticle": {
+      "frame": {
+        "x": 1077,
+        "y": 250,
+        "w": 128,
+        "h": 128
+      }
+    },
+    "jalapenos": {
+      "frame": {
+        "x": 1988,
+        "y": 301,
+        "w": 46,
+        "h": 61
+      }
+    },
+    "merda": {
+      "frame": {
+        "x": 1988,
+        "y": 254,
+        "w": 57,
+        "h": 45
+      }
+    },
+    "pause": {
+      "frame": {
+        "x": 1990,
+        "y": 152,
+        "w": 50,
+        "h": 50
+      }
+    },
+    "play": {
+      "frame": {
+        "x": 1992,
+        "y": 100,
+        "w": 50,
+        "h": 50
+      }
+    },
+    "record": {
+      "frame": {
+        "x": 1226,
+        "y": 2,
+        "w": 255,
+        "h": 223
+      }
+    },
+    "scoreggiaParticle": {
+      "frame": {
+        "x": 1719,
+        "y": 476,
+        "w": 64,
+        "h": 64
+      }
+    },
+    "stella": {
+      "frame": {
+        "x": 1990,
+        "y": 204,
+        "w": 48,
+        "h": 48
+      }
+    },
+    "verdura": {
+      "frame": {
+        "x": 1992,
+        "y": 47,
+        "w": 50,
+        "h": 51
+      }
+    },
+    "background": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 800,
+        "h": 1500
+      }
+    },
+    "death_screen": {
+      "frame": {
+        "x": 2,
+        "y": 1504,
+        "w": 800,
+        "h": 430
+      }
+    },
+    "nuvola1": {
+      "frame": {
+        "x": 1077,
+        "y": 182,
+        "w": 133,
+        "h": 66
+      }
+    },
+    "nuvola2": {
+      "frame": {
+        "x": 1630,
+        "y": 414,
+        "w": 161,
+        "h": 60
+      }
+    },
+    "nuvola3": {
+      "frame": {
+        "x": 1077,
+        "y": 68,
+        "w": 147,
+        "h": 112
+      }
+    },
+    "playerRun_0": {
+      "frame": {
+        "x": 1770,
+        "y": 616,
+        "w": 79,
+        "h": 94
+      }
+    },
+    "playerRun_1": {
+      "frame": {
+        "x": 1831,
+        "y": 722,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_2": {
+      "frame": {
+        "x": 1931,
+        "y": 702,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_3": {
+      "frame": {
+        "x": 1487,
+        "y": 922,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_4": {
+      "frame": {
+        "x": 1326,
+        "y": 833,
+        "w": 79,
+        "h": 94
+      }
+    },
+    "playerRun_5": {
+      "frame": {
+        "x": 1505,
+        "y": 616,
+        "w": 81,
+        "h": 92
+      }
+    },
+    "playerRun_6": {
+      "frame": {
+        "x": 1687,
+        "y": 608,
+        "w": 81,
+        "h": 96
+      }
+    },
+    "playerRun_7": {
+      "frame": {
+        "x": 1416,
+        "y": 812,
+        "w": 79,
+        "h": 96
+      }
+    },
+    "playerRun_8": {
+      "frame": {
+        "x": 1256,
+        "y": 529,
+        "w": 77,
+        "h": 96
+      }
+    },
+    "playerRun_9": {
+      "frame": {
+        "x": 1910,
+        "y": 798,
+        "w": 73,
+        "h": 94
+      }
+    },
+    "playerRun_10": {
+      "frame": {
+        "x": 1002,
+        "y": 651,
+        "w": 71,
+        "h": 92
+      }
+    },
+    "playerRun_11": {
+      "frame": {
+        "x": 1971,
+        "y": 416,
+        "w": 75,
+        "h": 92
+      }
+    },
+    "playerRun_12": {
+      "frame": {
+        "x": 1971,
+        "y": 510,
+        "w": 73,
+        "h": 94
+      }
+    },
+    "playerRun_13": {
+      "frame": {
+        "x": 1577,
+        "y": 874,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerRun_14": {
+      "frame": {
+        "x": 1245,
+        "y": 819,
+        "w": 79,
+        "h": 94
+      }
+    },
+    "playerRun_15": {
+      "frame": {
+        "x": 1162,
+        "y": 731,
+        "w": 81,
+        "h": 92
+      }
+    },
+    "playerRun_16": {
+      "frame": {
+        "x": 1335,
+        "y": 639,
+        "w": 81,
+        "h": 94
+      }
+    },
+    "playerRun_17": {
+      "frame": {
+        "x": 1335,
+        "y": 735,
+        "w": 79,
+        "h": 96
+      }
+    },
+    "playerRun_18": {
+      "frame": {
+        "x": 1418,
+        "y": 714,
+        "w": 79,
+        "h": 96
+      }
+    },
+    "playerRun_19": {
+      "frame": {
+        "x": 1256,
+        "y": 627,
+        "w": 77,
+        "h": 94
+      }
+    },
+    "playerIdle_0": {
+      "frame": {
+        "x": 1505,
+        "y": 710,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_1": {
+      "frame": {
+        "x": 995,
+        "y": 347,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_2": {
+      "frame": {
+        "x": 1667,
+        "y": 812,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_3": {
+      "frame": {
+        "x": 1751,
+        "y": 712,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_4": {
+      "frame": {
+        "x": 1851,
+        "y": 616,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_5": {
+      "frame": {
+        "x": 995,
+        "y": 241,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_6": {
+      "frame": {
+        "x": 1407,
+        "y": 910,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_7": {
+      "frame": {
+        "x": 1497,
+        "y": 816,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_8": {
+      "frame": {
+        "x": 1587,
+        "y": 768,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_9": {
+      "frame": {
+        "x": 1671,
+        "y": 706,
+        "w": 78,
+        "h": 104
+      }
+    },
+    "playerIdle_10": {
+      "frame": {
+        "x": 742,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_11": {
+      "frame": {
+        "x": 660,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_12": {
+      "frame": {
+        "x": 578,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_13": {
+      "frame": {
+        "x": 496,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_14": {
+      "frame": {
+        "x": 2,
+        "y": 1936,
+        "w": 82,
+        "h": 104
+      }
+    },
+    "playerIdle_15": {
+      "frame": {
+        "x": 414,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_16": {
+      "frame": {
+        "x": 332,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_17": {
+      "frame": {
+        "x": 250,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_18": {
+      "frame": {
+        "x": 168,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerIdle_19": {
+      "frame": {
+        "x": 86,
+        "y": 1936,
+        "w": 80,
+        "h": 104
+      }
+    },
+    "playerFall_0": {
+      "frame": {
+        "x": 1335,
+        "y": 435,
+        "w": 87,
+        "h": 102
+      }
+    },
+    "playerFall_1": {
+      "frame": {
+        "x": 1076,
+        "y": 584,
+        "w": 87,
+        "h": 100
+      }
+    },
+    "playerFall_2": {
+      "frame": {
+        "x": 1076,
+        "y": 482,
+        "w": 89,
+        "h": 100
+      }
+    },
+    "playerFall_3": {
+      "frame": {
+        "x": 1077,
+        "y": 380,
+        "w": 89,
+        "h": 100
+      }
+    },
+    "playerFall_4": {
+      "frame": {
+        "x": 1374,
+        "y": 331,
+        "w": 89,
+        "h": 102
+      }
+    },
+    "playerFall_5": {
+      "frame": {
+        "x": 1379,
+        "y": 227,
+        "w": 89,
+        "h": 102
+      }
+    },
+    "playerFall_6": {
+      "frame": {
+        "x": 1374,
+        "y": 331,
+        "w": 89,
+        "h": 102
+      }
+    },
+    "playerFall_7": {
+      "frame": {
+        "x": 1077,
+        "y": 380,
+        "w": 89,
+        "h": 100
+      }
+    },
+    "playerFall_8": {
+      "frame": {
+        "x": 1076,
+        "y": 482,
+        "w": 89,
+        "h": 100
+      }
+    },
+    "playerFall_9": {
+      "frame": {
+        "x": 1076,
+        "y": 584,
+        "w": 87,
+        "h": 100
+      }
+    },
+    "playerFart_0": {
+      "frame": {
+        "x": 991,
+        "y": 553,
+        "w": 83,
+        "h": 96
+      }
+    },
+    "playerFart_1": {
+      "frame": {
+        "x": 991,
+        "y": 453,
+        "w": 83,
+        "h": 98
+      }
+    },
+    "playerFart_2": {
+      "frame": {
+        "x": 1422,
+        "y": 616,
+        "w": 81,
+        "h": 96
+      }
+    },
+    "playerFart_3": {
+      "frame": {
+        "x": 1588,
+        "y": 674,
+        "w": 81,
+        "h": 92
+      }
+    },
+    "playerFart_4": {
+      "frame": {
+        "x": 1252,
+        "y": 723,
+        "w": 81,
+        "h": 94
+      }
+    },
+    "playerFart_5": {
+      "frame": {
+        "x": 1963,
+        "y": 606,
+        "w": 83,
+        "h": 94
+      }
+    },
+    "playerFart_6": {
+      "frame": {
+        "x": 1600,
+        "y": 576,
+        "w": 85,
+        "h": 96
+      }
+    },
+    "playerFart_7": {
+      "frame": {
+        "x": 1513,
+        "y": 516,
+        "w": 85,
+        "h": 98
+      }
+    },
+    "playerFart_8": {
+      "frame": {
+        "x": 1424,
+        "y": 516,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_9": {
+      "frame": {
+        "x": 1874,
+        "y": 516,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_10": {
+      "frame": {
+        "x": 1167,
+        "y": 529,
+        "w": 87,
+        "h": 100
+      }
+    },
+    "playerFart_11": {
+      "frame": {
+        "x": 1785,
+        "y": 516,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_12": {
+      "frame": {
+        "x": 1882,
+        "y": 416,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_13": {
+      "frame": {
+        "x": 1630,
+        "y": 476,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_14": {
+      "frame": {
+        "x": 1793,
+        "y": 416,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_15": {
+      "frame": {
+        "x": 913,
+        "y": 651,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_16": {
+      "frame": {
+        "x": 824,
+        "y": 651,
+        "w": 87,
+        "h": 98
+      }
+    },
+    "playerFart_17": {
+      "frame": {
+        "x": 1075,
+        "y": 686,
+        "w": 85,
+        "h": 98
+      }
+    },
+    "playerFart_18": {
+      "frame": {
+        "x": 1165,
+        "y": 631,
+        "w": 85,
+        "h": 98
+      }
+    },
+    "playerFart_19": {
+      "frame": {
+        "x": 1335,
+        "y": 539,
+        "w": 85,
+        "h": 98
+      }
+    },
+    "playerMerda_0": {
+      "frame": {
+        "x": 1483,
+        "y": 2,
+        "w": 169,
+        "h": 102
+      }
+    },
+    "playerMerda_1": {
+      "frame": {
+        "x": 824,
+        "y": 345,
+        "w": 169,
+        "h": 102
+      }
+    },
+    "playerMerda_2": {
+      "frame": {
+        "x": 1652,
+        "y": 208,
+        "w": 167,
+        "h": 100
+      }
+    },
+    "playerMerda_3": {
+      "frame": {
+        "x": 1821,
+        "y": 106,
+        "w": 167,
+        "h": 100
+      }
+    },
+    "playerMerda_4": {
+      "frame": {
+        "x": 1652,
+        "y": 106,
+        "w": 167,
+        "h": 100
+      }
+    },
+    "playerMerda_5": {
+      "frame": {
+        "x": 1168,
+        "y": 429,
+        "w": 165,
+        "h": 98
+      }
+    },
+    "playerMerda_6": {
+      "frame": {
+        "x": 824,
+        "y": 551,
+        "w": 165,
+        "h": 98
+      }
+    },
+    "playerMerda_7": {
+      "frame": {
+        "x": 1470,
+        "y": 314,
+        "w": 165,
+        "h": 98
+      }
+    },
+    "playerMerda_8": {
+      "frame": {
+        "x": 1207,
+        "y": 329,
+        "w": 165,
+        "h": 98
+      }
+    },
+    "playerMerda_9": {
+      "frame": {
+        "x": 824,
+        "y": 449,
+        "w": 165,
+        "h": 100
+      }
+    },
+    "playerMerda_10": {
+      "frame": {
+        "x": 1465,
+        "y": 414,
+        "w": 163,
+        "h": 100
+      }
+    },
+    "playerMerda_11": {
+      "frame": {
+        "x": 1212,
+        "y": 227,
+        "w": 165,
+        "h": 100
+      }
+    },
+    "playerMerda_12": {
+      "frame": {
+        "x": 1817,
+        "y": 312,
+        "w": 165,
+        "h": 102
+      }
+    },
+    "playerMerda_13": {
+      "frame": {
+        "x": 1650,
+        "y": 310,
+        "w": 165,
+        "h": 102
+      }
+    },
+    "playerMerda_14": {
+      "frame": {
+        "x": 1821,
+        "y": 208,
+        "w": 165,
+        "h": 102
+      }
+    },
+    "playerMerda_15": {
+      "frame": {
+        "x": 1483,
+        "y": 210,
+        "w": 165,
+        "h": 102
+      }
+    },
+    "playerMerda_16": {
+      "frame": {
+        "x": 1483,
+        "y": 106,
+        "w": 167,
+        "h": 102
+      }
+    },
+    "playerMerda_17": {
+      "frame": {
+        "x": 1823,
+        "y": 2,
+        "w": 167,
+        "h": 102
+      }
+    },
+    "playerMerda_18": {
+      "frame": {
+        "x": 1654,
+        "y": 2,
+        "w": 167,
+        "h": 102
+      }
+    },
+    "playerMerda_19": {
+      "frame": {
+        "x": 824,
+        "y": 241,
+        "w": 169,
+        "h": 102
+      }
+    }
+  },
+  "animations": {
+    "playerRun": [
+      "playerRun_0",
+      "playerRun_1",
+      "playerRun_2",
+      "playerRun_3",
+      "playerRun_4",
+      "playerRun_5",
+      "playerRun_6",
+      "playerRun_7",
+      "playerRun_8",
+      "playerRun_9",
+      "playerRun_10",
+      "playerRun_11",
+      "playerRun_12",
+      "playerRun_13",
+      "playerRun_14",
+      "playerRun_15",
+      "playerRun_16",
+      "playerRun_17",
+      "playerRun_18",
+      "playerRun_19"
+    ],
+    "playerIdle": [
+      "playerIdle_0",
+      "playerIdle_1",
+      "playerIdle_2",
+      "playerIdle_3",
+      "playerIdle_4",
+      "playerIdle_5",
+      "playerIdle_6",
+      "playerIdle_7",
+      "playerIdle_8",
+      "playerIdle_9",
+      "playerIdle_10",
+      "playerIdle_11",
+      "playerIdle_12",
+      "playerIdle_13",
+      "playerIdle_14",
+      "playerIdle_15",
+      "playerIdle_16",
+      "playerIdle_17",
+      "playerIdle_18",
+      "playerIdle_19"
+    ],
+    "playerFall": [
+      "playerFall_0",
+      "playerFall_1",
+      "playerFall_2",
+      "playerFall_3",
+      "playerFall_4",
+      "playerFall_5",
+      "playerFall_6",
+      "playerFall_7",
+      "playerFall_8",
+      "playerFall_9"
+    ],
+    "playerFart": [
+      "playerFart_0",
+      "playerFart_1",
+      "playerFart_2",
+      "playerFart_3",
+      "playerFart_4",
+      "playerFart_5",
+      "playerFart_6",
+      "playerFart_7",
+      "playerFart_8",
+      "playerFart_9",
+      "playerFart_10",
+      "playerFart_11",
+      "playerFart_12",
+      "playerFart_13",
+      "playerFart_14",
+      "playerFart_15",
+      "playerFart_16",
+      "playerFart_17",
+      "playerFart_18",
+      "playerFart_19"
+    ],
+    "playerMerda": [
+      "playerMerda_0",
+      "playerMerda_1",
+      "playerMerda_2",
+      "playerMerda_3",
+      "playerMerda_4",
+      "playerMerda_5",
+      "playerMerda_6",
+      "playerMerda_7",
+      "playerMerda_8",
+      "playerMerda_9",
+      "playerMerda_10",
+      "playerMerda_11",
+      "playerMerda_12",
+      "playerMerda_13",
+      "playerMerda_14",
+      "playerMerda_15",
+      "playerMerda_16",
+      "playerMerda_17",
+      "playerMerda_18",
+      "playerMerda_19"
+    ]
+  },
+  "meta": {
+    "image": "player.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 2048,
+      "h": 2048
+    },
+    "scale": 1
+  }
+}
