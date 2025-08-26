@@ -8,15 +8,17 @@ let app: Application | null = null;
 
 export async function initGame(container: HTMLElement) {
 
+    if (app) {
+        destroyGame();
+    }
+
     container.innerHTML = `
     <div id="game-container"></div>
   `;
 
-
-    const gameContainer = document.getElementById('game-container');
-
+    const gameContainer = container.querySelector<HTMLDivElement>("#game-container");
     if (!gameContainer) {
-        console.error('Game container non trovato!');
+        console.error("Game container non trovato");
         return;
     }
 
@@ -31,7 +33,7 @@ export async function initGame(container: HTMLElement) {
         autoDensity: true,
     });
 
-    document.body.appendChild(app.canvas);
+    gameContainer.appendChild(app.canvas);
 
     try {
         const loadingThing = new LoadingThing(app);
