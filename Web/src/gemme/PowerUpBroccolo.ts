@@ -27,14 +27,6 @@ class PowerUpBroccolo extends PowerUp {
         this._playerAnimation = assets.player.merda;
     }
 
-    override playActivationSound(soundManager: SoundManager) {
-        soundManager.playBroccolo();
-    }
-
-    override stopSound(soundManager: SoundManager) {
-        soundManager.stopBroccolo();
-    }
-
     override getPopupText(): string {
         return "Propulsione clorofilliana!";
     }

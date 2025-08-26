@@ -96,8 +96,14 @@ abstract class PowerUp extends Gemma {
     abstract getPlayerAnimation(): AnimatedSprite | null;
     abstract getPowerUpType(): PowerUpTypes;
     abstract getPopupText(): string;
-    abstract playActivationSound(soundManager: SoundManager): void;
-    abstract stopSound(soundManager: SoundManager): void;
+
+    playActivationSound(soundManager: SoundManager) {
+        soundManager.playPowerUp();
+    }
+
+    stopSound(soundManager: SoundManager) {
+        soundManager.stopePowerUp();
+    }
 
     public addParticles(where: Point) {
 

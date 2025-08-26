@@ -11,9 +11,7 @@ class SoundManager {
         fall: "/assets/sounds/effects/fall.mp3",
         heartbeat: "/assets/sounds/effects/heartbeat.mp3",
         explosion: "/assets/sounds/effects/explosion.mp3",
-        thunder: "/assets/sounds/effects/thunder.m4a",
-        truck: "/assets/sounds/effects/truck.m4a",
-        jalapeno: "/assets/sounds/effects/jalapeno.m4a",
+        powerup: "/assets/sounds/effects/powerup.mp3",
     };
 
     constructor() {
@@ -28,9 +26,7 @@ class SoundManager {
         this.sounds["fall"] = new Howl({src: [this.paths.fall]});
         this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});
         this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true});
-        this.sounds["thunder"] = new Howl({src: [this.paths.thunder]});
-        this.sounds["truck"] = new Howl({src: [this.paths.truck]});
-        this.sounds["jalapeno"] = new Howl({src: [this.paths.jalapeno]});
+        this.sounds["powerup"] = new Howl({src: [this.paths.powerup]});
     }
 
     // ---------- MUSICHE ----------
@@ -81,28 +77,12 @@ class SoundManager {
         this.sounds["explosion"]!.play();
     }
 
-    playBean() {
-        this.sounds["thunder"]!.play();
+    playPowerUp() {
+        this.sounds["powerup"]!.play();
     }
 
-    stopBean() {
-        this.sounds["thunder"]!.stop();
-    }
-
-    playBroccolo() {
-        this.sounds["truck"]!.play();
-    }
-
-    stopBroccolo() {
-        this.sounds["truck"]!.stop();
-    }
-
-    playJalapeno() {
-        this.sounds["jalapeno"]!.play();
-    }
-
-    stopJalapeno() {
-        this.sounds["jalapeno"]!.stop();
+    stopePowerUp() {
+        this.sounds["powerup"]!.stop();
     }
 
     async playHeartBeat() {

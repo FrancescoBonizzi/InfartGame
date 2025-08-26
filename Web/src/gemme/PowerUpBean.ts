@@ -23,14 +23,6 @@ class PowerUpBean extends PowerUp {
             () => new BeanParticleSystem(assets, world));
     }
 
-    override playActivationSound(soundManager: SoundManager) {
-        soundManager.playBean();
-    }
-
-    override stopSound(soundManager: SoundManager) {
-        soundManager.stopBean();
-    }
-
     override getPopupText(): string {
         return "Tornado intestinale!";
     }

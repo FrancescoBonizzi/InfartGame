@@ -23,14 +23,6 @@ class PowerUpJalapeno extends PowerUp {
             () => new JalapenoParticleSystem(assets, world));
     }
 
-    override playActivationSound(soundManager: SoundManager) {
-        soundManager.playJalapeno();
-    }
-
-    override stopSound(soundManager: SoundManager) {
-        soundManager.stopJalapeno();
-    }
-
     override getPopupText(): string {
         return "Fiammata rettale!";
     }
