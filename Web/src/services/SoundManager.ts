@@ -1,8 +1,7 @@
-import {Howl, Howler} from 'howler';
+import {Howl} from 'howler';
 
 class SoundManager {
     private sounds: Record<string, Howl> = {};
-    private unlocked = false;
 
     private paths = {
         musicMenu: "/assets/sounds/music/menu.mp3",
@@ -24,7 +23,7 @@ class SoundManager {
     private preload() {
         // carico i suoni principali
         this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true});
-        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true});
+        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.5});
         this.sounds["bite"] = new Howl({src: [this.paths.bite]});
         this.sounds["fall"] = new Howl({src: [this.paths.fall]});
         this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});
@@ -32,18 +31,13 @@ class SoundManager {
         this.sounds["thunder"] = new Howl({src: [this.paths.thunder], loop: true});
         this.sounds["truck"] = new Howl({src: [this.paths.truck], loop: true});
         this.sounds["jalapeno"] = new Howl({src: [this.paths.jalapeno], loop: true});
-
-        // farts caricati on-demand nei metodi
-    }
-
-    async unlock() {
-        if (this.unlocked) return;
-        await Howler.ctx.resume();
-        this.unlocked = true;
     }
 
     // ---------- MUSICHE ----------
     playMenuSoundTrack() {
+        if (this.sounds["musicMenu"]!.playing())
+            return;
+
         this.stopAllMusic();
         this.sounds["musicMenu"]!.play();
     }
@@ -91,12 +85,24 @@ class SoundManager {
         this.sounds["thunder"]!.play();
     }
 
+    stopBean() {
+        this.sounds["thunder"]!.stop();
+    }
+
     playBroccolo() {
         this.sounds["truck"]!.play();
     }
 
+    stopBroccolo() {
+        this.sounds["truck"]!.stop();
+    }
+
     playJalapeno() {
         this.sounds["jalapeno"]!.play();
+    }
+
+    stopJalapeno() {
+        this.sounds["jalapeno"]!.stop();
     }
 
     async playHeartBeat() {

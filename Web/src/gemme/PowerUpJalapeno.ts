@@ -27,6 +27,10 @@ class PowerUpJalapeno extends PowerUp {
         soundManager.playJalapeno();
     }
 
+    override stopSound(soundManager: SoundManager) {
+        soundManager.stopJalapeno();
+    }
+
     override getPopupText(): string {
         return "Fiammata rettale!";
     }

@@ -31,6 +31,10 @@ class PowerUpBroccolo extends PowerUp {
         soundManager.playBroccolo();
     }
 
+    override stopSound(soundManager: SoundManager) {
+        soundManager.stopBroccolo();
+    }
+
     override getPopupText(): string {
         return "Propulsione clorofilliana!";
     }

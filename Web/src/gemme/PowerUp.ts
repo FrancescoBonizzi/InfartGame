@@ -59,8 +59,10 @@ abstract class PowerUp extends Gemma {
         }
 
         const isExpired = this.isPowerUpTimeExpired();
-        if (isExpired)
+        if (isExpired) {
             this._popupText?.destroy();
+            this.stopSound(this._soundManager);
+        }
         return isExpired;
     }
 
@@ -95,6 +97,7 @@ abstract class PowerUp extends Gemma {
     abstract getPowerUpType(): PowerUpTypes;
     abstract getPopupText(): string;
     abstract playActivationSound(soundManager: SoundManager): void;
+    abstract stopSound(soundManager: SoundManager): void;
 
     public addParticles(where: Point) {
 

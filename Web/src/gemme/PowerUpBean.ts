@@ -27,6 +27,10 @@ class PowerUpBean extends PowerUp {
         soundManager.playBean();
     }
 
+    override stopSound(soundManager: SoundManager) {
+        soundManager.stopBean();
+    }
+
     override getPopupText(): string {
         return "Tornado intestinale!";
     }
