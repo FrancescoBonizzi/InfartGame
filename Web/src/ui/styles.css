@@ -53,7 +53,7 @@ html, body {
     font: 500 16px/1.5 "Patrick Hand SC", "Comic Sans MS", cursive, sans-serif;
 }
 
-main, .menu, .score {
+main, .menu, .score, .gameover {
     min-height: 100vh;
 }
 

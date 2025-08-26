@@ -14,17 +14,17 @@ export function renderScorePage(container: HTMLElement) {
                 <div class="score-table">
                     <div class="score-row">
                         <div class="score-label">Scoregge scoreggiate:</div>
-                        <div class="score-value" id="score-farts">0</div>
+                        <div class="score-value" id="score-farts">${ScoreRepository.getScore('farts', 'record')}</div>
                     </div>
                     
                       <div class="score-row">
                         <div class="score-label">Verdure digerite:</div>
-                        <div class="score-value" id="score-vegetables">0</div>
+                        <div class="score-value" id="score-vegetables">${ScoreRepository.getScore('vegetables', 'record')}</div>
                     </div>
                     
                     <div class="score-row">
                         <div class="score-label">Metri percorsi:</div>
-                        <div class="score-value" id="score-meters">0</div>
+                        <div class="score-value" id="score-meters">${ScoreRepository.getScore('meters', 'record')}</div>
                     </div>
                 </div>
                 
@@ -36,10 +36,6 @@ export function renderScorePage(container: HTMLElement) {
       
     </main>
   `;
-
-    document.getElementById('score-farts')!.textContent = ScoreRepository.getFarts().toString();
-    document.getElementById('score-vegetables')!.textContent = ScoreRepository.getVegetablesEaten().toString();
-    document.getElementById('score-meters')!.textContent = ScoreRepository.getMeters().toString();
 
     router.updatePageLinks();
 }

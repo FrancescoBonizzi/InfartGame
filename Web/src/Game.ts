@@ -12,6 +12,7 @@ import GemmeManager from "./gemme/GemmeManager.ts";
 import InfartExplosion from "./particleEmitters/InfartExplosion.ts";
 import Hud from "./hud/Hud.ts";
 import ScoreRepository from "./services/ScoreRepository.ts";
+import router from "./pages/router.ts";
 
 class Game {
 
@@ -27,7 +28,7 @@ class Game {
     private readonly _hud: Hud;
 
     private _score: number = 0;
-    private _isPaused: boolean = false;
+    private _isGameOverTimeoutStarted = false;
 
     constructor(
         assets: InfartAssets,
@@ -67,14 +68,6 @@ class Game {
             this._camera,
             this._player,
             this._foreground);
-    }
-
-    set isPaused(value: boolean) {
-        this._isPaused = value;
-    }
-
-    get isPaused(): boolean {
-        return this._isPaused;
     }
 
     private _heightK = 0;
@@ -136,12 +129,6 @@ class Game {
 
         if (this._controller.consumeKeyPress('space')) {
             this._player.jump();
-        } else if (this._controller.consumeKeyPress('KeyP')) {
-            this._isPaused = !this._isPaused;
-        }
-
-        if (this._isPaused) {
-            return;
         }
 
         this.repositionCamera();
@@ -155,11 +142,20 @@ class Game {
         this._gemmeManager.update(time);
         this._infartExplosion.update(time);
 
-        if (this._player.isDead) {
-            // TODO: andare alla pagina gameover dopo tot secondi
-            ScoreRepository.setMeters(this._score);
-            ScoreRepository.setVegetablesEaten(this._gemmeManager.totalVegetablesEaten);
-            ScoreRepository.setFarts(this._player.totalFarts);
+        if (this._player.isDead && !this._isGameOverTimeoutStarted) {
+
+            ScoreRepository.setScore('meters', 'record', this._score);
+            ScoreRepository.setScore( 'vegetables', 'record',this._gemmeManager.totalVegetablesEaten);
+            ScoreRepository.setScore( 'farts', 'record', this._player.totalFarts);
+            ScoreRepository.setScore('meters', 'gameover', this._score);
+            ScoreRepository.setScore( 'vegetables', 'gameover',this._gemmeManager.totalVegetablesEaten);
+            ScoreRepository.setScore( 'farts', 'gameover', this._player.totalFarts);
+
+            setTimeout(() => {
+                router.navigate(`/gameover`);
+            }, 5000);
+
+            this._isGameOverTimeoutStarted = true;
         }
     }
 

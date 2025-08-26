@@ -1,6 +1,5 @@
 # Feature
 - [ ] Suoni -> potrei anche farli tutti gestire dall'html, con new Audio ecc!
-- [ ] Pagina di gameover e navigazione ad essa
 - [ ] Musica nel menù!
 
 # Fix

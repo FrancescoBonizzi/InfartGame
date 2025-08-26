@@ -1,42 +1,22 @@
 import stringHelper from "./StringHelper.ts";
 
-const METERS_KEY = 'infart-meters';
-const FARTS_KEY = 'infart-farts';
-const VEGETABLES_EATEN_KEY = 'infart-vegetables';
+const ScorePrefix = 'infart-score';
+export type ScoreType = 'meters' | 'farts' | 'vegetables';
+export type ScoreSource = 'gameover' | 'record';
 
-const getMeters = () => toNumberOr0(localStorage.getItem(METERS_KEY));
-const getFarts = () => toNumberOr0(localStorage.getItem(FARTS_KEY));
-const getVegetablesEaten = () => toNumberOr0(localStorage.getItem(VEGETABLES_EATEN_KEY));
+const makeKey = (type: ScoreType, source: ScoreSource) => `${ScorePrefix}-${source}-${type}`;
 
 export default {
-    setMeters: (meters: number) => {
-        const storedMeters = getMeters();
-        if (meters > storedMeters) {
-            localStorage.setItem(METERS_KEY, meters.toString());
-        }
+    getScore: (type: ScoreType, source: ScoreSource) => {
+        const key = makeKey(type, source);
+        return toNumberOr0(localStorage.getItem(key));
     },
 
-    getMeters: getMeters,
-
-    setFarts: (farts: number) => {
-        const storedFarts = getFarts();
-        if (farts > storedFarts) {
-            localStorage.setItem(FARTS_KEY, farts.toString());
-        }
-    },
-
-    getFarts: getFarts,
-
-    setVegetablesEaten: (vegetablesEaten: number) => {
-        const storedVegetablesEaten = getVegetablesEaten();
-        if (vegetablesEaten > storedVegetablesEaten) {
-            localStorage.setItem(VEGETABLES_EATEN_KEY, vegetablesEaten.toString());
-        }
-    },
-
-    getVegetablesEaten: getVegetablesEaten
+    setScore: (type: ScoreType, source: ScoreSource, value: number) => {
+        const key = makeKey(type, source);
+        localStorage.setItem(key, value.toString());
+    }
 }
-
 
 const toNumberOr0 = (value: string | null | undefined): number => {
     if (stringHelper.isNullOrWhitespace(value)) {
