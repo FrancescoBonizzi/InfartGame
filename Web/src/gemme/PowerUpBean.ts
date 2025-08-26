@@ -4,12 +4,14 @@ import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BeanParticleSystem from "../particleEmitters/BeanParticleSystem.ts";
 import PowerUpTypes from "./PowerUpTypes.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 class PowerUpBean extends PowerUp {
 
     constructor(
         world: Camera,
         assets: InfartAssets,
+        soundManager: SoundManager,
         position: Point) {
 
         super(
@@ -17,7 +19,12 @@ class PowerUpBean extends PowerUp {
             assets.textures.bean,
             assets,
             position,
+            soundManager,
             () => new BeanParticleSystem(assets, world));
+    }
+
+    override playActivationSound(soundManager: SoundManager) {
+        soundManager.playBean();
     }
 
     override getPopupText(): string {

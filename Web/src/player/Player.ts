@@ -269,7 +269,7 @@ class Player implements IHasCollisionRectangle {
         }
 
         if (this._position.y > 0) {
-            // TODO: Suono fall
+            this._soundManager.playFall();
             this.die(false);
         }
 

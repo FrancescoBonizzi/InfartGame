@@ -67,7 +67,8 @@ class Game {
             assets,
             this._camera,
             this._player,
-            this._foreground);
+            this._foreground,
+            this._soundManager);
     }
 
     private _heightK = 0;

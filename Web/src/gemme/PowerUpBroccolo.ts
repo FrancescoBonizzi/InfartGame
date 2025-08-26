@@ -4,6 +4,7 @@ import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import BroccoloParticleSystem from "../particleEmitters/BroccoloParticleSystem.ts";
 import PowerUpTypes from "./PowerUpTypes.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 class PowerUpBroccolo extends PowerUp {
 
@@ -12,6 +13,7 @@ class PowerUpBroccolo extends PowerUp {
     constructor(
         world: Camera,
         assets: InfartAssets,
+        soundManager: SoundManager,
         position: Point) {
 
         super(
@@ -19,9 +21,14 @@ class PowerUpBroccolo extends PowerUp {
             assets.textures.verdura,
             assets,
             position,
+            soundManager,
             () => new BroccoloParticleSystem(assets, world));
 
         this._playerAnimation = assets.player.merda;
+    }
+
+    override playActivationSound(soundManager: SoundManager) {
+        soundManager.playBroccolo();
     }
 
     override getPopupText(): string {

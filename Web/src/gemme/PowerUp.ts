@@ -5,22 +5,25 @@ import ParticleSystem, {deallocateEmptyParticleSystems} from "../particleEmitter
 import PowerUpTypes from "./PowerUpTypes.ts";
 import InfartAssets from "../assets/InfartAssets.ts";
 import PopupText from "../hud/PopupText.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 abstract class PowerUp extends Gemma {
 
     private readonly _particleSystemFactory: () => ParticleSystem;
+    private readonly _assets: InfartAssets;
+    private readonly _soundManager: SoundManager;
 
     private _particleSystems: ParticleSystem[];
     private _hasBeenActivatedByPlayer: boolean = false;
     private _lastParticleEmissionTime: number = 0;
     private _popupText: PopupText | null = null;
-    private readonly _assets: InfartAssets;
 
     protected constructor(
         camera: Camera,
         texture: Texture,
         assets: InfartAssets,
         position: Point,
+        soundManager: SoundManager,
         particleSystemFactory: () => ParticleSystem) {
 
         super(camera, texture, position);
@@ -28,6 +31,7 @@ abstract class PowerUp extends Gemma {
         this._particleSystems = [];
         this._particleSystemFactory = particleSystemFactory;
         this._assets = assets;
+        this._soundManager = soundManager;
     }
 
     override update(time: Ticker) {
@@ -72,7 +76,9 @@ abstract class PowerUp extends Gemma {
                 this.sprite.position.y - 50),
             this.getPopupText(),
             this.getFillColor()
-        )
+        );
+
+        this.playActivationSound(this._soundManager);
     }
 
     public get hasBeenActivatedByPlayer() {
@@ -88,6 +94,7 @@ abstract class PowerUp extends Gemma {
     abstract getPlayerAnimation(): AnimatedSprite | null;
     abstract getPowerUpType(): PowerUpTypes;
     abstract getPopupText(): string;
+    abstract playActivationSound(soundManager: SoundManager): void;
 
     public addParticles(where: Point) {
 

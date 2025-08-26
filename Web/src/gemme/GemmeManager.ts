@@ -12,6 +12,7 @@ import Foreground from "../background/Foreground.ts";
 import PowerUpJalapeno from "./PowerUpJalapeno.ts";
 import PowerUpBean from "./PowerUpBean.ts";
 import PowerUpBroccolo from "./PowerUpBroccolo.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 class GemmeManager {
 
@@ -23,6 +24,7 @@ class GemmeManager {
     private readonly _powerUpProbability = 0.8;
     private readonly _assets: InfartAssets;
     private readonly _player: Player;
+    private readonly _soundManager: SoundManager;
 
     private _hambugers: Hamburger[];
     private _activePowerup: PowerUp | null;
@@ -33,7 +35,8 @@ class GemmeManager {
         assets: InfartAssets,
         camera: Camera,
         player: Player,
-        foreground: Foreground) {
+        foreground: Foreground,
+        soundManager: SoundManager) {
 
         this._camera = camera;
         this._hambugers = [];
@@ -41,6 +44,7 @@ class GemmeManager {
         this._hamburgerTexture = assets.textures.burger;
         this._activePowerup = null;
         this._player = player;
+        this._soundManager = soundManager;
 
         foreground.onGrattacieloGeneratoHandler = this.onGrattacieloGeneratoHandler.bind(this);
         foreground.drawnGrattacieli
@@ -75,18 +79,21 @@ class GemmeManager {
                 return new PowerUpJalapeno(
                     this._camera,
                     this._assets,
+                    this._soundManager,
                     where
                 );
             case PowerUpTypes.Bean:
                 return new PowerUpBean(
                     this._camera,
                     this._assets,
+                    this._soundManager,
                     where
                 );
             case PowerUpTypes.Broccolo:
                 return new PowerUpBroccolo(
                     this._camera,
                     this._assets,
+                    this._soundManager,
                     where
                 );
         }

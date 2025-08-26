@@ -4,12 +4,14 @@ import {AnimatedSprite, Point} from "pixi.js";
 import InfartAssets from "../assets/InfartAssets.ts";
 import JalapenoParticleSystem from "../particleEmitters/JalapenoParticleSystem.ts";
 import PowerUpTypes from "./PowerUpTypes.ts";
+import SoundManager from "../services/SoundManager.ts";
 
 class PowerUpJalapeno extends PowerUp {
 
     constructor(
         world: Camera,
         assets: InfartAssets,
+        soundManager: SoundManager,
         position: Point) {
 
         super(
@@ -17,7 +19,12 @@ class PowerUpJalapeno extends PowerUp {
             assets.textures.jalapenos,
             assets,
             position,
+            soundManager,
             () => new JalapenoParticleSystem(assets, world));
+    }
+
+    override playActivationSound(soundManager: SoundManager) {
+        soundManager.playJalapeno();
     }
 
     override getPopupText(): string {

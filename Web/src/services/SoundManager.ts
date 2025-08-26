@@ -1,31 +1,243 @@
+// SoundManager.ts
+type OneShot = { stop: () => void; tag?: string };
+
 class SoundManager {
+    private ctx: AudioContext;
+    private readonly master: GainNode;
+    private readonly musicBus: GainNode;
+    private readonly sfxBus: GainNode;
+
+    private currentMusic?: { el: HTMLAudioElement; src: MediaElementAudioSourceNode; gain: GainNode; url: string };
+    private unlocked = false;
+
+    private buffers = new Map<string, AudioBuffer>();
+    private activeSfx = new Set<AudioNode>();
+    private heartbeat?: { src: AudioBufferSourceNode; gain: GainNode } | null = null;
+
+    private paths = {
+        musicMenu: "/assets/music/menu.mp3",
+        musicGame: "/assets/music/game.mp3",
+        fart: (n: number) => `/assets/sounds/farts/fart${n}.mp3`,
+        bite: "/assets/sounds/effects/bite.mp3",
+        fall: "/assets/sounds/effects/fall.mp3",
+        heartbeat: "/assets/sounds/effects/heartbeat.mp3",
+        explosion: "/assets/sounds/effects/explosion.mp3",
+        thunder: "/assets/sounds/effects/thunder.mp3",
+        truck: "/assets/sounds/effects/truck.mp3",
+        jalapeno: "/assets/sounds/effects/jalapeno.mp3",
+    };
 
     constructor() {
-        // TODO
+        this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        this.master = this.ctx.createGain();
+        this.musicBus = this.ctx.createGain();
+        this.sfxBus = this.ctx.createGain();
+
+        this.musicBus.connect(this.master);
+        this.sfxBus.connect(this.master);
+        this.master.connect(this.ctx.destination);
+
+        this.master.gain.value = 1;
+        this.musicBus.gain.value = 1;
+        this.sfxBus.gain.value = 1;
     }
 
-    playFart() {
-        // TODO
+    // Sblocca l'audio al primo gesto utente
+    async unlock() {
+        if (this.unlocked) return;
+        if (this.ctx.state !== "running")
+            await this.ctx.resume();
+        this.unlocked = true;
+    }
+
+    // --- Volume globali (opzionali) ---
+    setMasterVolume(v: number) {
+        this.master.gain.value = v;
+    }
+
+    setMusicVolume(v: number) {
+        this.musicBus.gain.value = v;
+    }
+
+    setSfxVolume(v: number) {
+        this.sfxBus.gain.value = v;
+    }
+
+    // ---------- MUSICHE ----------
+    async playMenuSoundTrack() {
+        await this.crossfadeTo(this.paths.musicMenu, 1.2, 0.9);
+    }
+
+    async playGameSoundTrack() {
+        await this.crossfadeTo(this.paths.musicGame, 1.2, 0.9);
+    }
+
+    private async crossfadeTo(url: string, seconds = 1.2, volume = 1) {
+        if (this.currentMusic?.url === url) return;
+
+        const next = this.createMusicNode(url, volume);
+        next.gain.gain.setValueAtTime(0, this.ctx.currentTime);
+        next.el.play().catch(() => { /* ignorare errori di autoplay se non sbloccato */
+        });
+
+        const now = this.ctx.currentTime;
+        const end = now + seconds;
+
+        if (this.currentMusic) {
+            // fade out
+            this.currentMusic.gain.gain.cancelScheduledValues(now);
+            this.currentMusic.gain.gain.setValueAtTime(this.currentMusic.gain.gain.value, now);
+            this.currentMusic.gain.gain.linearRampToValueAtTime(0, end);
+        }
+
+        // fade in
+        next.gain.gain.linearRampToValueAtTime(volume, end);
+
+        // switch e cleanup dopo il fade
+        setTimeout(() => {
+            if (this.currentMusic) {
+                this.currentMusic.el.pause();
+                this.currentMusic.src.disconnect();
+                this.currentMusic.gain.disconnect();
+            }
+            this.currentMusic = next;
+        }, seconds * 1000 + 30);
+    }
+
+    private createMusicNode(url: string, volume: number) {
+        const el = new Audio(url);
+        el.loop = true;
+        el.preload = "auto";
+        const src = this.ctx.createMediaElementSource(el);
+        const gain = this.ctx.createGain();
+        gain.gain.value = volume;
+        src.connect(gain);
+        gain.connect(this.musicBus);
+        return {el, src, gain, url};
+    }
+
+    // ---------- EFFETTI (SFX) ----------
+    async playFall() {
+        await this.playOneShot(this.paths.fall, {volume: 1, tag: "fall"});
+    }
+
+    async playFart() {
+        const n = (Math.floor(Math.random() * 7) + 1);
+        await this.playOneShot(this.paths.fart(n), {volume: 1, tag: "fart"});
     }
 
     stopFart() {
-        // TODO
+        // interrompe tutti i fart attivi
+        this.stopByTag("fart");
     }
 
-    playBite() {
-        // TODO
+    async playBite() {
+        await this.playOneShot(this.paths.bite, {volume: 1, tag: "bite"});
     }
 
-    playHeartBeat() {
-// TODO
+    async playExplosion() {
+        await this.playOneShot(this.paths.explosion, {volume: 1, tag: "explosion"});
+    }
+
+    async playBean() {
+        await this.playOneShot(this.paths.thunder, {volume: 0.5, tag: "bean"});
+    }
+
+    async playBroccolo() {
+        await this.playOneShot(this.paths.truck, {volume: 0.5, tag: "truck"});
+    }
+
+    async playJalapeno() {
+        await this.playOneShot(this.paths.jalapeno, {volume: 0.5, tag: "jalapeno"});
+    }
+
+    async playHeartBeat() {
+        if (this.heartbeat) return; // già attivo
+        const buf = await this.getBuffer(this.paths.heartbeat);
+        const src = this.ctx.createBufferSource();
+        src.buffer = buf;
+        src.loop = true;
+
+        const gain = this.ctx.createGain();
+        gain.gain.value = 0.9;
+
+        src.connect(gain);
+        gain.connect(this.sfxBus);
+        src.start();
+
+        this.heartbeat = {src, gain};
     }
 
     stopHeartBeat() {
-// TODO
+        if (!this.heartbeat) return;
+        try {
+            this.heartbeat.src.stop();
+        } catch {
+        }
+        this.heartbeat.src.disconnect();
+        this.heartbeat.gain.disconnect();
+        this.heartbeat = null;
     }
 
-    playExplosion() {
+    // ---------- Utility interne ----------
+    private async playOneShot(url: string, opts: { volume?: number; tag?: string } = {}): Promise<OneShot> {
+        const buf = await this.getBuffer(url);
+        const src = this.ctx.createBufferSource();
+        src.buffer = buf;
 
+        const gain = this.ctx.createGain();
+        gain.gain.value = opts.volume ?? 1;
+
+        src.connect(gain);
+        gain.connect(this.sfxBus);
+        src.start();
+
+        // tracking per stopByTag/cleanup
+        this.activeSfx.add(gain);
+        const onEnded = () => {
+            this.activeSfx.delete(gain);
+            src.removeEventListener("ended", onEnded);
+            src.disconnect();
+            gain.disconnect();
+        };
+        src.addEventListener("ended", onEnded);
+
+        // Attacca la tag al nodo gain via (any) per lookup
+        (gain as any).__tag = opts.tag;
+
+        return {
+            tag: opts.tag!,
+            stop: () => {
+                try {
+                    src.stop();
+                } catch {
+                }
+            }
+        };
+    }
+
+    private stopByTag(tag: string) {
+        for (const node of Array.from(this.activeSfx)) {
+            if ((node as any).__tag === tag) {
+                try { /* il nodo precedente è il BufferSource; fermiamo via gain non possibile, quindi no-op */
+                } catch {
+                }
+                // non abbiamo riferimento diretto alla source qui; lasciamo che scada naturalmente
+                // alternativa: salvare anche la source; per semplicità, riduci a zero subito:
+                (node as GainNode).gain.setTargetAtTime(0, this.ctx.currentTime, 0.01);
+                this.activeSfx.delete(node);
+            }
+        }
+    }
+
+    private async getBuffer(url: string): Promise<AudioBuffer> {
+        const cached = this.buffers.get(url);
+        if (cached) return cached;
+        const res = await fetch(url);
+        const arr = await res.arrayBuffer();
+        const buf = await this.ctx.decodeAudioData(arr);
+        this.buffers.set(url, buf);
+        return buf;
     }
 }
 
