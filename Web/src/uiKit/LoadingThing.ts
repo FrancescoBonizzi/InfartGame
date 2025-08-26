@@ -17,7 +17,7 @@ class LoadingThing {
         this._loadingText = new Text({
             text: text,
             style: {
-                fontSize: 40,
+                fontSize: 44,
                 fontWeight: 'bold',
                 fill: {color: '#ffffff'},
             }

@@ -26,7 +26,7 @@ class PopupText {
             text: message,
             style: {
                 fontFamily: assets.fontName,
-                fontSize: 40,
+                fontSize: 44,
                 fill: { color: color },
                 stroke: { color: "#000000", width: 3 },
                 align: "center",

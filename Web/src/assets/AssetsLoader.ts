@@ -86,10 +86,10 @@ export const loadAssets = async (): Promise<InfartAssets> => {
 const loadFont = async () => {
 
     const bundleName = 'fonts';
-    const fontName = 'Arial Rounded Bold';
+    const fontName = 'Patrick Hand SC';
 
     Assets.addBundle(bundleName, [
-        { alias: fontName, src: `${_fontsAssetsRoot}/Arial Rounded Bold.ttf` }
+        { alias: fontName, src: `${_fontsAssetsRoot}/PatrickHandSC-Regular.ttf` }
     ]);
 
     await Assets.loadBundle(bundleName);

@@ -14,7 +14,7 @@ class HudText {
         this._text = new Text({
             style: {
                 fontFamily: assets.fontName,
-                fontSize: 20,
+                fontSize: 24,
                 fill: {color: '#ffffff'},
             }
         });
