@@ -1,18 +1,8 @@
-// SoundManager.ts
-type OneShot = { stop: () => void; tag?: string };
+import {Howl, Howler} from 'howler';
 
 class SoundManager {
-    private ctx: AudioContext;
-    private readonly master: GainNode;
-    private readonly musicBus: GainNode;
-    private readonly sfxBus: GainNode;
-
-    private loops = new Map<string, { src: AudioBufferSourceNode; gain: GainNode; tag: string | undefined }>();
+    private sounds: Record<string, Howl> = {};
     private unlocked = false;
-
-    private buffers = new Map<string, AudioBuffer>();
-    private activeSfx = new Set<AudioNode>();
-    private heartbeat?: { src: AudioBufferSourceNode; gain: GainNode } | null = null;
 
     private paths = {
         musicMenu: "/assets/sounds/music/menu.mp3",
@@ -28,193 +18,95 @@ class SoundManager {
     };
 
     constructor() {
-        this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-        this.master = this.ctx.createGain();
-        this.musicBus = this.ctx.createGain();
-        this.sfxBus = this.ctx.createGain();
-
-        this.musicBus.connect(this.master);
-        this.sfxBus.connect(this.master);
-        this.master.connect(this.ctx.destination);
-
-        this.master.gain.value = 1;
-        this.musicBus.gain.value = 1;
-        this.sfxBus.gain.value = 1;
+        this.preload();
     }
 
-    // Sblocca l'audio al primo gesto utente
+    private preload() {
+        // carico i suoni principali
+        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true});
+        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true});
+        this.sounds["bite"] = new Howl({src: [this.paths.bite]});
+        this.sounds["fall"] = new Howl({src: [this.paths.fall]});
+        this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});
+        this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true});
+        this.sounds["thunder"] = new Howl({src: [this.paths.thunder], loop: true});
+        this.sounds["truck"] = new Howl({src: [this.paths.truck], loop: true});
+        this.sounds["jalapeno"] = new Howl({src: [this.paths.jalapeno], loop: true});
+
+        // farts caricati on-demand nei metodi
+    }
+
     async unlock() {
         if (this.unlocked) return;
-        if (this.ctx.state !== "running")
-            await this.ctx.resume();
+        await Howler.ctx.resume();
         this.unlocked = true;
     }
 
     // ---------- MUSICHE ----------
     playMenuSoundTrack() {
-        void this.playLoop(this.paths.musicMenu);
+        this.stopAllMusic();
+        this.sounds["musicMenu"]!.play();
     }
 
     playGameSoundTrack() {
-        void this.playLoop(this.paths.musicGame);
+        this.stopAllMusic();
+        this.sounds["musicGame"]!.play();
     }
 
+    private stopAllMusic() {
+        this.sounds["musicMenu"]!.stop();
+        this.sounds["musicGame"]!.stop();
+    }
 
-    // ---------- EFFETTI (SFX) ----------
+    // ---------- EFFETTI ----------
     playFall() {
-        void this.playOneShot(this.paths.fall, {volume: 1, tag: "fall"});
+        this.sounds["fall"]!.play();
     }
 
     playFart() {
-        const n = (Math.floor(Math.random() * 7) + 1);
-        void this.playOneShot(this.paths.fart(n), {volume: 1, tag: "fart"});
+        const n = Math.floor(Math.random() * 7) + 1;
+        const key = `fart${n}`;
+        if (!this.sounds[key]) {
+            this.sounds[key] = new Howl({src: [this.paths.fart(n)]});
+        }
+        this.sounds[key].play();
     }
 
     stopFart() {
-        // interrompe tutti i fart attivi
-        this.stopByTag("fart");
+        for (let n = 1; n <= 7; n++) {
+            const key = `fart${n}`;
+            this.sounds[key]?.stop();
+        }
     }
 
     playBite() {
-        void this.playOneShot(this.paths.bite, {volume: 1, tag: "bite"});
+        this.sounds["bite"]!.play();
     }
 
     playExplosion() {
-        void this.playOneShot(this.paths.explosion, {volume: 1, tag: "explosion"});
+        this.sounds["explosion"]!.play();
     }
 
     playBean() {
-        void this.playLoop(this.paths.thunder, {volume: 0.5, tag: "bean"});
+        this.sounds["thunder"]!.play();
     }
 
     playBroccolo() {
-        void this.playLoop(this.paths.truck, {volume: 0.5, tag: "truck"});
+        this.sounds["truck"]!.play();
     }
 
     playJalapeno() {
-        void this.playLoop(this.paths.jalapeno, {volume: 0.5, tag: "jalapeno"});
+        this.sounds["jalapeno"]!.play();
     }
 
-
     async playHeartBeat() {
-        if (this.heartbeat) return; // già attivo
-        const buf = await this.getBuffer(this.paths.heartbeat);
-        const src = this.ctx.createBufferSource();
-        src.buffer = buf;
-        src.loop = true;
-
-        const gain = this.ctx.createGain();
-        gain.gain.value = 0.9;
-
-        src.connect(gain);
-        gain.connect(this.sfxBus);
-        src.start();
-
-        this.heartbeat = {src, gain};
+        if (!this.sounds["heartbeat"]!.playing()) {
+            this.sounds["heartbeat"]!.play();
+        }
     }
 
     stopHeartBeat() {
-        if (!this.heartbeat) return;
-        try {
-            this.heartbeat.src.stop();
-        } catch {
-        }
-        this.heartbeat.src.disconnect();
-        this.heartbeat.gain.disconnect();
-        this.heartbeat = null;
-    }
-
-    // ---------- Utility interne ----------
-    private async playOneShot(url: string, opts: { volume?: number; tag?: string } = {}): Promise<OneShot> {
-        const buf = await this.getBuffer(url);
-        const src = this.ctx.createBufferSource();
-        src.buffer = buf;
-
-        const gain = this.ctx.createGain();
-        gain.gain.value = opts.volume ?? 1;
-
-        src.connect(gain);
-        gain.connect(this.sfxBus);
-        src.start();
-
-        // tracking per stopByTag/cleanup
-        this.activeSfx.add(gain);
-        const onEnded = () => {
-            this.activeSfx.delete(gain);
-            src.removeEventListener("ended", onEnded);
-            src.disconnect();
-            gain.disconnect();
-        };
-        src.addEventListener("ended", onEnded);
-
-        // Attacca la tag al nodo gain via (any) per lookup
-        (gain as any).__tag = opts.tag;
-
-        return {
-            tag: opts.tag!,
-            stop: () => {
-                try {
-                    src.stop();
-                } catch {
-                }
-            }
-        };
-    }
-
-    private async playLoop(url: string, opts: { volume?: number; tag?: string } = {}): Promise<{ stop: () => void }> {
-        const buf = await this.getBuffer(url);
-        const src = this.ctx.createBufferSource();
-        src.buffer = buf;
-        src.loop = true;
-
-        const gain = this.ctx.createGain();
-        gain.gain.value = opts.volume ?? 1;
-
-        src.connect(gain);
-        gain.connect(this.sfxBus);
-        src.start();
-
-        // chiave per identificare univocamente il loop
-        const key = `${opts.tag ?? url}::${performance.now()}`;
-        this.loops.set(key, { src, gain, tag: opts.tag });
-
-        const stop = () => {
-            const entry = this.loops.get(key);
-            if (!entry) return;
-            try { entry.src.stop(); } catch {}
-            entry.src.disconnect();
-            entry.gain.disconnect();
-            this.loops.delete(key);
-        };
-
-        // se il browser dovesse terminare il source (non comune con loop), cleanup
-        src.addEventListener("ended", stop);
-
-        return { stop };
-    }
-
-    private stopByTag(tag: string) {
-        for (const node of Array.from(this.activeSfx)) {
-            if ((node as any).__tag === tag) {
-                try { /* il nodo precedente è il BufferSource; fermiamo via gain non possibile, quindi no-op */
-                } catch {
-                }
-                // non abbiamo riferimento diretto alla source qui; lasciamo che scada naturalmente
-                // alternativa: salvare anche la source; per semplicità, riduci a zero subito:
-                (node as GainNode).gain.setTargetAtTime(0, this.ctx.currentTime, 0.01);
-                this.activeSfx.delete(node);
-            }
-        }
-    }
-
-    private async getBuffer(url: string): Promise<AudioBuffer> {
-        const cached = this.buffers.get(url);
-        if (cached) return cached;
-        const res = await fetch(url);
-        const arr = await res.arrayBuffer();
-        const buf = await this.ctx.decodeAudioData(arr);
-        this.buffers.set(url, buf);
-        return buf;
+        this.sounds["heartbeat"]!.stop();
     }
 }
 
