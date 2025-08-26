@@ -1,5 +1,6 @@
 import router from './router';
 import ScoreRepository from "../services/ScoreRepository.ts";
+import {SoundManagerInstance} from "../services/SoundInstance.ts";
 
 export function renderGameOverPage(container: HTMLElement) {
 
@@ -39,4 +40,5 @@ export function renderGameOverPage(container: HTMLElement) {
   `;
 
     router.updatePageLinks();
+    SoundManagerInstance.playMenuSoundTrack();
 }
