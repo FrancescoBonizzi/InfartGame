@@ -28,9 +28,9 @@ class SoundManager {
         this.sounds["fall"] = new Howl({src: [this.paths.fall]});
         this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});
         this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true});
-        this.sounds["thunder"] = new Howl({src: [this.paths.thunder], loop: true});
-        this.sounds["truck"] = new Howl({src: [this.paths.truck], loop: true});
-        this.sounds["jalapeno"] = new Howl({src: [this.paths.jalapeno], loop: true});
+        this.sounds["thunder"] = new Howl({src: [this.paths.thunder]});
+        this.sounds["truck"] = new Howl({src: [this.paths.truck]});
+        this.sounds["jalapeno"] = new Howl({src: [this.paths.jalapeno]});
     }
 
     // ---------- MUSICHE ----------
