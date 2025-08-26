@@ -5,8 +5,5 @@
 
 # Post
 - [ ] Build per il mio sito
-- [ ] Full screen
-- [ ] Responsive
-- [ ] Ottimizzare tutto. Come si fa? C'è un profiler? -> molte classi di PixiJs hanno il metodo .destroy()! Usalo!
 - [ ] Post Linkedin aiuto Chiara
 - [ ] Stato whatsapp
