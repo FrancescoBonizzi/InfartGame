@@ -11,9 +11,9 @@ class SoundManager {
         fall: "/assets/sounds/effects/fall.mp3",
         heartbeat: "/assets/sounds/effects/heartbeat.mp3",
         explosion: "/assets/sounds/effects/explosion.mp3",
-        thunder: "/assets/sounds/effects/thunder.mp3",
-        truck: "/assets/sounds/effects/truck.mp3",
-        jalapeno: "/assets/sounds/effects/jalapeno.mp3",
+        thunder: "/assets/sounds/effects/thunder.m4a",
+        truck: "/assets/sounds/effects/truck.m4a",
+        jalapeno: "/assets/sounds/effects/jalapeno.m4a",
     };
 
     constructor() {
