@@ -2,7 +2,6 @@
 - [ ] Suoni -> potrei anche farli tutti gestire dall'html, con new Audio ecc!
 - [ ] Musica nel menù!
 
-
 # Fix
 - [ ] Non mi fa impazzire il bounding box di hamburger e powerup, a volte non li prende, a volte li prende troppo presto
 - [ ] I vari TODO sparsi
