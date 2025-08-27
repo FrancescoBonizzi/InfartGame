@@ -98,6 +98,8 @@ main, .menu, .score, .gameover {
     justify-self: center;
     align-self: center;
     gap: 16px;
+    width: 100%;
+    max-width: 300px;
 }
 
 .button {
@@ -105,7 +107,8 @@ main, .menu, .score, .gameover {
     border: 1px solid #334155;
     background: var(--background);
     color: var(--ink);
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
     padding: 12px 16px;
     border-radius: 12px;
     cursor: pointer;
@@ -153,17 +156,22 @@ canvas {
     display: grid;
     grid-template-rows: auto 1fr;
     align-items: center;
+    width: 100%;
+    padding: 0 16px;
 }
 
 .score-second-row {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .score-table {
     display: grid;
     gap: 8px;
     max-width: 600px;
+    width: 100%;
     margin-bottom: 16px;
     border-radius: 16px;
 }
@@ -176,7 +184,8 @@ canvas {
     border: 1px solid #334155;
     border-radius: 8px;
     background: var(--background);
-    gap: 32px;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .score-label {
@@ -287,5 +296,71 @@ canvas {
     .title {
         font-size: 60px;
         margin-top: 32px;
+    }
+    
+    .score-label, .score-value {
+        font-size: 22px;
+    }
+    
+    .button {
+        font-size: 24px;
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 48px;
+        margin-top: 24px;
+    }
+    
+    .score-label, .score-value {
+        font-size: 18px;
+    }
+    
+    .button {
+        font-size: 20px;
+        padding: 8px 12px;
+    }
+}
+
+/* Aggiunta per dispositivi in orizzontale */
+@media (max-height: 450px) and (orientation: landscape) {
+    .menu-content, .score-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 0 16px;
+        height: 100dvh;
+    }
+    
+    .title {
+        font-size: 42px;
+        margin: 0;
+    }
+
+    .menu-actions, .score-second-row {
+        margin-left: 20px;
+    }
+    
+    .button {
+        font-size: 18px;
+        padding: 6px 10px;
+        max-width: 200px;
+    }
+    
+    .score-label, .score-value {
+        font-size: 16px;
+    }
+    
+    .score-row {
+        padding: 8px 12px;
+    }
+    
+    .score-table {
+        margin-bottom: 8px;
+        gap: 4px;
     }
 }
