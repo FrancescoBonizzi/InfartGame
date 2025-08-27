@@ -1,7 +1,7 @@
 import Navigo from 'navigo';
-import { renderMenuPage } from './menu';
-import { renderScorePage } from './score';
-import { initGame } from './gamebootstrap';
+import {renderMenuPage} from './menu';
+import {renderScorePage} from './score';
+import {initGame} from './gamebootstrap';
 import {renderGameOverPage} from "./gameover.ts";
 
 const router = new Navigo('/', {
@@ -19,7 +19,17 @@ export function initializeRouter() {
     router
         .on(() => renderMenuPage(appElement))
         .on('/', () => renderMenuPage(appElement!))
-        .on('/game', () => initGame(appElement!))
+        .on(
+            '/game',
+            () => initGame(document.getElementById('app')!),
+            {
+                leave: (done) => {
+                    import('./gamebootstrap').then(m => {
+                        m.destroyGame?.();
+                        done();
+                    }).catch(() => done());
+                }
+            })
         .on('/scores', () => renderScorePage(appElement!))
         .on('/gameover', () => renderGameOverPage(appElement!))
         .notFound(() => renderMenuPage(appElement!))
