@@ -41,13 +41,13 @@ class SoundManager {
     }
 
     private preload() {
-        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true, volume: 0.4});
-        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.4});
-        this.sounds["bite"] = new Howl({src: [this.paths.bite]});
-        this.sounds["fall"] = new Howl({src: [this.paths.fall]});
-        this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});
-        this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true});
-        this.sounds["powerup"] = new Howl({src: [this.paths.powerup]});
+        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true, volume: 0.4, html5: true});
+        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.4, html5: true});
+        this.sounds["bite"] = new Howl({src: [this.paths.bite], html5: true});
+        this.sounds["fall"] = new Howl({src: [this.paths.fall], html5: true});
+        this.sounds["explosion"] = new Howl({src: [this.paths.explosion], html5: true});
+        this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true, html5: true});
+        this.sounds["powerup"] = new Howl({src: [this.paths.powerup], html5: true});
     }
 
     playMenuSoundTrack() {
@@ -76,7 +76,7 @@ class SoundManager {
         const n = Math.floor(Math.random() * 7) + 1;
         const key = `fart${n}`;
         if (!this.sounds[key]) {
-            this.sounds[key] = new Howl({src: [this.paths.fart(n)]});
+            this.sounds[key] = new Howl({src: [this.paths.fart(n)], html5: true});
         }
         this.sounds[key].play();
     }
