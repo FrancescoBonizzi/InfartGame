@@ -1,61 +1,46 @@
-interface KeyState {
-    pressed: boolean;
-    justPressed: boolean;
-}
-
-interface Keys {
-    space: KeyState;
-    KeyP: KeyState;
-}
-
-const keyMap: Record<string, keyof Keys> = {
-    Space: 'space',
-    KeyP: 'KeyP',
-};
-
 class Controller {
-    private readonly _keys: Keys;
+    private _pressed = false;
+    private _justPressed = false;
 
-    constructor() {
-        this._keys = {
-            space: { pressed: false, justPressed: false },
-            KeyP: { pressed: false, justPressed: false },
-        };
+    constructor(target: EventTarget = window) {
+        target.addEventListener("keydown", this.downHandler);
+        target.addEventListener("keyup", this.upHandler);
 
-        window.addEventListener('keydown', this.keydownHandler.bind(this));
-        window.addEventListener('keyup', this.keyupHandler.bind(this));
+        target.addEventListener("pointerdown", this.downHandler);
+        target.addEventListener("pointerup", this.upHandler);
+
+        window.addEventListener("blur", this.reset);
+        document.addEventListener("visibilitychange", this.reset);
     }
 
-    private keydownHandler(event: KeyboardEvent): void {
-        const key = keyMap[event.code];
-
-        if (!key) return;
-
-        if (!this._keys[key].pressed) {
-            this._keys[key].pressed = true;
-            this._keys[key].justPressed = true; // Viene impostato solo una volta
+    // NB: tipo ampio "Event"
+    private downHandler = (_e: Event) => {
+        if (!this._pressed) {
+            this._pressed = true;
+            this._justPressed = true;
         }
-    }
+    };
 
-    private keyupHandler(event: KeyboardEvent): void {
-        const key = keyMap[event.code];
+    private upHandler = (_e: Event) => {
+        this._pressed = false;
+        this._justPressed = false;
+    };
 
-        if (!key) return;
+    private reset = (_e?: Event) => {
+        this._pressed = false;
+        this._justPressed = false;
+    };
 
-        this._keys[key].pressed = false;
-        this._keys[key].justPressed = false; // Reset totale
-    }
-
-    public consumeKeyPress(key: keyof Keys): boolean {
-        if (this._keys[key].justPressed) {
-            this._keys[key].justPressed = false; // Consuma il valore
+    public consumePress(): boolean {
+        if (this._justPressed) {
+            this._justPressed = false;
             return true;
         }
         return false;
     }
 
-    get Keys(): Keys {
-        return this._keys;
+    public get isPressed(): boolean {
+        return this._pressed;
     }
 }
 

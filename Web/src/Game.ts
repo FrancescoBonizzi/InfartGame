@@ -129,7 +129,7 @@ class Game {
 
     update(time: Ticker) {
 
-        if (this._controller.consumeKeyPress('space')) {
+        if (this._controller.consumePress()) {
             this._player.jump();
         }
 
