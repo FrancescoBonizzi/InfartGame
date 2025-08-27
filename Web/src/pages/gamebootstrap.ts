@@ -9,6 +9,7 @@ const GAME_H = 480;
 
 let app: Application | null = null;
 let gameContainer: HTMLDivElement | null = null;
+let orientationMsg: HTMLParagraphElement | null = null;
 
 export async function initGame(container: HTMLElement) {
 
@@ -17,7 +18,12 @@ export async function initGame(container: HTMLElement) {
     }
 
     container.innerHTML = `
-    <div id="game-container" style="width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center"></div>
+    <div id="game-wrapper">
+        <div id="game-container"></div>
+        <p id="orientation-message">
+          Ruota lo schermo in orizzontale per un'esperienza migliore.
+        </p>
+      </div>
   `;
 
     gameContainer = container.querySelector<HTMLDivElement>("#game-container");
@@ -25,6 +31,8 @@ export async function initGame(container: HTMLElement) {
         console.error("Game container non trovato");
         return;
     }
+
+    orientationMsg = container.querySelector<HTMLParagraphElement>("#orientation-message");
 
     app = new Application();
 
@@ -72,6 +80,10 @@ function resize() {
     const containerH = gameContainer.clientHeight;
 
     if (containerW === 0 || containerH === 0) return;
+
+    if (orientationMsg) {
+        orientationMsg.style.display = containerH > containerW ? "block" : "none";
+    }
 
     // Calcola il fattore di scala mantenendo l'aspect ratio
     const scale = Math.min(containerW / GAME_W, containerH / GAME_H);
