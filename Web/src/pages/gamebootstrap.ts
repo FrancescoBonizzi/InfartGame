@@ -21,7 +21,7 @@ export async function initGame(container: HTMLElement) {
     <div id="game-wrapper">
         <div id="game-container"></div>
         <p id="orientation-message">
-          Ruota lo schermo in orizzontale per un'esperienza migliore.
+          Il gioco è più bello se giocato da PC!
         </p>
       </div>
   `;
