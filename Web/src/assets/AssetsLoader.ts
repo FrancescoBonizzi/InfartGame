@@ -2,13 +2,12 @@ import {AnimatedSprite, Assets, Spritesheet, Texture} from "pixi.js";
 import InfartAssets from "./InfartAssets";
 import {Sound, sound} from "@pixi/sound";
 
-/// TODO: MMM non sta funzionando la get del path relativo
-//const VITE_BASE = import.meta.env.BASE_URL;
-const _assetsRoot: string = `./assets`;
-const _imagesAssetsRoot: string = `${_assetsRoot}/images`;
+const VITE_BASE = import.meta.env.BASE_URL;
+export const AssetsRoot: string = `${VITE_BASE}assets`;
+const _imagesAssetsRoot: string = `${AssetsRoot}/images`;
 const _spriteSheetsAssetsRoot: string = `${_imagesAssetsRoot}/spriteSheets`;
-const _soundsAssetsRoot: string = `${_assetsRoot}/sounds`;
-const _fontsAssetsRoot: string = `${_assetsRoot}/fonts`;
+const _soundsAssetsRoot: string = `${AssetsRoot}/sounds`;
+const _fontsAssetsRoot: string = `${AssetsRoot}/fonts`;
 
 export const loadAssets = async (): Promise<InfartAssets> => {
 

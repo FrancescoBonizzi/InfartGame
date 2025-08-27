@@ -1,17 +1,18 @@
 import {Howl} from 'howler';
+import {AssetsRoot} from "../assets/AssetsLoader.ts";
 
 class SoundManager {
     private sounds: Record<string, Howl> = {};
 
     private paths = {
-        musicMenu: "/assets/sounds/music/menu.mp3",
-        musicGame: "/assets/sounds/music/game.mp3",
-        fart: (n: number) => `/assets/sounds/farts/fart${n}.mp3`,
-        bite: "/assets/sounds/effects/bite.mp3",
-        fall: "/assets/sounds/effects/fall.mp3",
-        heartbeat: "/assets/sounds/effects/heartbeat.mp3",
-        explosion: "/assets/sounds/effects/explosion.mp3",
-        powerup: "/assets/sounds/effects/powerup.mp3",
+        musicMenu: `${AssetsRoot}/sounds/music/menu.mp3`,
+        musicGame: `${AssetsRoot}/sounds/music/game.mp3`,
+        fart: (n: number) => `${AssetsRoot}/sounds/farts/fart${n}.mp3`,
+        bite: `${AssetsRoot}/sounds/effects/bite.mp3`,
+        fall: `${AssetsRoot}/sounds/effects/fall.mp3`,
+        heartbeat: `${AssetsRoot}/sounds/effects/heartbeat.mp3`,
+        explosion: `${AssetsRoot}/sounds/effects/explosion.mp3`,
+        powerup: `${AssetsRoot}/sounds/effects/powerup.mp3`,
     };
 
     constructor() {
