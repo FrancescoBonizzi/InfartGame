@@ -14,6 +14,9 @@
     padding: 0;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 
 /* blocco selezione (incluso iOS) */
 html, body, * {
@@ -381,30 +384,8 @@ canvas {
     }
 }
 
-/* Hover solo per mouse/trackpad */
-@media (hover: hover) and (pointer: fine) {
-    .menu-actions .button:hover,
-    .menu-actions .button:focus-visible {
-        animation: none;
-        transform: scale(1.12) rotate(-1.5deg);
-    }
-    .menu-actions .button:nth-child(even):hover,
-    .menu-actions .button:nth-child(even):focus-visible {
-        transform: scale(1.12) rotate(1.5deg);
-    }
-}
-
-/* Feedback su touch */
 @media (hover: none) and (pointer: coarse) {
-    .menu-actions .button:active {
-        transform: scale(1.06);
-    }
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .menu-actions .button:focus,
-    .menu-actions .button:focus-visible {
-        outline: none; /* valuta accessibilità */
-        transform: none; /* nessun effetto focus su touch */
+    .button:hover {
+        transform: none !important;
     }
 }
