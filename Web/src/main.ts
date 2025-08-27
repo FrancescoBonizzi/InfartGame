@@ -1,6 +1,5 @@
-
 import { initializeRouter } from './pages/router';
-import {SoundManagerInstance} from "./services/SoundInstance.ts";
+import {wireAudioUnlockOnce} from "./services/AudioUnlocker.ts";
 
 const router = initializeRouter();
 
@@ -21,4 +20,4 @@ router.hooks({
     }
 });
 
-SoundManagerInstance.wireAudioUnlockOnce();
+wireAudioUnlockOnce();

@@ -20,33 +20,13 @@ class SoundManager {
         this.preload();
     }
 
-    // Altrimenti sui Browser non funziona l'audio
-    public wireAudioUnlockOnce() {
-        const unlock = async () => {
-            try {
-                const audioContext = Howler.ctx;
-                if (audioContext && audioContext.state !== 'running' && typeof audioContext.resume === 'function') {
-                    await audioContext.resume();
-                }
-            } finally {
-                window.removeEventListener('pointerdown', unlock as EventListener);
-                window.removeEventListener('keydown', unlock as EventListener);
-                window.removeEventListener('touchend', unlock as EventListener);
-            }
-        };
-
-        window.addEventListener('pointerdown', unlock as EventListener, { once: true, passive: true });
-        window.addEventListener('keydown',     unlock as EventListener, { once: true });
-        window.addEventListener('touchend',    unlock as EventListener, { once: true, passive: true });
-    }
-
     private preload() {
-        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true, volume: 0.4, html5: true});
-        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.4, html5: true});
-        this.sounds["bite"] = new Howl({src: [this.paths.bite], html5: true});
-        this.sounds["fall"] = new Howl({src: [this.paths.fall], html5: true});
-        this.sounds["explosion"] = new Howl({src: [this.paths.explosion], html5: true});
-        this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true, html5: true});
+        this.sounds["musicMenu"] = new Howl({src: [this.paths.musicMenu], loop: true, volume: 0.4});
+        this.sounds["musicGame"] = new Howl({src: [this.paths.musicGame], loop: true, volume: 0.4});
+        this.sounds["bite"] = new Howl({src: [this.paths.bite]});
+        this.sounds["fall"] = new Howl({src: [this.paths.fall]});
+        this.sounds["explosion"] = new Howl({src: [this.paths.explosion]});
+        this.sounds["heartbeat"] = new Howl({src: [this.paths.heartbeat], loop: true});
         this.sounds["powerup"] = new Howl({src: [this.paths.powerup], html5: true});
     }
 
@@ -76,7 +56,7 @@ class SoundManager {
         const n = Math.floor(Math.random() * 7) + 1;
         const key = `fart${n}`;
         if (!this.sounds[key]) {
-            this.sounds[key] = new Howl({src: [this.paths.fart(n)], html5: true});
+            this.sounds[key] = new Howl({src: [this.paths.fart(n)]});
         }
         this.sounds[key].play();
     }
