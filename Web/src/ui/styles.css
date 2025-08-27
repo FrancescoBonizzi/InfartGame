@@ -219,15 +219,26 @@ canvas {
     color: var(--accent);
 }
 
+@supports not (padding: max(0px)) { /* no-op, solo per vecchi parser */ }
+
 #game-wrapper {
     position: relative;
     width: 100%;
-    height: 100dvh;
+    height: 100svh;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
+
+/* Se dvh è affidabile sul device, usalo */
+@supports (height: 100dvh) {
+    #game-wrapper { height: min(100dvh, 100svh); }
+}
+
+canvas { display: block; }
 
 #game-container {
     width: 100%;
