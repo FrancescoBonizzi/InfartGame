@@ -22,14 +22,10 @@ export function initializeRouter() {
     }
 
     router
-        .on('',        () => renderMenuPage(appElement!))
-        .on('/',       () => renderMenuPage(appElement!))
-        .on('game',    () => initGame(appElement!))
-        .on('/game',   () => initGame(appElement!))
-        .on('scores',  () => renderScorePage(appElement!))
+        .on('/', () => renderMenuPage(appElement!))
+        .on('/game', () => initGame(appElement!))
         .on('/scores', () => renderScorePage(appElement!))
-        .on('gameover',   () => renderGameOverPage(appElement!))
-        .on('/gameover',  () => renderGameOverPage(appElement!))
+        .on('/gameover', () => renderGameOverPage(appElement!))
         .notFound(() => renderMenuPage(appElement!))
         .resolve();
 
