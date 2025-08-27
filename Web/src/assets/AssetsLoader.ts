@@ -1,12 +1,10 @@
 import {AnimatedSprite, Assets, Spritesheet, Texture} from "pixi.js";
 import InfartAssets from "./InfartAssets";
-import {Sound, sound} from "@pixi/sound";
 
 const VITE_BASE = import.meta.env.BASE_URL;
 export const AssetsRoot: string = `${VITE_BASE}assets`;
 const _imagesAssetsRoot: string = `${AssetsRoot}/images`;
 const _spriteSheetsAssetsRoot: string = `${_imagesAssetsRoot}/spriteSheets`;
-const _soundsAssetsRoot: string = `${AssetsRoot}/sounds`;
 const _fontsAssetsRoot: string = `${AssetsRoot}/fonts`;
 
 export const loadAssets = async (): Promise<InfartAssets> => {
@@ -56,30 +54,6 @@ export const loadAssets = async (): Promise<InfartAssets> => {
             fart: new AnimatedSprite(playerSpriteSheet.animations.playerFart!),
             fall: new AnimatedSprite(playerSpriteSheet.animations.playerFall!),
             merda: new AnimatedSprite(playerSpriteSheet.animations.playerMerda!),
-        },
-        sounds: {
-            music: {
-                game: loadSound("music", "game"),
-                menu: loadSound("music", "menu")
-            },
-            effects: {
-                bite: loadSound("effects", "bite"),
-                explosion: loadSound("effects", "explosion"),
-                fall: loadSound("effects", "fall"),
-                heartBeat: loadSound("effects", "heartBeat"),
-                jalapenos: loadSound("effects", "jalapenos"),
-                thunder: loadSound("effects", "thunder"),
-                truck: loadSound("effects", "truck"),
-            },
-            farts: [
-                loadSound("farts", "fart1"),
-                loadSound("farts", "fart2"),
-                loadSound("farts", "fart3"),
-                loadSound("farts", "fart4"),
-                loadSound("farts", "fart5"),
-                loadSound("farts", "fart6"),
-                loadSound("farts", "fart7")
-            ]
         }
     }
 };
@@ -120,8 +94,4 @@ const loadGrattacieliFromSpriteSheet = (
     }
 
     return textures;
-}
-
-const loadSound = (folder: string, name: string): Sound => {
-    return sound.add(name, `${_soundsAssetsRoot}/${folder}/${name}.mp3`);
 }

@@ -1,5 +1,4 @@
 import {Texture} from "pixi.js";
-import {Sound} from "@pixi/sound";
 import PlayerAnimations from "../player/PlayerAnimations.ts";
 
 interface InfartAssets {
@@ -33,23 +32,7 @@ interface InfartAssets {
         nuvola2: Texture;
         nuvola3: Texture;
     }
-    player: PlayerAnimations,
-    sounds: {
-        music: {
-            game: Sound,
-            menu: Sound
-        },
-        farts: Sound[],
-        effects: {
-            bite: Sound,
-            explosion: Sound,
-            fall: Sound,
-            heartBeat: Sound,
-            jalapenos: Sound,
-            thunder: Sound,
-            truck: Sound,
-        }
-    }
+    player: PlayerAnimations
 }
 
 export default InfartAssets;

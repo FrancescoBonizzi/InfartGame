@@ -14,7 +14,6 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
-    "@pixi/sound": "^6.0.1",
     "howler": "^2.2.4",
     "navigo": "^8.11.1",
     "pixi.js": "^8.6.2"

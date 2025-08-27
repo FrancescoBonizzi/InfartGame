@@ -16,7 +16,28 @@ class SoundManager {
     };
 
     constructor() {
+        Howler.autoUnlock = true;
         this.preload();
+    }
+
+    // Altrimenti sui Browser non funziona l'audio
+    public wireAudioUnlockOnce() {
+        const unlock = async () => {
+            try {
+                const audioContext = Howler.ctx;
+                if (audioContext && audioContext.state !== 'running' && typeof audioContext.resume === 'function') {
+                    await audioContext.resume();
+                }
+            } finally {
+                window.removeEventListener('pointerdown', unlock as EventListener);
+                window.removeEventListener('keydown', unlock as EventListener);
+                window.removeEventListener('touchend', unlock as EventListener);
+            }
+        };
+
+        window.addEventListener('pointerdown', unlock as EventListener, { once: true, passive: true });
+        window.addEventListener('keydown',     unlock as EventListener, { once: true });
+        window.addEventListener('touchend',    unlock as EventListener, { once: true, passive: true });
     }
 
     private preload() {
