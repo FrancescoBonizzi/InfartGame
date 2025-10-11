@@ -91,9 +91,15 @@ class Player implements IHasCollisionRectangle {
 
         this._hud.getHamburgerStatusBar().farted();
 
-        const jumpForce = this._activePowerUp
-            ? this._activePowerUp.getJumpForce()
-            : force;
+        let jumpForce = 0;
+        if (this._activePowerUp) {
+            if (!this._activePowerUp.isExpired()) {
+                jumpForce = this._activePowerUp.getJumpForce();
+            }
+        }
+        else {
+            jumpForce = force;
+        }
 
         this._currentJumpCount++;
         this._totalFarts++;

@@ -107,6 +107,9 @@ abstract class PowerUp extends Gemma {
 
     public addParticles(where: Point) {
 
+        if (this.isPowerUpTimeExpired())
+            return;
+
         const intervalMilliseconds = this.getParticleGenerationIntervalMilliseconds();
         if (this._elapsedMilliseconds - this._lastParticleEmissionTime >= intervalMilliseconds) {
             this._lastParticleEmissionTime = this._elapsedMilliseconds;
