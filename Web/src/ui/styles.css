@@ -123,11 +123,11 @@ main, .menu, .score, .gameover {
 
 .button {
     appearance: none;
-    border: 1px solid #334155;
+    border: 2px solid #475569;
     background: var(--background);
     color: var(--ink);
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     padding: 12px 16px;
     border-radius: 12px;
     cursor: pointer;
@@ -136,16 +136,23 @@ main, .menu, .score, .gameover {
     font-size: 32px;
     display: inline-block;
     text-align: center;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .button.primary {
     background: var(--accent);
     color: var(--background);
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(34, 211, 238, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .button.fart {
     background-color: var(--fart);
     color: var(--background);
+    border-color: var(--fart);
+    box-shadow: 0 4px 20px rgba(255, 101, 36, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 canvas {
@@ -310,16 +317,39 @@ canvas { display: block; }
     animation-delay: .6s;
 }
 
+.menu-actions .button:nth-child(5) {
+    animation-delay: .8s;
+}
+
 /* Hover/focus: effetto secco */
 .menu-actions .button:hover,
 .menu-actions .button:focus-visible {
     animation: none; /* blocca il pulse */
     transform: scale(1.12) rotate(-1.5deg);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.menu-actions .button.primary:hover,
+.menu-actions .button.primary:focus-visible {
+    box-shadow: 0 8px 32px rgba(34, 211, 238, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.menu-actions .button.fart:hover,
+.menu-actions .button.fart:focus-visible {
+    box-shadow: 0 8px 32px rgba(255, 101, 36, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .menu-actions .button:nth-child(even):hover,
 .menu-actions .button:nth-child(even):focus-visible {
     transform: scale(1.12) rotate(1.5deg);
+}
+
+/* Feedback tattile al click */
+.menu-actions .button:active {
+    animation: none !important;
+    transform: scale(0.95) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
 @media (max-width: 600px) {
