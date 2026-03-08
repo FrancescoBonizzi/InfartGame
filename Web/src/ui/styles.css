@@ -255,16 +255,40 @@ canvas { display: block; }
     justify-content: center;
 }
 
-#orientation-message {
-    position: absolute;
-    bottom: 16px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font: 500 16px 'Patrick Hand SC', 'Comic Sans MS', cursive, sans-serif;
-    color: white;
+#orientation-overlay {
     display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #0b1220;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    color: white;
+    font: 500 20px "Patrick Hand SC", cursive, sans-serif;
+}
+
+#orientation-overlay.visible {
+    display: flex;
+}
+
+.rotate-icon {
+    width: 4rem;
+    height: 4rem;
+    animation: rotate-hint 1.5s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes rotate-hint {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.button.disabled {
+    opacity: 0.5;
     pointer-events: none;
+    cursor: default;
 }
 
 /* --- Animazioni --- */

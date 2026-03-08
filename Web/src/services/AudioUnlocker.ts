@@ -1,3 +1,4 @@
+import { Howler } from 'howler';
 
 // Altrimenti sui Browser non funziona l'audio
 export const wireAudioUnlockOnce = () => {
@@ -34,3 +35,6 @@ export const unlockHowler = async () => {
 
     Howler.mute(false);
 }
+
+export const isAudioUnlocked = (): boolean =>
+    Howler.ctx?.state === 'running';

@@ -1,6 +1,6 @@
 import router from './router';
 import {SoundManagerInstance} from "../services/SoundInstance.ts";
-import {unlockHowler} from "../services/AudioUnlocker.ts";
+import {unlockHowler, isAudioUnlocked} from "../services/AudioUnlocker.ts";
 
 export function renderMenuPage(container: HTMLElement) {
     container.innerHTML = `
@@ -39,10 +39,17 @@ export function renderMenuPage(container: HTMLElement) {
 
     const audioButton = container.querySelector<HTMLAnchorElement>("#audio-button");
     if (audioButton) {
-        audioButton.addEventListener("click", async () => {
-            await unlockHowler();
-            SoundManagerInstance.playFart();
-        });
+        if (isAudioUnlocked()) {
+            audioButton.textContent = 'Audio attivo ✓';
+            audioButton.classList.add('disabled');
+        } else {
+            audioButton.addEventListener('click', async () => {
+                await unlockHowler();
+                SoundManagerInstance.playMenuSoundTrack();
+                audioButton.textContent = 'Audio attivo ✓';
+                audioButton.classList.add('disabled');
+            });
+        }
     }
 
     SoundManagerInstance.playMenuSoundTrack();

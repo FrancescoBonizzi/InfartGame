@@ -9,7 +9,8 @@ const GAME_H = 480;
 
 let app: Application | null = null;
 let gameContainer: HTMLDivElement | null = null;
-let orientationMsg: HTMLParagraphElement | null = null;
+let orientationOverlay: HTMLDivElement | null = null;
+let resizeObserver: ResizeObserver | null = null;
 
 export async function initGame(container: HTMLElement) {
 
@@ -20,9 +21,14 @@ export async function initGame(container: HTMLElement) {
     container.innerHTML = `
     <div id="game-wrapper">
         <div id="game-container"></div>
-        <p id="orientation-message">
-          Il gioco è più bello se giocato da PC!
-        </p>
+        <div id="orientation-overlay">
+          <svg class="rotate-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+          </svg>
+          <p>Ruota il dispositivo</p>
+        </div>
       </div>
   `;
 
@@ -32,7 +38,7 @@ export async function initGame(container: HTMLElement) {
         return;
     }
 
-    orientationMsg = container.querySelector<HTMLParagraphElement>("#orientation-message");
+    orientationOverlay = container.querySelector<HTMLDivElement>("#orientation-overlay");
 
     app = new Application();
 
@@ -46,7 +52,10 @@ export async function initGame(container: HTMLElement) {
         resolution: Math.min(window.devicePixelRatio || 1, 2),
     });
 
-    window.addEventListener('resize', resize);
+    try { await screen.orientation.lock('landscape'); } catch {}
+
+    resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(gameContainer);
     resize();
 
     gameContainer.appendChild(app.canvas);
@@ -81,8 +90,14 @@ function resize() {
 
     if (containerW === 0 || containerH === 0) return;
 
-    if (orientationMsg) {
-        orientationMsg.style.display = containerH > containerW ? "block" : "none";
+    if (orientationOverlay) {
+        const isPortrait = containerH > containerW;
+        orientationOverlay.classList.toggle('visible', isPortrait);
+        if (isPortrait) {
+            app.ticker.stop();
+        } else {
+            app.ticker.start();
+        }
     }
 
     // Calcola il fattore di scala mantenendo l'aspect ratio
@@ -109,7 +124,10 @@ export function destroyGame() {
         return;
     }
 
-    window.removeEventListener("resize", resize);
+    resizeObserver?.disconnect();
+    resizeObserver = null;
+    orientationOverlay = null;
+    try { screen.orientation.unlock(); } catch {}
     app.destroy(true, {children: true});
     app = null;
     gameContainer = null;
