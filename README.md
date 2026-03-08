@@ -1,40 +1,46 @@
-# <img src="CSharp/Infart/Assets/_Other/web_hi_res_512.png" alt="drawing" width="72"/> INFART
+# Infart
 
-**TODO: Link to play**
+![Icona di Infart](CSharp/Infart/Assets/_Other/web_hi_res_512.png)
 
-The ozone hole has widened due to farts. There is no more atmosphere on earth!
+[Gioca ora sul web](https://imaginesoftware.it/open-source-projects/infart)
 
-Set in an abstract city, constantly changing, INFART is a very simple RUN AND FART game, where you have to eat vegetables, avoid hamburgers and holes. 
+Il buco dell'ozono si è allargato a causa delle scoregge. Sulla Terra non c'e piu atmosfera.
 
-Features:
-- A complete level with increasing difficulty
-- A lot of farts
-- Original soundtrack
-- Handmade graphic
+Ambientato in una citta astratta in continuo cambiamento, INFART e un semplice gioco run-and-fart in cui devi mangiare verdure ed evitare hamburger e buche.
 
-# Screenshots
+## Caratteristiche
 
-<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/1.png" width="500">
+- Un livello completo con difficolta crescente
+- Tantissime scoregge
+- Colonna sonora originale
+- Grafica realizzata a mano
 
-<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/2.png" width="500">
+## Screenshot
 
-<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/3.png" width="500">
+![Screenshot 1](CSharp/Infart/Assets/_Other/Screenshots/EN/1.png)
 
-<img src="CSharp/Infart/Assets/_Other/Screenshots/EN/4.png" width="500">
+![Screenshot 2](CSharp/Infart/Assets/_Other/Screenshots/EN/2.png)
 
----
+![Screenshot 3](CSharp/Infart/Assets/_Other/Screenshots/EN/3.png)
 
-The game is entirely **free** and open source: I didn't use any third party library to track or log user events. There are no ads too.
-
-There are two versions:
-- The CSharp version, that you can find in the `CSharp` folder
-  - I coded this version (Android, Windows...) with these libraries:
-    - [MonoGame](https://github.com/MonoGame)
-    - [FbonizziMonoGame](https://github.com/FrancescoBonizzi/FbonizziMonoGame)
-- The Web version, that you can play **HERE (TODO)**
-  - I coded this version with [PixiJS](https://pixijs.com). **I will only support this**
-
+![Screenshot 4](CSharp/Infart/Assets/_Other/Screenshots/EN/4.png)
 
 ---
 
-If you like my work, please consider to [offer me an espresso!](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=DTT7P8N3TV7N6&currency_code=EUR&source=url) ;-)
+Il gioco e completamente **gratuito** e open source: non uso librerie di terze parti per tracciare o registrare eventi utente e non ci sono pubblicita.
+
+Ci sono due versioni:
+
+1. Versione CSharp, che trovi nella cartella `CSharp`.
+
+   Ho sviluppato questa versione (Android, Windows...) con queste librerie:
+   - [MonoGame](https://github.com/MonoGame)
+   - [FbonizziMonoGame](https://github.com/FrancescoBonizzi/FbonizziMonoGame)
+
+2. Versione Web, che puoi giocare [qui](https://imaginesoftware.it/open-source-projects/infart).
+
+   Ho sviluppato questa versione con [PixiJS](https://pixijs.com/). **Supportero solo questa**.
+
+---
+
+Se apprezzi il mio lavoro, puoi [offrirmi un espresso](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=DTT7P8N3TV7N6&currency_code=EUR&source=url).
