@@ -6,5 +6,5 @@ export default defineConfig({
       input: "index.html",
     },
   },
-  base: "/infart-play", // Per nextJs
+  base: "/infart-play/", // Per nextJs
 });
